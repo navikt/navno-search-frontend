@@ -2,7 +2,8 @@ name: Deploy-to-q0
 on:
   push:
     tags:
-      - "v*"
+      - "v*-q0"
+      - "v*-prod"
 jobs:
   deploy:
     runs-on: ubuntu-latest
