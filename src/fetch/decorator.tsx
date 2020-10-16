@@ -2,6 +2,7 @@ import React from 'react';
 import { fetchWithTimeout, objectToQueryString } from './_utils';
 import { JSDOM } from 'jsdom';
 import parse from 'html-react-parser';
+import Config from '../config';
 
 const decoratorUrl = process.env.DECORATOR_URL;
 
@@ -26,11 +27,7 @@ const fetchDecorator = (queryString?: string) => {
 };
 
 export const getDecorator = async () => {
-    const params = {
-        chatbot: true,
-    };
-
-    const query = objectToQueryString(params);
+    const query = objectToQueryString(Config.VARS.decoratorParams);
 
     const decoratorBody = await fetchDecorator(query);
 

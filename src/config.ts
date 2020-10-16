@@ -9,7 +9,12 @@ const URLS = {
     xpSearchService: `${process.env.XP_ORIGIN}${PATHS.xpSearchService}`,
 };
 
-const VARS = {};
+const VARS = {
+    decoratorParams: {
+        chatbot: true,
+        breadcrumbs: [{ title: 'Søk', url: '/sok' }],
+    },
+};
 
 export const Config = {
     PATHS,
