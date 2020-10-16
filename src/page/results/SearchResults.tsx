@@ -36,9 +36,9 @@ const sortByDate = (a: SearchHitProps, b: SearchHitProps) => {
     const lastChanged = (props: SearchHitProps) =>
         Math.max(
             ...[
-                props.publish.first,
-                props.publish.from,
-                props.modifiedTime,
+                props.publish.first || 0,
+                props.publish.from || 0,
+                props.modifiedTime || 0,
                 0,
             ].map((v) => dayjs(v).unix())
         );
