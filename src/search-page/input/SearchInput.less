@@ -1,0 +1,19 @@
+@import (reference) '../../global-style.less';
+@import (reference) '~nav-frontend-knapper-style/src/mixins';
+
+.search-input {
+    margin-bottom: 1rem;
+    display: flex;
+
+    &__input {
+        flex-grow: 1;
+        margin-right: 0.5rem;
+
+        input {
+            .typo-normal;
+            font-size: 150%;
+            border-width: 2px;
+            border-color: @navGra80;
+        }
+    }
+}

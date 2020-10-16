@@ -1,0 +1,55 @@
+@import '~nav-frontend-core/less/_variabler';
+@import '~nav-frontend-core/less/core';
+@import (reference) '~nav-frontend-typografi-style/src/index';
+
+@mobilMaxWidth: 768px;
+@desktopSmallMaxWidth: 1024px;
+@screen-desktop: ~'(min-width: @{desktopSmallMaxWidth})';
+@screen-desktop-small: ~'(min-width: @{mobilMaxWidth})';
+@screen-mobile: ~'not all and (min-width: @{mobilMaxWidth})';
+@padding-sides-desktop: 3rem;
+@padding-sides-desktop-small: 1rem;
+@padding-sides-mobile: 1rem;
+
+.app {
+    max-width: 1440px;
+    min-height: 20rem;
+    margin: 2rem auto 3rem auto;
+}
+
+@media @screen-mobile {
+    .content-wrapper {
+        padding: 0 @padding-sides-mobile;
+    }
+}
+
+@media @screen-desktop-small {
+    .content-wrapper {
+        padding: 1rem @padding-sides-desktop-small;
+    }
+}
+
+@media @screen-desktop {
+    .content-wrapper {
+        padding: 1rem @padding-sides-desktop;
+    }
+}
+
+#decorator-header {
+    min-height: 88px;
+}
+
+@media @screen-desktop-small {
+    #decorator-header {
+        min-height: 106px;
+    }
+    #decorator-header.with-context {
+        min-height: 150px;
+    }
+}
+
+@media print {
+    .decorator-wrapper {
+        display: none;
+    }
+} ;
