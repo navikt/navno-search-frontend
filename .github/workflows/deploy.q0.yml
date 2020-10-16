@@ -2,7 +2,6 @@ name: Deploy-to-q0
 on:
   push:
     tags:
-      - "v*-q0"
       - "v*-prod"
 jobs:
   deploy:
