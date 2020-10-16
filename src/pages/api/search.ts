@@ -1,4 +1,4 @@
-import { fetchSearchResults } from '../../fetch/search';
+import { fetchSearchResults } from '../../utils/fetch-search-result';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { SearchParams } from '../../types/search-params';
 import { SearchResultProps } from '../../types/search-result';

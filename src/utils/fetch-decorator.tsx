@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchWithTimeout, objectToQueryString } from './_utils';
+import { fetchWithTimeout, objectToQueryString } from './fetch-utils';
 import { JSDOM } from 'jsdom';
 import parse from 'html-react-parser';
 import Config from '../config';

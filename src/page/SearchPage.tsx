@@ -9,7 +9,7 @@ import debounce from 'lodash.debounce';
 import { SearchFilters, UFSetterProps } from './filters/SearchFilters';
 import { SearchResultProps } from '../types/search-result';
 import { SearchParams } from '../types/search-params';
-import { fetchSearchResultsClientSide } from '../fetch/search';
+import { fetchSearchResultsClientSide } from '../utils/fetch-search-result';
 import './SearchPage.less';
 
 const SearchPage = (props: SearchResultProps) => {

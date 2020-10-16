@@ -3,7 +3,7 @@ import { NextRouter } from 'next/router';
 import { Config } from '../config';
 import { SearchParams } from '../types/search-params';
 import { SearchResultProps } from '../types/search-result';
-import { fetchWithTimeout, objectToQueryString } from './_utils';
+import { fetchWithTimeout, objectToQueryString } from './fetch-utils';
 
 export const fetchSearchResults = (
     params?: SearchParams

@@ -6,7 +6,7 @@ import Document, {
     NextScript,
     DocumentContext,
 } from 'next/document';
-import { DecoratorFragments, getDecorator } from '../fetch/decorator';
+import { DecoratorFragments, getDecorator } from '../utils/fetch-decorator';
 
 type Props = {
     decoratorFragments: DecoratorFragments;

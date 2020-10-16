@@ -1,9 +1,9 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import { fetchSearchResults } from '../fetch/search';
+import { fetchSearchResults } from '../utils/fetch-search-result';
 import { SearchResultProps } from '../types/search-result';
 import { HeadWithMetatags } from '../components/metatags/HeadWithMetatags';
-import SearchPage from '../search-page/SearchPage';
+import SearchPage from '../page/SearchPage';
 import { UndertekstBold } from 'nav-frontend-typografi';
 import '../global-style.less';
 

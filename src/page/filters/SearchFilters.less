@@ -25,6 +25,8 @@
     &__filters {
         & > * {
             margin-top: 1rem;
+            overflow: hidden;
+            width: @width;
         }
     }
 
@@ -55,17 +57,19 @@
         }
 
         &__filters {
+            position: relative;
             visibility: hidden;
             overflow: hidden;
             max-height: 0;
             max-width: 140px;
             transition-property: max-height, max-width, visibility;
-            transition-duration: 0.25s;
+            transition-duration: 0.35s;
             transition-timing-function: ease-in;
 
             &--visible-mobile {
                 visibility: visible;
-                max-height: 50rem;
+                z-index: 9999;
+                max-height: 100rem;
                 max-width: @width;
             }
         }

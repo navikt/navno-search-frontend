@@ -12,7 +12,7 @@ import {
     SearchResultProps,
 } from '../../types/search-result';
 import { SearchParams } from '../../types/search-params';
-import { fetchSearchResultsClientSide } from '../../fetch/search';
+import { fetchSearchResultsClientSide } from '../../utils/fetch-search-result';
 import Spinner from '../../components/spinner/Spinner';
 import { LenkeNavNo } from '../../components/lenke/LenkeNavNo';
 import { Config } from '../../config';
