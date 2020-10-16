@@ -1,5 +1,5 @@
 const PATHS = {
-    xpSearchService: '/_/service/no.nav.navno/search',
+    xpSearchService: '/_/service/navno.nav.no.search/search',
     searchApi: `${process.env.APP_BASE_PATH}/api/search`,
     searchTips:
         '/no/nav-og-samfunn/kontakt-nav/teknisk-brukerstotte/nyttig-a-vite/soketips',
