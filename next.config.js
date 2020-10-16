@@ -15,6 +15,7 @@ const configWithAllTheThings = (config) =>
     withTranspileModules(withLess(config));
 
 module.exports = configWithAllTheThings({
+    basePath: '/person/navno-search',
     env: {
         XP_ORIGIN: process.env.XP_ORIGIN,
     },
