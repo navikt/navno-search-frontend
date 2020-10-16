@@ -22,6 +22,7 @@ jobs:
           cat > .env <<EOF
           NODE_ENV=production
           APP_ORIGIN=https://www-q6.nav.no
+          APP_BASE_PATH=/person/navno-search
           DECORATOR_URL=https://www-q6.nav.no/dekoratoren
           XP_ORIGIN=https://www-q6.nav.no
           EOF

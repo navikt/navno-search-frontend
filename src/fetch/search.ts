@@ -5,17 +5,15 @@ import { SearchParams } from '../types/search-params';
 import { SearchResultProps } from '../types/search-result';
 import { fetchWithTimeout, objectToQueryString } from './_utils';
 
-const xpSearchServiceUrl = `${process.env.XP_ORIGIN}${Config.PATHS.xpSearchService}`;
-
 export const fetchSearchResults = (
     params?: SearchParams
 ): Promise<SearchResultProps> => {
-    const url = `${xpSearchServiceUrl}${objectToQueryString(params)}`;
+    const url = `${Config.URLS.xpSearchService}${objectToQueryString(params)}`;
     return fetchWithTimeout(url, 5000).then((res) => {
         if (res.ok) {
             return res.json();
         }
-        const error = `Failed to fetch search results: ${res.statusText}`;
+        const error = `Failed to fetch search re sults: ${res.statusText}`;
         throw Error(error);
     });
 };
@@ -26,7 +24,7 @@ export const fetchSearchResultsClientSide = async (
 ): Promise<SearchApiResponse> => {
     const queryString = objectToQueryString(searchParams);
     const { result, error } = (await fetch(
-        `/api/search${queryString}`
+        `${Config.PATHS.searchApi}${queryString}`
     ).then((res) => res.json())) as SearchApiResponse;
 
     if (result) {

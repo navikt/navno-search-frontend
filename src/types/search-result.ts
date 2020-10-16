@@ -1,5 +1,3 @@
-import { EnonicContentRef } from '../../utils/paths';
-
 export enum DaterangeKey {
     Last7Days = 'Siste 7 dager',
     Last30Days = 'Siste 30 dager',
@@ -45,7 +43,7 @@ export type SearchHitProps = {
     modifiedTime: string;
     className: string;
     publishedString: string;
-    id: EnonicContentRef;
+    id: string;
     score: number;
     keywords: string[];
 };

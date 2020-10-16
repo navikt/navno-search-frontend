@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { FacetBucketProps } from '../../../../types/search/search-result';
-import { SearchParams } from '../../../../types/search/search-params';
 import { FilterSectionPanel } from '../filter-section-panel/FilterSectionPanel';
 import { FilterOption } from '../filter-section-panel/FilterOption';
 import { BEM } from '../../../utils/bem';
 import { FilterRadioPanel } from '../filter-radio-panel/FilterRadioPanel';
+import { FacetBucketProps } from '../../../types/search-result';
+import { SearchParams } from '../../../types/search-params';
 import './FacetsSelector.less';
 
 type Props = {

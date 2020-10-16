@@ -2,12 +2,9 @@ import { Undertekst } from 'nav-frontend-typografi';
 import { FacetsSelector } from './facets-selector/FacetsSelector';
 import { DaterangeSelector } from './daterange-selector/DaterangeSelector';
 import React, { useState } from 'react';
-import {
-    DaterangeProps,
-    FacetBucketProps,
-} from '../../../types/search/search-result';
 import { BEM } from '../../utils/bem';
 import Lenke from 'nav-frontend-lenker';
+import { DaterangeProps, FacetBucketProps } from '../../types/search-result';
 import './SearchFilters.less';
 
 export type UFSetterProps = {

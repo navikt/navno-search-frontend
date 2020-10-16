@@ -4,6 +4,7 @@ import { fetchSearchResults } from '../fetch/search';
 import { SearchResultProps } from '../types/search-result';
 import { HeadWithMetatags } from '../components/metatags/HeadWithMetatags';
 import SearchPage from '../search-page/SearchPage';
+import { UndertekstBold } from 'nav-frontend-typografi';
 import '../global-style.less';
 
 type Props = {
@@ -25,6 +26,13 @@ const SearchBase = (props: Props) => {
                 canonicalUrl={'https://www.nav.no/sok'}
             />
             <div className={'content-wrapper'} id={'maincontent'}>
+                <div className={'work-in-progress'}>
+                    <UndertekstBold>
+                        {
+                            'Obs: denne versjonen av søk på nav.no er under utvikling! :)'
+                        }
+                    </UndertekstBold>
+                </div>
                 <SearchPage {...results} />
             </div>
         </div>
