@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { SearchHit } from './search-hit/SearchHit';
 import { BEM } from '../../utils/bem';
-import { Flatknapp } from 'nav-frontend-knapper';
+import { Knapp } from 'nav-frontend-knapper';
 import { useRouter } from 'next/router';
 import { SearchResultProps } from '../../types/search-result';
-import { SearchParams } from '../../types/search-params';
+import { SearchParams, SearchSort } from '../../types/search-params';
 import { fetchSearchResultsClientSide } from '../../utils/fetch-search-result';
 import Spinner from '../spinner/Spinner';
 import { Config } from '../../config';
 import Lenke from 'nav-frontend-lenker';
+import { sortHitsByDate } from '../../utils/sort';
 import './SearchResults.less';
 
 type Props = {
@@ -26,10 +27,13 @@ export const SearchResults = ({
     setSearchResults,
 }: Props) => {
     const bem = BEM('search-results');
-    const { hits, isMore } = results;
+    const { hits, isMore, s: sorting } = results;
 
     const [isAwaitingMore, setIsAwaitingMore] = useState(false);
     const router = useRouter();
+
+    const sortFunc =
+        Number(sorting) === SearchSort.Newest ? sortHitsByDate : undefined;
 
     const showMore = async () => {
         setIsAwaitingMore(true);
@@ -55,9 +59,11 @@ export const SearchResults = ({
             ) : (
                 <>
                     {hits?.length > 0 ? (
-                        hits.map((hitProps, index) => (
-                            <SearchHit {...hitProps} key={index} />
-                        ))
+                        hits
+                            .sort(sortFunc)
+                            .map((hitProps, index) => (
+                                <SearchHit {...hitProps} key={index} />
+                            ))
                     ) : (
                         <div className={bem('no-hits')}>
                             <Undertittel>
@@ -76,7 +82,7 @@ export const SearchResults = ({
                         </div>
                     )}
                     {isMore && (
-                        <Flatknapp
+                        <Knapp
                             onClick={showMore}
                             className={bem('show-more')}
                             spinner={isAwaitingMore}
@@ -87,7 +93,7 @@ export const SearchResults = ({
                                     ? 'Henter flere treff...'
                                     : 'Vis flere treff'}
                             </Undertittel>
-                        </Flatknapp>
+                        </Knapp>
                     )}
                 </>
             )}
