@@ -19,6 +19,7 @@ export const SearchInput = ({
 
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        (document.activeElement as HTMLElement).blur();
         fetchNewResults();
     };
 
