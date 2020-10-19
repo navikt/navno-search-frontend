@@ -11,6 +11,7 @@ import {
     Undertittel,
 } from 'nav-frontend-typografi';
 import htmlReactParser from 'html-react-parser';
+import { logResultClick } from '../../../utils/amplitude';
 import './SearchHit.less';
 
 const createPublishedAndModifiedString = (
@@ -37,7 +38,12 @@ const parseHighlight = (highlight: string) => {
     );
 };
 
-export const SearchHit = (props: SearchHitProps) => {
+type Props = {
+    hit: SearchHitProps;
+    searchTerm: string;
+};
+
+export const SearchHit = ({ hit, searchTerm }: Props) => {
     const {
         displayName,
         href,
@@ -46,7 +52,7 @@ export const SearchHit = (props: SearchHitProps) => {
         publish,
         modifiedTime,
         priority,
-    } = props;
+    } = hit;
 
     if (!displayName || !href) {
         return null;
@@ -60,7 +66,11 @@ export const SearchHit = (props: SearchHitProps) => {
     );
 
     return (
-        <LenkepanelBase href={href} className={bem()}>
+        <LenkepanelBase
+            href={href}
+            className={bem()}
+            onClick={() => logResultClick(href, searchTerm)}
+        >
             <Undertittel className={`${bem('header')} lenkepanel__heading`}>
                 {displayName}
             </Undertittel>

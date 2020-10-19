@@ -27,7 +27,7 @@ export const SearchResults = ({
     setSearchResults,
 }: Props) => {
     const bem = BEM('search-results');
-    const { hits, isMore, s: sorting } = results;
+    const { hits, isMore, word, s: sorting } = results;
 
     const [isAwaitingMore, setIsAwaitingMore] = useState(false);
     const router = useRouter();
@@ -62,7 +62,11 @@ export const SearchResults = ({
                         hits
                             .sort(sortFunc)
                             .map((hitProps, index) => (
-                                <SearchHit {...hitProps} key={index} />
+                                <SearchHit
+                                    hit={hitProps}
+                                    searchTerm={word}
+                                    key={index}
+                                />
                             ))
                     ) : (
                         <div className={bem('no-hits')}>

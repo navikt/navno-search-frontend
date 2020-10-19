@@ -14,8 +14,8 @@ import {
     SearchSort,
 } from '../types/search-params';
 import { fetchSearchResultsClientSide } from '../utils/fetch-search-result';
+import { initAmplitude, logPageview, logSearchQuery } from '../utils/amplitude';
 import './SearchPage.less';
-import { initAmplitude, logPageview } from '../utils/amplitude';
 
 const SearchPage = (props: SearchResultProps) => {
     const bem = BEM('search');
@@ -70,6 +70,7 @@ const SearchPage = (props: SearchResultProps) => {
 
     const fetchAndSetNewResults = debounce(async () => {
         setIsAwaiting(true);
+        logSearchQuery(searchParams.ord);
         const { result, error } = await fetchSearchResultsClientSide(
             searchParams,
             router
@@ -100,6 +101,9 @@ const SearchPage = (props: SearchResultProps) => {
         setIsLoaded(true);
         initAmplitude();
         logPageview();
+        if (initialParams.ord) {
+            logSearchQuery(initialParams.ord);
+        }
     }, []);
 
     return (

@@ -14,8 +14,11 @@ export const initAmplitude = () => {
 
 export const logPageview = () => logAmplitudeEvent('sidevisning');
 
+export const logSearchQuery = (searchTerm: string) =>
+    logAmplitudeEvent('søk', { sokeOrd: searchTerm });
+
 export const logResultClick = (href: string, searchTerm: string | undefined) =>
-    logAmplitudeEvent('søkeresultat-klikk', {
+    logAmplitudeEvent('resultat-klikk', {
         destinasjon: href,
         sokeOrd: searchTerm,
     });
