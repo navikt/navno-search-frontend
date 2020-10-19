@@ -8,9 +8,14 @@ import { useRouter } from 'next/router';
 import debounce from 'lodash.debounce';
 import { SearchFilters, UFSetterProps } from './filters/SearchFilters';
 import { SearchResultProps } from '../types/search-result';
-import { SearchParams, searchParamsDefault } from '../types/search-params';
+import {
+    SearchParams,
+    searchParamsDefault,
+    SearchSort,
+} from '../types/search-params';
 import { fetchSearchResultsClientSide } from '../utils/fetch-search-result';
 import './SearchPage.less';
+import { initAmplitude, logPageview } from '../utils/amplitude';
 
 const SearchPage = (props: SearchResultProps) => {
     const bem = BEM('search');
@@ -20,9 +25,9 @@ const SearchPage = (props: SearchResultProps) => {
         props
     );
     const [isAwaiting, setIsAwaiting] = useState(false);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoadedClient, setIsLoaded] = useState(false);
 
-    const { fasett, word, total, isSortDate, aggregations } = searchResults;
+    const { fasett, word, total, aggregations, s: sort } = searchResults;
 
     const initialParams: SearchParams = {
         ord: word || '',
@@ -81,7 +86,7 @@ const SearchPage = (props: SearchResultProps) => {
     }, 100);
 
     useEffect(() => {
-        if (isLoaded) {
+        if (isLoadedClient) {
             fetchAndSetNewResults();
         }
     }, [
@@ -93,6 +98,8 @@ const SearchPage = (props: SearchResultProps) => {
 
     useEffect(() => {
         setIsLoaded(true);
+        initAmplitude();
+        logPageview();
     }, []);
 
     return (
@@ -106,7 +113,7 @@ const SearchPage = (props: SearchResultProps) => {
                         fetchNewResults={fetchAndSetNewResults}
                     />
                     <SearchSorting
-                        isSortDate={isSortDate}
+                        isSortDate={sort === SearchSort.Newest}
                         setSort={setSort}
                         searchTerm={word}
                         numHits={Number(total)}

@@ -14,16 +14,16 @@ export const initAmplitude = () => {
 
 export const logPageview = () => logAmplitudeEvent('sidevisning');
 
-export const logLinkClick = (href: string, linkText: string | undefined) =>
-    logAmplitudeEvent('navigere', {
+export const logResultClick = (href: string, searchTerm: string | undefined) =>
+    logAmplitudeEvent('søkeresultat-klikk', {
         destinasjon: href,
-        lenketekst: linkText,
+        sokeOrd: searchTerm,
     });
 
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
     return new Promise(function (resolve: any) {
         const eventData = data || {};
-        eventData.origin = 'navno-frontend-search';
+        eventData.origin = 'navno-search-frontend';
         eventData.originVersion = 'unknown';
         amplitude?.getInstance().logEvent(eventName, eventData, resolve);
     });

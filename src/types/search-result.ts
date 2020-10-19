@@ -52,7 +52,7 @@ export type SearchHitProps = {
 
 export type SearchResultProps = {
     c: number;
-    isSortDate: boolean;
+    isSortDate: boolean; // note: this value is inverted!
     s: SearchSort;
     daterange: number;
     isMore: boolean;

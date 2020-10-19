@@ -4,33 +4,13 @@ import { SearchHit } from './search-hit/SearchHit';
 import { BEM } from '../../utils/bem';
 import { Flatknapp } from 'nav-frontend-knapper';
 import { useRouter } from 'next/router';
-import {
-    FacetBucketProps,
-    SearchHitProps,
-    SearchResultProps,
-} from '../../types/search-result';
+import { SearchResultProps } from '../../types/search-result';
 import { SearchParams } from '../../types/search-params';
 import { fetchSearchResultsClientSide } from '../../utils/fetch-search-result';
-import Spinner from '../../components/spinner/Spinner';
-import { LenkeNavNo } from '../../components/lenke/LenkeNavNo';
+import Spinner from '../spinner/Spinner';
 import { Config } from '../../config';
-import { sortHitsByDate } from '../../utils/sort';
+import Lenke from 'nav-frontend-lenker';
 import './SearchResults.less';
-
-const filterByFacets = (
-    hits: SearchHitProps[],
-    facetBuckets: FacetBucketProps[]
-) => {
-    const selected = facetBuckets?.filter((bucket) => bucket.checked);
-
-    const classes = (selected?.length > 0 ? selected : facetBuckets).map((uf) =>
-        uf.key.toLowerCase()
-    );
-
-    return hits.filter((hit) =>
-        classes?.includes(hit.className.toLowerCase().trim())
-    );
-};
 
 type Props = {
     results: SearchResultProps;
@@ -46,28 +26,10 @@ export const SearchResults = ({
     setSearchResults,
 }: Props) => {
     const bem = BEM('search-results');
-    const {
-        hits,
-        prioritized,
-        fasett,
-        aggregations,
-        isMore,
-        isSortDate,
-    } = results;
+    const { hits, isMore } = results;
 
     const [isAwaitingMore, setIsAwaitingMore] = useState(false);
     const router = useRouter();
-
-    const underFacetBuckets = aggregations?.fasetter?.buckets?.find(
-        (bucket) => bucket.key === fasett
-    )?.underaggregeringer?.buckets;
-
-    const sortFunc = isSortDate ? sortHitsByDate : undefined;
-
-    const allHits = [
-        ...filterByFacets(prioritized, underFacetBuckets),
-        ...hits,
-    ].sort(sortFunc);
 
     const showMore = async () => {
         setIsAwaitingMore(true);
@@ -92,8 +54,8 @@ export const SearchResults = ({
                 <Spinner text={'Henter søke-resultater...'} />
             ) : (
                 <>
-                    {allHits?.length > 0 ? (
-                        allHits.map((hitProps, index) => (
+                    {hits?.length > 0 ? (
+                        hits.map((hitProps, index) => (
                             <SearchHit {...hitProps} key={index} />
                         ))
                     ) : (
@@ -107,12 +69,9 @@ export const SearchResults = ({
                                 {
                                     'Prøv igjen med mer generelle søkeord, eller andre søkefiltre. '
                                 }
-                                <LenkeNavNo
-                                    href={Config.PATHS.searchTips}
-                                    withChevron={false}
-                                >
-                                    {'Se søketips.'}
-                                </LenkeNavNo>
+                                <Lenke href={Config.PATHS.searchTips}>
+                                    {'Se søketips'}
+                                </Lenke>
                             </Normaltekst>
                         </div>
                     )}

@@ -2,9 +2,15 @@ import React from 'react';
 import { BEM } from '../../../utils/bem';
 import { formatDate } from '../../../utils/datetime';
 import dayjs from 'dayjs';
-import './SearchHit.less';
 import { SearchHitProps } from '../../../types/search-result';
-import LenkepanelNavNo from '../../../components/lenkepanel/LenkepanelNavNo';
+import { LenkepanelBase } from 'nav-frontend-lenkepanel';
+import {
+    Normaltekst,
+    Undertekst,
+    UndertekstBold,
+    Undertittel,
+} from 'nav-frontend-typografi';
+import './SearchHit.less';
 
 const createPublishedAndModifiedString = (
     publish: SearchHitProps['publish'],
@@ -31,6 +37,7 @@ export const SearchHit = (props: SearchHitProps) => {
         highlight,
         publish,
         modifiedTime,
+        priority,
     } = props;
 
     if (!displayName || !href) {
@@ -45,12 +52,30 @@ export const SearchHit = (props: SearchHitProps) => {
     );
 
     return (
-        <LenkepanelNavNo href={href} tittel={displayName} className={bem()}>
-            <p className={bem('display-path')}>{displayPath}</p>
-            {highlight && <p className={bem('highlight')}>{highlight}</p>}
-            {publishedString && (
-                <p className={bem('published')}>{publishedString}</p>
-            )}
-        </LenkepanelNavNo>
+        <LenkepanelBase href={href} className={bem()}>
+            <Undertittel className={'lenkepanel__heading'}>
+                {displayName}
+            </Undertittel>
+            <div className={bem('content')}>
+                <Undertekst className={bem('display-path')}>
+                    {displayPath}
+                </Undertekst>
+                {highlight && (
+                    <Normaltekst className={bem('highlight')}>
+                        {highlight}
+                    </Normaltekst>
+                )}
+                <div className={bem('bottom-row')}>
+                    {publishedString && (
+                        <Undertekst className={bem('published')}>
+                            {publishedString}
+                        </Undertekst>
+                    )}
+                    {priority && (
+                        <UndertekstBold>{'Anbefalt innhold'}</UndertekstBold>
+                    )}
+                </div>
+            </div>
+        </LenkepanelBase>
     );
 };

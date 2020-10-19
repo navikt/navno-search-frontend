@@ -3,8 +3,8 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { BEM } from '../../utils/bem';
 import { Radio } from 'nav-frontend-skjema';
 import { SearchSort } from '../../types/search-params';
-import { LenkeNavNo } from '../../components/lenke/LenkeNavNo';
 import { Config } from '../../config';
+import Lenke from 'nav-frontend-lenker';
 import './SearchSorting.less';
 
 type Props = {
@@ -48,9 +48,7 @@ export const SearchSorting = ({
                 </div>
             </div>
             <div className={bem('hits-and-tips')}>
-                <LenkeNavNo href={Config.PATHS.searchTips} withChevron={false}>
-                    {'Søketips'}
-                </LenkeNavNo>
+                <Lenke href={Config.PATHS.searchTips}>{'Søketips'}</Lenke>
                 <Normaltekst>{hitsCountText}</Normaltekst>
             </div>
         </div>

@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import { fetchSearchResults } from '../utils/fetch-search-result';
 import { SearchResultProps } from '../types/search-result';
 import { HeadWithMetatags } from '../components/metatags/HeadWithMetatags';
-import SearchPage from '../page/SearchPage';
+import SearchPage from '../components/SearchPage';
 import { UndertekstBold } from 'nav-frontend-typografi';
 import { searchParamsDefault } from '../types/search-params';
 import '../global-style.less';
