@@ -10,6 +10,7 @@ import {
     UndertekstBold,
     Undertittel,
 } from 'nav-frontend-typografi';
+import htmlReactParser from 'html-react-parser';
 import './SearchHit.less';
 
 const createPublishedAndModifiedString = (
@@ -27,6 +28,13 @@ const createPublishedAndModifiedString = (
               )}`
             : '';
     return `${publisedString}${modifiedString}`;
+};
+
+const parseHighlight = (highlight: string) => {
+    return htmlReactParser(
+        // trim whitespace
+        highlight.replace(/(\r\n|\n|\r)/gm, '')
+    );
 };
 
 export const SearchHit = (props: SearchHitProps) => {
@@ -53,7 +61,7 @@ export const SearchHit = (props: SearchHitProps) => {
 
     return (
         <LenkepanelBase href={href} className={bem()}>
-            <Undertittel className={'lenkepanel__heading'}>
+            <Undertittel className={`${bem('header')} lenkepanel__heading`}>
                 {displayName}
             </Undertittel>
             <div className={bem('content')}>
@@ -62,7 +70,7 @@ export const SearchHit = (props: SearchHitProps) => {
                 </Undertekst>
                 {highlight && (
                     <Normaltekst className={bem('highlight')}>
-                        {highlight}
+                        {parseHighlight(highlight)}
                     </Normaltekst>
                 )}
                 <div className={bem('bottom-row')}>

@@ -6,11 +6,12 @@
     align-items: flex-start;
 
     border: none;
-    padding: 0;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
     word-break: break-word;
     transition: transform 0.1s ease-in;
 
-    &:hover {
+    &:hover:not(:focus) {
         box-shadow: none;
         border: none;
     }
@@ -28,7 +29,7 @@
     }
 
     &__display-path,
-    &__published {
+    &__bottom-row {
         color: @navGra60;
     }
 

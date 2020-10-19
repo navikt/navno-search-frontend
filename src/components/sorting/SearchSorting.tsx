@@ -22,9 +22,14 @@ export const SearchSorting = ({
 }: Props) => {
     const bem = BEM('search-sorting-row');
 
-    const hitsCountText = `${numHits} treff${
-        searchTerm ? ` for "${searchTerm}"` : ''
-    }`;
+    const HitsCountText = () => (
+        <>
+            <Normaltekst>
+                {`${numHits} treff${searchTerm ? ' for ' : ''}`}
+                {searchTerm && <b>{`"${searchTerm}"`}</b>}
+            </Normaltekst>
+        </>
+    );
 
     return (
         <div className={bem()}>
@@ -49,7 +54,7 @@ export const SearchSorting = ({
             </div>
             <div className={bem('hits-and-tips')}>
                 <Lenke href={Config.PATHS.searchTips}>{'Søketips'}</Lenke>
-                <Normaltekst>{hitsCountText}</Normaltekst>
+                <HitsCountText />
             </div>
         </div>
     );
