@@ -9,10 +9,10 @@
     padding: 0.75rem;
     margin-bottom: 0.5rem;
     word-break: break-word;
-    transition: transform 0.1s ease-in;
+    box-shadow: 0 1px 5px @navGra40;
 
     &:hover:not(:focus) {
-        box-shadow: none;
+        box-shadow: 0 1px 6px @navGra80;
         border: none;
     }
 
@@ -39,7 +39,12 @@
 
     &__bottom-row {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         margin-top: 0.5rem;
+    }
+
+    &__published {
+        margin-right: 0.75rem;
     }
 }

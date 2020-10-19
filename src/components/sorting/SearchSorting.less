@@ -1,7 +1,6 @@
 .search-sorting-row {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
     padding: 0 0.75rem;
 
     &__selector {
@@ -11,8 +10,10 @@
 
     &__buttons {
         display: flex;
+        flex-wrap: wrap;
         margin-top: 0.25rem;
         & > * {
+            margin-bottom: 0.5rem;
             margin-right: 2rem;
         }
     }
@@ -21,6 +22,8 @@
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+        word-break: break-word;
+
         & > :first-child {
             margin-bottom: 0.25rem;
         }

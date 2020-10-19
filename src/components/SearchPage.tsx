@@ -118,7 +118,6 @@ const SearchPage = (props: SearchResultProps) => {
                         searchTerm={word}
                         numHits={Number(total)}
                     />
-                    <hr className={bem('separator')} />
                 </div>
                 <SearchResults
                     results={searchResults}
