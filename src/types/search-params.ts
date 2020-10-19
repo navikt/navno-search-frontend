@@ -29,3 +29,10 @@ export type SearchParams = {
     s?: SearchSort;
     daterange?: number;
 };
+
+export const searchParamsDefault: SearchParams = {
+    f: 0,
+    c: 1,
+    s: 1,
+    daterange: -1,
+};

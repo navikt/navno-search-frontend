@@ -1,3 +1,5 @@
+import { SearchSort } from './search-params';
+
 export enum DaterangeKey {
     Last7Days = 'Siste 7 dager',
     Last30Days = 'Siste 30 dager',
@@ -51,8 +53,8 @@ export type SearchHitProps = {
 export type SearchResultProps = {
     c: number;
     isSortDate: boolean;
-    s: string;
-    daterange: string;
+    s: SearchSort;
+    daterange: number;
     isMore: boolean;
     word: string;
     total: string;

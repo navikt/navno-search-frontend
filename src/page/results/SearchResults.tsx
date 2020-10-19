@@ -4,8 +4,6 @@ import { SearchHit } from './search-hit/SearchHit';
 import { BEM } from '../../utils/bem';
 import { Flatknapp } from 'nav-frontend-knapper';
 import { useRouter } from 'next/router';
-import dayjs from 'dayjs';
-import './SearchResults.less';
 import {
     FacetBucketProps,
     SearchHitProps,
@@ -16,6 +14,8 @@ import { fetchSearchResultsClientSide } from '../../utils/fetch-search-result';
 import Spinner from '../../components/spinner/Spinner';
 import { LenkeNavNo } from '../../components/lenke/LenkeNavNo';
 import { Config } from '../../config';
+import { sortHitsByDate } from '../../utils/sort';
+import './SearchResults.less';
 
 const filterByFacets = (
     hits: SearchHitProps[],
@@ -30,20 +30,6 @@ const filterByFacets = (
     return hits.filter((hit) =>
         classes?.includes(hit.className.toLowerCase().trim())
     );
-};
-
-const sortByDate = (a: SearchHitProps, b: SearchHitProps) => {
-    const lastChanged = (props: SearchHitProps) =>
-        Math.max(
-            ...[
-                props.publish.first || 0,
-                props.publish.from || 0,
-                props.modifiedTime || 0,
-                0,
-            ].map((v) => dayjs(v).unix())
-        );
-
-    return lastChanged(b) - lastChanged(a);
 };
 
 type Props = {
@@ -69,7 +55,6 @@ export const SearchResults = ({
         isSortDate,
     } = results;
 
-    const [chunkCount, setChunkCount] = useState(searchParams.c);
     const [isAwaitingMore, setIsAwaitingMore] = useState(false);
     const router = useRouter();
 
@@ -77,7 +62,7 @@ export const SearchResults = ({
         (bucket) => bucket.key === fasett
     )?.underaggregeringer?.buckets;
 
-    const sortFunc = isSortDate ? sortByDate : undefined;
+    const sortFunc = isSortDate ? sortHitsByDate : undefined;
 
     const allHits = [
         ...filterByFacets(prioritized, underFacetBuckets),
@@ -86,12 +71,10 @@ export const SearchResults = ({
 
     const showMore = async () => {
         setIsAwaitingMore(true);
-        const newCount = chunkCount + 1;
         const { result, error } = await fetchSearchResultsClientSide(
-            { ...searchParams, c: newCount },
+            { ...searchParams, c: results.c + 1 },
             router
         );
-        setChunkCount(newCount);
         setIsAwaitingMore(false);
 
         if (result) {

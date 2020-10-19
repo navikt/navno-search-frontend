@@ -13,7 +13,7 @@ export const fetchSearchResults = (
         if (res.ok) {
             return res.json();
         }
-        const error = `Failed to fetch search re sults: ${res.statusText}`;
+        const error = `Failed to fetch search results: ${res.statusText}`;
         throw Error(error);
     });
 };

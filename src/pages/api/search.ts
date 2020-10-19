@@ -16,8 +16,7 @@ const searchHandler = async (
     await fetchSearchResults(searchParams)
         .then((searchRes) => res.status(200).json({ result: searchRes }))
         .catch((err) => {
-            const error = `search error: ${err}`;
-            res.status(500).json({ error: error });
+            res.status(err.statusCode).json(err);
         });
 };
 

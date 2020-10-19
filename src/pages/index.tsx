@@ -5,6 +5,7 @@ import { SearchResultProps } from '../types/search-result';
 import { HeadWithMetatags } from '../components/metatags/HeadWithMetatags';
 import SearchPage from '../page/SearchPage';
 import { UndertekstBold } from 'nav-frontend-typografi';
+import { searchParamsDefault } from '../types/search-params';
 import '../global-style.less';
 
 type Props = {
@@ -40,14 +41,15 @@ const SearchBase = (props: Props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const results = await fetchSearchResults(context.query).catch((err) =>
-        console.log(err)
-    );
+    const results = await fetchSearchResults({
+        ...searchParamsDefault,
+        ...context.query,
+    }).catch((err) => console.error(err));
 
     if (!results) {
-        const resultsWithoutQuery = await fetchSearchResults().catch((err) =>
-            console.log(err)
-        );
+        const resultsWithoutQuery = await fetchSearchResults(
+            searchParamsDefault
+        ).catch((err) => console.error(err));
         return { props: { results: resultsWithoutQuery } };
     }
 

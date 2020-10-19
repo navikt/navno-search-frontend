@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import debounce from 'lodash.debounce';
 import { SearchFilters, UFSetterProps } from './filters/SearchFilters';
 import { SearchResultProps } from '../types/search-result';
-import { SearchParams } from '../types/search-params';
+import { SearchParams, searchParamsDefault } from '../types/search-params';
 import { fetchSearchResultsClientSide } from '../utils/fetch-search-result';
 import './SearchPage.less';
 
@@ -26,12 +26,13 @@ const SearchPage = (props: SearchResultProps) => {
 
     const initialParams: SearchParams = {
         ord: word || '',
-        c: Number(props.c) || 1,
-        s: Number(props.s) || 0,
+        c: props.c || searchParamsDefault.c,
+        s: props.s || searchParamsDefault.s,
         f:
             aggregations.fasetter.buckets.findIndex(
                 (bucket) => bucket.key === fasett
-            ) || 0,
+            ) || searchParamsDefault.f,
+        daterange: props.daterange || searchParamsDefault.daterange,
     };
 
     const [searchParams, setSearchParams] = useState<SearchParams>(
