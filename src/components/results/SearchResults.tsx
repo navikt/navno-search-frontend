@@ -5,12 +5,11 @@ import { BEM } from '../../utils/bem';
 import { Knapp } from 'nav-frontend-knapper';
 import { useRouter } from 'next/router';
 import { SearchResultProps } from '../../types/search-result';
-import { SearchParams, SearchSort } from '../../types/search-params';
+import { SearchParams } from '../../types/search-params';
 import { fetchSearchResultsClientSide } from '../../utils/fetch-search-result';
 import Spinner from '../spinner/Spinner';
 import { Config } from '../../config';
 import Lenke from 'nav-frontend-lenker';
-import { sortHitsByDate } from '../../utils/sort';
 import './SearchResults.less';
 
 type Props = {
@@ -27,13 +26,10 @@ export const SearchResults = ({
     setSearchResults,
 }: Props) => {
     const bem = BEM('search-results');
-    const { hits, isMore, word, s: sorting } = results;
+    const { hits, isMore, word } = results;
 
     const [isAwaitingMore, setIsAwaitingMore] = useState(false);
     const router = useRouter();
-
-    const sortFunc =
-        Number(sorting) === SearchSort.Newest ? sortHitsByDate : undefined;
 
     const showMore = async () => {
         setIsAwaitingMore(true);
@@ -59,15 +55,13 @@ export const SearchResults = ({
             ) : (
                 <>
                     {hits?.length > 0 ? (
-                        hits
-                            .sort(sortFunc)
-                            .map((hitProps, index) => (
-                                <SearchHit
-                                    hit={hitProps}
-                                    searchTerm={word}
-                                    key={index}
-                                />
-                            ))
+                        hits.map((hitProps, index) => (
+                            <SearchHit
+                                hit={hitProps}
+                                searchTerm={word}
+                                key={index}
+                            />
+                        ))
                     ) : (
                         <div className={bem('no-hits')}>
                             <Undertittel>
