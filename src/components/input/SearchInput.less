@@ -2,7 +2,6 @@
 @import (reference) '~nav-frontend-knapper-style/src/mixins';
 
 .search-input {
-    @borderWidth: 2px;
     margin-bottom: 1rem;
     display: flex;
     position: relative;
@@ -13,7 +12,7 @@
         input {
             .typo-normal;
             font-size: 150%;
-            border-width: @borderWidth;
+            border-width: 2px;
             border-color: @navBla;
         }
     }
@@ -27,7 +26,7 @@
         transform: none;
         box-shadow: none;
         border-radius: 0 @border-radius-base @border-radius-base 0;
-        height: calc(100% - @borderWidth * 2);
+        height: 100%;
 
         &::after,
         &::before {
