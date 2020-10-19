@@ -5,21 +5,26 @@
     margin-left: 3rem;
     min-width: @width;
 
-    &__header.lenke {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        text-decoration: none;
-        pointer-events: none;
-    }
-
-    &__title {
-        .typo-undertittel;
-        color: black;
-    }
-
-    &__filter-toggle {
+    &__title-mobile {
         display: none;
+        justify-content: space-between;
+        text-decoration: none;
+
+        &:hover {
+            .search-filters__title-mobile-toggle {
+                text-decoration: underline;
+            }
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 2px @fokusFarge;
+            background-color: transparent;
+            color: @navBla;
+        }
+    }
+
+    &__title-mobile-label {
+        color: black;
     }
 
     &__filters {
@@ -35,25 +40,27 @@
         right: 1rem;
         margin: 0;
         padding: 0.5rem;
-        background-color: @navDypBlaLighten80;
+        background-color: white;
         border-radius: @border-radius-base;
+        border: 2px solid black;
         min-width: 0;
 
-        &__title {
-            .typo-element;
-        }
+        &--visible-mobile {
+            z-index: 9999;
 
-        &__filter-toggle {
-            display: block;
-        }
-
-        &__header.lenke {
-            pointer-events: auto;
-            &:focus {
-                & > * {
-                    color: white;
-                }
+            .search-filters__filters {
+                visibility: visible;
+                max-height: 100rem;
+                max-width: @width;
             }
+        }
+
+        &__title {
+            display: none;
+        }
+
+        &__title-mobile {
+            display: flex;
         }
 
         &__filters {
@@ -65,13 +72,6 @@
             transition-property: max-height, max-width, visibility;
             transition-duration: 0.35s;
             transition-timing-function: ease-in;
-
-            &--visible-mobile {
-                visibility: visible;
-                z-index: 9999;
-                max-height: 100rem;
-                max-width: @width;
-            }
         }
     }
 }

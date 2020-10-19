@@ -1,4 +1,4 @@
-import { Undertekst } from 'nav-frontend-typografi';
+import { Undertekst, Undertittel, Element } from 'nav-frontend-typografi';
 import { FacetsSelector } from './facets-selector/FacetsSelector';
 import { DaterangeSelector } from './daterange-selector/DaterangeSelector';
 import React, { useState } from 'react';
@@ -28,28 +28,31 @@ export const SearchFilters = ({
     setDaterange,
 }: Props) => {
     const bem = BEM('search-filters');
-    const [visibleMobile, setVisibleMobile] = useState(false);
+    const [openMobile, setOpenMobile] = useState(false);
 
     return (
-        <div className={bem()}>
+        <div
+            className={`${bem()} ${
+                openMobile ? bem(undefined, 'visible-mobile') : ''
+            }`}
+        >
+            <Undertittel className={bem('title')}>{'Søkefilter'}</Undertittel>
             <Lenke
                 href={''}
                 onClick={(e) => {
                     e.preventDefault();
-                    setVisibleMobile((state) => !state);
+                    setOpenMobile((state) => !state);
                 }}
-                className={bem('header')}
+                className={bem('title-mobile')}
             >
-                <p className={bem('title')}>{'Søkefilter'}</p>
-                <Undertekst className={bem('filter-toggle')}>
-                    {visibleMobile ? 'Skjul filter' : 'Vis filter'}
+                <Element className={bem('title-mobile-label')}>
+                    {'Søkefilter'}
+                </Element>
+                <Undertekst className={bem('title-mobile-toggle')}>
+                    {openMobile ? 'Skjul filter' : 'Vis filter'}
                 </Undertekst>
             </Lenke>
-            <div
-                className={`${bem('filters')} ${
-                    visibleMobile ? bem('filters', 'visible-mobile') : undefined
-                }`}
-            >
+            <div className={bem('filters')}>
                 <FacetsSelector
                     facetsProps={facetsProps}
                     setFacet={setFacet}
