@@ -26,3 +26,13 @@ export const objectToQueryString = (params: object) =>
               ''
           )
         : '';
+
+export const queryStringToObject = (query: string) =>
+    query
+        .replace('?', '')
+        .split('&')
+        .reduce((acc, kv) => {
+            const [key, value] = kv.split('=');
+
+            return { ...acc, [key]: value };
+        }, {});

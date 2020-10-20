@@ -15,6 +15,7 @@ import {
 } from '../types/search-params';
 import { fetchSearchResultsClientSide } from '../utils/fetch-search-result';
 import { initAmplitude, logPageview, logSearchQuery } from '../utils/amplitude';
+import { queryStringToObject } from '../utils/fetch-utils';
 import './SearchPage.less';
 
 const SearchPage = (props: SearchResultProps) => {
@@ -24,37 +25,27 @@ const SearchPage = (props: SearchResultProps) => {
     const [searchResults, setSearchResults] = useState<SearchResultProps>(
         props
     );
+
+    const [searchParams, setSearchParams] = useState<SearchParams>(
+        searchParamsDefault
+    );
+
     const [isAwaiting, setIsAwaiting] = useState(false);
-    const [isLoadedClient, setIsLoaded] = useState(false);
+    const [isLoadedClientside, setIsLoadedClientside] = useState(false);
 
     const { fasett, word, total, aggregations, s: sort } = searchResults;
 
-    const initialParams: SearchParams = {
-        ord: word || '',
-        c: props.c || searchParamsDefault.c,
-        s: props.s || searchParamsDefault.s,
-        f:
-            aggregations.fasetter.buckets.findIndex(
-                (bucket) => bucket.key === fasett
-            ) || searchParamsDefault.f,
-        daterange: props.daterange || searchParamsDefault.daterange,
-    };
-
-    const [searchParams, setSearchParams] = useState<SearchParams>(
-        initialParams
-    );
-
     const setSearchTerm = (term: string) =>
-        setSearchParams((state) => ({ ...state, ord: term?.trim(), c: 1 }));
+        setSearchParams((state) => ({ ...state, ord: term?.trim() }));
 
     const setDaterange = (daterange: number) =>
-        setSearchParams((state) => ({ ...state, daterange, c: 1 }));
+        setSearchParams((state) => ({ ...state, daterange }));
 
     const setSort = (s: number) =>
-        setSearchParams((state) => ({ ...state, s, c: 1 }));
+        setSearchParams((state) => ({ ...state, s }));
 
     const setFacet = (f: number) =>
-        setSearchParams((state) => ({ ...state, f, uf: undefined, c: 1 }));
+        setSearchParams((state) => ({ ...state, f, uf: undefined }));
 
     const setUnderFacet = ({ underFacet, toggle }: UFSetterProps) => {
         setSearchParams((state) => {
@@ -64,7 +55,7 @@ const SearchPage = (props: SearchResultProps) => {
                     ? oldUf
                     : [...oldUf, underFacet]
                 : oldUf.filter((item) => item !== underFacet);
-            return { ...state, uf: newUf.length > 0 ? newUf : undefined, c: 1 };
+            return { ...state, uf: newUf.length > 0 ? newUf : undefined };
         });
     };
 
@@ -87,7 +78,7 @@ const SearchPage = (props: SearchResultProps) => {
     }, 100);
 
     useEffect(() => {
-        if (isLoadedClient) {
+        if (isLoadedClientside) {
             fetchAndSetNewResults();
         }
     }, [
@@ -98,12 +89,22 @@ const SearchPage = (props: SearchResultProps) => {
     ]);
 
     useEffect(() => {
-        setIsLoaded(true);
+        setIsLoadedClientside(true);
         initAmplitude();
         logPageview();
+
+        const initialParams = queryStringToObject(
+            window.location.search
+        ) as SearchParams;
+
         if (initialParams.ord) {
             logSearchQuery(initialParams.ord);
         }
+
+        setSearchParams({
+            ...searchParamsDefault,
+            ...initialParams,
+        });
     }, []);
 
     return (
