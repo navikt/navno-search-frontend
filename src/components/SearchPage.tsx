@@ -19,6 +19,30 @@ import { objectToQueryString } from '../utils/fetch-utils';
 import Spinner from './spinner/Spinner';
 import './SearchPage.less';
 
+const paramsFromResult = (searchResult: SearchResultProps) => {
+    const initialFacetIndex = searchResult?.aggregations?.fasetter?.buckets?.findIndex(
+        (bucket) => bucket.key === searchResult.fasett
+    );
+
+    const initialUnderFacets = searchResult?.aggregations?.fasetter?.buckets[
+        initialFacetIndex
+    ]?.underaggregeringer?.buckets?.reduce(
+        (acc, bucket, index) => (bucket.checked ? [...acc, index] : acc),
+        []
+    );
+
+    return {
+        ...(searchResult.word && { ord: searchResult.word }),
+        ...(initialFacetIndex && { f: initialFacetIndex }),
+        ...(initialUnderFacets.length > 0 && { uf: initialUnderFacets }),
+        ...(searchResult.c && { c: Number(searchResult.c) }),
+        ...(searchResult.s && { s: Number(searchResult.s) }),
+        ...(searchResult.daterange && {
+            daterange: Number(searchResult.daterange),
+        }),
+    };
+};
+
 const SearchPage = (props: SearchResultProps) => {
     const bem = BEM('search');
     const router = useRouter();
@@ -97,24 +121,7 @@ const SearchPage = (props: SearchResultProps) => {
     );
 
     useEffect(() => {
-        const initialFacetIndex = searchResults.aggregations.fasetter.buckets.findIndex(
-            (bucket) => bucket.key === searchResults.fasett
-        );
-        const initialUnderFacets = searchResults.aggregations.fasetter.buckets[
-            initialFacetIndex
-        ].underaggregeringer.buckets.reduce(
-            (acc, bucket, index) => (bucket.checked ? [...acc, index] : acc),
-            []
-        );
-
-        const initialParams = {
-            ord: searchResults.word,
-            f: initialFacetIndex,
-            uf: initialUnderFacets,
-            c: searchResults.c,
-            s: searchResults.s,
-            daterange: searchResults.daterange,
-        };
+        const initialParams = paramsFromResult(searchResults);
 
         setSearchParams({
             ...searchParamsDefault,
@@ -123,8 +130,8 @@ const SearchPage = (props: SearchResultProps) => {
 
         initAmplitude();
         logPageview();
-        if (initialParams?.ord) {
-            logSearchQuery(initialParams.ord);
+        if (searchResults?.word) {
+            logSearchQuery(searchResults.word);
         }
     }, []);
 
@@ -138,7 +145,7 @@ const SearchPage = (props: SearchResultProps) => {
                     fetchNewResults={fetchAndSetNewResults}
                 />
                 <SearchSorting
-                    isSortDate={sort === SearchSort.Newest}
+                    isSortDate={Number(sort) === SearchSort.Newest}
                     setSort={setSort}
                     searchTerm={word}
                     numHits={Number(total)}
