@@ -32,7 +32,7 @@ export type FacetBucketProps = {
     defaultClassName?: string;
 };
 
-export type SearchHitProps = {
+export type SearchHitProps = Partial<{
     priority: boolean;
     displayName: string;
     href: string;
@@ -48,7 +48,11 @@ export type SearchHitProps = {
     id: string;
     score: number;
     keywords: string[];
-};
+    officeInformation: {
+        phone?: string;
+        audienceReception?: string;
+    };
+}>;
 
 export type SearchResultProps = {
     c: number;

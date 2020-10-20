@@ -38,6 +38,27 @@ const parseHighlight = (highlight: string) => {
     );
 };
 
+const officeInformationTable = (info: SearchHitProps['officeInformation']) => {
+    const { phone, audienceReception } = info;
+
+    return (
+        <>
+            {phone && (
+                <span>
+                    <span className={'label'}>{'Telefon:'}</span>
+                    {phone}
+                </span>
+            )}
+            {audienceReception && (
+                <span>
+                    <span className={'label'}>{'Publikumsmottak:'}</span>
+                    {audienceReception}
+                </span>
+            )}
+        </>
+    );
+};
+
 type Props = {
     hit: SearchHitProps;
     searchTerm: string;
@@ -52,6 +73,7 @@ export const SearchHit = ({ hit, searchTerm }: Props) => {
         publish,
         modifiedTime,
         priority,
+        officeInformation,
     } = hit;
 
     if (!displayName || !href) {
@@ -81,6 +103,11 @@ export const SearchHit = ({ hit, searchTerm }: Props) => {
                 {highlight && (
                     <Normaltekst className={bem('highlight')}>
                         {parseHighlight(highlight)}
+                    </Normaltekst>
+                )}
+                {officeInformation && (
+                    <Normaltekst className={bem('office-info')}>
+                        {officeInformationTable(officeInformation)}
                     </Normaltekst>
                 )}
                 <div className={bem('bottom-row')}>

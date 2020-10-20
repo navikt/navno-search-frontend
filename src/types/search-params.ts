@@ -13,22 +13,22 @@ export enum SearchSort {
     Newest = 1,
 }
 
-export type SearchParams = {
+export type SearchParams = Partial<{
     // Search string
-    ord?: string;
+    ord: string;
 
     // Facet
-    f?: number;
+    f: number;
 
     // Under-facets
-    uf?: string[];
+    uf: string[];
 
     // Number of results to retrieve (20 * c)
-    c?: number;
+    c: number;
 
-    s?: SearchSort;
-    daterange?: number;
-};
+    s: SearchSort;
+    daterange: number;
+}>;
 
 export const searchParamsDefault: SearchParams = {
     f: 0,
