@@ -34,17 +34,20 @@ export const SearchResults = ({
     const showMore = async () => {
         setIsAwaitingMore(true);
         const { result, error } = await fetchSearchResultsClientSide(
-            { ...searchParams, c: results.c + 1 },
+            { ...searchParams, c: results.c + 1, start: results.c },
             router
         );
         setIsAwaitingMore(false);
 
-        if (result) {
-            setSearchResults(result);
-        }
+        const newResult = {
+            ...result,
+            hits: [...results.hits, ...result.hits],
+        };
+
+        setSearchResults(newResult);
 
         if (error) {
-            console.error(`failed to fetch more: ${error}`);
+            console.error(`Error while fetching more results: ${error}`);
         }
     };
 
