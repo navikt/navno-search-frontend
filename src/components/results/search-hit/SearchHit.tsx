@@ -24,7 +24,7 @@ const createPublishedAndModifiedString = (
         : '';
     const modifiedString =
         modifiedTime && dayjs(modifiedTime).unix() > dayjs(publishedTime).unix()
-            ? `${publisedString ? ' - ' : ''}Sist endret ${formatDate(
+            ? `${publisedString ? ' | ' : ''}Sist endret ${formatDate(
                   modifiedTime
               )}`
             : '';

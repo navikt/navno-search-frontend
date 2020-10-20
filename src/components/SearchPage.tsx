@@ -124,10 +124,9 @@ const SearchPage = (props: SearchResultProps) => {
                     />
                 </div>
                 <SearchResults
-                    results={searchResults}
+                    initialResults={searchResults}
                     isAwaiting={isAwaiting}
                     searchParams={searchParams}
-                    setSearchResults={setSearchResults}
                 />
             </div>
             <SearchFilters

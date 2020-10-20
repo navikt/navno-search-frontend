@@ -20,7 +20,7 @@ export const fetchSearchResults = (
 
 export const fetchSearchResultsClientSide = async (
     searchParams: SearchParams,
-    router: NextRouter
+    router?: NextRouter
 ): Promise<SearchApiResponse> => {
     const queryString = objectToQueryString(searchParams);
     const { result, error } = (await fetch(
@@ -29,7 +29,7 @@ export const fetchSearchResultsClientSide = async (
 
     if (result) {
         const newUrl = `${window.location.href.split('?')[0]}${queryString}`;
-        router.push(newUrl, undefined, {
+        router?.push(newUrl, undefined, {
             shallow: true,
         });
     }
