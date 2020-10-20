@@ -55,6 +55,8 @@ const SearchPage = (props: SearchResultProps) => {
     );
     const [isAwaitingResults, setIsAwaitingResults] = useState(false);
 
+    const { fasett, word, total, s: sort } = searchResults;
+
     const setSearchTerm = (term: string) => {
         const newParams = { ...searchParams, ord: term?.trim() };
         setSearchParams(newParams);
@@ -88,8 +90,6 @@ const SearchPage = (props: SearchResultProps) => {
         setSearchParams(newParams);
         fetchAndSetNewResults(newParams);
     };
-
-    const { fasett, word, total, s: sort } = searchResults;
 
     const fetchAndSetNewResults = debounce(
         async (params: SearchParams = searchParams) => {
@@ -130,8 +130,8 @@ const SearchPage = (props: SearchResultProps) => {
 
         initAmplitude();
         logPageview();
-        if (searchResults?.word) {
-            logSearchQuery(searchResults.word);
+        if (word) {
+            logSearchQuery(word);
         }
     }, []);
 
