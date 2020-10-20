@@ -13,9 +13,10 @@ import {
     searchParamsDefault,
     SearchSort,
 } from '../types/search-params';
-import { fetchSearchResultsClientSide } from '../utils/fetch-search-result';
+import { fetchSearchResultsClientside } from '../utils/fetch-search-result';
 import { initAmplitude, logPageview, logSearchQuery } from '../utils/amplitude';
-import { queryStringToObject } from '../utils/fetch-utils';
+import { objectToQueryString } from '../utils/fetch-utils';
+import Spinner from './spinner/Spinner';
 import './SearchPage.less';
 
 const SearchPage = (props: SearchResultProps) => {
@@ -25,114 +26,134 @@ const SearchPage = (props: SearchResultProps) => {
     const [searchResults, setSearchResults] = useState<SearchResultProps>(
         props
     );
-
     const [searchParams, setSearchParams] = useState<SearchParams>(
         searchParamsDefault
     );
+    const [isAwaitingResults, setIsAwaitingResults] = useState(false);
 
-    const [isAwaiting, setIsAwaiting] = useState(false);
-    const [isLoadedClientside, setIsLoadedClientside] = useState(false);
-
-    const { fasett, word, total, aggregations, s: sort } = searchResults;
-
-    const setSearchTerm = (term: string) =>
-        setSearchParams((state) => ({ ...state, ord: term?.trim() }));
-
-    const setDaterange = (daterange: number) =>
-        setSearchParams((state) => ({ ...state, daterange }));
-
-    const setSort = (s: number) =>
-        setSearchParams((state) => ({ ...state, s }));
-
-    const setFacet = (f: number) =>
-        setSearchParams((state) => ({ ...state, f, uf: undefined }));
-
-    const setUnderFacet = ({ underFacet, toggle }: UFSetterProps) => {
-        setSearchParams((state) => {
-            const oldUf = state.uf || [];
-            const newUf = toggle
-                ? oldUf.includes(underFacet)
-                    ? oldUf
-                    : [...oldUf, underFacet]
-                : oldUf.filter((item) => item !== underFacet);
-            return { ...state, uf: newUf.length > 0 ? newUf : undefined };
-        });
+    const setSearchTerm = (term: string) => {
+        const newParams = { ...searchParams, ord: term?.trim() };
+        setSearchParams(newParams);
+    };
+    const setDaterange = (daterange: number) => {
+        const newParams = { ...searchParams, daterange };
+        setSearchParams(newParams);
+        fetchAndSetNewResults(newParams);
+    };
+    const setSort = (s: number) => {
+        const newParams = { ...searchParams, s };
+        setSearchParams(newParams);
+        fetchAndSetNewResults(newParams);
+    };
+    const setFacet = (f: number) => {
+        const newParams = { ...searchParams, f, uf: undefined };
+        setSearchParams(newParams);
+        fetchAndSetNewResults(newParams);
+    };
+    const setUnderFacet = ({ uf, toggle }: UFSetterProps) => {
+        const oldUf = searchParams.uf || [];
+        const newUf = toggle
+            ? oldUf.includes(uf)
+                ? oldUf
+                : [...oldUf, uf]
+            : oldUf.filter((item) => item !== uf);
+        const newParams = {
+            ...searchParams,
+            uf: newUf.length > 0 ? newUf : undefined,
+        };
+        setSearchParams(newParams);
+        fetchAndSetNewResults(newParams);
     };
 
-    const fetchAndSetNewResults = debounce(async () => {
-        setIsAwaiting(true);
-        logSearchQuery(searchParams.ord);
-        const { result, error } = await fetchSearchResultsClientSide(
-            searchParams,
-            router
+    const { fasett, word, total, s: sort } = searchResults;
+
+    const fetchAndSetNewResults = debounce(
+        async (params: SearchParams = searchParams) => {
+            setIsAwaitingResults(true);
+            const { result, error } = await fetchSearchResultsClientside(
+                params
+            );
+            setIsAwaitingResults(false);
+
+            if (result) {
+                setSearchResults(result);
+
+                // Sets the correct query string in the browser url-bar
+                const newUrl = `${
+                    window.location.href.split('?')[0]
+                }${objectToQueryString(params)}`;
+                router.push(newUrl, undefined, {
+                    shallow: true,
+                });
+            }
+
+            if (error) {
+                console.error(`Error while fetching results: ${error}`);
+            }
+
+            logSearchQuery(params.ord);
+        },
+        100
+    );
+
+    useEffect(() => {
+        const initialFacetIndex = searchResults.aggregations.fasetter.buckets.findIndex(
+            (bucket) => bucket.key === searchResults.fasett
         );
-        setIsAwaiting(false);
+        const initialUnderFacets = searchResults.aggregations.fasetter.buckets[
+            initialFacetIndex
+        ].underaggregeringer.buckets.reduce(
+            (acc, bucket, index) => (bucket.checked ? [...acc, index] : acc),
+            []
+        );
 
-        if (result) {
-            setSearchResults(result);
-        }
-
-        if (error) {
-            console.error(`failed to fetch results: ${error}`);
-        }
-    }, 100);
-
-    useEffect(() => {
-        if (isLoadedClientside) {
-            fetchAndSetNewResults();
-        }
-    }, [
-        searchParams.daterange,
-        searchParams.f,
-        searchParams.uf,
-        searchParams.s,
-    ]);
-
-    useEffect(() => {
-        setIsLoadedClientside(true);
-        initAmplitude();
-        logPageview();
-
-        const initialParams = queryStringToObject(
-            window.location.search
-        ) as SearchParams;
-
-        if (initialParams.ord) {
-            logSearchQuery(initialParams.ord);
-        }
+        const initialParams = {
+            ord: searchResults.word,
+            f: initialFacetIndex,
+            uf: initialUnderFacets,
+            c: searchResults.c,
+            s: searchResults.s,
+            daterange: searchResults.daterange,
+        };
 
         setSearchParams({
             ...searchParamsDefault,
             ...initialParams,
         });
+
+        initAmplitude();
+        logPageview();
+        if (initialParams?.ord) {
+            logSearchQuery(initialParams.ord);
+        }
     }, []);
 
     return (
         <div className={bem()}>
-            <div className={bem('search-col')}>
-                <div className={bem('search-top-row')}>
-                    <SearchHeader facet={fasett} />
-                    <SearchInput
-                        prevSearchTerm={word}
-                        setSearchTerm={setSearchTerm}
-                        fetchNewResults={fetchAndSetNewResults}
-                    />
-                    <SearchSorting
-                        isSortDate={sort === SearchSort.Newest}
-                        setSort={setSort}
-                        searchTerm={word}
-                        numHits={Number(total)}
-                    />
-                </div>
-                <SearchResults
-                    initialResults={searchResults}
-                    isAwaiting={isAwaiting}
-                    searchParams={searchParams}
+            <div className={bem('left-col')}>
+                <SearchHeader facet={fasett} />
+                <SearchInput
+                    initialSearchTerm={word}
+                    setSearchTerm={setSearchTerm}
+                    fetchNewResults={fetchAndSetNewResults}
                 />
+                <SearchSorting
+                    isSortDate={sort === SearchSort.Newest}
+                    setSort={setSort}
+                    searchTerm={word}
+                    numHits={Number(total)}
+                />
+                {isAwaitingResults ? (
+                    <Spinner text={'Henter søke-resultater...'} />
+                ) : (
+                    <SearchResults
+                        initialResults={searchResults}
+                        searchParams={searchParams}
+                    />
+                )}
             </div>
             <SearchFilters
-                daterangeProps={aggregations.Tidsperiode}
-                facetsProps={aggregations.fasetter.buckets}
+                results={searchResults}
                 setFacet={setFacet}
                 setUnderFacet={setUnderFacet}
                 setDaterange={setDaterange}

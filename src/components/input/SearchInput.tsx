@@ -5,42 +5,36 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import './SearchInput.less';
 
 type Props = {
-    prevSearchTerm: string;
+    initialSearchTerm: string;
     setSearchTerm: (term: string) => void;
     fetchNewResults: () => void;
 };
 
 export const SearchInput = ({
-    prevSearchTerm,
+    initialSearchTerm,
     setSearchTerm,
     fetchNewResults,
 }: Props) => {
     const bem = BEM('search-input');
 
-    const onSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        (document.activeElement as HTMLElement).blur();
-        fetchNewResults();
-    };
-
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-        setSearchTerm(e.target.value);
-
     return (
-        <form onSubmit={onSubmit} className={bem()}>
+        <form
+            onSubmit={(e) => {
+                e.preventDefault();
+                // remove focus to close on-screen keyboards etc
+                (document.activeElement as HTMLElement)?.blur?.();
+                fetchNewResults();
+            }}
+            className={bem()}
+        >
             <Input
                 aria-labelledby={'search-header'}
                 className={bem('input')}
-                onChange={onChange}
-                onSubmit={onSubmit}
-                defaultValue={prevSearchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                defaultValue={initialSearchTerm}
                 placeholder={'Søk på nav.no'}
             />
-            <Hovedknapp
-                className={bem('button')}
-                onClick={onSubmit}
-                htmlType={'submit'}
-            >
+            <Hovedknapp className={bem('button')} htmlType={'submit'}>
                 {'Søk'}
             </Hovedknapp>
         </form>

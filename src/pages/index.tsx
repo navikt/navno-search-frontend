@@ -6,6 +6,7 @@ import { HeadWithMetatags } from '../components/metatags/HeadWithMetatags';
 import SearchPage from '../components/SearchPage';
 import { UndertekstBold } from 'nav-frontend-typografi';
 import { searchParamsDefault } from '../types/search-params';
+import AlertStripe from 'nav-frontend-alertstriper';
 import '../global-style.less';
 
 type Props = {
@@ -15,10 +16,6 @@ type Props = {
 const SearchBase = (props: Props) => {
     const { results } = props;
 
-    if (!results) {
-        return <div>{'Unknown error'}</div>;
-    }
-
     return (
         <div className={'app'}>
             <HeadWithMetatags
@@ -27,14 +24,22 @@ const SearchBase = (props: Props) => {
                 canonicalUrl={'https://www.nav.no/sok'}
             />
             <div className={'content-wrapper'} id={'maincontent'}>
-                <div className={'work-in-progress'}>
-                    <UndertekstBold>
-                        {
-                            'Obs: denne versjonen av søk på nav.no er under utvikling! :)'
-                        }
-                    </UndertekstBold>
-                </div>
-                <SearchPage {...results} />
+                {process.env.APP_BASE_PATH !== '/sok' && (
+                    <div className={'work-in-progress'}>
+                        <UndertekstBold>
+                            {
+                                'Denne versjonen av søk på nav.no er under utvikling.'
+                            }
+                        </UndertekstBold>
+                    </div>
+                )}
+                {results ? (
+                    <SearchPage {...results} />
+                ) : (
+                    <AlertStripe type={'feil'} form={'inline'}>
+                        {'Ukjent feil - søketjenesten er ikke tilgjengelig'}
+                    </AlertStripe>
+                )}
             </div>
         </div>
     );

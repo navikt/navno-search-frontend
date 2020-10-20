@@ -1,16 +1,14 @@
 import React from 'react';
-import { RadioGruppe } from 'nav-frontend-skjema';
 import { FilterSectionPanel } from '../filter-section-panel/FilterSectionPanel';
-import {
-    FilterOption,
-    FilterOptionType,
-} from '../filter-section-panel/FilterOption';
+import { FilterOption } from '../filter-section-panel/FilterOption';
 import {
     DaterangeBucketProps,
     DaterangeKey,
     DaterangeProps,
 } from '../../../types/search-result';
 import { daterangeKeyToParam } from '../../../types/search-params';
+import { Element } from 'nav-frontend-typografi';
+import './DaterangeSelector.less';
 
 type Props = {
     daterangeProps: DaterangeProps;
@@ -34,36 +32,33 @@ export const DaterangeSelector = ({ daterangeProps, setDaterange }: Props) => {
         buckets,
     } = daterangeProps;
 
-    const buttonProps = {
-        name: 'timerange',
-        type: 'radio' as FilterOptionType,
-    };
-
     return (
         <FilterSectionPanel>
-            <RadioGruppe legend={'Tidsperiode'}>
+            <Element className={'daterange-label'}>{'Tidsperiode'}</Element>
+            <FilterOption
+                name={'timerange'}
+                type={'radio'}
+                label={DaterangeKey.All}
+                count={allDocCount}
+                defaultChecked={allChecked}
+                onChange={() =>
+                    setDaterange(daterangeKeyToParam[DaterangeKey.All])
+                }
+            />
+            {buckets.sort(sortBuckets).map((bucket) => (
                 <FilterOption
-                    {...buttonProps}
-                    label={DaterangeKey.All}
-                    count={allDocCount}
-                    defaultChecked={allChecked}
+                    name={'timerange'}
+                    type={'radio'}
+                    label={bucket.key}
+                    count={bucket.docCount}
+                    defaultChecked={bucket.checked}
                     onChange={() =>
-                        setDaterange(daterangeKeyToParam[DaterangeKey.All])
+                        setDaterange(daterangeKeyToParam[bucket.key])
                     }
+                    key={bucket.key}
                 />
-                {buckets.sort(sortBuckets).map((bucket) => (
-                    <FilterOption
-                        {...buttonProps}
-                        label={bucket.key}
-                        count={bucket.docCount}
-                        defaultChecked={bucket.checked}
-                        onChange={() =>
-                            setDaterange(daterangeKeyToParam[bucket.key])
-                        }
-                        key={bucket.key}
-                    />
-                ))}
-            </RadioGruppe>
+            ))}
+            {/*</RadioGruppe>*/}
         </FilterSectionPanel>
     );
 };
