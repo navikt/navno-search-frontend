@@ -36,6 +36,6 @@ export type SearchParams = Partial<{
 export const searchParamsDefault: SearchParams = {
     f: 0,
     c: 1,
-    s: 1,
+    s: 0,
     daterange: -1,
 };
