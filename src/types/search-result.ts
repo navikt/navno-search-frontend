@@ -54,7 +54,7 @@ export type SearchHitProps = Partial<{
     };
 }>;
 
-export type SearchResultProps = {
+export type SearchResultProps = Partial<{
     c: number;
     isSortDate: boolean; // note: this value is inverted!
     s: SearchSort;
@@ -64,9 +64,9 @@ export type SearchResultProps = {
     total: string;
     fasett: string;
     aggregations: {
-        fasetter: { buckets: FacetBucketProps[] };
-        Tidsperiode: DaterangeProps;
+        fasetter?: { buckets: FacetBucketProps[] };
+        Tidsperiode?: DaterangeProps;
     };
     hits: SearchHitProps[];
     prioritized: SearchHitProps[];
-};
+}>;

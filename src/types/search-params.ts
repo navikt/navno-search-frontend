@@ -26,6 +26,9 @@ export type SearchParams = Partial<{
     // Number of results to retrieve (20 * c)
     c: number;
 
+    // Skip first (20 * start) results
+    start: number;
+
     s: SearchSort;
     daterange: number;
 }>;

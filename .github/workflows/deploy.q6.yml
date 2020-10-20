@@ -23,7 +23,7 @@ jobs:
           cat > .env <<EOF
           NODE_ENV=production
           APP_ORIGIN=https://www-q6.nav.no
-          APP_BASE_PATH=/person/navno-search
+          APP_BASE_PATH=/sok
           DECORATOR_URL=https://www-q6.nav.no/dekoratoren
           XP_ORIGIN=https://www-q6.nav.no
           EOF
@@ -46,6 +46,7 @@ jobs:
           namespace: q6
           ingresses:
             - https://www-q6.nav.no/person/navno-search
+            - https://www-q6.nav.no/sok
           image: $IMAGE_REGISTRY/$IMAGE_NAME
           version: $IMAGE_VERSION
           EOF
