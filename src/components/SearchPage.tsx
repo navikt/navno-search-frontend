@@ -27,8 +27,7 @@ const paramsFromResult = (searchResult: SearchResultProps) => {
     const initialUnderFacets = searchResult?.aggregations?.fasetter?.buckets[
         initialFacetIndex
     ]?.underaggregeringer?.buckets?.reduce(
-        (acc, bucket, index) =>
-            bucket.checked ? [...acc, String(index)] : acc,
+        (acc, bucket, index) => (bucket.checked ? [...acc, index] : acc),
         []
     );
 

@@ -21,7 +21,7 @@ const SearchBase = (props: Props) => {
             <HeadWithMetatags
                 title={'Søk'}
                 description={'Søk på nav.no'}
-                canonicalUrl={'https://www.nav.no/sok'}
+                canonicalUrl={`${process.env.APP_ORIGIN}/${process.env.APP_BASE_PATH}`}
             />
             <div className={'content-wrapper'} id={'maincontent'}>
                 {process.env.APP_BASE_PATH !== '/sok' && (

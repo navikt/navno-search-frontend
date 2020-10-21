@@ -106,9 +106,9 @@ export const SearchHit = ({ hit, searchTerm }: Props) => {
                     </Normaltekst>
                 )}
                 {officeInformation && (
-                    <Normaltekst className={bem('office-info')}>
+                    <div className={bem('office-info')}>
                         {officeInformationTable(officeInformation)}
-                    </Normaltekst>
+                    </div>
                 )}
                 <div className={bem('bottom-row')}>
                     {publishedString && (

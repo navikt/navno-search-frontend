@@ -45,7 +45,7 @@ export const FacetsSelector = ({
                                     type={'checkbox'}
                                     onChange={(e) =>
                                         setUnderFacet({
-                                            uf: String(index),
+                                            uf: index,
                                             toggle: e.target.checked,
                                         })
                                     }

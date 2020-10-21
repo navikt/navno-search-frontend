@@ -8,7 +8,7 @@ import { SearchResultProps } from '../../types/search-result';
 import './SearchFilters.less';
 
 export type UFSetterProps = {
-    uf: string;
+    uf: number;
     toggle: boolean;
 };
 

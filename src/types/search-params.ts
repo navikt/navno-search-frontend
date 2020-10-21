@@ -21,7 +21,7 @@ export type SearchParams = Partial<{
     f: number;
 
     // Under-facets
-    uf: string[];
+    uf: number[];
 
     // Number of results to retrieve (20 * c)
     c: number;
