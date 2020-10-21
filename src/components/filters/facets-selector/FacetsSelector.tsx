@@ -3,13 +3,12 @@ import { FilterSectionPanel } from '../filter-section-panel/FilterSectionPanel';
 import { FilterOption } from '../filter-section-panel/FilterOption';
 import { FilterRadioPanel } from '../filter-radio-panel/FilterRadioPanel';
 import { FacetBucketProps } from '../../../types/search-result';
-import { SearchParams } from '../../../types/search-params';
 import { UFSetterProps } from '../SearchFilters';
 
 type Props = {
     facetsProps: FacetBucketProps[];
     initialFacet: string;
-    setFacet: (f: SearchParams['f']) => void;
+    setFacet: (f: number) => void;
     setUnderFacet: ({ uf, toggle }: UFSetterProps) => void;
 };
 
