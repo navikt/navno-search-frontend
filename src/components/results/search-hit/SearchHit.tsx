@@ -44,16 +44,16 @@ const officeInformationTable = (info: SearchHitProps['officeInformation']) => {
     return (
         <>
             {phone && (
-                <span>
+                <div>
                     <span className={'label'}>{'Telefon:'}</span>
                     {phone}
-                </span>
+                </div>
             )}
             {audienceReception && (
-                <span>
+                <div>
                     <span className={'label'}>{'Publikumsmottak:'}</span>
                     {audienceReception}
-                </span>
+                </div>
             )}
         </>
     );
