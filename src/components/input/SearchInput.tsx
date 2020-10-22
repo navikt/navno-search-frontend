@@ -52,7 +52,7 @@ export const SearchInput = ({
                         mini={true}
                         aria-label={'Nullstill søk'}
                         onClick={() => setInputValue('')}
-                        htmlType={'reset'}
+                        htmlType={'button'}
                     >
                         {'X'}
                     </Flatknapp>
