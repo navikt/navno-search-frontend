@@ -1,9 +1,11 @@
 @import (reference) '../../global-style.less';
 
+@filters-width: 300px;
+@filters-margin: 3rem;
+
 .search-filters {
-    @width: 300px;
-    margin-left: 3rem;
-    min-width: @width;
+    margin-left: @filters-margin;
+    min-width: @filters-width;
 
     &__title-mobile {
         display: none;
@@ -31,7 +33,7 @@
         & > * {
             margin-top: 1rem;
             overflow: hidden;
-            width: @width;
+            width: @filters-width;
         }
     }
 
@@ -51,7 +53,7 @@
             .search-filters__filters {
                 visibility: visible;
                 max-height: 100rem;
-                max-width: @width;
+                max-width: @filters-width;
             }
         }
 
