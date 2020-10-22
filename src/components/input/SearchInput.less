@@ -15,14 +15,21 @@
             border-width: 2px;
             border-color: @navBla;
             border-radius: @border-radius-base;
-            padding-right: 8rem;
+            padding-right: 12rem;
+            @media @screen-mobile {
+                padding-right: 9rem;
+            }
         }
+    }
+
+    &__buttons-container {
+        position: absolute;
+        right: 0;
+        height: 100%;
     }
 
     &__button {
         .typo-undertittel;
-        position: absolute;
-        right: 0;
         align-self: center;
         text-transform: none;
         transform: none;
@@ -38,6 +45,10 @@
         &:hover {
             transform: none;
             box-shadow: none;
+        }
+
+        @media @screen-mobile {
+            .knappmini-mixin;
         }
     }
 }

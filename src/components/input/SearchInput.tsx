@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from 'nav-frontend-skjema';
 import { BEM } from '../../utils/bem';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import './SearchInput.less';
 
 const maxInputLength = 200;
@@ -18,6 +18,14 @@ export const SearchInput = ({
     fetchNewResults,
 }: Props) => {
     const bem = BEM('search-input');
+    const [inputValue, _setInputValue] = useState(
+        initialSearchTerm.slice(0, maxInputLength)
+    );
+
+    const setInputValue = (value: string) => {
+        _setInputValue(value);
+        setSearchTerm(value);
+    };
 
     return (
         <form
@@ -32,14 +40,26 @@ export const SearchInput = ({
             <Input
                 aria-labelledby={'search-header'}
                 className={bem('input')}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                defaultValue={initialSearchTerm.slice(0, maxInputLength)}
+                onChange={(e) => setInputValue(e.target.value)}
+                value={inputValue}
                 maxLength={maxInputLength}
                 placeholder={'Søk på nav.no'}
             />
-            <Hovedknapp className={bem('button')} htmlType={'submit'}>
-                {'Søk'}
-            </Hovedknapp>
+            <div className={bem('buttons-container')}>
+                {inputValue && (
+                    <Flatknapp
+                        className={bem('button')}
+                        mini={true}
+                        aria-label={'Nullstill søk'}
+                        onClick={() => setInputValue('')}
+                    >
+                        {'X'}
+                    </Flatknapp>
+                )}
+                <Hovedknapp className={bem('button')} htmlType={'submit'}>
+                    {'Søk'}
+                </Hovedknapp>
+            </div>
         </form>
     );
 };
