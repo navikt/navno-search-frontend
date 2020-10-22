@@ -55,7 +55,7 @@ const SearchPage = (props: SearchResultProps) => {
     );
     const [isAwaitingResults, setIsAwaitingResults] = useState(false);
 
-    const { fasett, word, total, s: sort } = searchResults;
+    const { word: searchTerm } = searchResults;
 
     const setSearchTerm = (term: string) => {
         const newParams = { ...searchParams, ord: term?.trim() };
@@ -87,6 +87,11 @@ const SearchPage = (props: SearchResultProps) => {
             ...searchParams,
             uf: newUf.length > 0 ? newUf : undefined,
         };
+        setSearchParams(newParams);
+        fetchAndSetNewResults(newParams);
+    };
+    const clearUnderFacets = () => {
+        const newParams = { ...searchParams, uf: undefined };
         setSearchParams(newParams);
         fetchAndSetNewResults(newParams);
     };
@@ -130,25 +135,28 @@ const SearchPage = (props: SearchResultProps) => {
 
         initAmplitude();
         logPageview();
-        if (word) {
-            logSearchQuery(word);
+        if (searchTerm) {
+            logSearchQuery(searchTerm);
         }
     }, []);
 
     return (
         <div className={bem()}>
             <div className={bem('left-col')}>
-                <SearchHeader facet={fasett} />
+                <SearchHeader
+                    results={searchResults}
+                    clearFilter={clearUnderFacets}
+                />
                 <SearchInput
-                    initialSearchTerm={word}
+                    initialSearchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
                     fetchNewResults={fetchAndSetNewResults}
                 />
                 <SearchSorting
-                    isSortDate={Number(sort) === SearchSort.Newest}
+                    isSortDate={Number(searchResults.s) === SearchSort.Newest}
                     setSort={setSort}
-                    searchTerm={word}
-                    numHits={Number(total)}
+                    searchTerm={searchTerm}
+                    numHits={Number(searchResults.total)}
                 />
                 {isAwaitingResults ? (
                     <Spinner text={'Henter søke-resultater...'} />

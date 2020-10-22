@@ -39,7 +39,7 @@ export const SearchFilters = ({
                 {'Søkefilter'}
             </Undertittel>
             <Lenke
-                href={''}
+                href={'#'}
                 onClick={(e) => {
                     e.preventDefault();
                     setOpenMobile((state) => !state);
