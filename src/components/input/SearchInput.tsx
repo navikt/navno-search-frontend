@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Input } from 'nav-frontend-skjema';
 import { BEM } from '../../utils/bem';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
+import { ClearIcon } from './clear-icon/ClearIcon';
 import './SearchInput.less';
 
 const maxInputLength = 200;
@@ -54,7 +55,7 @@ export const SearchInput = ({
                         onClick={() => setInputValue('')}
                         htmlType={'button'}
                     >
-                        {'X'}
+                        <ClearIcon />
                     </Flatknapp>
                 )}
                 <Hovedknapp className={bem('button')} htmlType={'submit'}>
