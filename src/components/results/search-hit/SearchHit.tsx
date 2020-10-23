@@ -117,7 +117,9 @@ export const SearchHit = ({ hit, searchTerm }: Props) => {
                         </Undertekst>
                     )}
                     {priority && (
-                        <UndertekstBold>{'Anbefalt innhold'}</UndertekstBold>
+                        <UndertekstBold className={bem('recommended')}>
+                            {'Anbefalt innhold'}
+                        </UndertekstBold>
                     )}
                 </div>
             </div>
