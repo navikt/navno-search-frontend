@@ -155,6 +155,8 @@ const SearchPage = (props: SearchResultProps) => {
                 <SearchSorting
                     isSortDate={Number(searchResults.s) === SearchSort.Newest}
                     setSort={setSort}
+                    searchTerm={searchTerm}
+                    numHits={Number(searchResults.total)}
                 />
                 {isAwaitingResults ? (
                     <Spinner text={'Henter søke-resultater...'} />

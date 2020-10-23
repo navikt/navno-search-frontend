@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { SearchHit } from './search-hit/SearchHit';
 import { BEM } from '../../utils/bem';
 import { Knapp } from 'nav-frontend-knapper';
 import { SearchResultProps } from '../../types/search-result';
 import { SearchParams } from '../../types/search-params';
 import { fetchSearchResultsClientside } from '../../utils/fetch-search-result';
-import { HitCount } from './hit-count/HitCount';
+import { quote } from '../../utils/quote';
+import Lenke from 'nav-frontend-lenker';
+import { Config } from '../../config';
 import './SearchResults.less';
 
 type Props = {
@@ -19,6 +21,7 @@ export const SearchResults = ({ initialResults, searchParams }: Props) => {
 
     const [results, setResults] = useState(initialResults);
     const [isAwaitingMore, setIsAwaitingMore] = useState(false);
+    const { word: searchTerm } = results;
 
     const showMore = async () => {
         setIsAwaitingMore(true);
@@ -47,18 +50,31 @@ export const SearchResults = ({ initialResults, searchParams }: Props) => {
 
     return (
         <div className={bem()}>
-            <HitCount
-                searchTerm={results.word}
-                hitCount={results.hits?.length > 0 ? Number(results.total) : 0}
-            />
-            {results.hits?.length > 0 &&
+            {results.hits?.length > 0 ? (
                 results.hits.map((hitProps, index) => (
                     <SearchHit
                         hit={hitProps}
                         searchTerm={results.word}
                         key={index}
                     />
-                ))}
+                ))
+            ) : (
+                <div className={bem('no-hits')}>
+                    <Undertittel>
+                        {`Ingen treff${
+                            searchTerm ? ` for ${quote(searchTerm)}` : ''
+                        }.`}
+                    </Undertittel>
+                    <Normaltekst>
+                        {
+                            'Prøv igjen med mer generelle søkeord, eller forsøk andre søkefiltre. '
+                        }
+                        <Lenke href={Config.PATHS.searchTips}>
+                            {'Se søketips'}
+                        </Lenke>
+                    </Normaltekst>
+                </div>
+            )}
             {results.isMore && (
                 <Knapp
                     onClick={showMore}
