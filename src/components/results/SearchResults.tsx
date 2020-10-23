@@ -6,7 +6,7 @@ import { Knapp } from 'nav-frontend-knapper';
 import { SearchResultProps } from '../../types/search-result';
 import { SearchParams } from '../../types/search-params';
 import { fetchSearchResultsClientside } from '../../utils/fetch-search-result';
-import { NoHits } from './no-hits/NoHits';
+import { HitCount } from './hit-count/HitCount';
 import './SearchResults.less';
 
 type Props = {
@@ -47,17 +47,18 @@ export const SearchResults = ({ initialResults, searchParams }: Props) => {
 
     return (
         <div className={bem()}>
-            {results.hits?.length > 0 ? (
+            <HitCount
+                searchTerm={results.word}
+                hitCount={results.hits?.length > 0 ? Number(results.total) : 0}
+            />
+            {results.hits?.length > 0 &&
                 results.hits.map((hitProps, index) => (
                     <SearchHit
                         hit={hitProps}
                         searchTerm={results.word}
                         key={index}
                     />
-                ))
-            ) : (
-                <NoHits searchTerm={results.word} />
-            )}
+                ))}
             {results.isMore && (
                 <Knapp
                     onClick={showMore}
