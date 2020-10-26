@@ -54,12 +54,14 @@ export const SearchFilters = ({
                 </Undertekst>
             </Lenke>
             <div className={bem('filters')}>
-                <FacetsSelector
-                    initialFacet={results.fasett}
-                    facetsProps={fasetter.buckets}
-                    setFacet={setFacet}
-                    setUnderFacet={setUnderFacet}
-                />
+                {fasetter?.buckets && (
+                    <FacetsSelector
+                        initialFacet={results.fasett}
+                        facetsProps={fasetter.buckets}
+                        setFacet={setFacet}
+                        setUnderFacet={setUnderFacet}
+                    />
+                )}
                 <DaterangeSelector
                     daterangeProps={Tidsperiode}
                     setDaterange={setDaterange}

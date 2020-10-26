@@ -2,7 +2,6 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import { fetchSearchResults } from '../utils/fetch-search-result';
 import { SearchResultProps } from '../types/search-result';
-import { HeadWithMetatags } from '../components/metatags/HeadWithMetatags';
 import SearchPage from '../components/SearchPage';
 import { UndertekstBold } from 'nav-frontend-typografi';
 import { searchParamsDefault } from '../types/search-params';
@@ -18,11 +17,6 @@ const SearchBase = (props: Props) => {
 
     return (
         <div className={'app'}>
-            <HeadWithMetatags
-                title={'Søk'}
-                description={'Søk på nav.no'}
-                canonicalUrl={`${process.env.APP_ORIGIN}/${process.env.APP_BASE_PATH}`}
-            />
             <div className={'content-wrapper'} id={'maincontent'}>
                 {process.env.APP_BASE_PATH !== '/sok' && (
                     <div className={'work-in-progress'}>

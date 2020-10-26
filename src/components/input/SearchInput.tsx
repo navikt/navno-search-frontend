@@ -45,6 +45,7 @@ export const SearchInput = ({
                 value={inputValue}
                 maxLength={maxInputLength}
                 placeholder={'Søk på nav.no'}
+                id={'search-input'}
             />
             <div className={bem('buttons-container')}>
                 {inputValue && (

@@ -1,5 +1,9 @@
 import { SearchSort } from './search-params';
 
+type DeepPartial<T> = {
+    [P in keyof T]?: DeepPartial<T[P]>;
+};
+
 export enum DaterangeKey {
     Last7Days = 'Siste 7 dager',
     Last30Days = 'Siste 30 dager',
@@ -8,21 +12,21 @@ export enum DaterangeKey {
     All = 'Alle datoer',
 }
 
-export type DaterangeBucketProps = {
+export type DaterangeBucketProps = DeepPartial<{
     key: DaterangeKey;
     docCount: number;
     checked: boolean;
     to?: string;
     from?: string;
-};
+}>;
 
-export type DaterangeProps = {
+export type DaterangeProps = DeepPartial<{
     docCount: number;
     checked: boolean;
     buckets: DaterangeBucketProps[];
-};
+}>;
 
-export type FacetBucketProps = {
+export type FacetBucketProps = DeepPartial<{
     key: string;
     docCount: number;
     checked: boolean;
@@ -30,17 +34,17 @@ export type FacetBucketProps = {
     underaggregeringer: { buckets: FacetBucketProps[] };
     default?: boolean;
     defaultClassName?: string;
-};
+}>;
 
-export type SearchHitProps = Partial<{
+export type SearchHitProps = DeepPartial<{
     priority: boolean;
     displayName: string;
     href: string;
     displayPath: string;
     highlight: string;
     publish: {
-        from?: string;
-        first?: string;
+        from: string;
+        first: string;
     };
     modifiedTime: string;
     className: string;
@@ -48,13 +52,13 @@ export type SearchHitProps = Partial<{
     id: string;
     score: number;
     keywords: string[];
-    officeInformation: {
-        phone?: string;
-        audienceReception?: string;
-    };
+    officeInformation: Partial<{
+        phone: string;
+        audienceReception: string;
+    }>;
 }>;
 
-export type SearchResultProps = Partial<{
+export type SearchResultProps = DeepPartial<{
     c: number;
     isSortDate: boolean; // note: this value is inverted!
     s: SearchSort;
@@ -64,8 +68,8 @@ export type SearchResultProps = Partial<{
     total: string;
     fasett: string;
     aggregations: {
-        fasetter?: { buckets: FacetBucketProps[] };
-        Tidsperiode?: DaterangeProps;
+        fasetter: { buckets: FacetBucketProps[] };
+        Tidsperiode: DaterangeProps;
     };
     hits: SearchHitProps[];
     prioritized: SearchHitProps[];

@@ -16,11 +16,11 @@ type Props = {
 
 export const SearchHeader = ({ results, clearFilter }: Props) => {
     const bem = BEM('search-header');
-    const facetObject = results.aggregations.fasetter.buckets.find(
+    const facetObject = results.aggregations?.fasetter?.buckets?.find(
         (f) => f.key === results.fasett
     );
-    const underFacetNames = facetObject.underaggregeringer.buckets
-        .filter((uf) => uf.checked)
+    const underFacetNames = facetObject?.underaggregeringer?.buckets
+        ?.filter((uf) => uf.checked)
         .map((uf) => uf.key);
 
     return (

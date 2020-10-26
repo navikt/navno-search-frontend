@@ -167,12 +167,14 @@ const SearchPage = (props: SearchResultProps) => {
                     />
                 )}
             </div>
-            <SearchFilters
-                results={searchResults}
-                setFacet={setFacet}
-                setUnderFacet={setUnderFacet}
-                setDaterange={setDaterange}
-            />
+            {searchResults.aggregations && (
+                <SearchFilters
+                    results={searchResults}
+                    setFacet={setFacet}
+                    setUnderFacet={setUnderFacet}
+                    setDaterange={setDaterange}
+                />
+            )}
         </div>
     );
 };
