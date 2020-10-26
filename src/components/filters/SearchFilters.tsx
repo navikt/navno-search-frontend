@@ -64,10 +64,12 @@ export const SearchFilters = ({
                         setUnderFacet={setUnderFacet}
                     />
                 )}
-                <DaterangeSelector
-                    daterangeProps={Tidsperiode}
-                    setDaterange={setDaterange}
-                />
+                {Tidsperiode && (
+                    <DaterangeSelector
+                        daterangeProps={Tidsperiode}
+                        setDaterange={setDaterange}
+                    />
+                )}
             </div>
         </div>
     );
