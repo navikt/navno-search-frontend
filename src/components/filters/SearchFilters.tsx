@@ -5,6 +5,7 @@ import { DaterangeSelector } from './daterange-selector/DaterangeSelector';
 import { BEM } from '../../utils/bem';
 import Lenke from 'nav-frontend-lenker';
 import { SearchResultProps } from '../../types/search-result';
+import { NedChevron } from 'nav-frontend-chevron';
 import './SearchFilters.less';
 
 export type UFSetterProps = {
@@ -51,6 +52,7 @@ export const SearchFilters = ({
                 </Element>
                 <Undertekst className={bem('title-mobile-toggle')}>
                     {openMobile ? 'Skjul filter' : 'Vis filter'}
+                    <NedChevron className={bem('mobile-toggle-chevron')} />
                 </Undertekst>
             </Lenke>
             <div className={bem('filters')}>

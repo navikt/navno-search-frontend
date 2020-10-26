@@ -48,14 +48,16 @@ export const SearchSorting = ({
                 <Lenke href={Config.PATHS.searchTips}>{'Søketips'}</Lenke>
                 <Normaltekst className={bem('hits')}>
                     {`${numHits} treff`}
-                    {searchTerm && (
-                        <>
-                            {' for '}
-                            <span className={bem('term')}>
-                                {quote(searchTerm)}
-                            </span>
-                        </>
-                    )}
+                    <span className={bem('hits-verbose')}>
+                        {searchTerm && (
+                            <>
+                                {' for '}
+                                <span className={bem('term')}>
+                                    {quote(searchTerm)}
+                                </span>
+                            </>
+                        )}
+                    </span>
                 </Normaltekst>
             </div>
         </div>
