@@ -22,7 +22,7 @@ export const FacetsSelector = ({
 
     return (
         <FilterSectionPanel>
-            {facetsProps.map((facet, index) => {
+            {facetsProps.map((facet, fIndex) => {
                 const underFacets = facet.underaggregeringer.buckets;
                 return (
                     <FilterRadioPanel
@@ -31,12 +31,13 @@ export const FacetsSelector = ({
                         isOpen={facet.key === currentFacet}
                         onClick={() => {
                             setCurrentFacet(facet.key);
-                            setFacet(index);
+                            setFacet(fIndex);
                         }}
+                        id={`select-facet-${fIndex}`}
                         key={facet.key}
                     >
                         {underFacets.length > 0 &&
-                            underFacets.map((underFacet, index) => (
+                            underFacets.map((underFacet, ufIndex) => (
                                 <FilterOption
                                     label={underFacet.key}
                                     name={facet.key}
@@ -45,11 +46,12 @@ export const FacetsSelector = ({
                                     type={'checkbox'}
                                     onChange={(e) =>
                                         setUnderFacet({
-                                            uf: index,
+                                            uf: ufIndex,
                                             toggle: e.target.checked,
                                         })
                                     }
                                     key={underFacet.key}
+                                    id={`select-uf-${fIndex}-${ufIndex}`}
                                 />
                             ))}
                     </FilterRadioPanel>

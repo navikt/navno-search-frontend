@@ -33,12 +33,14 @@ export const SearchSorting = ({
                         name={'search-sorting'}
                         defaultChecked={!isSortDate}
                         onChange={() => setSort(SearchSort.BestMatch)}
+                        id={'select-sort-best'}
                     />
                     <Radio
                         label={'Dato'}
                         name={'search-sorting'}
                         defaultChecked={isSortDate}
                         onChange={() => setSort(SearchSort.Newest)}
+                        id={'select-sort-date'}
                     />
                 </div>
             </div>

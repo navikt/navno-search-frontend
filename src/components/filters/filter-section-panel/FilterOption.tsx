@@ -13,6 +13,7 @@ type Props = {
     defaultChecked?: boolean;
     onChange: (args: any) => any;
     type: FilterOptionType;
+    id: string;
 };
 
 export const FilterOption = ({
@@ -23,6 +24,7 @@ export const FilterOption = ({
     defaultChecked,
     onChange,
     type,
+    id,
 }: Props) => {
     const buttonProps = {
         label,
@@ -30,6 +32,7 @@ export const FilterOption = ({
         checked,
         defaultChecked,
         onChange,
+        id,
     };
 
     return (

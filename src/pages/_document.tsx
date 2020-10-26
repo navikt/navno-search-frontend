@@ -30,7 +30,6 @@ class MyDocument extends Document<Props> {
         return (
             <Html>
                 <Head>
-                    <title>{title}</title>
                     <meta name="description" content={description} />
                     <link
                         rel={'canonical'}

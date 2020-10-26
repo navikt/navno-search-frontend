@@ -10,6 +10,7 @@ type Props = {
     count: number;
     isOpen: boolean;
     onClick: (args: any) => any;
+    id: string;
     children: React.ReactNode | React.ReactNode[];
 };
 
@@ -18,6 +19,7 @@ export const FilterRadioPanel = ({
     count,
     isOpen,
     onClick,
+    id,
     children,
 }: Props) => {
     const bem = BEM('radio-expanding-panel');
@@ -29,6 +31,7 @@ export const FilterRadioPanel = ({
                 label={label}
                 checked={isOpen}
                 readOnly={true}
+                id={id}
             />
             <Undertekst className={bem('count')}>{count}</Undertekst>
         </div>

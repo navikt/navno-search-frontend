@@ -6,6 +6,7 @@ import SearchPage from '../components/SearchPage';
 import { UndertekstBold } from 'nav-frontend-typografi';
 import { searchParamsDefault } from '../types/search-params';
 import AlertStripe from 'nav-frontend-alertstriper';
+import Head from 'next/head';
 import '../global-style.less';
 
 type Props = {
@@ -17,6 +18,9 @@ const SearchBase = (props: Props) => {
 
     return (
         <div className={'app'}>
+            <Head>
+                <title>{'Søk - nav.no'}</title>
+            </Head>
             <div className={'content-wrapper'} id={'maincontent'}>
                 {process.env.APP_BASE_PATH !== '/sok' && (
                     <div className={'work-in-progress'}>

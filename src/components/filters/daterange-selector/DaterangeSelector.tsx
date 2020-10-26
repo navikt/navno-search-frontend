@@ -44,8 +44,9 @@ export const DaterangeSelector = ({ daterangeProps, setDaterange }: Props) => {
                 onChange={() =>
                     setDaterange(daterangeKeyToParam[DaterangeKey.All])
                 }
+                id={'select-date-all'}
             />
-            {buckets.sort(sortBuckets).map((bucket) => (
+            {buckets.sort(sortBuckets).map((bucket, index) => (
                 <FilterOption
                     name={'timerange'}
                     type={'radio'}
@@ -56,6 +57,7 @@ export const DaterangeSelector = ({ daterangeProps, setDaterange }: Props) => {
                         setDaterange(daterangeKeyToParam[bucket.key])
                     }
                     key={bucket.key}
+                    id={`select-date-${index}`}
                 />
             ))}
             {/*</RadioGruppe>*/}
