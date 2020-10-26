@@ -1,6 +1,15 @@
-// Hindrer crash ved server-side kjøring (amplitude.js fungerer kun i browser)
+// Prevents crash during SSR (amplitude-js is only for use in browsers)
 const amplitude =
     typeof window !== 'undefined' ? require('amplitude-js') : () => null;
+
+const logAmplitudeEvent = (eventName: string, data?: any): Promise<any> => {
+    return new Promise(function (resolve: any) {
+        const eventData = data || {};
+        eventData.origin = 'navno-search-frontend';
+        eventData.originVersion = 'unknown';
+        amplitude?.getInstance().logEvent(eventName, eventData, resolve);
+    });
+};
 
 export const initAmplitude = () => {
     amplitude?.getInstance().init('default', '', {
@@ -23,11 +32,8 @@ export const logResultClick = (href: string, searchTerm: string | undefined) =>
         sokeOrd: searchTerm,
     });
 
-export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
-    return new Promise(function (resolve: any) {
-        const eventData = data || {};
-        eventData.origin = 'navno-search-frontend';
-        eventData.originVersion = 'unknown';
-        amplitude?.getInstance().logEvent(eventName, eventData, resolve);
+export const logFilterSelection = (filter: string, subFilter?: string) =>
+    logAmplitudeEvent('filter-valg', {
+        filter,
+        subFilter,
     });
-}

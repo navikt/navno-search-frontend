@@ -4,6 +4,7 @@ import { FilterOption } from '../filter-section-panel/FilterOption';
 import { FilterRadioPanel } from '../filter-radio-panel/FilterRadioPanel';
 import { FacetBucketProps } from '../../../types/search-result';
 import { UFSetterProps } from '../SearchFilters';
+import { logFilterSelection } from '../../../utils/amplitude';
 
 type Props = {
     facetsProps: FacetBucketProps[];
@@ -32,6 +33,7 @@ export const FacetsSelector = ({
                         onClick={() => {
                             setCurrentFacet(facet.key);
                             setFacet(fIndex);
+                            logFilterSelection(facet.key);
                         }}
                         id={`select-facet-${fIndex}`}
                         key={facet.key}
@@ -44,12 +46,18 @@ export const FacetsSelector = ({
                                     count={underFacet.docCount}
                                     checked={underFacet.checked}
                                     type={'checkbox'}
-                                    onChange={(e) =>
+                                    onChange={(e) => {
                                         setUnderFacet({
                                             uf: ufIndex,
                                             toggle: e.target.checked,
-                                        })
-                                    }
+                                        });
+                                        if (e.target.checked) {
+                                            logFilterSelection(
+                                                facet.key,
+                                                underFacet.key
+                                            );
+                                        }
+                                    }}
                                     key={underFacet.key}
                                     id={`select-uf-${fIndex}-${ufIndex}`}
                                 />

@@ -8,6 +8,7 @@ import {
 } from '../../../types/search-result';
 import { daterangeKeyToParam } from '../../../types/search-params';
 import { Element } from 'nav-frontend-typografi';
+import { logFilterSelection } from '../../../utils/amplitude';
 import './DaterangeSelector.less';
 
 type Props = {
@@ -32,6 +33,11 @@ export const DaterangeSelector = ({ daterangeProps, setDaterange }: Props) => {
         buckets,
     } = daterangeProps;
 
+    const onChange = (option: DaterangeKey) => {
+        logFilterSelection('tidsperiode', option);
+        setDaterange(daterangeKeyToParam[option]);
+    };
+
     return (
         <FilterSectionPanel>
             <Element className={'daterange-label'}>{'Tidsperiode'}</Element>
@@ -41,9 +47,7 @@ export const DaterangeSelector = ({ daterangeProps, setDaterange }: Props) => {
                 label={DaterangeKey.All}
                 count={allDocCount}
                 defaultChecked={allChecked}
-                onChange={() =>
-                    setDaterange(daterangeKeyToParam[DaterangeKey.All])
-                }
+                onChange={() => onChange(DaterangeKey.All)}
                 id={'select-date-all'}
             />
             {buckets.sort(sortBuckets).map((bucket, index) => (
@@ -53,9 +57,7 @@ export const DaterangeSelector = ({ daterangeProps, setDaterange }: Props) => {
                     label={bucket.key}
                     count={bucket.docCount}
                     defaultChecked={bucket.checked}
-                    onChange={() =>
-                        setDaterange(daterangeKeyToParam[bucket.key])
-                    }
+                    onChange={() => onChange(bucket.key)}
                     key={bucket.key}
                     id={`select-date-${index}`}
                 />
