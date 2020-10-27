@@ -6,6 +6,9 @@
     padding: 0.75rem;
     margin-bottom: 0.5rem;
     word-break: break-word;
+    transition-property: background-color, box-shadow;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-out;
 
     @media @screen-mobile {
         box-shadow: 0 1px 5px @navGra40;
@@ -13,7 +16,7 @@
 
     &:hover {
         border: none;
-        background-color: @navLysGra;
+        background-color: rgba(@navLysGra, 0.5);
     }
 
     .lenkepanel__heading {
@@ -47,9 +50,7 @@
     }
 
     &__bottom-row {
-        display: flex;
-        flex-direction: column;
-        margin-top: 0.5rem;
+        margin-top: 0.75rem;
     }
 
     &__recommended {

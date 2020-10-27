@@ -11,10 +11,12 @@
 @padding-sides-desktop-small: 1rem;
 @padding-sides-mobile: 1rem;
 
-@font-size-factor: 1.075;
+@font-size-factor: 1.08;
 
 .app {
-    max-width: 1152px;
+    display: flex;
+    justify-content: center;
+    max-width: 1440px;
     min-height: 20rem;
     margin: 0 auto 3rem auto;
 
@@ -40,6 +42,10 @@
             line-height: calc(2.25rem * @font-size-factor);
         }
     }
+}
+
+.brodsmulesti li:nth-child(2) {
+    display: none;
 }
 
 @media @screen-mobile {

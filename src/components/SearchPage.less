@@ -3,13 +3,13 @@
 
 .search {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 
     &__left-col {
         flex-grow: 1;
-        // Fixes width overflow in IE11...
-        @media @screen-desktop {
-            max-width: calc(100% - @filters-width - @filters-margin);
-        }
+        max-width: calc(
+            @desktopSmallMaxWidth - @filters-width - @filters-margin -
+                @padding-sides-desktop * 2
+        );
     }
 }

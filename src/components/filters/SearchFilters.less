@@ -5,6 +5,7 @@
 
 .search-filters {
     @transition-duration: 0.35s;
+    @collapsed-width: 185px;
     margin-left: @filters-margin;
     min-width: @filters-width;
 
@@ -52,8 +53,8 @@
         background-color: white;
         border-radius: @border-radius-base;
         box-shadow: 0 1px 4px 0 @navGra60;
-        min-width: 175px;
-        max-width: 175px;
+        min-width: @collapsed-width;
+        max-width: @collapsed-width;
         transition-property: min-width, max-width;
         transition-duration: @transition-duration;
         transition-timing-function: ease-in;
