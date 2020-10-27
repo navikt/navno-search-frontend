@@ -3,13 +3,15 @@
 @import (reference) '~nav-frontend-typografi-style/src/index';
 
 @mobilMaxWidth: 768px;
-@desktopSmallMaxWidth: 1024px;
-@screen-desktop: ~'(min-width: @{desktopSmallMaxWidth})';
-@screen-desktop-small: ~'(min-width: @{mobilMaxWidth})';
+@desktopLargeMinWidth: 1024px;
+
+@screen-desktop-large: ~'(min-width: @{desktopLargeMinWidth})';
+@screen-desktop: ~'(min-width: @{mobilMaxWidth})';
 @screen-mobile: ~'not all and (min-width: @{mobilMaxWidth})';
-@padding-sides-desktop: 3rem;
-@padding-sides-desktop-small: 1rem;
-@padding-sides-mobile: 1rem;
+
+@padding-sides-desktop: 48px;
+@padding-sides-desktop-small: 16px;
+@padding-sides-mobile: 16px;
 
 @font-size-factor: 1.08;
 
@@ -54,13 +56,13 @@
     }
 }
 
-@media @screen-desktop-small {
+@media @screen-desktop {
     .content-wrapper {
         padding: 1rem @padding-sides-desktop-small;
     }
 }
 
-@media @screen-desktop {
+@media @screen-desktop-large {
     .content-wrapper {
         padding: 1rem @padding-sides-desktop;
     }
@@ -70,7 +72,7 @@
     min-height: 88px;
 }
 
-@media @screen-desktop-small {
+@media @screen-desktop {
     #decorator-header {
         min-height: 106px;
     }

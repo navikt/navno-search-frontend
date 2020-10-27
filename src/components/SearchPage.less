@@ -2,14 +2,18 @@
 @import (reference) './filters/SearchFilters.less';
 
 .search {
+    @left-col-width: @desktopLargeMinWidth - @filters-width - @filters-margin -
+        @padding-sides-desktop * 2;
+    @breakpoint: @left-col-width + @padding-sides-desktop-small * 2;
+
     display: flex;
     justify-content: center;
 
     &__left-col {
         flex-grow: 1;
-        max-width: calc(
-            @desktopSmallMaxWidth - @filters-width - @filters-margin -
-                @padding-sides-desktop * 2
-        );
+        width: @left-col-width;
+        @media (max-width: @breakpoint) {
+            width: 100%;
+        }
     }
 }
