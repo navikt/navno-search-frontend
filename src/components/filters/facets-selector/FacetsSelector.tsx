@@ -3,14 +3,16 @@ import { FilterSectionPanel } from '../filter-section-panel/FilterSectionPanel';
 import { FilterOption } from '../filter-section-panel/FilterOption';
 import { FilterRadioPanel } from '../filter-radio-panel/FilterRadioPanel';
 import { FacetBucketProps } from '../../../types/search-result';
-import { UFSetterProps } from '../SearchFilters';
 import { logFilterSelection } from '../../../utils/amplitude';
+import { SearchSort } from '../../../types/search-params';
+import { UFToggleProps } from '../../../context/reducer';
 
 type Props = {
     facetsProps: FacetBucketProps[];
     initialFacet: string;
     setFacet: (f: number) => void;
-    setUnderFacet: ({ uf, toggle }: UFSetterProps) => void;
+    setUnderFacet: ({ uf, toggle }: UFToggleProps) => void;
+    setSorting: (sorting: SearchSort) => void;
 };
 
 export const FacetsSelector = ({
@@ -18,6 +20,7 @@ export const FacetsSelector = ({
     initialFacet,
     setFacet,
     setUnderFacet,
+    setSorting,
 }: Props) => {
     const [currentFacet, setCurrentFacet] = useState(initialFacet);
 
@@ -33,6 +36,9 @@ export const FacetsSelector = ({
                         onClick={() => {
                             setCurrentFacet(facet.key);
                             setFacet(fIndex);
+                            if (facet.key === 'Nyheter') {
+                                setSorting(SearchSort.Newest);
+                            }
                             logFilterSelection(facet.key);
                         }}
                         id={`select-facet-${fIndex}`}

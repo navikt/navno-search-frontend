@@ -6,22 +6,25 @@ import { SearchSort } from '../../types/search-params';
 import { Config } from '../../config';
 import Lenke from 'nav-frontend-lenker';
 import { quote } from '../../utils/quote';
+import { useSearchContext } from '../../context/ContextProvider';
+import { ActionType } from '../../context/actions';
 import './SearchSorting.less';
 
 type Props = {
     isSortDate: boolean;
-    setSort: (s: SearchSort) => void;
     searchTerm: string;
     numHits: number;
 };
 
-export const SearchSorting = ({
-    isSortDate,
-    setSort,
-    searchTerm,
-    numHits,
-}: Props) => {
+export const SearchSorting = ({ isSortDate, searchTerm, numHits }: Props) => {
     const bem = BEM('search-sorting');
+    const [, dispatch] = useSearchContext();
+
+    const setSort = (sort: SearchSort) =>
+        dispatch({
+            type: ActionType.SetSort,
+            sort: sort,
+        });
 
     return (
         <div className={bem()}>
@@ -31,14 +34,14 @@ export const SearchSorting = ({
                     <Radio
                         label={'Beste treff'}
                         name={'search-sorting'}
-                        defaultChecked={!isSortDate}
+                        checked={!isSortDate}
                         onChange={() => setSort(SearchSort.BestMatch)}
                         id={'select-sort-best'}
                     />
                     <Radio
                         label={'Dato'}
                         name={'search-sorting'}
-                        defaultChecked={isSortDate}
+                        checked={isSortDate}
                         onChange={() => setSort(SearchSort.Newest)}
                         id={'select-sort-date'}
                     />
