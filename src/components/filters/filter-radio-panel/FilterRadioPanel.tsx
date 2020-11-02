@@ -32,7 +32,7 @@ export const FilterRadioPanel = ({
                 checked={isOpen}
                 readOnly={true}
                 id={id}
-                onClick={onClick}
+                tabIndex={-1}
             />
             <Undertekst className={bem('count')}>{count}</Undertekst>
         </div>
@@ -44,6 +44,7 @@ export const FilterRadioPanel = ({
             apen={isOpen && !!children}
             border={false}
             className={bem()}
+            onClick={onClick}
         >
             {children}
         </EkspanderbartpanelBase>
