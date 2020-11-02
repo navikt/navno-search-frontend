@@ -53,6 +53,7 @@ export const SearchResults = ({ result }: Props) => {
                 result.hits.map((hitProps, index) => (
                     <SearchHit
                         hit={hitProps}
+                        hitIndex={index}
                         searchTerm={result.word}
                         key={index}
                     />

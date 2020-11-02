@@ -61,10 +61,11 @@ const officeInformationTable = (info: SearchHitProps['officeInformation']) => {
 
 type Props = {
     hit: SearchHitProps;
+    hitIndex: number;
     searchTerm: string;
 };
 
-export const SearchHit = ({ hit, searchTerm }: Props) => {
+export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
     const {
         displayName,
         href,
@@ -91,7 +92,7 @@ export const SearchHit = ({ hit, searchTerm }: Props) => {
         <LenkepanelBase
             href={href}
             className={bem()}
-            onClick={() => logResultClick(href, searchTerm)}
+            onClick={() => logResultClick(href, searchTerm, hitIndex)}
         >
             <Undertittel className={`${bem('header')} lenkepanel__heading`}>
                 {displayName}

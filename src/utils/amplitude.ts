@@ -26,10 +26,15 @@ export const logPageview = () => logAmplitudeEvent('sidevisning');
 export const logSearchQuery = (searchTerm: string) =>
     logAmplitudeEvent('søk', { sokeOrd: searchTerm });
 
-export const logResultClick = (href: string, searchTerm: string | undefined) =>
+export const logResultClick = (
+    href: string,
+    searchTerm?: string,
+    hitIndex?: number
+) =>
     logAmplitudeEvent('resultat-klikk', {
         destinasjon: href,
         sokeOrd: searchTerm,
+        treffNr: hitIndex,
     });
 
 export const logFilterSelection = (filter: string, subFilter?: string) =>
