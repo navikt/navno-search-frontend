@@ -26,7 +26,7 @@ export const SearchSorting = ({
     return (
         <div className={bem()}>
             <div className={bem('selector')}>
-                <Normaltekst>{'Sortér etter:'}</Normaltekst>
+                <Normaltekst>{'Sorter etter:'}</Normaltekst>
                 <div className={bem('buttons')}>
                     <Radio
                         label={'Beste treff'}
