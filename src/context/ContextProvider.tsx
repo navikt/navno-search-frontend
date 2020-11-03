@@ -14,20 +14,20 @@ const SearchContext = React.createContext(
 );
 
 type Props = {
-    initialResults: SearchResultProps;
+    initialResult: SearchResultProps;
     initialParams?: SearchParams;
     children: React.ReactNode;
 };
 
 export const ContextProvider = ({
-    initialResults,
+    initialResult,
     initialParams = searchParamsDefault,
     children,
 }: Props) => {
     return (
         <SearchContext.Provider
             value={useReducer(reducer, {
-                result: initialResults,
+                result: initialResult,
                 params: initialParams,
             })}
         >

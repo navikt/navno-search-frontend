@@ -78,7 +78,7 @@ const SearchPage = () => {
                 <SearchSorting
                     isSortDate={Number(result.s) === SearchSort.Newest}
                     searchTerm={searchTerm}
-                    numHits={Number(result.total)}
+                    numHitsTotal={Number(result.total)}
                 />
                 {isAwaitingResults ? (
                     <Spinner text={'Henter søke-resultater...'} />

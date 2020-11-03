@@ -19,7 +19,7 @@ const SearchBase = (props: Props) => {
 
     return (
         <ContextProvider
-            initialResults={initialResult}
+            initialResult={initialResult}
             initialParams={paramsFromResult(initialResult)}
         >
             <div className={'app'}>

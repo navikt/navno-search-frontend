@@ -13,10 +13,14 @@ import './SearchSorting.less';
 type Props = {
     isSortDate: boolean;
     searchTerm: string;
-    numHits: number;
+    numHitsTotal: number;
 };
 
-export const SearchSorting = ({ isSortDate, searchTerm, numHits }: Props) => {
+export const SearchSorting = ({
+    isSortDate,
+    searchTerm,
+    numHitsTotal,
+}: Props) => {
     const bem = BEM('search-sorting');
     const [, dispatch] = useSearchContext();
 
@@ -50,7 +54,7 @@ export const SearchSorting = ({ isSortDate, searchTerm, numHits }: Props) => {
             <div className={bem('hits-and-tips')}>
                 <Lenke href={Config.PATHS.searchTips}>{'Søketips'}</Lenke>
                 <Normaltekst className={bem('hits')}>
-                    {`${numHits} treff`}
+                    {`${numHitsTotal} treff`}
                     <span className={bem('hits-verbose')}>
                         {searchTerm && (
                             <>
