@@ -4,7 +4,7 @@ import { fetchSearchResults } from '../utils/fetch-search-result';
 import { SearchResultProps } from '../types/search-result';
 import SearchPage from '../components/SearchPage';
 import { UndertekstBold } from 'nav-frontend-typografi';
-import { paramsFromResult, searchParamsDefault } from '../types/search-params';
+import { paramsFromResult } from '../types/search-params';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Head from 'next/head';
 import { ContextProvider } from '../context/ContextProvider';
@@ -50,15 +50,14 @@ const SearchBase = (props: Props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const result = await fetchSearchResults({
-        ...searchParamsDefault,
-        ...context.query,
-    }).catch((err) => console.error(err));
+    const result = await fetchSearchResults(context.query).catch((err) =>
+        console.error(err)
+    );
 
     if (!result) {
-        const resultWithoutQuery = await fetchSearchResults(
-            searchParamsDefault
-        ).catch((err) => console.error(err));
+        const resultWithoutQuery = await fetchSearchResults().catch((err) =>
+            console.error(err)
+        );
         return { props: { initialResult: resultWithoutQuery } };
     }
 

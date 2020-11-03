@@ -57,6 +57,7 @@ export const paramsFromResult = (searchResult: SearchResultProps) => {
     );
 
     return {
+        ...searchParamsDefault,
         ...(searchResult.word && { ord: searchResult.word }),
         ...(initialFacetIndex && { f: initialFacetIndex }),
         ...(initialUnderFacets.length > 0 && { uf: initialUnderFacets }),

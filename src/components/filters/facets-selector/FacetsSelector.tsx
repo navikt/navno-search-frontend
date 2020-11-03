@@ -22,7 +22,7 @@ export const FacetsSelector = ({
     setUnderFacet,
     setSorting,
 }: Props) => {
-    const [currentFacet, setCurrentFacet] = useState(initialFacet);
+    const [currentFacetKey, setCurrentFacetKey] = useState(initialFacet);
 
     return (
         <FilterSectionPanel>
@@ -32,9 +32,9 @@ export const FacetsSelector = ({
                     <FilterRadioPanel
                         label={facet.key}
                         count={facet.docCount}
-                        isOpen={facet.key === currentFacet}
+                        isOpen={facet.key === currentFacetKey}
                         onClick={() => {
-                            setCurrentFacet(facet.key);
+                            setCurrentFacetKey(facet.key);
                             setFacet(fIndex);
                             if (facet.key === 'Nyheter') {
                                 setSorting(SearchSort.Newest);

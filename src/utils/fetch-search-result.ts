@@ -7,7 +7,10 @@ import { fetchWithTimeout, objectToQueryString } from './fetch-utils';
 export const fetchSearchResults = (
     params?: SearchParams
 ): Promise<SearchResultProps> => {
-    const url = `${Config.URLS.xpSearchService}${objectToQueryString(params)}`;
+    const url = `${Config.URLS.xpSearchService}${objectToQueryString({
+        ...searchParamsDefault,
+        ...params,
+    })}`;
     return fetchWithTimeout(url, 5000).then((res) => {
         if (res.ok) {
             return res.json();
