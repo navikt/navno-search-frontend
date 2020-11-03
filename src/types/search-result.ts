@@ -31,7 +31,9 @@ export type FacetBucketProps = DeepPartial<{
     docCount: number;
     checked: boolean;
     className: string;
-    underaggregeringer: { buckets: FacetBucketProps[] };
+    underaggregeringer: {
+        buckets: FacetBucketProps[];
+    };
     default?: boolean;
     defaultClassName?: string;
 }>;
@@ -52,10 +54,10 @@ export type SearchHitProps = DeepPartial<{
     id: string;
     score: number;
     keywords: string[];
-    officeInformation: Partial<{
+    officeInformation: {
         phone: string;
         audienceReception: string;
-    }>;
+    };
 }>;
 
 export type SearchResultProps = DeepPartial<{
@@ -68,7 +70,9 @@ export type SearchResultProps = DeepPartial<{
     total: string;
     fasett: string;
     aggregations: {
-        fasetter: { buckets: FacetBucketProps[] };
+        fasetter: {
+            buckets: FacetBucketProps[];
+        };
         Tidsperiode: DaterangeProps;
     };
     hits: SearchHitProps[];
