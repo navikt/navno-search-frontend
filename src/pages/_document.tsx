@@ -7,6 +7,7 @@ import Document, {
     Head,
 } from 'next/document';
 import { DecoratorFragments, getDecorator } from '../utils/fetch-decorator';
+import Config from '../config';
 
 type Props = {
     decoratorFragments: DecoratorFragments;
@@ -20,21 +21,23 @@ class MyDocument extends Document<Props> {
     }
 
     render() {
+        const {
+            APP_ORIGIN: appOrigin,
+            APP_BASE_PATH: appBasePath,
+        } = process.env;
+        const { appBasePathProd } = Config.PATHS;
         const { decoratorFragments } = this.props;
         const { HEADER, FOOTER, SCRIPTS, STYLES } = decoratorFragments;
         const title = 'Søk - nav.no';
         const description = 'Søk på nav.no';
         const previewImg = '/gfx/social-share-fallback.png';
-        const canonicalUrl = `${process.env.APP_ORIGIN}${process.env.APP_BASE_PATH}`;
+        const canonicalUrl = `${appOrigin}${appBasePathProd}`;
 
         return (
             <Html>
                 <Head>
                     <meta name="description" content={description} />
-                    <link
-                        rel={'canonical'}
-                        href={`${process.env.APP_ORIGIN}${process.env.APP_BASE_PATH}`}
-                    />
+                    <link rel={'canonical'} href={canonicalUrl} />
                     <meta property={'og:title'} content={title} />
                     <meta property={'og:site_name'} content={'nav.no'} />
                     <meta property={'og:url'} content={canonicalUrl} />
@@ -45,6 +48,9 @@ class MyDocument extends Document<Props> {
                     <meta name="twitter:title" content={title} />
                     <meta name="twitter:description" content={description} />
                     <meta name="twitter:image:src" content={previewImg} />
+                    {appBasePath !== appBasePathProd && (
+                        <meta name="robots" content="noindex" />
+                    )}
                     {STYLES}
                 </Head>
                 <body>
