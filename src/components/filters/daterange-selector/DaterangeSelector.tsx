@@ -6,14 +6,13 @@ import {
     DaterangeKey,
     DaterangeProps,
 } from '../../../types/search-result';
-import { daterangeKeyToParam } from '../../../types/search-params';
 import { Element } from 'nav-frontend-typografi';
 import { logFilterSelection } from '../../../utils/amplitude';
 import './DaterangeSelector.less';
 
 type Props = {
     daterangeProps: DaterangeProps;
-    setDaterange: (key: number) => void;
+    setDaterange: (key: DaterangeKey) => void;
 };
 
 const bucketsDisplayOrder = [
@@ -35,7 +34,7 @@ export const DaterangeSelector = ({ daterangeProps, setDaterange }: Props) => {
 
     const onChange = (option: DaterangeKey) => {
         logFilterSelection('tidsperiode', option);
-        setDaterange(daterangeKeyToParam[option]);
+        setDaterange(option);
     };
 
     return (

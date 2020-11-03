@@ -3,29 +3,30 @@ import { Input } from 'nav-frontend-skjema';
 import { BEM } from '../../utils/bem';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { ClearIcon } from './clear-icon/ClearIcon';
+import { useSearchContext } from '../../context/ContextProvider';
+import { ActionType } from '../../context/actions';
 import './SearchInput.less';
 
 const maxInputLength = 200;
 
 type Props = {
     initialSearchTerm: string;
-    setSearchTerm: (term: string) => void;
     fetchNewResults: () => void;
 };
 
-export const SearchInput = ({
-    initialSearchTerm,
-    setSearchTerm,
-    fetchNewResults,
-}: Props) => {
+export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
     const bem = BEM('search-input');
     const [inputValue, _setInputValue] = useState(
         initialSearchTerm.slice(0, maxInputLength)
     );
+    const [, dispatch] = useSearchContext();
 
     const setInputValue = (value: string) => {
         _setInputValue(value);
-        setSearchTerm(value);
+        dispatch({
+            type: ActionType.SetSearchTerm,
+            searchTerm: value,
+        });
     };
 
     return (

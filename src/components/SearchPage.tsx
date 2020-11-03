@@ -1,138 +1,65 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { SearchHeader } from './header/SearchHeader';
 import { BEM } from '../utils/bem';
-import { SearchInput } from './input/SearchInput';
-import { SearchSorting } from './sorting/SearchSorting';
-import { SearchResults } from './results/SearchResults';
 import { useRouter } from 'next/router';
-import debounce from 'lodash.debounce';
-import { SearchFilters, UFSetterProps } from './filters/SearchFilters';
-import { SearchResultProps } from '../types/search-result';
-import {
-    SearchParams,
-    searchParamsDefault,
-    SearchSort,
-} from '../types/search-params';
 import { fetchSearchResultsClientside } from '../utils/fetch-search-result';
 import { initAmplitude, logPageview, logSearchQuery } from '../utils/amplitude';
 import { objectToQueryString } from '../utils/fetch-utils';
+import { useSearchContext } from '../context/ContextProvider';
+import { ActionType } from '../context/actions';
+import { SearchInput } from './input/SearchInput';
+import { SearchSorting } from './sorting/SearchSorting';
+import { SearchSort } from '../types/search-params';
 import Spinner from './spinner/Spinner';
+import { SearchResults } from './results/SearchResults';
+import { SearchFilters } from './filters/SearchFilters';
 import './SearchPage.less';
 
-const paramsFromResult = (searchResult: SearchResultProps) => {
-    const initialFacetIndex = searchResult?.aggregations?.fasetter?.buckets?.findIndex(
-        (bucket) => bucket.key === searchResult.fasett
-    );
-
-    const initialUnderFacets = searchResult?.aggregations?.fasetter?.buckets[
-        initialFacetIndex
-    ]?.underaggregeringer?.buckets?.reduce(
-        (acc, bucket, index) => (bucket.checked ? [...acc, index] : acc),
-        []
-    );
-
-    return {
-        ...(searchResult.word && { ord: searchResult.word }),
-        ...(initialFacetIndex && { f: initialFacetIndex }),
-        ...(initialUnderFacets.length > 0 && { uf: initialUnderFacets }),
-        ...(searchResult.c && { c: Number(searchResult.c) }),
-        ...(searchResult.s && { s: Number(searchResult.s) }),
-        ...(searchResult.daterange && {
-            daterange: Number(searchResult.daterange),
-        }),
-    };
-};
-
-const SearchPage = (props: SearchResultProps) => {
+const SearchPage = () => {
     const bem = BEM('search');
-    const router = useRouter();
+    const [{ result, params }, dispatch] = useSearchContext();
+    const { word: searchTerm } = result;
 
-    const [searchResults, setSearchResults] = useState<SearchResultProps>(
-        props
-    );
-    const [searchParams, setSearchParams] = useState<SearchParams>(
-        searchParamsDefault
-    );
+    const enableClientsideFetch = useRef(false);
     const [isAwaitingResults, setIsAwaitingResults] = useState(false);
 
-    const { word: searchTerm } = searchResults;
+    const router = useRouter();
 
-    const setSearchTerm = (term: string) => {
-        const newParams = { ...searchParams, ord: term?.trim() };
-        setSearchParams(newParams);
-    };
-    const setDaterange = (daterange: number) => {
-        const newParams = { ...searchParams, daterange };
-        setSearchParams(newParams);
-        fetchAndSetNewResults(newParams);
-    };
-    const setSort = (s: number) => {
-        const newParams = { ...searchParams, s };
-        setSearchParams(newParams);
-        fetchAndSetNewResults(newParams);
-    };
-    const setFacet = (f: number) => {
-        const newParams = { ...searchParams, f, uf: undefined };
-        setSearchParams(newParams);
-        fetchAndSetNewResults(newParams);
-    };
-    const setUnderFacet = ({ uf, toggle }: UFSetterProps) => {
-        const oldUf = searchParams.uf || [];
-        const newUf = toggle
-            ? oldUf.includes(uf)
-                ? oldUf
-                : [...oldUf, uf]
-            : oldUf.filter((item) => item !== uf);
-        const newParams = {
-            ...searchParams,
-            uf: newUf.length > 0 ? newUf : undefined,
-        };
-        setSearchParams(newParams);
-        fetchAndSetNewResults(newParams);
-    };
-    const clearUnderFacets = () => {
-        const newParams = { ...searchParams, uf: undefined };
-        setSearchParams(newParams);
-        fetchAndSetNewResults(newParams);
+    const fetchAndSetNewResults = async () => {
+        setIsAwaitingResults(true);
+
+        const { result, error } = await fetchSearchResultsClientside(params);
+
+        if (result) {
+            dispatch({ type: ActionType.SetResults, result: result });
+
+            // Sets the correct query string in the browser url-bar
+            const newUrl = `${
+                window.location.href.split('?')[0]
+            }${objectToQueryString(params)}`;
+            router.push(newUrl, undefined, {
+                shallow: true,
+            });
+        }
+
+        if (error) {
+            console.error(`Error while fetching results: ${error}`);
+        }
+
+        setIsAwaitingResults(false);
+
+        logSearchQuery(params.ord);
     };
 
-    const fetchAndSetNewResults = debounce(
-        async (params: SearchParams = searchParams) => {
-            setIsAwaitingResults(true);
-            const { result, error } = await fetchSearchResultsClientside(
-                params
-            );
-            setIsAwaitingResults(false);
-
-            if (result) {
-                setSearchResults(result);
-
-                // Sets the correct query string in the browser url-bar
-                const newUrl = `${
-                    window.location.href.split('?')[0]
-                }${objectToQueryString(params)}`;
-                router.push(newUrl, undefined, {
-                    shallow: true,
-                });
-            }
-
-            if (error) {
-                console.error(`Error while fetching results: ${error}`);
-            }
-
-            logSearchQuery(params.ord);
-        },
-        100
-    );
+    const { s, daterange, f, uf } = params;
+    useEffect(() => {
+        if (enableClientsideFetch.current) {
+            fetchAndSetNewResults();
+        }
+    }, [s, daterange, f, uf]);
 
     useEffect(() => {
-        const initialParams = paramsFromResult(searchResults);
-
-        setSearchParams({
-            ...searchParamsDefault,
-            ...initialParams,
-        });
-
+        enableClientsideFetch.current = true;
         initAmplitude();
         logPageview();
         if (searchTerm) {
@@ -143,38 +70,23 @@ const SearchPage = (props: SearchResultProps) => {
     return (
         <div className={bem()}>
             <div className={bem('left-col')}>
-                <SearchHeader
-                    results={searchResults}
-                    clearFilter={clearUnderFacets}
-                />
+                <SearchHeader result={result} />
                 <SearchInput
                     initialSearchTerm={searchTerm}
-                    setSearchTerm={setSearchTerm}
                     fetchNewResults={fetchAndSetNewResults}
                 />
                 <SearchSorting
-                    isSortDate={Number(searchResults.s) === SearchSort.Newest}
-                    setSort={setSort}
+                    isSortDate={Number(result.s) === SearchSort.Newest}
                     searchTerm={searchTerm}
-                    numHits={Number(searchResults.total)}
+                    numHitsTotal={Number(result.total)}
                 />
                 {isAwaitingResults ? (
                     <Spinner text={'Henter søke-resultater...'} />
                 ) : (
-                    <SearchResults
-                        initialResults={searchResults}
-                        searchParams={searchParams}
-                    />
+                    <SearchResults result={result} />
                 )}
             </div>
-            {searchResults.aggregations && (
-                <SearchFilters
-                    results={searchResults}
-                    setFacet={setFacet}
-                    setUnderFacet={setUnderFacet}
-                    setDaterange={setDaterange}
-                />
-            )}
+            {result.aggregations && <SearchFilters result={result} />}
         </div>
     );
 };

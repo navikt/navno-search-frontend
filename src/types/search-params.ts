@@ -1,4 +1,4 @@
-import { DaterangeKey } from './search-result';
+import { DaterangeKey, SearchResultProps } from './search-result';
 
 export const daterangeKeyToParam = {
     [DaterangeKey.All]: -1,
@@ -38,4 +38,33 @@ export const searchParamsDefault: SearchParams = {
     c: 1,
     s: 0,
     daterange: -1,
+};
+
+export const paramsFromResult = (searchResult: SearchResultProps) => {
+    if (!searchResult) {
+        return searchParamsDefault;
+    }
+
+    const initialFacetIndex = searchResult.aggregations?.fasetter?.buckets?.findIndex(
+        (bucket) => bucket.key === searchResult.fasett
+    );
+
+    const initialUnderFacets = searchResult.aggregations?.fasetter?.buckets[
+        initialFacetIndex
+    ]?.underaggregeringer?.buckets?.reduce(
+        (acc, bucket, index) => (bucket.checked ? [...acc, index] : acc),
+        []
+    );
+
+    return {
+        ...searchParamsDefault,
+        ...(searchResult.word && { ord: searchResult.word }),
+        ...(initialFacetIndex && { f: initialFacetIndex }),
+        ...(initialUnderFacets.length > 0 && { uf: initialUnderFacets }),
+        ...(searchResult.c && { c: Number(searchResult.c) }),
+        ...(searchResult.s && { s: Number(searchResult.s) }),
+        ...(searchResult.daterange && {
+            daterange: Number(searchResult.daterange),
+        }),
+    };
 };

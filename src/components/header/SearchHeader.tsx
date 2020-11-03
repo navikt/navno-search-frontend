@@ -7,21 +7,23 @@ import {
 import { SearchResultProps } from '../../types/search-result';
 import { BEM } from '../../utils/bem';
 import Lenke from 'nav-frontend-lenker';
+import { useSearchContext } from '../../context/ContextProvider';
+import { ActionType } from '../../context/actions';
 import './SearchHeader.less';
 
 type Props = {
-    results: SearchResultProps;
-    clearFilter: () => void;
+    result: SearchResultProps;
 };
 
-export const SearchHeader = ({ results, clearFilter }: Props) => {
+export const SearchHeader = ({ result }: Props) => {
     const bem = BEM('search-header');
-    const facetObject = results.aggregations?.fasetter?.buckets?.find(
-        (f) => f.key === results.fasett
+    const facetObject = result.aggregations?.fasetter?.buckets?.find(
+        (f) => f.key === result.fasett
     );
     const underFacetNames = facetObject?.underaggregeringer?.buckets
         ?.filter((uf) => uf.checked)
         .map((uf) => uf.key);
+    const [, dispatch] = useSearchContext();
 
     return (
         <div className={bem()} id={'search-header'}>
@@ -30,7 +32,7 @@ export const SearchHeader = ({ results, clearFilter }: Props) => {
                     {'Søk'}
                 </Innholdstittel>
                 <Undertittel className={bem('facet')}>
-                    {results.fasett}
+                    {result.fasett}
                 </Undertittel>
                 {underFacetNames?.length > 0 && (
                     <Undertekst className={bem('under-facets')}>
@@ -43,7 +45,7 @@ export const SearchHeader = ({ results, clearFilter }: Props) => {
                             className={bem('clear-uf')}
                             onClick={(e) => {
                                 e.preventDefault();
-                                clearFilter();
+                                dispatch({ type: ActionType.ClearUnderfacets });
                             }}
                         >
                             {'Nullstill filter'}
