@@ -20,7 +20,7 @@ const SearchPage = () => {
     const [{ result, params }, dispatch] = useSearchContext();
     const { word: searchTerm } = result;
 
-    const allowClientsideFetch = useRef(false);
+    const enableClientsideFetch = useRef(false);
     const [isAwaitingResults, setIsAwaitingResults] = useState(false);
 
     const router = useRouter();
@@ -53,13 +53,13 @@ const SearchPage = () => {
 
     const { s, daterange, f, uf } = params;
     useEffect(() => {
-        if (allowClientsideFetch.current) {
+        if (enableClientsideFetch.current) {
             fetchAndSetNewResults();
         }
     }, [s, daterange, f, uf]);
 
     useEffect(() => {
-        allowClientsideFetch.current = true;
+        enableClientsideFetch.current = true;
         initAmplitude();
         logPageview();
         if (searchTerm) {
