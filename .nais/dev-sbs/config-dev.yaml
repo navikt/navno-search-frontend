@@ -16,6 +16,9 @@ spec:
   readiness:
     path: /sok/api/internal/isReady
     initialDelay: 10
+  prometheus:
+    enabled: true
+    path: /sok/_metrics
   ingresses:
   {{#each ingresses as |url|}}
     - {{url}}
