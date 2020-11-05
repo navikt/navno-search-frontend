@@ -1,4 +1,5 @@
 @import (reference) '../../../global-style.less';
+@import (reference) '~nav-frontend-skjema-style/src/index';
 
 .radio-expanding-panel {
     display: flex;
@@ -28,10 +29,16 @@
 
     &__header {
         display: flex;
-        justify-content: space-between;
 
-        .skjemaelement__label {
-            .typo-element;
+        input {
+            .radioknapp;
+        }
+
+        label.skjemaelement__label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
         }
     }
 }

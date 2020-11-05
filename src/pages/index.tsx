@@ -60,7 +60,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         const resultWithoutQuery = await fetchSearchResults().catch((err) =>
             console.error(err)
         );
-        return { props: { initialResult: resultWithoutQuery } };
+        return { props: { initialResult: resultWithoutQuery || null } };
     }
 
     return { props: { initialResult: result } };
