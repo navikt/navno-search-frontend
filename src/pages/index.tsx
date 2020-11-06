@@ -63,7 +63,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         return { props: { initialResult: resultWithoutQuery || null } };
     }
 
-    return { props: { initialResult: result } };
+    return { props: { initialResult: result || null } };
 };
 
 export default SearchBase;
