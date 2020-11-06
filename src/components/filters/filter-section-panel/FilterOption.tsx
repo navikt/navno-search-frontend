@@ -8,7 +8,7 @@ export type FilterOptionType = 'radio' | 'checkbox';
 type Props = {
     label: string;
     name: string;
-    count?: number;
+    count: number;
     checked?: boolean;
     defaultChecked?: boolean;
     onChange: (args: any) => any;
@@ -42,11 +42,9 @@ export const FilterOption = ({
             ) : (
                 <Checkbox {...buttonProps} />
             )}
-            {!isNaN(count) && (
-                <Undertekst className={'search-filter-option__count'}>
-                    {count}
-                </Undertekst>
-            )}
+            <Undertekst className={'search-filter-option__count'}>
+                {count}
+            </Undertekst>
         </div>
     );
 };

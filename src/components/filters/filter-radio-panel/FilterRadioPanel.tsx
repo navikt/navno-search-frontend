@@ -1,6 +1,7 @@
 import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import React from 'react';
-import { Undertekst, Element } from 'nav-frontend-typografi';
+import { Radio } from 'nav-frontend-skjema';
+import { Undertekst } from 'nav-frontend-typografi';
 import { BEM } from '../../../utils/bem';
 import './FilterRadioPanel.less';
 
@@ -8,7 +9,7 @@ type Props = {
     label: string;
     count: number;
     isOpen: boolean;
-    onClick: (args?: any) => any;
+    onClick: (args: any) => any;
     id: string;
     children: React.ReactNode | React.ReactNode[];
 };
@@ -25,17 +26,15 @@ export const FilterRadioPanel = ({
 
     const header = (
         <div className={bem('header')}>
-            <input
-                type={'radio'}
+            <Radio
                 name={'search-facet'}
+                label={label}
                 checked={isOpen}
                 readOnly={true}
                 id={id}
+                tabIndex={-1}
             />
-            <label htmlFor={id} className={'skjemaelement__label'}>
-                <Element>{label}</Element>
-                <Undertekst className={bem('count')}>{count}</Undertekst>
-            </label>
+            <Undertekst className={bem('count')}>{count}</Undertekst>
         </div>
     );
 
@@ -45,10 +44,7 @@ export const FilterRadioPanel = ({
             apen={isOpen && !!children}
             border={false}
             className={bem()}
-            onClick={(e) => {
-                document.getElementById(id)?.focus();
-                onClick?.(e);
-            }}
+            onClick={onClick}
         >
             {children}
         </EkspanderbartpanelBase>
