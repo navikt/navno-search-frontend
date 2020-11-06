@@ -33,6 +33,7 @@ export const FilterOption = ({
         defaultChecked,
         onChange,
         id,
+        disabled: !count,
     };
 
     return (
