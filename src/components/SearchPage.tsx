@@ -43,7 +43,7 @@ const SearchPage = () => {
         }
 
         if (error) {
-            console.error(`Error while fetching results: ${error}`);
+            console.error(`Error while fetching results: `, error);
         }
 
         setIsAwaitingResults(false);
