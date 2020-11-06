@@ -29,8 +29,8 @@ export const FilterOption = ({
     const buttonProps = {
         label,
         name,
-        checked,
-        defaultChecked,
+        checked: checked && !!count,
+        defaultChecked: defaultChecked && !!count,
         onChange,
         id,
         disabled: !count,

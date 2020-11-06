@@ -14,10 +14,10 @@ const searchHandler = async (
 ) => {
     const searchParams = req.query as SearchParams;
     await fetchSearchResults(searchParams)
-        .then((searchRes) => res.status(200).send({ result: searchRes }))
+        .then((searchRes) => res.status(200).json({ result: searchRes }))
         .catch((err) => {
             console.error(err);
-            res.status(err.statusCode).send(err);
+            res.status(err.statusCode).send({ error: err });
         });
 };
 
