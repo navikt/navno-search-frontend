@@ -45,7 +45,6 @@ jobs:
           cat > .nais/vars.yaml <<EOF
           namespace: q1
           ingresses:
-            - https://www-q1.nav.no/person/navno-search
             - https://www-q1.nav.no/sok
           image: $IMAGE_REGISTRY/$IMAGE_NAME
           version: $IMAGE_VERSION

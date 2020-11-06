@@ -11,14 +11,14 @@ spec:
   team: personbruker
   port: 3001
   liveness:
-    path: /person/navno-search/api/internal/isAlive
+    path: /sok/api/internal/isAlive
     initialDelay: 10
   readiness:
-    path: /person/navno-search/api/internal/isReady
+    path: /sok/api/internal/isReady
     initialDelay: 10
   prometheus:
     enabled: true
-    path: /person/navno-search/_metrics
+    path: /sok/_metrics
   ingresses:
   {{#each ingresses as |url|}}
     - {{url}}
