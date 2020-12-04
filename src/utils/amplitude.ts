@@ -25,7 +25,7 @@ export const logPageview = () => logAmplitudeEvent('sidevisning');
 
 export const logSearchQuery = (searchTerm: string) =>
     logAmplitudeEvent('søk', {
-        sokeOrd: searchTerm,
+        sokeOrd: searchTerm?.toLowerCase(),
     });
 
 export const logResultClick = (
@@ -35,7 +35,7 @@ export const logResultClick = (
 ) =>
     logAmplitudeEvent('resultat-klikk', {
         destinasjon: href,
-        sokeOrd: searchTerm,
+        sokeOrd: searchTerm?.toLowerCase(),
         treffNr: hitIndex,
     });
 
