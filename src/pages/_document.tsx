@@ -29,7 +29,7 @@ class MyDocument extends Document<Props> {
         const { decoratorFragments } = this.props;
         const { HEADER, FOOTER, SCRIPTS, STYLES } = decoratorFragments;
         const title = 'Søk - nav.no';
-        const description = 'Søk på nav.no';
+        const description = 'Søk på hele nav.no. Du kan filtrere på innhold og dato.';
         const previewImg = '/gfx/social-share-fallback.png';
         const canonicalUrl = `${appOrigin}${appBasePathProd}`;
 
