@@ -17,14 +17,14 @@ class MyDocument extends Document<Props> {
     static async getInitialProps(ctx: DocumentContext) {
         const initialProps = await Document.getInitialProps(ctx);
         const decoratorFragments = await getDecorator();
-        return { ...initialProps, decoratorFragments };
+        return {
+            ...initialProps,
+            decoratorFragments,
+        };
     }
 
     render() {
-        const {
-            APP_ORIGIN: appOrigin,
-            APP_BASE_PATH: appBasePath,
-        } = process.env;
+        const { APP_ORIGIN: appOrigin } = process.env;
         const { appBasePathProd } = Config.PATHS;
         const { decoratorFragments } = this.props;
         const { HEADER, FOOTER, SCRIPTS, STYLES } = decoratorFragments;
@@ -48,9 +48,7 @@ class MyDocument extends Document<Props> {
                     <meta name="twitter:title" content={title} />
                     <meta name="twitter:description" content={description} />
                     <meta name="twitter:image:src" content={previewImg} />
-                    {appBasePath !== appBasePathProd && (
-                        <meta name="robots" content="noindex" />
-                    )}
+                    <meta name="robots" content="noindex" />
                     {STYLES}
                 </Head>
                 <body>
