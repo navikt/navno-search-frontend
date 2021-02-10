@@ -11,22 +11,24 @@ import Config from '../config';
 
 type Props = {
     decoratorFragments: DecoratorFragments;
+    hasQuery: boolean;
 };
 
 class MyDocument extends Document<Props> {
     static async getInitialProps(ctx: DocumentContext) {
         const initialProps = await Document.getInitialProps(ctx);
         const decoratorFragments = await getDecorator();
-        return { ...initialProps, decoratorFragments };
+        return {
+            ...initialProps,
+            decoratorFragments,
+            hasQuery: ctx.asPath !== '/',
+        };
     }
 
     render() {
-        const {
-            APP_ORIGIN: appOrigin,
-            APP_BASE_PATH: appBasePath,
-        } = process.env;
+        const { APP_ORIGIN: appOrigin } = process.env;
         const { appBasePathProd } = Config.PATHS;
-        const { decoratorFragments } = this.props;
+        const { decoratorFragments, hasQuery } = this.props;
         const { HEADER, FOOTER, SCRIPTS, STYLES } = decoratorFragments;
         const title = 'Søk - nav.no';
         const description = 'Søk på nav.no';
@@ -48,9 +50,7 @@ class MyDocument extends Document<Props> {
                     <meta name="twitter:title" content={title} />
                     <meta name="twitter:description" content={description} />
                     <meta name="twitter:image:src" content={previewImg} />
-                    {appBasePath !== appBasePathProd && (
-                        <meta name="robots" content="noindex" />
-                    )}
+                    {hasQuery && <meta name="robots" content="noindex" />}
                     {STYLES}
                 </Head>
                 <body>
