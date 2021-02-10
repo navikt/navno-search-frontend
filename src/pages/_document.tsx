@@ -11,7 +11,6 @@ import Config from '../config';
 
 type Props = {
     decoratorFragments: DecoratorFragments;
-    hasQuery: boolean;
 };
 
 class MyDocument extends Document<Props> {
@@ -21,14 +20,13 @@ class MyDocument extends Document<Props> {
         return {
             ...initialProps,
             decoratorFragments,
-            hasQuery: ctx.asPath !== '/',
         };
     }
 
     render() {
         const { APP_ORIGIN: appOrigin } = process.env;
         const { appBasePathProd } = Config.PATHS;
-        const { decoratorFragments, hasQuery } = this.props;
+        const { decoratorFragments } = this.props;
         const { HEADER, FOOTER, SCRIPTS, STYLES } = decoratorFragments;
         const title = 'Søk - nav.no';
         const description = 'Søk på nav.no';
@@ -50,7 +48,7 @@ class MyDocument extends Document<Props> {
                     <meta name="twitter:title" content={title} />
                     <meta name="twitter:description" content={description} />
                     <meta name="twitter:image:src" content={previewImg} />
-                    {hasQuery && <meta name="robots" content="noindex" />}
+                    <meta name="robots" content="noindex" />
                     {STYLES}
                 </Head>
                 <body>
