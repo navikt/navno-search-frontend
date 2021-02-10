@@ -48,7 +48,7 @@ class MyDocument extends Document<Props> {
                     <meta name="twitter:title" content={title} />
                     <meta name="twitter:description" content={description} />
                     <meta name="twitter:image:src" content={previewImg} />
-                    <meta name="robots" content="noindex" />
+                    <meta name="robots" content="noindex, nofollow" />
                     {STYLES}
                 </Head>
                 <body>
