@@ -24,7 +24,7 @@ jobs:
           NODE_ENV=production
           APP_ORIGIN=https://www.dev.nav.no
           APP_BASE_PATH=/sok
-          DECORATOR_URL=https://www.dev.nav.no/dekoratoren
+          DECORATOR_URL=https://dekoratoren.dev.nav.no
           XP_ORIGIN=https://www-q1.nav.no
           EOF
       - uses: actions/cache@v1
