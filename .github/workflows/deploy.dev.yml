@@ -25,7 +25,7 @@ jobs:
           APP_ORIGIN=https://www.dev.nav.no
           APP_BASE_PATH=/sok
           DECORATOR_URL=https://dekoratoren.dev.nav.no
-          XP_ORIGIN=https://www-q1.nav.no
+          XP_ORIGIN=https://www.dev.nav.no
           EOF
       - uses: actions/cache@v1
         with:

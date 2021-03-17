@@ -7,15 +7,16 @@ import { fetchWithTimeout, objectToQueryString } from './fetch-utils';
 export const fetchSearchResults = (
     params?: SearchParams
 ): Promise<SearchResultProps> => {
-    const url = `${Config.URLS.xpSearchService}${objectToQueryString({
+    const queryString = objectToQueryString({
         ...searchParamsDefault,
         ...params,
-    })}`;
+    });
+    const url = `${Config.URLS.xpSearchService}${queryString}`;
     return fetchWithTimeout(url, 5000).then((res) => {
         if (res.ok) {
             return res.json();
         }
-        const error = `Failed to fetch search results: ${res.statusText}`;
+        const error = `Failed to fetch search results from "${url}" - Error: ${res.statusText}`;
         throw Error(error);
     });
 };
