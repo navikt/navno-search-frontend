@@ -48,6 +48,7 @@ export type SearchHitProps = DeepPartial<{
         from: string;
         first: string;
     };
+    createdTime: string;
     modifiedTime: string;
     className: string;
     publishedString: string;
