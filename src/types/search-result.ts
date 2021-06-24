@@ -30,12 +30,10 @@ export type FacetBucketProps = DeepPartial<{
     key: string;
     docCount: number;
     checked: boolean;
-    className: string;
     underaggregeringer: {
         buckets: FacetBucketProps[];
     };
     default?: boolean;
-    defaultClassName?: string;
 }>;
 
 export type SearchHitProps = DeepPartial<{
@@ -50,8 +48,6 @@ export type SearchHitProps = DeepPartial<{
     };
     createdTime: string;
     modifiedTime: string;
-    className: string;
-    publishedString: string;
     id: string;
     score: number;
     keywords: string[];
