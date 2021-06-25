@@ -14,11 +14,12 @@ import htmlReactParser from 'html-react-parser';
 import { logResultClick } from '../../../utils/amplitude';
 import './SearchHit.less';
 
-const createPublishedAndModifiedString = (
-    publish: SearchHitProps['publish'],
-    modifiedTime: SearchHitProps['modifiedTime']
-) => {
-    const publishedTime = publish.from || publish.first;
+const createPublishedAndModifiedString = ({
+    publish,
+    modifiedTime,
+    createdTime,
+}: SearchHitProps) => {
+    const publishedTime = publish?.first || createdTime;
     const publisedString = publishedTime
         ? `Publisert ${formatDate(publishedTime)}`
         : '';
@@ -71,8 +72,6 @@ export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
         href,
         displayPath,
         highlight,
-        publish,
-        modifiedTime,
         priority,
         officeInformation,
     } = hit;
@@ -83,10 +82,7 @@ export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
 
     const bem = BEM('search-hit');
 
-    const publishedString = createPublishedAndModifiedString(
-        publish,
-        modifiedTime
-    );
+    const publishedString = createPublishedAndModifiedString(hit);
 
     return (
         <LenkepanelBase
