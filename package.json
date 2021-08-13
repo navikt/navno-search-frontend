@@ -41,7 +41,7 @@
         "nav-frontend-spinner-style": "^0.2.5",
         "nav-frontend-typografi": "^2.0.30",
         "nav-frontend-typografi-style": "^1.0.26",
-        "next": "^10.0.0",
+        "next": "^11.1.0",
         "prop-types": "^15.7.2",
         "react": "^17.0.1",
         "react-collapse": "^5.0.1",
