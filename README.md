@@ -15,3 +15,11 @@ Kopier innhold fra .env.development til .env.local og kjør:
 ```
 npm run build && npm start
 ```
+
+## Deploy til dev-miljø
+
+[Deploy-to-dev](https://github.com/navikt/navno-search-frontend/actions/workflows/deploy.dev.yml) -> Run workflow -> Velg branch -> Run workflow
+
+## Prodsetting
+
+Publiser en ny release på master for å starte deploy til prod
