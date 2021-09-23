@@ -55,5 +55,5 @@ jobs:
         env:
           CLUSTER: prod-sbs
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          RESOURCE: .nais/prod-sbs/config-prod.yaml
+          RESOURCE: .nais/config.yaml
           VARS: .nais/vars.yaml
