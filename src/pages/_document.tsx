@@ -34,7 +34,7 @@ class MyDocument extends Document<Props> {
         const canonicalUrl = `${appOrigin}${appBasePathProd}`;
 
         return (
-            <Html>
+            <Html lang={'no'}>
                 <Head>
                     <meta name="description" content={description} />
                     <link rel={'canonical'} href={canonicalUrl} />
