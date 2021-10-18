@@ -25,7 +25,7 @@ const SearchBase = (props: Props) => {
                 <Head>
                     <title>{'Søk - nav.no'}</title>
                 </Head>
-                <div className={'content-wrapper'} id={'maincontent'}>
+                <div role={'main'} className={'content-wrapper'} id={'maincontent'}>
                     {initialResult ? (
                         <SearchPage />
                     ) : (
