@@ -27,7 +27,7 @@ const SearchBase = (props: Props) => {
                 <Head>
                     <title>{'Søk - nav.no'}</title>
                 </Head>
-                <div className={'content-wrapper'} id={'maincontent'}>
+                <div role={'main'} className={'content-wrapper'} id={'maincontent'}>
                     {process.env.APP_BASE_PATH !==
                         Config.PATHS.appBasePathProd && (
                         <div className={'work-in-progress'}>
