@@ -20,4 +20,5 @@ module.exports = configWithAllTheThings({
         APP_BASE_PATH: process.env.APP_BASE_PATH,
         XP_ORIGIN: process.env.XP_ORIGIN,
     },
+    webpack5: false
 });
