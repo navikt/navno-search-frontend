@@ -11,7 +11,7 @@ import './SearchInput.less';
 const maxInputLength = 200;
 
 const setSubmitTrackerCookie = () => {
-    Cookies.set('nav-search-use', Date.now(), { expires: 30, domain: '.nav.no' });
+    Cookies.set('nav-search-use', Date.now().toString(), { expires: 30, domain: '.nav.no' });
 };
 
 type Props = {
