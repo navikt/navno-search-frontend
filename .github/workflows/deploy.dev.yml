@@ -31,7 +31,8 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - run: npm ci --no-optional
+      - run: npm version
+      - run: npm ci
       - run: npm run build
       - name: Docker build and push
         run: |
