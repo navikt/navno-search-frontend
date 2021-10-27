@@ -5,9 +5,14 @@ import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { ClearIcon } from './clear-icon/ClearIcon';
 import { useSearchContext } from '../../context/ContextProvider';
 import { ActionType } from '../../context/actions';
+import Cookies from 'js-cookie';
 import './SearchInput.less';
 
 const maxInputLength = 200;
+
+const setSubmitTrackerCookie = () => {
+    Cookies.set('nav-search-use', Date.now(), { expires: 30, domain: '.nav.no' });
+};
 
 type Props = {
     initialSearchTerm: string;
@@ -17,7 +22,7 @@ type Props = {
 export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
     const bem = BEM('search-input');
     const [inputValue, _setInputValue] = useState(
-        initialSearchTerm.slice(0, maxInputLength)
+        initialSearchTerm.slice(0, maxInputLength),
     );
     const [, dispatch] = useSearchContext();
 
@@ -36,6 +41,7 @@ export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
                 // remove focus to close on-screen keyboards etc
                 (document.activeElement as HTMLElement)?.blur?.();
                 fetchNewResults();
+                setSubmitTrackerCookie();
             }}
             className={bem()}
         >
