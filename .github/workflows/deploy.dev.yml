@@ -23,9 +23,9 @@ jobs:
         run: |
           cat > .env <<EOF
           NODE_ENV=production
-          APP_ORIGIN=https://person.dev.nav.no
+          APP_ORIGIN=https://www.dev.nav.no
           APP_BASE_PATH=/sok
-          DECORATOR_URL=https://dekoratoren.dev.nav.no
+          DECORATOR_URL=https://www.dev.nav.no/dekoratoren
           XP_ORIGIN=https://www.dev.nav.no
           EOF
       - uses: actions/cache@v2
@@ -46,7 +46,7 @@ jobs:
           cat > .nais/vars.yaml <<EOF
           namespace: personbruker
           ingresses:
-            - https://person.dev.nav.no/sok
+            - https://www.dev.nav.no/sok
           image: $IMAGE_REGISTRY/$IMAGE_NAME
           version: $IMAGE_VERSION
           EOF
