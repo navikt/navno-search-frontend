@@ -1,4 +1,4 @@
-name: Deploy-to-prod
+name: Deploy to prod
 on:
   release:
     types: [released]
@@ -9,8 +9,8 @@ jobs:
     uses: ./.github/workflows/build-and-deploy.yml
     with:
       cluster: prod-gcp
+      deployEnv: prod
       imagename: release-${{ github.ref_name }}
-      varsFile: vars-prod.yml
       APP_ORIGIN: https://www.nav.no
       DECORATOR_URL: https://www.nav.no/dekoratoren
       XP_ORIGIN: https://www.nav.no

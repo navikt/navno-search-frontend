@@ -7,8 +7,8 @@ jobs:
     uses: ./.github/workflows/build-and-deploy.yml
     with:
       cluster: dev-gcp
+      deployEnv: dev1
       imagename: dev1-deploy
-      varsFile: vars-dev1.yml
       APP_ORIGIN: https://www.dev.nav.no
       DECORATOR_URL: https://www.dev.nav.no/dekoratoren
       XP_ORIGIN: https://www.dev.nav.no

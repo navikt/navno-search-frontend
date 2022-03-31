@@ -5,10 +5,10 @@ on:
       cluster:
         required: true
         type: string
-      imagename:
+      deployEnv:
         required: true
         type: string
-      varsFile:
+      imagename:
         required: true
         type: string
       APP_ORIGIN:
@@ -28,6 +28,7 @@ jobs:
   build-and-deploy:
     name: Build docker image and deploy to nais k8s
     runs-on: ubuntu-latest
+    environment: ${{ inputs.deployEnv }}
     env:
       image: ghcr.io/${{ github.repository }}:${{ inputs.imagename }}-${{ github.sha }}
     steps:
@@ -71,8 +72,8 @@ jobs:
           docker push ${{ env.image }}
       - uses: nais/deploy/actions/deploy@master
         env:
-          CLUSTER: prod-gcp
+          CLUSTER: ${{ inputs.cluster }}
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: .nais/config.yml
           VAR: image=${{ inputs.image }}
-          VARS: .nais/${{ inputs.varsFile }}
+          VARS: .nais/vars-${{ inputs.deployEnv }}.yml
