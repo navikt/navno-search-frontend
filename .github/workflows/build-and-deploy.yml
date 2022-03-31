@@ -23,6 +23,8 @@ on:
     secrets:
       READER_TOKEN:
         required: true
+      NAIS_DEPLOY_APIKEY:
+        required: true
 
 jobs:
   build-and-deploy:
