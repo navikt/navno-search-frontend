@@ -1,0 +1,78 @@
+name: Build docker image
+on:
+  workflow_call:
+    inputs:
+      cluster:
+        required: true
+        type: string
+      imagename:
+        required: true
+        type: string
+      varsFile:
+        required: true
+        type: string
+      APP_ORIGIN:
+        required: true
+        type: string
+      DECORATOR_URL:
+        required: true
+        type: string
+      XP_ORIGIN:
+        required: true
+        type: string
+    secrets:
+      READER_TOKEN:
+        required: true
+
+jobs:
+  build-and-deploy:
+    name: Build docker image and deploy to nais k8s
+    runs-on: ubuntu-latest
+    env:
+      image: ghcr.io/${{ github.repository }}:${{ inputs.imagename }}-${{ github.sha }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Setup node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          registry-url: 'https://npm.pkg.github.com'
+          cache: 'npm'
+      - name: Set app environmment
+        run: |
+          cat > .env <<EOF
+          NODE_ENV=production
+          APP_BASE_PATH=/sok
+          APP_ORIGIN=${{ inputs.APP_ORIGIN }}
+          DECORATOR_URL=${{ inputs.DECORATOR_URL }}
+          XP_ORIGIN=${{ inputs.XP_ORIGIN }}
+          EOF
+      - name: Nextjs cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - name: Build application
+        run: npm run build
+      - name: Login to Docker registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push docker image
+        run: |
+          docker build -t ${{ env.image }} .
+          docker push ${{ env.image }}
+      - uses: nais/deploy/actions/deploy@master
+        env:
+          CLUSTER: prod-gcp
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          RESOURCE: .nais/config.yml
+          VAR: image=${{ inputs.image }}
+          VARS: .nais/${{ inputs.varsFile }}

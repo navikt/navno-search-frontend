@@ -1,0 +1,3 @@
+appName: navno-search-frontend-dev2
+ingresses:
+  - https://www-2.dev.nav.no/sok
