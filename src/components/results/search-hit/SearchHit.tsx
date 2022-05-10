@@ -70,7 +70,6 @@ export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
     const {
         displayName,
         href,
-        displayPath,
         highlight,
         priority,
         officeInformation,
@@ -94,9 +93,6 @@ export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
                 {displayName}
             </Undertittel>
             <div className={bem('content')}>
-                <Undertekst className={bem('display-path')}>
-                    {displayPath}
-                </Undertekst>
                 {highlight && (
                     <Normaltekst className={bem('highlight')}>
                         {parseHighlight(highlight)}
