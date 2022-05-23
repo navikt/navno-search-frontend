@@ -1,3 +1,3 @@
 appName: navno-search-frontend
 ingresses:
-  - https://www.nav.no/sok
+  - https://www.nav.no/sok($|\/.+)
