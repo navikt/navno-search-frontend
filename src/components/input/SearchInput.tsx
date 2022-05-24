@@ -54,7 +54,7 @@ export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
                 onChange={(e) => setInputValue(e.target.value)}
                 value={inputValue}
                 maxLength={maxInputLength}
-                id={'sok-knapp-sokefelt'}
+                id={'search-input'}
             />
             <div className={bem('buttons-container')}>
                 {inputValue && (
