@@ -11,7 +11,10 @@ import './SearchInput.less';
 const maxInputLength = 200;
 
 const setSubmitTrackerCookie = () => {
-    Cookies.set('nav-search-use', Date.now().toString(), { expires: 30, domain: '.nav.no' });
+    Cookies.set('nav-search-use', Date.now().toString(), {
+        expires: 30,
+        domain: '.nav.no',
+    });
 };
 
 type Props = {
@@ -22,7 +25,7 @@ type Props = {
 export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
     const bem = BEM('search-input');
     const [inputValue, _setInputValue] = useState(
-        initialSearchTerm.slice(0, maxInputLength),
+        initialSearchTerm.slice(0, maxInputLength)
     );
     const [, dispatch] = useSearchContext();
 
@@ -51,7 +54,6 @@ export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
                 onChange={(e) => setInputValue(e.target.value)}
                 value={inputValue}
                 maxLength={maxInputLength}
-                placeholder={'Søk på nav.no'}
                 id={'search-input'}
             />
             <div className={bem('buttons-container')}>

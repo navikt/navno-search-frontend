@@ -29,7 +29,7 @@ export const SearchHeader = ({ result }: Props) => {
         <div className={bem()} id={'search-header'}>
             <div>
                 <Innholdstittel className={bem('title')}>
-                    {'Søk'}
+                    {'Søk på nav.no'}
                 </Innholdstittel>
                 <Undertittel className={bem('facet')}>
                     {result.fasett}
