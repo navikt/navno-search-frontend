@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 
 # Installing dependencies
 COPY package*.json /usr/src/app/
-RUN npm ci
+RUN npm ci --legacy-peer-deps
 
 # Copying build files from workflow
 COPY public /usr/src/app/public/
