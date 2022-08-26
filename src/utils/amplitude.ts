@@ -1,6 +1,7 @@
+import Config from '../config';
+
 // Prevents crash during SSR (amplitude-js is only for use in browsers)
-const amplitude =
-    typeof window !== 'undefined' ? require('amplitude-js') : () => null;
+const amplitude = typeof window !== 'undefined' ? require('amplitude-js') : () => null;
 
 const logAmplitudeEvent = (eventName: string, data?: any): Promise<any> => {
     return new Promise(function (resolve: any) {
@@ -17,7 +18,6 @@ export const initAmplitude = () => {
         saveEvents: false,
         includeUtm: true,
         includeReferrer: true,
-        platform: window.location.toString(),
     });
 };
 
@@ -25,7 +25,9 @@ export const logPageview = () => logAmplitudeEvent('sidevisning');
 
 export const logSearchQuery = (searchTerm: string) =>
     logAmplitudeEvent('søk', {
-        sokeOrd: searchTerm?.toLowerCase(),
+        destinasjon: Config.URLS.xpSearchService,
+        sokeord: searchTerm?.toLowerCase(),
+        komponent: 'søkeside',
     });
 
 export const logResultClick = (
@@ -35,8 +37,8 @@ export const logResultClick = (
 ) =>
     logAmplitudeEvent('resultat-klikk', {
         destinasjon: href,
-        sokeOrd: searchTerm?.toLowerCase(),
-        treffNr: hitIndex,
+        sokeord: searchTerm?.toLowerCase(),
+        treffnr: hitIndex,
     });
 
 export const logFilterSelection = (filter: string, subFilter?: string) =>
