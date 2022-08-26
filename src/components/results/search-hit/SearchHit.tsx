@@ -87,7 +87,7 @@ export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
         <LenkepanelBase
             href={href}
             className={bem()}
-            onClick={() => logResultClick(href, searchTerm, hitIndex)}
+            onClick={() => logResultClick(href, searchTerm, hitIndex + 1)}
         >
             <Undertittel className={`${bem('header')} lenkepanel__heading`}>
                 {displayName}

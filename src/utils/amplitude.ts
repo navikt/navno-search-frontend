@@ -37,8 +37,8 @@ export const logResultClick = (
 ) =>
     logAmplitudeEvent('resultat-klikk', {
         destinasjon: href,
-        sokeOrd: searchTerm?.toLowerCase(),
-        treffNr: hitIndex,
+        sokeord: searchTerm?.toLowerCase(),
+        treffnr: hitIndex,
     });
 
 export const logFilterSelection = (filter: string, subFilter?: string) =>
