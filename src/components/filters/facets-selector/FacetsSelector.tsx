@@ -7,6 +7,9 @@ import { logFilterSelection } from '../../../utils/amplitude';
 import { SearchSort } from '../../../types/search-params';
 import { UFToggleProps } from '../../../context/reducer';
 
+const sortFacets = (facets: FacetBucketProps[]) =>
+    facets.sort((a, b) => a.displayIndex - b.displayIndex);
+
 type Props = {
     facetsProps: FacetBucketProps[];
     initialFacet: string;
@@ -26,8 +29,10 @@ export const FacetsSelector = ({
 
     return (
         <FilterSectionPanel>
-            {facetsProps.map((facet, fIndex) => {
+            {sortFacets(facetsProps).map((facet) => {
                 const underFacets = facet.underaggregeringer.buckets;
+                const fIndex = facet.index;
+
                 return (
                     <FilterRadioPanel
                         label={facet.key}
@@ -44,8 +49,10 @@ export const FacetsSelector = ({
                         id={`select-facet-${fIndex}`}
                         key={facet.key}
                     >
-                        {underFacets.length > 0 &&
-                            underFacets.map((underFacet, ufIndex) => (
+                        {sortFacets(underFacets).map((underFacet) => {
+                            const ufIndex = underFacet.index;
+
+                            return (
                                 <FilterOption
                                     label={underFacet.key}
                                     name={facet.key}
@@ -67,7 +74,8 @@ export const FacetsSelector = ({
                                     key={underFacet.key}
                                     id={`select-uf-${fIndex}-${ufIndex}`}
                                 />
-                            ))}
+                            );
+                        })}
                     </FilterRadioPanel>
                 );
             })}

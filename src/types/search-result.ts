@@ -34,6 +34,8 @@ export type FacetBucketProps = DeepPartial<{
         buckets: FacetBucketProps[];
     };
     default?: boolean;
+    index: number;
+    displayIndex: number;
 }>;
 
 export type SearchHitProps = DeepPartial<{
