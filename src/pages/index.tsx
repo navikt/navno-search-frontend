@@ -31,7 +31,7 @@ const SearchBase = (props: Props) => {
                     id={'maincontent'}
                     tabIndex={-1}
                 >
-                    {initialResult ? (
+                    {initialResult?.fasettKey ? (
                         <SearchPage />
                     ) : (
                         <AlertStripe type={'feil'} form={'inline'}>
