@@ -6,11 +6,12 @@ import { FacetBucketProps } from '../../../types/search-result';
 import { logFilterSelection } from '../../../utils/amplitude';
 import { SearchSort } from '../../../types/search-params';
 import { UFToggleProps } from '../../../context/reducer';
+import config from '../../../config';
 
 type Props = {
     facetsProps: FacetBucketProps[];
     initialFacet: string;
-    setFacet: (f: number) => void;
+    setFacet: (f: string) => void;
     setUnderFacet: ({ uf, toggle }: UFToggleProps) => void;
     setSorting: (sorting: SearchSort) => void;
 };
@@ -30,13 +31,13 @@ export const FacetsSelector = ({
                 const underFacets = facet.underaggregeringer.buckets;
                 return (
                     <FilterRadioPanel
-                        label={facet.key}
+                        label={facet.name}
                         count={facet.docCount}
                         isOpen={facet.key === currentFacetKey}
                         onClick={() => {
                             setCurrentFacetKey(facet.key);
-                            setFacet(fIndex);
-                            if (facet.key === 'Nyheter') {
+                            setFacet(facet.key);
+                            if (facet.key === config.VARS.keys.news) {
                                 setSorting(SearchSort.Newest);
                             }
                             logFilterSelection(facet.key);
@@ -47,14 +48,14 @@ export const FacetsSelector = ({
                         {underFacets.length > 0 &&
                             underFacets.map((underFacet, ufIndex) => (
                                 <FilterOption
-                                    label={underFacet.key}
-                                    name={facet.key}
+                                    label={underFacet.name}
+                                    name={underFacet.key}
                                     count={underFacet.docCount}
                                     checked={underFacet.checked}
                                     type={'checkbox'}
                                     onChange={(e) => {
                                         setUnderFacet({
-                                            uf: ufIndex,
+                                            uf: underFacet.key,
                                             toggle: e.target.checked,
                                         });
                                         if (e.target.checked) {

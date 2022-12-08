@@ -48,7 +48,7 @@ export const SearchFilters = ({ result }: Props) => {
             <div className={bem('filters')}>
                 {fasetter?.buckets && (
                     <FacetsSelector
-                        initialFacet={result.fasett}
+                        initialFacet={result.fasettKey}
                         facetsProps={fasetter.buckets}
                         setFacet={(facet) =>
                             dispatch({

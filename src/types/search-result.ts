@@ -28,6 +28,7 @@ export type DaterangeProps = DeepPartial<{
 
 export type FacetBucketProps = DeepPartial<{
     key: string;
+    name: string;
     docCount: number;
     checked: boolean;
     underaggregeringer: {
@@ -66,6 +67,7 @@ export type SearchResultProps = DeepPartial<{
     word: string;
     total: string;
     fasett: string;
+    fasettKey: string;
     aggregations: {
         fasetter: {
             buckets: FacetBucketProps[];

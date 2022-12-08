@@ -16,6 +16,9 @@ const VARS = {
         feedback: true,
         breadcrumbs: [{ title: 'Søk', url: '/sok' }],
     },
+    keys: {
+        news: '1',
+    },
 };
 
 export const Config = {
