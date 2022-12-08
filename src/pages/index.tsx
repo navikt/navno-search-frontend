@@ -31,11 +31,11 @@ const SearchBase = (props: Props) => {
                     id={'maincontent'}
                     tabIndex={-1}
                 >
-                    {initialResult ? (
+                    {initialResult?.fasettKey ? (
                         <SearchPage />
                     ) : (
                         <AlertStripe type={'feil'} form={'inline'}>
-                            {'Ukjent feil - søketjenesten er ikke tilgjengelig'}
+                            {'Feil - søketjenesten er ikke tilgjengelig'}
                         </AlertStripe>
                     )}
                 </div>

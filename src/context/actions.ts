@@ -36,7 +36,7 @@ export type Action =
       }
     | {
           type: ActionType.SetFacet;
-          facet: number;
+          facet: string;
       }
     | {
           type: ActionType.SetUnderfacet;

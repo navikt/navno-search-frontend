@@ -3,7 +3,7 @@ import { Action, ActionType } from './actions';
 import { SearchContext } from './ContextProvider';
 
 export type UFToggleProps = {
-    uf: number;
+    uf: string;
     toggle: boolean;
 };
 

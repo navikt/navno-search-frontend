@@ -18,10 +18,10 @@ export type SearchParams = Partial<{
     ord: string;
 
     // Facet
-    f: number;
+    f: string;
 
     // Under-facets
-    uf: number[];
+    uf: string[];
 
     // Number of results to retrieve (20 * c)
     c: number;
@@ -34,7 +34,7 @@ export type SearchParams = Partial<{
 }>;
 
 export const searchParamsDefault: SearchParams = {
-    f: 0,
+    f: '0',
     c: 1,
     s: 0,
     daterange: -1,
@@ -45,22 +45,20 @@ export const paramsFromResult = (searchResult: SearchResultProps) => {
         return searchParamsDefault;
     }
 
-    const initialFacetIndex = searchResult.aggregations?.fasetter?.buckets?.findIndex(
-        (bucket) => bucket.key === searchResult.fasett
+    const initialFacet = searchResult.aggregations?.fasetter?.buckets?.find(
+        (bucket) => bucket.key === searchResult.fasettKey
     );
 
-    const initialUnderFacets = searchResult.aggregations?.fasetter?.buckets[
-        initialFacetIndex
-    ]?.underaggregeringer?.buckets?.reduce(
-        (acc, bucket, index) => (bucket.checked ? [...acc, index] : acc),
+    const initialUfKeys = initialFacet?.underaggregeringer?.buckets?.reduce(
+        (acc, bucket) => (bucket.checked ? [...acc, bucket.key] : acc),
         []
     );
 
     return {
         ...searchParamsDefault,
         ...(searchResult.word && { ord: searchResult.word }),
-        ...(initialFacetIndex && { f: initialFacetIndex }),
-        ...(initialUnderFacets.length > 0 && { uf: initialUnderFacets }),
+        ...(initialFacet && { f: initialFacet.key }),
+        ...(initialUfKeys && initialUfKeys.length > 0 && { uf: initialUfKeys }),
         ...(searchResult.c && { c: Number(searchResult.c) }),
         ...(searchResult.s && { s: Number(searchResult.s) }),
         ...(searchResult.daterange && {
