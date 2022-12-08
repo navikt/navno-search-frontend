@@ -35,7 +35,7 @@ const SearchBase = (props: Props) => {
                         <SearchPage />
                     ) : (
                         <AlertStripe type={'feil'} form={'inline'}>
-                            {'Ukjent feil - søketjenesten er ikke tilgjengelig'}
+                            {'Feil - søketjenesten er ikke tilgjengelig'}
                         </AlertStripe>
                     )}
                 </div>
