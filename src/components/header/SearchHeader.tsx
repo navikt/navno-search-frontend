@@ -22,7 +22,7 @@ export const SearchHeader = ({ result }: Props) => {
     );
     const underFacetNames = facetObject?.underaggregeringer?.buckets
         ?.filter((uf) => uf.checked)
-        .map((uf) => uf.key);
+        .map((uf) => uf.name);
     const [, dispatch] = useSearchContext();
 
     return (
