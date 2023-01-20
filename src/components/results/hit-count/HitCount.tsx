@@ -2,7 +2,7 @@ import React from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import { Config } from '../../../config';
-import { BEM } from '../../../utils/bem';
+import { BEM } from '../../../utils/classnames';
 import { quote } from '../../../utils/quote';
 import './HitCount.less';
 

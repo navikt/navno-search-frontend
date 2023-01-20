@@ -2,7 +2,7 @@ import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import React from 'react';
 import { Radio } from 'nav-frontend-skjema';
 import { Undertekst } from 'nav-frontend-typografi';
-import { BEM } from '../../../utils/bem';
+import { BEM } from '../../../utils/classnames';
 import './FilterRadioPanel.less';
 
 type Props = {

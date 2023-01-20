@@ -1,6 +1,6 @@
 import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { BEM } from '../../utils/bem';
+import { BEM } from '../../utils/classnames';
 import { Radio } from 'nav-frontend-skjema';
 import { SearchSort } from '../../types/search-params';
 import { Config } from '../../config';

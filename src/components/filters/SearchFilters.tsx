@@ -1,51 +1,50 @@
 import React, { useState } from 'react';
-import { Element, Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { FacetsSelector } from './facets-selector/FacetsSelector';
 import { DaterangeSelector } from './daterange-selector/DaterangeSelector';
-import { BEM } from '../../utils/bem';
-import Lenke from 'nav-frontend-lenker';
-import { SearchResultProps } from '../../types/search-result';
-import { NedChevron } from 'nav-frontend-chevron';
-import { ActionType } from '../../context/actions';
-import { useSearchContext } from '../../context/ContextProvider';
-import './SearchFilters.less';
+import { SearchResultProps } from 'types/search-result';
+import { ActionType } from 'context/actions';
+import { useSearchContext } from 'context/ContextProvider';
+import classNames from 'classnames';
+
+import style from './SearchFilters.module.scss';
+import { Detail, Heading, Label, Link } from '@navikt/ds-react';
+import { Expand } from '@navikt/ds-icons';
 
 type Props = {
     result: SearchResultProps;
 };
 
 export const SearchFilters = ({ result }: Props) => {
-    const bem = BEM('search-filters');
     const [, dispatch] = useSearchContext();
     const { fasetter, Tidsperiode } = result.aggregations;
     const [openMobile, setOpenMobile] = useState(false);
 
     return (
         <div
-            className={`${bem()} ${
-                openMobile ? bem(undefined, 'visible-mobile') : ''
-            }`}
+            className={classNames( style.searchFilters,
+                openMobile ? style.visibleMobile : ''
+            )}
         >
-            <Undertittel className={bem('title-desktop')}>
+            <Heading level="2" size="large" className={style.titleDesktop}>
                 {'Søkefilter'}
-            </Undertittel>
-            <Lenke
+            </Heading>
+            <Link
                 href={'#'}
                 onClick={(e) => {
                     e.preventDefault();
                     setOpenMobile((state) => !state);
                 }}
-                className={bem('title-mobile')}
+                className={style.titleMobile}
             >
-                <Element className={bem('title-mobile-label')}>
+                <Label className={style.titleMobileLabel}>
                     {'Søkefilter'}
-                </Element>
-                <Undertekst className={bem('title-mobile-toggle')}>
+                </Label>
+                <Detail className={style.titleMobileToggle}>
                     {openMobile ? 'Skjul' : 'Vis'}
-                    <NedChevron className={bem('mobile-toggle-chevron')} />
-                </Undertekst>
-            </Lenke>
-            <div className={bem('filters')}>
+                    <Expand className={style.mobileToggleChevron} />
+                </Detail>
+            </Link>
+            <div className={style.filters}>
                 {fasetter?.buckets && (
                     <FacetsSelector
                         initialFacet={result.fasettKey}

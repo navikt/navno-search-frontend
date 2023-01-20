@@ -1,94 +1,93 @@
-@import (reference) '../../global-style.less';
+@forward '@navikt/ds-tokens/dist/tokens';
+@use '@navikt/ds-tokens/dist/tokens' as *;
+@use 'src/common' as common;
 
-@filters-width: 18.75rem;
-@filters-margin: 3rem;
+.searchFilters {
+    $transition-duration: 0.35s;
+    $collapsed-width: 10rem;
+    margin-left: common.$filters-margin;
+    min-width: common.$filters-width;
 
-.search-filters {
-    @transition-duration: 0.35s;
-    @collapsed-width: 10rem;
-    margin-left: @filters-margin;
-    min-width: @filters-width;
-
-    &__title-mobile {
+    .titleMobile {
         display: none;
         justify-content: space-between;
         align-items: center;
         text-decoration: none;
 
         &:hover {
-            .search-filters__title-mobile-toggle {
+            .title-mobile-toggle {
                 text-decoration: underline;
             }
         }
 
         &:focus {
-            box-shadow: 0 0 0 2px @fokusFarge;
+            box-shadow: 0 0 0 2px common.$a-shadow-focus;
             background-color: transparent;
-            color: @navBla;
+            color: common.$a-text-action;
         }
     }
 
-    &__title-mobile-label {
+    .titleMobileLabel {
         color: black;
     }
 
-    &__mobile-toggle-chevron {
+    .mobileToggleChevron {
         margin-left: 0.25rem;
-        transition: transform @transition-duration linear;
+        transition: transform $transition-duration linear;
     }
 
-    &__filters {
+    .filters {
         & > * {
             margin-top: 1rem;
             overflow: hidden;
-            width: calc(@filters-width - 1rem);
+            width: calc(#{common.$filters-width} - 1rem);
         }
     }
 
-    @media (max-width: @desktopLargeMinWidth) {
+    @media #{common.$mq-screen-tablet-and-mobile} {
         position: absolute;
         right: 1rem;
         margin: 0;
         padding: 0.5rem;
         background-color: white;
-        border-radius: @border-radius-base;
-        box-shadow: 0 1px 4px 0 @navGra60;
-        min-width: @collapsed-width;
-        max-width: @collapsed-width;
+        border-radius: $a-border-radius-medium;
+        box-shadow: 0 1px 4px 0 common.$a-border-default;
+        min-width: $collapsed-width;
+        max-width: $collapsed-width;
         transition-property: min-width, max-width;
-        transition-duration: @transition-duration;
+        transition-duration: $transition-duration;
         transition-timing-function: ease-in;
 
-        &--visible-mobile {
+        .visibleMobile {
             z-index: 9999;
-            max-width: @filters-width;
-            min-width: @filters-width;
+            max-width: $filters-width;
+            min-width: $filters-width;
 
-            .search-filters__filters {
+            .filters {
                 visibility: visible;
                 max-height: 100rem;
             }
 
-            .search-filters__mobile-toggle-chevron {
+            .mobileToggleChevron {
                 transform: rotateX(-180deg);
             }
         }
 
-        &__title-desktop {
+        .titleDesktop {
             display: none;
         }
 
-        &__title-mobile {
+        .titleMobile {
             display: flex;
         }
 
-        &__filters {
+        .filters {
             position: relative;
             visibility: hidden;
             overflow: hidden;
             max-height: 0;
             transition-property: max-height, visibility;
-            transition-duration: @transition-duration;
+            transition-duration: $transition-duration;
             transition-timing-function: ease-in;
         }
     }

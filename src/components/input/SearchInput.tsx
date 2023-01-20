@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Input } from 'nav-frontend-skjema';
-import { BEM } from '../../utils/bem';
+import { BEM } from '../../utils/classnames';
 import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
 import { ClearIcon } from './clear-icon/ClearIcon';
 import { useSearchContext } from '../../context/ContextProvider';

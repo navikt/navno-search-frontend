@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { SearchHit } from './search-hit/SearchHit';
-import { BEM } from '../../utils/bem';
+import { BEM } from '../../utils/classnames';
 import { Knapp } from 'nav-frontend-knapper';
 import { SearchResultProps } from '../../types/search-result';
 import { fetchSearchResultsClientside } from '../../utils/fetch-search-result';

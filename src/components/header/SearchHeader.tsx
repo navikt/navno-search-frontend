@@ -5,7 +5,7 @@ import {
     Undertittel,
 } from 'nav-frontend-typografi';
 import { SearchResultProps } from '../../types/search-result';
-import { BEM } from '../../utils/bem';
+import { BEM } from '../../utils/classnames';
 import Lenke from 'nav-frontend-lenker';
 import { useSearchContext } from '../../context/ContextProvider';
 import { ActionType } from '../../context/actions';
