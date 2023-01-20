@@ -1,13 +1,14 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import { fetchSearchResults } from '../utils/fetch-search-result';
-import { SearchResultProps } from '../types/search-result';
-import SearchPage from '../components/SearchPage';
-import { paramsFromResult } from '../types/search-params';
-import AlertStripe from 'nav-frontend-alertstriper';
 import Head from 'next/head';
-import { ContextProvider } from '../context/ContextProvider';
-import '../global-style.less';
+import { ContextProvider } from 'context/ContextProvider';
+import { fetchSearchResults } from 'utils/fetch-search-result';
+import { SearchResultProps } from 'types/search-result';
+import SearchPage from 'components/SearchPage';
+import { paramsFromResult } from 'types/search-params';
+import { Alert } from '@navikt/ds-react';
+
+import 'global.scss';
 
 type Props = {
     initialResult: SearchResultProps;
@@ -25,7 +26,7 @@ const SearchBase = (props: Props) => {
                 <Head>
                     <title>{'Søk - nav.no'}</title>
                 </Head>
-                <div
+                <main
                     role={'main'}
                     className={'content-wrapper'}
                     id={'maincontent'}
@@ -34,11 +35,11 @@ const SearchBase = (props: Props) => {
                     {initialResult?.fasettKey ? (
                         <SearchPage />
                     ) : (
-                        <AlertStripe type={'feil'} form={'inline'}>
+                        <Alert variant="error">
                             {'Feil - søketjenesten er ikke tilgjengelig'}
-                        </AlertStripe>
+                        </Alert>
                     )}
-                </div>
+                </main>
             </div>
         </ContextProvider>
     );
