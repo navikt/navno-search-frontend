@@ -1,4 +1,4 @@
-React/[Next.js](https://nextjs.org/) frontend for søk på nav.no 
+Frontend for søk på nav.no 
 
 ## Lokal kjøring
 
