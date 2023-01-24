@@ -1,18 +1,12 @@
 import React from 'react';
-import { BEM } from '../../../utils/classnames';
-import { formatDate } from '../../../utils/datetime';
-import dayjs from 'dayjs';
-import { SearchHitProps } from '../../../types/search-result';
-import { LenkepanelBase } from 'nav-frontend-lenkepanel';
-import {
-    Normaltekst,
-    Undertekst,
-    UndertekstBold,
-    Undertittel,
-} from 'nav-frontend-typografi';
 import htmlReactParser from 'html-react-parser';
-import { logResultClick } from '../../../utils/amplitude';
-import './SearchHit.less';
+import { formatDate } from 'utils/datetime';
+import dayjs from 'dayjs';
+import { SearchHitProps } from 'types/search-result';
+import { logResultClick } from 'utils/amplitude';
+
+import style from './SearchHit.module.scss';
+import { BodyLong, BodyShort, LinkPanel } from '@navikt/ds-react';
 
 const createPublishedAndModifiedString = ({
     publish,
@@ -46,13 +40,13 @@ const officeInformationTable = (info: SearchHitProps['officeInformation']) => {
         <>
             {phone && (
                 <div>
-                    <span className={'label'}>{'Telefon:'}</span>
+                    <span className={style.label}>{'Telefon:'}</span>
                     {phone}
                 </div>
             )}
             {audienceReception && (
                 <div>
-                    <span className={'label'}>{'Publikumsmottak:'}</span>
+                    <span className={style.label}>{'Publikumsmottak:'}</span>
                     {audienceReception}
                 </div>
             )}
@@ -79,43 +73,41 @@ export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
         return null;
     }
 
-    const bem = BEM('search-hit');
-
     const publishedString = createPublishedAndModifiedString(hit);
 
     return (
-        <LenkepanelBase
+        <LinkPanel
             href={href}
-            className={bem()}
+            className={style.searchHit}
             onClick={() => logResultClick(href, searchTerm, hitIndex + 1)}
         >
-            <Undertittel className={`${bem('header')} lenkepanel__heading`}>
+            <LinkPanel.Title>
                 {displayName}
-            </Undertittel>
-            <div className={bem('content')}>
+            </LinkPanel.Title>
+            <div className={style.content}>
                 {highlight && (
-                    <Normaltekst className={bem('highlight')}>
+                    <BodyLong className={style.highlight}>
                         {parseHighlight(highlight)}
-                    </Normaltekst>
+                    </BodyLong>
                 )}
                 {officeInformation && (
-                    <div className={bem('office-info')}>
+                    <div className={style.officeInfo}>
                         {officeInformationTable(officeInformation)}
                     </div>
                 )}
-                <div className={bem('bottom-row')}>
+                <div className={style.bottomRow}>
                     {publishedString && (
-                        <Undertekst className={bem('published')}>
+                        <BodyShort className={style.published}>
                             {publishedString}
-                        </Undertekst>
+                        </BodyShort>
                     )}
                     {priority && (
-                        <UndertekstBold className={bem('recommended')}>
+                        <BodyShort className={style.recommended}>
                             {'Anbefalt innhold'}
-                        </UndertekstBold>
+                        </BodyShort>
                     )}
                 </div>
             </div>
-        </LenkepanelBase>
+        </LinkPanel>
     );
 };

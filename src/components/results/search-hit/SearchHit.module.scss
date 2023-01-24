@@ -1,6 +1,6 @@
-@import (reference) '../../../global-style.less';
+@use 'src/common' as common;
 
-.search-hit {
+.searchHit {
     display: block;
     border: none;
     padding: 0.75rem;
@@ -10,36 +10,37 @@
     transition-duration: 0.1s;
     transition-timing-function: ease-out;
 
-    @media @screen-mobile {
-        box-shadow: 0 1px 5px @navGra40;
+    @media #{common.$mq-screen-mobile} {
+        box-shadow: common.$a-shadow-large;
     }
 
     &:hover {
         border: none;
-        background-color: rgba(@navLysGra, 0.5);
+        background-color: common.$a-surface-hover;
     }
 
-    .lenkepanel__heading {
-        color: @navBla;
+    :global(.navds-link-panel__title) {
+        color: common.$a-text-action;
     }
 
-    .lenkepanel__indikator {
+    :global(.navds-link-panel__chevron) {
         display: none;
     }
 
-    &__content {
+    .content {
         width: 100%;
     }
 
-    &__bottom-row {
-        color: @navGra60;
+    .bottomRow {
+        margin-top: 0.75rem;
+        color: common.$a-text-subtle;
     }
 
-    &__highlight {
+    .highlight {
         margin-top: 0.5rem;
     }
 
-    &__office-info {
+    .officeInfo {
         margin-top: 0.5rem;
         .label {
             display: inline-block;
@@ -48,11 +49,8 @@
         }
     }
 
-    &__bottom-row {
-        margin-top: 0.75rem;
-    }
-
-    &__recommended {
+    .recommended {
+        font-weight: bold;
         margin-top: 0.25rem;
     }
 }
