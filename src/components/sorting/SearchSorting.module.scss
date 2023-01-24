@@ -1,17 +1,17 @@
-@import (reference) '../../global-style.less';
+@use 'src/common' as common;
 
-.search-sorting {
+.searchSorting {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 0.75rem;
 
-    &__selector {
+    .selector {
         display: flex;
         flex-direction: column;
     }
 
-    &__buttons {
+    .buttons {
         display: flex;
         flex-wrap: wrap;
         margin-top: 0.25rem;
@@ -21,7 +21,7 @@
         }
     }
 
-    &__hits-and-tips {
+    .hitsAndTips {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -36,17 +36,17 @@
         }
     }
 
-    &__hits {
+    .hits {
         margin-top: 0.25rem;
     }
 
-    &__hits-verbose {
-        @media @screen-mobile {
+    .hitsVerbose {
+        @media #{common.$mq-screen-mobile} {
             display: none;
         }
     }
 
-    &__term {
+    .term {
         font-weight: bold;
     }
 }
