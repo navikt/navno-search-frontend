@@ -1,24 +1,20 @@
 import React, { useState } from 'react';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { SearchHit } from './search-hit/SearchHit';
-import { BEM } from '../../utils/classnames';
-import { Knapp } from 'nav-frontend-knapper';
-import { SearchResultProps } from '../../types/search-result';
-import { fetchSearchResultsClientside } from '../../utils/fetch-search-result';
-import { quote } from '../../utils/quote';
-import Lenke from 'nav-frontend-lenker';
-import { Config } from '../../config';
-import { useSearchContext } from '../../context/ContextProvider';
-import { ActionType } from '../../context/actions';
-import './SearchResults.less';
+import { SearchResultProps } from 'types/search-result';
+import { fetchSearchResultsClientside } from 'utils/fetch-search-result';
+import { quote } from 'utils/quote';
+import { Config } from 'config';
+import { useSearchContext } from 'context/ContextProvider';
+import { ActionType } from 'context/actions';
+
+import style from './SearchResults.module.scss';
+import { BodyLong, Button, Heading, Link } from '@navikt/ds-react';
 
 type Props = {
     result: SearchResultProps;
 };
 
 export const SearchResults = ({ result }: Props) => {
-    const bem = BEM('search-results');
-
     const [{ params }, dispatch] = useSearchContext();
     const [isAwaitingMore, setIsAwaitingMore] = useState(false);
     const { word: searchTerm } = result;
@@ -48,7 +44,7 @@ export const SearchResults = ({ result }: Props) => {
     };
 
     return (
-        <div className={bem()}>
+        <div className={style.searchResults}>
             {result.hits?.length > 0 ? (
                 result.hits.map((hitProps, index) => (
                     <SearchHit
@@ -59,35 +55,40 @@ export const SearchResults = ({ result }: Props) => {
                     />
                 ))
             ) : (
-                <div className={bem('no-hits')}>
-                    <Undertittel>
+                <div className={style.noHits}>
+                    <Heading size="medium" level="2">
                         {`Ingen treff${
                             searchTerm ? ` for ${quote(searchTerm)}` : ''
                         }.`}
-                    </Undertittel>
-                    <Normaltekst>
+                    </Heading>
+                    <BodyLong>
                         {
                             'Prøv igjen med mer generelle søkeord, eller forsøk andre søkefiltre. '
                         }
-                        <Lenke href={Config.PATHS.searchTips}>
+                        <Link href={Config.PATHS.searchTips}>
                             {'Se søketips'}
-                        </Lenke>
-                    </Normaltekst>
+                        </Link>
+                    </BodyLong>
                 </div>
             )}
             {result.isMore && (
-                <Knapp
-                    onClick={showMore}
-                    className={bem('show-more')}
-                    spinner={isAwaitingMore}
-                    disabled={isAwaitingMore}
-                >
-                    <Undertittel>
-                        {isAwaitingMore
-                            ? 'Henter flere treff...'
-                            : 'Vis flere treff'}
-                    </Undertittel>
-                </Knapp>
+                (isAwaitingMore
+                    ?
+                        <Button
+                            className={style.showMore}
+                            loading
+                        >
+                            {'Henter flere treff...'}
+                        </Button>
+                    :
+                        <Button
+                            className={style.showMore}
+                            variant="secondary"
+                            onClick={showMore}
+                        >
+                            {'Vis flere treff'}
+                        </Button>
+                )
             )}
         </div>
     );
