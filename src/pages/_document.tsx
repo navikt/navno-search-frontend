@@ -7,7 +7,7 @@ import Document, {
     Head,
 } from 'next/document';
 import { DecoratorFragments, getDecorator } from '../utils/fetch-decorator';
-import Config from '../config';
+import { Config } from 'config';
 
 type Props = {
     decoratorFragments: DecoratorFragments;

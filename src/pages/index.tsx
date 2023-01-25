@@ -8,8 +8,6 @@ import SearchPage from 'components/SearchPage';
 import { paramsFromResult } from 'types/search-params';
 import { Alert } from '@navikt/ds-react';
 
-import 'global.scss';
-
 type Props = {
     initialResult: SearchResultProps;
 };

@@ -60,8 +60,8 @@
 
         .visibleMobile {
             z-index: 9999;
-            max-width: $filters-width;
-            min-width: $filters-width;
+            max-width: common.$filters-width;
+            min-width: common.$filters-width;
 
             .filters {
                 visibility: visible;
