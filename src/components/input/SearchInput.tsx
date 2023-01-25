@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Input } from 'nav-frontend-skjema';
-import { BEM } from '../../utils/classnames';
-import { Flatknapp, Hovedknapp } from 'nav-frontend-knapper';
-import { ClearIcon } from './clear-icon/ClearIcon';
-import { useSearchContext } from '../../context/ContextProvider';
-import { ActionType } from '../../context/actions';
+import { useSearchContext } from 'context/ContextProvider';
+import { ActionType } from 'context/actions';
 import Cookies from 'js-cookie';
-import './SearchInput.less';
+import { Close } from '@navikt/ds-icons';
+import { Button, TextField } from '@navikt/ds-react';
+
+import style from './SearchInput.module.scss';
 
 const maxInputLength = 200;
 
@@ -23,12 +22,10 @@ type Props = {
 };
 
 export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
-    const bem = BEM('search-input');
     const [inputValue, _setInputValue] = useState(
         initialSearchTerm.slice(0, maxInputLength)
     );
     const [, dispatch] = useSearchContext();
-
     const setInputValue = (value: string) => {
         _setInputValue(value);
         dispatch({
@@ -46,31 +43,31 @@ export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
                 fetchNewResults();
                 setSubmitTrackerCookie();
             }}
-            className={bem()}
+            className={style.searchInput}
         >
-            <Input
-                aria-labelledby={'search-header'}
-                className={bem('input')}
+            <TextField
+                label="Søk på nav.no"
+                hideLabel={true}
+                className={style.input}
                 onChange={(e) => setInputValue(e.target.value)}
                 value={inputValue}
                 maxLength={maxInputLength}
-                id={'search-input'}
+                id="search-input"
             />
-            <div className={bem('buttons-container')}>
+            <div className={style.buttonsContainer}>
                 {inputValue && (
-                    <Flatknapp
-                        className={bem('button')}
-                        mini={true}
+                    <Button
+                        variant="tertiary"
+                        className={style.button}
                         aria-label={'Nullstill søk'}
                         onClick={() => setInputValue('')}
-                        htmlType={'button'}
                     >
-                        <ClearIcon />
-                    </Flatknapp>
+                        <Close/>
+                    </Button>
                 )}
-                <Hovedknapp className={bem('button')} htmlType={'submit'}>
+                <Button className={style.button}>
                     {'Søk'}
-                </Hovedknapp>
+                </Button>
             </div>
         </form>
     );

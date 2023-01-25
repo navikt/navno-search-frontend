@@ -1,19 +1,16 @@
-.search-header {
+.searchHeader {
     margin-bottom: 1rem;
 
-    &__title {
-    }
-
-    &__facet {
+    .facet {
         margin-top: 0.25rem;
     }
 
-    &__under-facets {
+    .underFacets {
         margin-top: 0.25rem;
         font-style: italic;
     }
 
-    &__clear-uf.lenke {
+    .clearUf {
         text-decoration: none;
         font-weight: bold;
         font-style: normal;
