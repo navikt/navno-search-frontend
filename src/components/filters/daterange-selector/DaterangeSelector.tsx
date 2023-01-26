@@ -5,10 +5,11 @@ import {
     DaterangeBucketProps,
     DaterangeKey,
     DaterangeProps,
-} from '../../../types/search-result';
-import { Element } from 'nav-frontend-typografi';
-import { logFilterSelection } from '../../../utils/amplitude';
-import './DaterangeSelector.less';
+} from 'types/search-result';
+import { logFilterSelection } from 'utils/amplitude';
+import { RadioGroup } from '@navikt/ds-react';
+
+import style from './DaterangeSelector.module.scss';
 
 type Props = {
     daterangeProps: DaterangeProps;
@@ -39,29 +40,29 @@ export const DaterangeSelector = ({ daterangeProps, setDaterange }: Props) => {
 
     return (
         <FilterSectionPanel>
-            <Element className={'daterange-label'}>{'Tidsperiode'}</Element>
-            <FilterOption
-                name={'timerange'}
-                type={'radio'}
-                label={DaterangeKey.All}
-                count={allDocCount}
-                defaultChecked={allChecked}
-                onChange={() => onChange(DaterangeKey.All)}
-                id={'select-date-all'}
-            />
-            {buckets.sort(sortBuckets).map((bucket, index) => (
+            <RadioGroup legend="Tidsperiode">
                 <FilterOption
                     name={'timerange'}
                     type={'radio'}
-                    label={bucket.key}
-                    count={bucket.docCount}
-                    defaultChecked={bucket.checked}
-                    onChange={() => onChange(bucket.key)}
-                    key={bucket.key}
-                    id={`select-date-${index}`}
+                    label={DaterangeKey.All}
+                    count={allDocCount}
+                    defaultChecked={allChecked}
+                    onChange={() => onChange(DaterangeKey.All)}
+                    id={'select-date-all'}
                 />
-            ))}
-            {/*</RadioGruppe>*/}
+                {buckets.sort(sortBuckets).map((bucket, index) => (
+                    <FilterOption
+                        name={'timerange'}
+                        type={'radio'}
+                        label={bucket.key}
+                        count={bucket.docCount}
+                        defaultChecked={bucket.checked}
+                        onChange={() => onChange(bucket.key)}
+                        key={bucket.key}
+                        id={`select-date-${index}`}
+                    />
+                ))}
+            </RadioGroup>
         </FilterSectionPanel>
     );
 };

@@ -1,9 +1,7 @@
-import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
+import { Accordion, BodyShort, Radio } from '@navikt/ds-react';
 import React from 'react';
-import { Radio } from 'nav-frontend-skjema';
-import { Undertekst } from 'nav-frontend-typografi';
-import { BEM } from '../../../utils/classnames';
-import './FilterRadioPanel.less';
+
+import style from './FilterRadioPanel.module.scss';
 
 type Props = {
     label: string;
@@ -22,31 +20,40 @@ export const FilterRadioPanel = ({
     id,
     children,
 }: Props) => {
-    const bem = BEM('radio-expanding-panel');
 
     const header = (
-        <div className={bem('header')}>
+        <div className={style.header}>
             <Radio
+                value={''}
                 name={'search-facet'}
-                label={label}
                 checked={isOpen}
                 readOnly={true}
+                onClick={onClick}
                 id={id}
                 tabIndex={-1}
-            />
-            <Undertekst className={bem('count')}>{count}</Undertekst>
+            >
+                {label}
+            </Radio>
+            <BodyShort className={style.count}>
+                {count}
+            </BodyShort>
         </div>
     );
 
     return (
-        <EkspanderbartpanelBase
-            tittel={header}
-            apen={isOpen && !!children}
-            border={false}
-            className={bem()}
-            onClick={onClick}
+        <Accordion
+            className={style.radioExpandingPanel}
         >
-            {children}
-        </EkspanderbartpanelBase>
+            <Accordion.Item
+                defaultOpen={isOpen && !!children}
+            >
+                <Accordion.Header>
+                    {header}
+                </Accordion.Header>
+                <Accordion.Content>
+                    {children}
+                </Accordion.Content>
+            </Accordion.Item>
+        </Accordion>
     );
 };

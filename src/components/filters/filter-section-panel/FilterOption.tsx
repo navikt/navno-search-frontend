@@ -1,7 +1,7 @@
-import { Checkbox, Radio } from 'nav-frontend-skjema';
-import { Undertekst } from 'nav-frontend-typografi';
 import React from 'react';
-import './FilterOption.less';
+import { BodyShort, Checkbox, Radio } from '@navikt/ds-react';
+
+import style from './FilterOption.module.scss';
 
 export type FilterOptionType = 'radio' | 'checkbox';
 
@@ -27,7 +27,7 @@ export const FilterOption = ({
     id,
 }: Props) => {
     const buttonProps = {
-        label,
+        value: undefined,   //Not used
         name,
         checked: checked && !!count,
         defaultChecked: defaultChecked && !!count,
@@ -37,15 +37,19 @@ export const FilterOption = ({
     };
 
     return (
-        <div className={'search-filter-option'}>
+        <div className={style.searchFilterOption}>
             {type === 'radio' ? (
-                <Radio {...buttonProps} />
+                <Radio {...buttonProps}>
+                    {label}
+                </Radio>
             ) : (
-                <Checkbox {...buttonProps} />
+                <Checkbox {...buttonProps}>
+                    {label}
+                </Checkbox>
             )}
-            <Undertekst className={'search-filter-option__count'}>
+            <BodyShort className={style.count}>
                 {count}
-            </Undertekst>
+            </BodyShort>
         </div>
     );
 };

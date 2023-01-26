@@ -1,9 +1,9 @@
-.search-filter-option {
+.searchFilterOption {
     display: flex;
     justify-content: space-between;
     padding: 0.375rem 0;
 
-    &__count {
+    .count {
         margin-left: 1rem;
     }
 }

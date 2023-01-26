@@ -5,10 +5,10 @@ import { SearchResultProps } from 'types/search-result';
 import { ActionType } from 'context/actions';
 import { useSearchContext } from 'context/ContextProvider';
 import classNames from 'classnames';
-
-import style from './SearchFilters.module.scss';
 import { Detail, Heading, Label, Link } from '@navikt/ds-react';
 import { Expand } from '@navikt/ds-icons';
+
+import style from './SearchFilters.module.scss';
 
 type Props = {
     result: SearchResultProps;

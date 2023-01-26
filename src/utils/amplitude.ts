@@ -8,11 +8,13 @@ const logAmplitudeEvent = (eventName: string, data?: any): Promise<any> => {
         const eventData = data || {};
         eventData.origin = 'navno-search-frontend';
         eventData.originVersion = 'unknown';
-        amplitude?.getInstance().logEvent(eventName, eventData, resolve);
+        //amplitude?.getInstance().logEvent(eventName, eventData, resolve);
     });
 };
 
 export const initAmplitude = () => {
+    //TODO: Fix amplitude
+    /*
     amplitude?.getInstance().init('default', '', {
         apiEndpoint: 'amplitude.nav.no/collect-auto',
         saveEvents: false,
@@ -20,6 +22,7 @@ export const initAmplitude = () => {
         includeReferrer: true,
         platform: window.location.toString(),
     });
+     */
 };
 
 export const logPageview = () => logAmplitudeEvent('sidevisning');
