@@ -2,22 +2,25 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 0.3125rem 0;
 
     button {
-        padding: 0.3125rem 0;
+        padding: 0;
+        border: none;
     }
 
-    .ekspanderbartPanel__tittel {
-        width: 100% !important;
+    // Overstyring av Accordion
+    :global(.navds-accordion__header-content) {
+        width: 100%;
     }
-
-    .ekspanderbartPanel__indikator {
-        display: none !important;
+    :global(.navds-accordion__expand-icon) {
+        display: none;
     }
-
-    .ekspanderbartPanel__innhold {
-        padding: 0.5rem;
+    :global(.navds-accordion__item--open > .navds-accordion__header) {
+        background-color: inherit;
+    }
+    :global(.navds-accordion__content) {
+        border: none;
+        padding: 0 var(--a-spacing-3);
     }
 
     &:hover {

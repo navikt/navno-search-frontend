@@ -1,7 +1,10 @@
 .searchFilterOption {
     display: flex;
     justify-content: space-between;
-    padding: 0.375rem 0;
+
+    label {
+        padding: 0.375rem 0;
+    }
 
     .count {
         margin-left: 1rem;
