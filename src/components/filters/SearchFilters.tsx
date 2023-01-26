@@ -25,7 +25,7 @@ export const SearchFilters = ({ result }: Props) => {
                 openMobile ? style.visibleMobile : ''
             )}
         >
-            <Heading level="2" size="large" className={style.titleDesktop}>
+            <Heading level="2" size="medium" className={style.titleDesktop}>
                 {'Søkefilter'}
             </Heading>
             <Link
