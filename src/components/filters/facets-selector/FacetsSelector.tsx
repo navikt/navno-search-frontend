@@ -7,7 +7,7 @@ import { logFilterSelection } from 'utils/amplitude';
 import { SearchSort } from 'types/search-params';
 import { UFToggleProps } from 'context/reducer';
 import config from 'config';
-import { RadioGroup } from '@navikt/ds-react';
+import { CheckboxGroup, RadioGroup } from '@navikt/ds-react';
 
 type Props = {
     facetsProps: FacetBucketProps[];
@@ -25,9 +25,18 @@ export const FacetsSelector = ({
     setSorting,
 }: Props) => {
     const [currentFacetKey, setCurrentFacetKey] = useState(initialFacet);
+    const currentFacet = (facetsProps) => {
+        const elementChecked = facetsProps.find((facet)=> facet.key === currentFacetKey);
+        return elementChecked.key;
+    }
+    console.log(currentFacet(facetsProps));
 
     return (
-        <RadioGroup legend={'Søkefilter'} hideLegend>
+        <RadioGroup
+            legend={'Søkefilter'}
+            hideLegend
+            defaultValue={currentFacet(facetsProps)}
+        >
             <FilterSectionPanel>
                 {facetsProps.map((facet, fIndex) => {
                     const underFacets = facet.underaggregeringer.buckets;
@@ -47,31 +56,36 @@ export const FacetsSelector = ({
                             id={`select-facet-${fIndex}`}
                             key={facet.key}
                         >
-                            {underFacets.length > 0 &&
-                                underFacets.map((underFacet, ufIndex) => (
-                                    <FilterOption
-                                        label={underFacet.name}
-                                        name={underFacet.key}
-                                        count={underFacet.docCount}
-                                        checked={underFacet.checked}
-                                        type={'checkbox'}
-                                        onChange={(e) => {
-                                            setUnderFacet({
-                                                uf: underFacet.key,
-                                                toggle: e.target.checked,
-                                            });
-                                            if (e.target.checked) {
+                            <CheckboxGroup
+                                legend={''}
+                                hideLegend
+                            >
+                                {underFacets.length > 0 &&
+                                    underFacets.map((underFacet, ufIndex) => (
+                                        <FilterOption
+                                            label={underFacet.name}
+                                            name={underFacet.key}
+                                            count={underFacet.docCount}
+                                            checked={underFacet.checked}
+                                            type={'checkbox'}
+                                            onClick={(e) => {
+                                                setUnderFacet({
+                                                    uf: underFacet.key,
+                                                    toggle: e.target.checked,
+                                                });
+                                                if (e.target.checked) {
                                                 logFilterSelection(
                                                     facet.key,
                                                     underFacet.key
-                                                );
-                                            }
-                                        }}
-                                        key={underFacet.key}
-                                        id={`select-uf-${fIndex}-${ufIndex}`}
-                                    />
-                                ))
-                            }
+                                                    );
+                                                }
+                                            }}
+                                            key={underFacet.key}
+                                            id={`select-uf-${fIndex}-${ufIndex}`}
+                                        />
+                                    ))
+                                }
+                            </CheckboxGroup>
                         </FilterRadioPanel>
                     );
                 })}

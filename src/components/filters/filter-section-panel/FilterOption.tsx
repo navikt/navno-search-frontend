@@ -10,8 +10,7 @@ type Props = {
     name: string;
     count: number;
     checked?: boolean;
-    defaultChecked?: boolean;
-    onChange: (args: any) => any;
+    onClick?: (args: any) => any;
     type: FilterOptionType;
     id: string;
 };
@@ -21,17 +20,15 @@ export const FilterOption = ({
     name,
     count,
     checked,
-    defaultChecked,
-    onChange,
+    onClick,
     type,
     id,
 }: Props) => {
     const buttonProps = {
-        value: undefined,   //Not used
+        value: label,
         name,
         checked: checked && !!count,
-        defaultChecked: defaultChecked && !!count,
-        onChange,
+        onClick,
         id,
         disabled: !count,
     };

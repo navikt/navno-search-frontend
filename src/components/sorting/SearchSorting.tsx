@@ -20,18 +20,19 @@ export const SearchSorting = ({
     numHitsTotal,
 }: Props) => {
     const [, dispatch] = useSearchContext();
-
     const setSort = (sort: SearchSort) =>
         dispatch({
             type: ActionType.SetSort,
             sort: sort,
         });
-    setSort(isSortDate ? SearchSort.Newest : SearchSort.BestMatch);
+    const searchSort = isSortDate ? SearchSort.Newest : SearchSort.BestMatch;
+    setSort(searchSort);
 
     return (
         <div className={style.searchSorting}>
             <RadioGroup
                 legend="Sorter etter:"
+                defaultValue={searchSort}
                 className={style.selector}
                 onChange={ (val:SearchSort) => setSort(val) }
             >

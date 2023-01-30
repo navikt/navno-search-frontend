@@ -1,15 +1,9 @@
 import React from 'react';
 import { FilterSectionPanel } from '../filter-section-panel/FilterSectionPanel';
 import { FilterOption } from '../filter-section-panel/FilterOption';
-import {
-    DaterangeBucketProps,
-    DaterangeKey,
-    DaterangeProps,
-} from 'types/search-result';
+import { DaterangeBucketProps, DaterangeKey, DaterangeProps, } from 'types/search-result';
 import { logFilterSelection } from 'utils/amplitude';
 import { RadioGroup } from '@navikt/ds-react';
-
-import style from './DaterangeSelector.module.scss';
 
 type Props = {
     daterangeProps: DaterangeProps;
@@ -32,22 +26,30 @@ export const DaterangeSelector = ({ daterangeProps, setDaterange }: Props) => {
         checked: allChecked,
         buckets,
     } = daterangeProps;
-
     const onChange = (option: DaterangeKey) => {
         logFilterSelection('tidsperiode', option);
         setDaterange(option);
     };
+    const currentRange = (dateRange:DaterangeProps):DaterangeKey => {
+        if ( dateRange.checked ) {
+            return DaterangeKey.All;
+        }
+        const elementChecked = dateRange.buckets.find((element)=> element.checked);
+        return elementChecked.key;
+    }
 
     return (
         <FilterSectionPanel>
-            <RadioGroup legend="Tidsperiode">
+            <RadioGroup
+                legend="Tidsperiode"
+                defaultValue={currentRange(daterangeProps)}
+                onChange={(option:DaterangeKey) => onChange(option)}
+            >
                 <FilterOption
                     name={'timerange'}
                     type={'radio'}
                     label={DaterangeKey.All}
                     count={allDocCount}
-                    defaultChecked={allChecked}
-                    onChange={() => onChange(DaterangeKey.All)}
                     id={'select-date-all'}
                 />
                 {buckets.sort(sortBuckets).map((bucket, index) => (
@@ -56,8 +58,6 @@ export const DaterangeSelector = ({ daterangeProps, setDaterange }: Props) => {
                         type={'radio'}
                         label={bucket.key}
                         count={bucket.docCount}
-                        defaultChecked={bucket.checked}
-                        onChange={() => onChange(bucket.key)}
                         key={bucket.key}
                         id={`select-date-${index}`}
                     />

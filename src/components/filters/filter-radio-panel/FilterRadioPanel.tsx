@@ -24,10 +24,9 @@ export const FilterRadioPanel = ({
     const header = (
         <div className={style.header}>
             <Radio
-                value={''}
+                value={label}
                 name={'search-facet'}
                 checked={isOpen}
-                readOnly={true}
                 onClick={onClick}
                 id={id}
                 tabIndex={-1}
