@@ -12,8 +12,8 @@
     :global(.navds-accordion__header-content) {
         width: 100%;
     }
-    :global(.navds-accordion__expand-icon) {
-        display: none;
+    svg {
+        display: none!important;
     }
     :global(.navds-accordion__item--open > .navds-accordion__header) {
         background-color: inherit;

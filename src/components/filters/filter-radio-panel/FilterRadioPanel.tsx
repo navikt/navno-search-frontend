@@ -49,9 +49,11 @@ export const FilterRadioPanel = ({
                 <Accordion.Header>
                     {header}
                 </Accordion.Header>
-                <Accordion.Content>
-                    {children}
-                </Accordion.Content>
+                {children &&
+                    <Accordion.Content>
+                        {children}
+                    </Accordion.Content>
+                }
             </Accordion.Item>
         </Accordion>
     );
