@@ -6,7 +6,7 @@ import { ActionType } from 'context/actions';
 import { useSearchContext } from 'context/ContextProvider';
 import classNames from 'classnames';
 import { BodyShort, Heading, Label, Link } from '@navikt/ds-react';
-import { Collapse, Expand } from '@navikt/ds-icons';
+import { Expand } from '@navikt/ds-icons';
 
 import style from './SearchFilters.module.scss';
 
@@ -40,17 +40,8 @@ export const SearchFilters = ({ result }: Props) => {
                     {'Søkefilter'}
                 </Label>
                 <BodyShort size="small" className={style.titleMobileToggle}>
-                    {openMobile ?
-                        <>
-                            {'Skjul'}
-                            <Collapse className={style.mobileToggleChevron}/>
-                        </>
-                        :
-                        <>
-                            {'Vis'}
-                            <Expand className={style.mobileToggleChevron}/>
-                        </>
-                    }
+                    {openMobile ? 'Skjul' : 'Vis'}
+                    <Expand className={style.mobileToggleChevron}/>
                 </BodyShort>
             </Link>
             <div className={style.filters}>
