@@ -58,7 +58,7 @@
         transition-duration: $transition-duration;
         transition-timing-function: ease-in;
 
-        .visibleMobile {
+        &.visibleMobile {
             z-index: 9999;
             max-width: common.$filters-width;
             min-width: common.$filters-width;

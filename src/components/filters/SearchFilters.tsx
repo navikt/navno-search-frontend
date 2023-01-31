@@ -40,13 +40,17 @@ export const SearchFilters = ({ result }: Props) => {
                     {'Søkefilter'}
                 </Label>
                 <BodyShort size="small" className={style.titleMobileToggle}>
-                    (openMobile ?
-                        {'Skjul'}
-                        <Collapse className={style.mobileToggleChevron} />
-                    :
-                        {'Vis'}
-                        <Expand className={style.mobileToggleChevron} />
-                    )
+                    {openMobile ?
+                        <>
+                            {'Skjul'}
+                            <Collapse className={style.mobileToggleChevron}/>
+                        </>
+                        :
+                        <>
+                            {'Vis'}
+                            <Expand className={style.mobileToggleChevron}/>
+                        </>
+                    }
                 </BodyShort>
             </Link>
             <div className={style.filters}>
