@@ -29,7 +29,6 @@ export const FacetsSelector = ({
         const elementChecked = facetsProps.find((facet)=> facet.key === currentFacetKey);
         return elementChecked.key;
     }
-    console.log(currentFacet(facetsProps));
 
     return (
         <RadioGroup
@@ -57,7 +56,7 @@ export const FacetsSelector = ({
                             key={facet.key}
                         >
                             <CheckboxGroup
-                                legend={''}
+                                legend={`Filter for ${facet.name}`}
                                 hideLegend
                             >
                                 {underFacets.length > 0 &&

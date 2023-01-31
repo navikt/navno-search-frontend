@@ -26,7 +26,6 @@ export const SearchSorting = ({
             sort: sort,
         });
     const searchSort = isSortDate ? SearchSort.Newest : SearchSort.BestMatch;
-    setSort(searchSort);
 
     return (
         <div className={style.searchSorting}>
