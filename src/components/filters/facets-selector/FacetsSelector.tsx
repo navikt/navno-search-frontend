@@ -59,9 +59,9 @@ export const FacetsSelector = ({
                                             toggle: e.target.checked,
                                         });
                                         if (e.target.checked) {
-                                        logFilterSelection(
-                                            facet.key,
-                                            underFacet.key
+                                            logFilterSelection(
+                                                facet.key,
+                                                underFacet.key
                                             );
                                         }
                                     }}
