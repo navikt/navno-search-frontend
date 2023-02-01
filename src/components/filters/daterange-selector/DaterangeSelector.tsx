@@ -3,6 +3,7 @@ import { FilterSectionPanel } from '../filter-section-panel/FilterSectionPanel';
 import { FilterOption } from '../filter-section-panel/FilterOption';
 import { DaterangeBucketProps, DaterangeKey, DaterangeProps, } from 'types/search-result';
 import { logFilterSelection } from 'utils/amplitude';
+import { Heading } from '@navikt/ds-react';
 
 type Props = {
     daterangeProps: DaterangeProps;
@@ -32,6 +33,9 @@ export const DaterangeSelector = ({ daterangeProps, setDaterange }: Props) => {
 
     return (
         <FilterSectionPanel>
+            <Heading level="3" size="small">
+                {'Tidsperiode'}
+            </Heading>
             <FilterOption
                 name={'timerange'}
                 type={'radio'}
