@@ -41,7 +41,7 @@ export const FilterRadioPanel = ({
             className={style.radioExpandingPanel}
         >
             <Accordion.Item
-                defaultOpen={isOpen && !!children}
+                open={isOpen && !!children}
             >
                 <Accordion.Header>
                     {header}

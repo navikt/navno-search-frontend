@@ -77,7 +77,6 @@ export const SearchResults = ({ result }: Props) => {
                     onClick={showMore}
                     className={style.showMore}
                     loading={isAwaitingMore}
-                    disabled={isAwaitingMore}
                 >
                     {'Vis flere treff'}
                 </Button>
