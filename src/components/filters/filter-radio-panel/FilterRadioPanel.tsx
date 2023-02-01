@@ -1,7 +1,8 @@
-import { Accordion, BodyShort, Radio } from '@navikt/ds-react';
+import { Accordion } from '@navikt/ds-react';
 import React from 'react';
 
 import style from './FilterRadioPanel.module.scss';
+import { FilterOption } from '../filter-section-panel/FilterOption';
 
 type Props = {
     label: string;
@@ -23,19 +24,15 @@ export const FilterRadioPanel = ({
 
     const header = (
         <div className={style.header}>
-            <Radio
-                value={label}
+            <FilterOption
+                type={'radio'}
+                label={label}
+                count={count}
                 name={'search-facet'}
                 checked={isOpen}
-                onClick={onClick}
+                onChange={onClick}
                 id={id}
-                tabIndex={-1}
-            >
-                {label}
-            </Radio>
-            <BodyShort className={style.count}>
-                {count}
-            </BodyShort>
+            />
         </div>
     );
 

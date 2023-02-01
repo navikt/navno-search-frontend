@@ -1,12 +1,14 @@
-.searchFilterOption {
+.filterOption {
     display: flex;
     justify-content: space-between;
+    width: 100%;
 
     label {
         padding: 0.375rem 0;
     }
 
     .count {
+        padding-top: 0.5rem;
         margin-left: 1rem;
     }
 }

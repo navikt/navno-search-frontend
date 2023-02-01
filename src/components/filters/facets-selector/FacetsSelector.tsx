@@ -7,7 +7,6 @@ import { logFilterSelection } from 'utils/amplitude';
 import { SearchSort } from 'types/search-params';
 import { UFToggleProps } from 'context/reducer';
 import config from 'config';
-import { CheckboxGroup, RadioGroup } from '@navikt/ds-react';
 
 type Props = {
     facetsProps: FacetBucketProps[];
@@ -25,70 +24,55 @@ export const FacetsSelector = ({
     setSorting,
 }: Props) => {
     const [currentFacetKey, setCurrentFacetKey] = useState(initialFacet);
-    const currentFacet = (facetsProps) => {
-        const elementChecked = facetsProps.find((facet)=> facet.key === currentFacetKey);
-        return elementChecked.key;
-    }
 
     return (
-        <RadioGroup
-            legend={'Søkefilter'}
-            hideLegend
-            defaultValue={currentFacet(facetsProps)}
-        >
-            <FilterSectionPanel>
-                {facetsProps.map((facet, fIndex) => {
-                    const underFacets = facet.underaggregeringer.buckets;
-                    return (
-                        <FilterRadioPanel
-                            label={facet.name}
-                            count={facet.docCount}
-                            isOpen={facet.key === currentFacetKey}
-                            onClick={() => {
-                                setCurrentFacetKey(facet.key);
-                                setFacet(facet.key);
-                                if (facet.key === config.VARS.keys.news) {
-                                    setSorting(SearchSort.Newest);
-                                }
-                                logFilterSelection(facet.key);
-                            }}
-                            id={`select-facet-${fIndex}`}
-                            key={facet.key}
-                        >
-                            <CheckboxGroup
-                                legend={`Filter for ${facet.name}`}
-                                hideLegend
-                            >
-                                {underFacets.length > 0 &&
-                                    underFacets.map((underFacet, ufIndex) => (
-                                        <FilterOption
-                                            label={underFacet.name}
-                                            name={underFacet.key}
-                                            count={underFacet.docCount}
-                                            checked={underFacet.checked}
-                                            type={'checkbox'}
-                                            onClick={(e) => {
-                                                setUnderFacet({
-                                                    uf: underFacet.key,
-                                                    toggle: e.target.checked,
-                                                });
-                                                if (e.target.checked) {
-                                                logFilterSelection(
-                                                    facet.key,
-                                                    underFacet.key
-                                                    );
-                                                }
-                                            }}
-                                            key={underFacet.key}
-                                            id={`select-uf-${fIndex}-${ufIndex}`}
-                                        />
-                                    ))
-                                }
-                            </CheckboxGroup>
-                        </FilterRadioPanel>
-                    );
-                })}
-            </FilterSectionPanel>
-        </RadioGroup>
+        <FilterSectionPanel>
+            {facetsProps.map((facet, fIndex) => {
+                const underFacets = facet.underaggregeringer.buckets;
+                return (
+                    <FilterRadioPanel
+                        label={facet.name}
+                        count={facet.docCount}
+                        isOpen={facet.key === currentFacetKey}
+                        onClick={() => {
+                            setCurrentFacetKey(facet.key);
+                            setFacet(facet.key);
+                            if (facet.key === config.VARS.keys.news) {
+                                setSorting(SearchSort.Newest);
+                            }
+                            logFilterSelection(facet.key);
+                        }}
+                        id={`select-facet-${fIndex}`}
+                        key={facet.key}
+                    >
+                        {underFacets.length > 0 &&
+                            underFacets.map((underFacet, ufIndex) => (
+                                <FilterOption
+                                    label={underFacet.name}
+                                    name={underFacet.key}
+                                    count={underFacet.docCount}
+                                    checked={underFacet.checked}
+                                    type={'checkbox'}
+                                    onChange={(e) => {
+                                        setUnderFacet({
+                                            uf: underFacet.key,
+                                            toggle: e.target.checked,
+                                        });
+                                        if (e.target.checked) {
+                                        logFilterSelection(
+                                            facet.key,
+                                            underFacet.key
+                                            );
+                                        }
+                                    }}
+                                    key={underFacet.key}
+                                    id={`select-uf-${fIndex}-${ufIndex}`}
+                                />
+                            ))
+                        }
+                    </FilterRadioPanel>
+                );
+            })}
+        </FilterSectionPanel>
     );
 };
