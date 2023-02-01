@@ -72,23 +72,15 @@ export const SearchResults = ({ result }: Props) => {
                 </div>
             )}
             {result.isMore && (
-                (isAwaitingMore
-                    ?
-                        <Button
-                            className={style.showMore}
-                            loading
-                        >
-                            {'Henter flere treff...'}
-                        </Button>
-                    :
-                        <Button
-                            className={style.showMore}
-                            variant="secondary"
-                            onClick={showMore}
-                        >
-                            {'Vis flere treff'}
-                        </Button>
-                )
+                <Button
+                    variant={"secondary"}
+                    onClick={showMore}
+                    className={style.showMore}
+                    loading={isAwaitingMore}
+                    disabled={isAwaitingMore}
+                >
+                    {'Vis flere treff'}
+                </Button>
             )}
         </div>
     );
