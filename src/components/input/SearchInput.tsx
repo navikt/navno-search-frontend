@@ -46,7 +46,8 @@ export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
             className={style.searchInput}
         >
             <TextField
-                label="Søk på nav.no"
+                aria-labelledby="search-header"
+                label={''}
                 hideLabel={true}
                 className={style.input}
                 onChange={(e) => setInputValue(e.target.value)}
