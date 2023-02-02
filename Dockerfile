@@ -4,9 +4,8 @@ FROM node:18-alpine
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-# Installing dependencies
 COPY package*.json /usr/src/app/
-RUN npm ci --legacy-peer-deps
+COPY node_modules /usr/src/app/node_modules/
 
 # Copying build files from workflow
 COPY public /usr/src/app/public/
