@@ -1,5 +1,6 @@
 import React from 'react';
 import { BodyShort } from '@navikt/ds-react';
+import classNames from 'classnames';
 
 import style from './FilterOption.module.scss';
 
@@ -26,6 +27,7 @@ export const FilterOption = ({
     type,
     id,
 }: Props) => {
+    const disabled = !count;
     const inputProps = {
         value: label,
         name,
@@ -34,23 +36,23 @@ export const FilterOption = ({
         onChange,
         type,
         id,
-        disabled: !count,
+        disabled,
     };
     const inputClass = `navds-${type}__input`;
     const labelClass = `navds-${type}__label`;
 
     return (
-        <div className={style.filterOption}>
+        <div className={classNames(style.filterOption, disabled ? style.disabled : '')}>
             <input
                 className={inputClass}
                 {...inputProps}
             />
             <label className={labelClass} htmlFor={inputProps.id}>
                 {label}
+                <BodyShort className={style.count}>
+                    {count}
+                </BodyShort>
             </label>
-            <BodyShort className={style.count}>
-                {count}
-            </BodyShort>
         </div>
     );
 };

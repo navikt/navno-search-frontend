@@ -3,8 +3,17 @@
     justify-content: space-between;
     width: 100%;
 
+    &.disabled {
+        > * {
+            color: var(--a-text-subtle);
+        }
+    }
+
     label {
         padding: 0.375rem 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
     }
 
     .count {
