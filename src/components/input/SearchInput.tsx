@@ -59,14 +59,13 @@ export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
                 {inputValue && (
                     <Button
                         variant="tertiary"
-                        className={style.button}
                         aria-label={'Nullstill søk'}
                         onClick={() => setInputValue('')}
                     >
                         <Close/>
                     </Button>
                 )}
-                <Button className={style.button}>
+                <Button className={style.searchButton}>
                     {'Søk'}
                 </Button>
             </div>

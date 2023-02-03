@@ -11,9 +11,10 @@
         input {
             border-width: 2px;
             border-color: common.$a-border-action;
-            padding-right: 12rem;
+            padding-right: 11rem;
+            min-height: 49px;
             @media #{common.$mq-screen-mobile} {
-                padding-right: 9rem;
+                padding-right: 8rem;
             }
         }
     }
@@ -24,26 +25,11 @@
         height: 100%;
     }
 
-    .button {
-        align-self: center;
-        text-transform: none;
-        transform: none;
-        box-shadow: none;
+    .searchButton {
         width: 8rem;
-        height: 100%;
 
-        &::after,
-        &::before {
-            all: unset;
+        @media #{common.$mq-screen-mobile} {
+            width: auto;
         }
-
-        &:hover {
-            transform: none;
-            box-shadow: none;
-        }
-
-//        @media @screen-mobile {
-//            .knappmini-mixin;
-//        }
     }
 }
