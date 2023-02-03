@@ -1,11 +1,11 @@
 @use 'src/common' as common;
 
 .searchFilterPanel {
-    padding: 1rem;
+    padding: 0.75rem;
     border-radius: 0.5rem;
     box-shadow: 0 1px 4px 0 common.$a-gray-400;
 
-    @media #{common.$mq-screen-tablet-and-mobile} {
-        padding: 0.75rem;
+    :global(.navds-heading) {
+        padding-left: 0.25rem;
     }
 }
