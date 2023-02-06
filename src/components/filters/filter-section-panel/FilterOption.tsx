@@ -1,5 +1,4 @@
 import React from 'react';
-import { BodyShort } from '@navikt/ds-react';
 import classNames from 'classnames';
 
 import style from './FilterOption.module.scss';
@@ -7,6 +6,7 @@ import style from './FilterOption.module.scss';
 export type FilterOptionType = 'radio' | 'checkbox';
 
 type Props = {
+    className?: string;
     label: string;
     name: string;
     count: number;
@@ -18,6 +18,7 @@ type Props = {
 };
 
 export const FilterOption = ({
+    className,
     label,
     name,
     count,
@@ -42,16 +43,16 @@ export const FilterOption = ({
     const labelClass = `navds-${type}__label`;
 
     return (
-        <div className={classNames(style.filterOption, disabled ? style.disabled : '')}>
+        <div className={classNames(className, style.filterOption, disabled ? style.disabled : '')}>
             <input
                 className={inputClass}
                 {...inputProps}
             />
             <label className={labelClass} htmlFor={inputProps.id}>
                 {label}
-                <BodyShort className={style.count}>
+                <span className={style.count}>
                     {count}
-                </BodyShort>
+                </span>
             </label>
         </div>
     );

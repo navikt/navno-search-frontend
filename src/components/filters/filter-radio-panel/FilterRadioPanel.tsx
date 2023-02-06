@@ -22,20 +22,6 @@ export const FilterRadioPanel = ({
     children,
 }: Props) => {
 
-    const header = (
-        <div className={style.header}>
-            <FilterOption
-                type={'radio'}
-                label={label}
-                count={count}
-                name={'search-facet'}
-                checked={isOpen}
-                onChange={onClick}
-                id={id}
-            />
-        </div>
-    );
-
     return (
         <Accordion
             className={style.radioExpandingPanel}
@@ -44,7 +30,16 @@ export const FilterRadioPanel = ({
                 open={isOpen && !!children}
             >
                 <Accordion.Header>
-                    {header}
+                    <FilterOption
+                        className={style.header}
+                        type={'radio'}
+                        label={label}
+                        count={count}
+                        name={'search-facet'}
+                        checked={isOpen}
+                        onChange={onClick}
+                        id={id}
+                    />
                 </Accordion.Header>
                 {children &&
                     <Accordion.Content>
