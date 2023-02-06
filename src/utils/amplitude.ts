@@ -1,28 +1,15 @@
-import Config from '../config';
+import Config from 'config';
+import { logAmplitudeEvent as logAmplitudeEventDecorator } from '@navikt/nav-dekoratoren-moduler';
 
-// Prevents crash during SSR (amplitude-js is only for use in browsers)
-const amplitude = typeof window !== 'undefined' ? require('amplitude-js') : () => null;
-
-const logAmplitudeEvent = (eventName: string, data?: any): Promise<any> => {
-    return new Promise(function (resolve: any) {
-        const eventData = data || {};
-        eventData.origin = 'navno-search-frontend';
-        eventData.originVersion = 'unknown';
-        //amplitude?.getInstance().logEvent(eventName, eventData, resolve);
+const logAmplitudeEvent = (
+    eventName: string,
+    data?: Record<string, any>
+): Promise<any> => {
+    return logAmplitudeEventDecorator({
+        eventName,
+        origin: 'navno-search-frontend',
+        eventData: data,
     });
-};
-
-export const initAmplitude = () => {
-    //TODO: Fix amplitude
-    /*
-    amplitude?.getInstance().init('default', '', {
-        apiEndpoint: 'amplitude.nav.no/collect-auto',
-        saveEvents: false,
-        includeUtm: true,
-        includeReferrer: true,
-        platform: window.location.toString(),
-    });
-     */
 };
 
 export const logPageview = () => logAmplitudeEvent('sidevisning');

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { SearchHeader } from './header/SearchHeader';
 import { useRouter } from 'next/router';
 import { fetchSearchResultsClientside } from '../utils/fetch-search-result';
-import { initAmplitude, logPageview, logSearchQuery } from '../utils/amplitude';
+import { logPageview, logSearchQuery } from '../utils/amplitude';
 import { objectToQueryString } from '../utils/fetch-utils';
 import { useSearchContext } from '../context/ContextProvider';
 import { ActionType } from '../context/actions';
@@ -57,7 +57,6 @@ const SearchPage = () => {
 
     useEffect(() => {
         enableClientsideFetch.current = true;
-        initAmplitude();
         logPageview();
         if (searchTerm) {
             logSearchQuery(searchTerm);
