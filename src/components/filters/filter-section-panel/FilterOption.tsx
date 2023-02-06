@@ -43,7 +43,7 @@ export const FilterOption = ({
     const labelClass = `navds-${type}__label`;
 
     return (
-        <div className={classNames(className, style.filterOption, disabled ? style.disabled : '')}>
+        <span className={classNames(className, style.filterOption, disabled ? style.disabled : '')}>
             <input
                 className={inputClass}
                 {...inputProps}
@@ -54,6 +54,6 @@ export const FilterOption = ({
                     {count}
                 </span>
             </label>
-        </div>
+        </span>
     );
 };
