@@ -1,5 +1,3 @@
-@forward '@navikt/ds-tokens/dist/tokens';
-@use '@navikt/ds-tokens/dist/tokens' as *;
 @use 'src/common' as common;
 
 .searchFilters {
@@ -50,7 +48,7 @@
         margin: 0;
         padding: 0.5rem;
         background-color: white;
-        border-radius: $a-border-radius-medium;
+        border-radius: common.$a-border-radius-medium;
         box-shadow: 0 1px 4px 0 common.$a-border-default;
         min-width: $collapsed-width;
         max-width: $collapsed-width;
