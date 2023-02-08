@@ -1,8 +1,7 @@
-import { Accordion } from '@navikt/ds-react';
 import React from 'react';
+import { FilterOption } from '../filter-section-panel/FilterOption';
 
 import style from './FilterRadioPanel.module.scss';
-import { FilterOption } from '../filter-section-panel/FilterOption';
 
 type Props = {
     label: string;
@@ -21,32 +20,22 @@ export const FilterRadioPanel = ({
     id,
     children,
 }: Props) => {
-
     return (
-        <Accordion
-            className={style.radioExpandingPanel}
-        >
-            <Accordion.Item
-                open={isOpen && !!children}
-            >
-                <Accordion.Header>
-                    <FilterOption
-                        className={style.header}
-                        type={'radio'}
-                        label={label}
-                        count={count}
-                        name={'search-facet'}
-                        checked={isOpen}
-                        onChange={onClick}
-                        id={id}
-                    />
-                </Accordion.Header>
-                {children &&
-                    <Accordion.Content>
-                        {children}
-                    </Accordion.Content>
-                }
-            </Accordion.Item>
-        </Accordion>
+        <div className={style.panel}>
+            <FilterOption
+                type={'radio'}
+                label={label}
+                count={count}
+                name={'search-facet'}
+                checked={isOpen}
+                onChange={onClick}
+                id={id}
+            />
+            {(isOpen && !!children) &&
+                <div className={style.panelContent} id={`panel-${id}`}>
+                    {children}
+                </div>
+            }
+        </div>
     );
 };
