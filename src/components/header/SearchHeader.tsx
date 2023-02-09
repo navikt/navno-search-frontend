@@ -28,7 +28,7 @@ export const SearchHeader = ({ result }: Props) => {
                 {result.fasett}
             </Heading>
             {underFacetNames?.length > 0 && (
-                <span className={style.underFacets}>
+                <span className={style.resetUnderFacets}>
                     {underFacetNames.map(
                         (uf, index) => `${index ? ' | ' : ''}${uf}`
                     )}
@@ -38,7 +38,7 @@ export const SearchHeader = ({ result }: Props) => {
                         className={style.clearUf}
                         onClick={(e) => {
                             e.preventDefault();
-                            dispatch({ type: ActionType.ClearUnderfacets });
+                            dispatch({ type: ActionType.ResetUnderfacets });
                         }}
                     >
                         {'Nullstill filter'}

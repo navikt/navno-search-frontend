@@ -1,18 +1,19 @@
 @use 'src/common' as common;
 
-.search {
-    $left-col-width: common.$desktopMinWidth - common.$filters-width - common.$filters-margin -
-        common.$padding-sides-desktop * 2;
-    $breakpoint: $left-col-width + common.$padding-sides-desktop-small * 2;
+$left-col-width:
+        common.$desktopMinWidth - common.$filters-width - common.$filters-margin - common.$padding-sides-desktop * 2;
+$breakpoint: $left-col-width + common.$padding-sides-desktop-small * 2;
 
+.search {
     display: flex;
     justify-content: center;
+}
 
-    .leftCol {
-        flex-grow: 1;
-        width: $left-col-width;
-        @media (max-width: $breakpoint) {
-            width: 100%;
-        }
+.leftCol {
+    flex-grow: 1;
+    width: $left-col-width;
+
+    @media (max-width: $breakpoint) {
+        width: 100%;
     }
 }

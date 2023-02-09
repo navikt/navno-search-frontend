@@ -1,23 +1,23 @@
 .searchHeader {
     margin-bottom: 1rem;
+}
 
-    .facet {
-        margin-top: 0.25rem;
-    }
+.facet {
+    margin-top: 0.25rem;
+}
 
-    .underFacets {
-        margin-top: 0.25rem;
-        font-style: italic;
-    }
+.underFacets {
+    margin-top: 0.25rem;
+    font-style: italic;
+}
 
-    .clearUf {
-        text-decoration: none;
-        font-weight: bold;
-        font-style: normal;
-        padding: 0;
+.resetUnderFacets {
+    text-decoration: none;
+    font-weight: bold;
+    font-style: normal;
+    padding: 0;
 
-        &:hover {
-            text-decoration: underline;
-        }
+    &:hover {
+        text-decoration: underline;
     }
 }
