@@ -1,9 +1,12 @@
 @use 'src/common' as common;
 
-.searchInput {
+.searchForm {
     margin-bottom: 1rem;
     display: flex;
     position: relative;
+}
+.searchField {
+    flex-grow: 1;
 }
 
 .input {
@@ -19,13 +22,15 @@
         }
     }
 }
-
-.buttonsContainer {
+.searchButtons {
     position: absolute;
     right: 0;
+    display: flex;
 }
-
-.searchButton {
+.searchReset > span {
+    display: flex;
+}
+.searchSubmit {
     width: 8rem;
 
     @media #{common.$mq-screen-mobile} {

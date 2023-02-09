@@ -43,31 +43,31 @@ export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
                 fetchNewResults();
                 setSubmitTrackerCookie();
             }}
-            className={style.searchInput}
+            className={style.searchForm}
         >
             <TextField
                 aria-labelledby="search-header"
                 label={''}
                 hideLabel={true}
-                className={style.input}
+                className={style.searchField}
                 onChange={(e) => setInputValue(e.target.value)}
                 value={inputValue}
                 maxLength={maxInputLength}
                 id="search-input"
             />
-            <div className={style.buttonsContainer}>
+
+            <div className={style.searchButtons}>
                 {inputValue && (
                     <Button
                         variant="tertiary"
                         aria-label={'Nullstill søk'}
                         onClick={() => setInputValue('')}
+                        className={style.searchReset}
                     >
-                        <Close/>
+                        <Close />
                     </Button>
                 )}
-                <Button className={style.searchButton}>
-                    {'Søk'}
-                </Button>
+                <Button className={style.searchSubmit}>{'Søk'}</Button>
             </div>
         </form>
     );
