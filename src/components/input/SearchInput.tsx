@@ -57,17 +57,16 @@ export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
             />
 
             <div className={style.searchButtons}>
+                <Button className={style.searchSubmit}>{'Søk'}</Button>
                 {inputValue && (
                     <Button
+                        icon={<Close/>}
                         variant="tertiary"
                         aria-label={'Nullstill søk'}
                         onClick={() => setInputValue('')}
                         className={style.searchReset}
-                    >
-                        <Close />
-                    </Button>
+                    />
                 )}
-                <Button className={style.searchSubmit}>{'Søk'}</Button>
             </div>
         </form>
     );

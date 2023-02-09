@@ -1,4 +1,6 @@
 @use 'src/common' as common;
+$searchButtonWidth: 8rem;
+$searchButtonMobileWidth: 5rem;
 
 .searchForm {
     margin-bottom: 1rem;
@@ -7,18 +9,14 @@
 }
 .searchField {
     flex-grow: 1;
-}
-
-.input {
-    flex-grow: 1;
 
     input {
         border-width: 2px;
         border-color: common.$a-border-action;
-        padding-right: 11rem;
+        padding-right: $searchButtonWidth + 2.5rem;
 
         @media #{common.$mq-screen-mobile} {
-            padding-right: 8rem;
+            padding-right: $searchButtonMobileWidth + 2.5rem;
         }
     }
 }
@@ -27,13 +25,18 @@
     right: 0;
     display: flex;
 }
-.searchReset > span {
-    display: flex;
-}
-.searchSubmit {
-    width: 8rem;
+.searchReset {
+    position: absolute;
+    right: $searchButtonWidth;
 
     @media #{common.$mq-screen-mobile} {
-        width: 5rem;
+        right: $searchButtonMobileWidth;
+    }
+}
+.searchSubmit {
+    width: $searchButtonWidth;
+
+    @media #{common.$mq-screen-mobile} {
+        width: $searchButtonMobileWidth;
     }
 }
