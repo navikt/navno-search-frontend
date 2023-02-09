@@ -2,9 +2,9 @@ import React from 'react';
 import { SearchResultProps } from 'types/search-result';
 import { useSearchContext } from 'context/ContextProvider';
 import { ActionType } from 'context/actions';
+import { BodyLong, Button, Heading } from '@navikt/ds-react';
 
 import style from './SearchHeader.module.scss';
-import { Button, Heading } from '@navikt/ds-react';
 
 type Props = {
     result: SearchResultProps;
@@ -28,14 +28,23 @@ export const SearchHeader = ({ result }: Props) => {
                 {result.fasett}
             </Heading>
             {underFacetNames?.length > 0 && (
-                <span className={style.resetUnderFacets}>
+                <BodyLong>
                     {underFacetNames.map(
-                        (uf, index) => `${index ? ' | ' : ''}${uf}`
-                    )}
+                        (uf, index) => {
+                            return (
+                                <>
+                                    {`${index ? ' | ' : ''}`}
+                                    <span className={style.underFacets}>
+                                        {`${uf}`}
+                                    </span>
+                                </>
+                            );
+                        })
+                    }
                     {' - '}
                     <Button
                         variant="tertiary"
-                        className={style.clearUf}
+                        className={style.resetUnderFacets}
                         onClick={(e) => {
                             e.preventDefault();
                             dispatch({ type: ActionType.ResetUnderfacets });
@@ -43,7 +52,7 @@ export const SearchHeader = ({ result }: Props) => {
                     >
                         {'Nullstill filter'}
                     </Button>
-                </span>
+                </BodyLong>
             )}
         </div>
     );
