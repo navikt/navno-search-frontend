@@ -5,7 +5,7 @@ import { SearchResultProps } from 'types/search-result';
 import { ActionType } from 'context/actions';
 import { useSearchContext } from 'context/ContextProvider';
 import classNames from 'classnames';
-import { Heading, Link } from '@navikt/ds-react';
+import { Button, Heading } from '@navikt/ds-react';
 import { Expand } from '@navikt/ds-icons';
 
 import style from './SearchFilters.module.scss';
@@ -28,22 +28,18 @@ export const SearchFilters = ({ result }: Props) => {
             <Heading level="2" size="medium" className={style.titleDesktop}>
                 {'Søkefilter'}
             </Heading>
-            <Link
-                href={'#'}
+            <Button
+                variant="tertiary"
+                icon={<Expand aria-hidden />}
+                iconPosition="right"
+                className={style.buttonMobile}
                 onClick={(e) => {
                     e.preventDefault();
                     setOpenMobile((state) => !state);
                 }}
-                className={style.titleMobile}
             >
-                <span className={style.titleMobileLabel}>
-                    {'Søkefilter'}
-                </span>
-                <span className={style.titleMobileToggle}>
-                    {openMobile ? 'Skjul' : 'Vis'}
-                    <Expand className={style.mobileToggleChevron}/>
-                </span>
-            </Link>
+                {`${openMobile ? 'Skjul' : 'Vis'} søkefilter`}
+            </Button>
             <div className={style.filters}>
                 {fasetter?.buckets && (
                     <FacetsSelector

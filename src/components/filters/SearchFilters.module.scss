@@ -1,46 +1,11 @@
 @use 'src/common' as common;
 
+$transition-duration: 0.35s;
+$collapsed-width: 10rem;
+
 .searchFilters {
-    $transition-duration: 0.35s;
-    $collapsed-width: 10rem;
     margin-left: common.$filters-margin;
     min-width: common.$filters-width;
-
-    .titleMobile {
-        display: none;
-        justify-content: space-between;
-        align-items: center;
-        text-decoration: none;
-
-        &:hover {
-            .titleMobileToggle {
-                text-decoration: underline;
-            }
-        }
-
-        &:focus {
-            box-shadow: 0 0 0 2px common.$a-shadow-focus;
-            background-color: transparent;
-            color: common.$a-text-action;
-        }
-    }
-
-    .titleMobileLabel {
-        color: black;
-    }
-
-    .mobileToggleChevron {
-        margin-left: 0.25rem;
-        transition: transform $transition-duration linear;
-    }
-
-    .filters {
-        & > * {
-            margin-top: 1rem;
-            overflow: hidden;
-            width: calc(#{common.$filters-width} - 1rem);
-        }
-    }
 
     @media #{common.$mq-screen-tablet-and-mobile} {
         position: absolute;
@@ -55,38 +20,57 @@
         transition-property: min-width, max-width;
         transition-duration: $transition-duration;
         transition-timing-function: ease-in;
+    }
+}
 
-        &.visibleMobile {
-            z-index: 9999;
-            max-width: common.$filters-width;
-            min-width: common.$filters-width;
+.buttonMobile {
+    display: none;
+    align-items: center;
+    text-decoration: none;
+    padding: 0;
+    width: 100%;
 
-            .filters {
-                visibility: visible;
-                max-height: 100rem;
-            }
+    svg {
+        margin-left: 0.25rem;
+        transition: transform $transition-duration linear;
+    }
+}
 
-            .mobileToggleChevron {
-                transform: rotateX(-180deg);
-            }
-        }
+.filters {
+    & > * {
+        margin-top: 1rem;
+        overflow: hidden;
+        width: calc(#{common.$filters-width} - 1rem);
+    }
+}
 
-        .titleDesktop {
-            display: none;
-        }
-
-        .titleMobile {
-            display: flex;
-        }
+@media #{common.$mq-screen-tablet-and-mobile} {
+    .titleDesktop {
+        display: none;
+    }
+    .buttonMobile {
+        display: flex;
+    }
+    .filters {
+        position: relative;
+        visibility: hidden;
+        overflow: hidden;
+        max-height: 0;
+        transition-property: max-height, visibility;
+        transition-duration: $transition-duration;
+        transition-timing-function: ease-in;
+    }
+    .visibleMobile {
+        z-index: 9999;
+        max-width: common.$filters-width;
+        min-width: common.$filters-width;
 
         .filters {
-            position: relative;
-            visibility: hidden;
-            overflow: hidden;
-            max-height: 0;
-            transition-property: max-height, visibility;
-            transition-duration: $transition-duration;
-            transition-timing-function: ease-in;
+            visibility: visible;
+            max-height: 100rem;
+        }
+        .buttonMobile svg {
+            transform: rotateX(-180deg);
         }
     }
 }
