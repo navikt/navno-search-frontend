@@ -32,12 +32,12 @@ export const SearchHeader = ({ result }: Props) => {
                     {underFacetNames.map(
                         (uf, index) => {
                             return (
-                                <>
+                                <span key={index}>
                                     {`${index ? ' | ' : ''}`}
                                     <span className={style.underFacets}>
                                         {`${uf}`}
                                     </span>
-                                </>
+                                </span>
                             );
                         })
                     }
