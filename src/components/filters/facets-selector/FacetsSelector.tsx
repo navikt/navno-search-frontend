@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { FilterSectionPanel } from '../filter-section-panel/FilterSectionPanel';
 import { FilterOption } from '../filter-section-panel/FilterOption';
 import { FilterRadioPanel } from '../filter-radio-panel/FilterRadioPanel';
-import { FacetBucketProps } from '../../../types/search-result';
-import { logFilterSelection } from '../../../utils/amplitude';
-import { SearchSort } from '../../../types/search-params';
-import { UFToggleProps } from '../../../context/reducer';
-import config from '../../../config';
+import { FacetBucketProps } from 'types/search-result';
+import { logFilterSelection } from 'utils/amplitude';
+import { SearchSort } from 'types/search-params';
+import { UFToggleProps } from 'context/reducer';
+import config from 'config';
 
 type Props = {
     facetsProps: FacetBucketProps[];
@@ -68,7 +68,8 @@ export const FacetsSelector = ({
                                     key={underFacet.key}
                                     id={`select-uf-${fIndex}-${ufIndex}`}
                                 />
-                            ))}
+                            ))
+                        }
                     </FilterRadioPanel>
                 );
             })}

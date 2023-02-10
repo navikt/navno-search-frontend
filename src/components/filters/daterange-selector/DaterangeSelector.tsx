@@ -1,14 +1,9 @@
 import React from 'react';
 import { FilterSectionPanel } from '../filter-section-panel/FilterSectionPanel';
 import { FilterOption } from '../filter-section-panel/FilterOption';
-import {
-    DaterangeBucketProps,
-    DaterangeKey,
-    DaterangeProps,
-} from '../../../types/search-result';
-import { Element } from 'nav-frontend-typografi';
-import { logFilterSelection } from '../../../utils/amplitude';
-import './DaterangeSelector.less';
+import { DaterangeBucketProps, DaterangeKey, DaterangeProps, } from 'types/search-result';
+import { logFilterSelection } from 'utils/amplitude';
+import { Heading } from '@navikt/ds-react';
 
 type Props = {
     daterangeProps: DaterangeProps;
@@ -31,7 +26,6 @@ export const DaterangeSelector = ({ daterangeProps, setDaterange }: Props) => {
         checked: allChecked,
         buckets,
     } = daterangeProps;
-
     const onChange = (option: DaterangeKey) => {
         logFilterSelection('tidsperiode', option);
         setDaterange(option);
@@ -39,7 +33,9 @@ export const DaterangeSelector = ({ daterangeProps, setDaterange }: Props) => {
 
     return (
         <FilterSectionPanel>
-            <Element className={'daterange-label'}>{'Tidsperiode'}</Element>
+            <Heading level="3" size="small">
+                {'Tidsperiode'}
+            </Heading>
             <FilterOption
                 name={'timerange'}
                 type={'radio'}
@@ -61,7 +57,6 @@ export const DaterangeSelector = ({ daterangeProps, setDaterange }: Props) => {
                     id={`select-date-${index}`}
                 />
             ))}
-            {/*</RadioGruppe>*/}
         </FilterSectionPanel>
     );
 };

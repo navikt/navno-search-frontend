@@ -51,7 +51,7 @@ export const reducer = (state: SearchContext, action: Action) => {
                     uf: newUf.length > 0 ? newUf : undefined,
                 },
             };
-        case ActionType.ClearUnderfacets:
+        case ActionType.ResetUnderfacets:
             return {
                 ...state,
                 params: { ...state.params, uf: undefined },

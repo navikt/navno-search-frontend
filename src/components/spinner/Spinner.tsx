@@ -1,17 +1,16 @@
 import React from 'react';
-import { Undertittel } from 'nav-frontend-typografi';
-import NavFrontendSpinner from 'nav-frontend-spinner';
-import './Spinner.less';
+import { Label, Loader } from '@navikt/ds-react';
+
+import style from './Spinner.module.scss';
 
 type Props = {
     text?: string;
-    className?: string;
 };
 
-export const Spinner = ({ text, className }: Props) => (
-    <div className={`spinner-container${className ? ` ${className}` : ''}`}>
-        {text && <Undertittel>{text}</Undertittel>}
-        <NavFrontendSpinner className={'navno-spinner'} />
+export const Spinner = ({ text }: Props) => (
+    <div className={style.container}>
+        {text && <Label>{text}</Label>}
+        <Loader size="2xlarge" className={style.spinner} />
     </div>
 );
 

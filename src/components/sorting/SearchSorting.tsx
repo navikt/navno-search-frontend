@@ -1,14 +1,12 @@
 import React from 'react';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { BEM } from '../../utils/bem';
-import { Radio } from 'nav-frontend-skjema';
-import { SearchSort } from '../../types/search-params';
-import { Config } from '../../config';
-import Lenke from 'nav-frontend-lenker';
-import { quote } from '../../utils/quote';
-import { useSearchContext } from '../../context/ContextProvider';
-import { ActionType } from '../../context/actions';
-import './SearchSorting.less';
+import { SearchSort } from 'types/search-params';
+import { Config } from 'config';
+import { quote } from 'utils/quote';
+import { useSearchContext } from 'context/ContextProvider';
+import { ActionType } from 'context/actions';
+import { BodyShort, Link, Radio, RadioGroup } from '@navikt/ds-react';
+
+import style from './SearchSorting.module.scss';
 
 type Props = {
     isSortDate: boolean;
@@ -21,51 +19,46 @@ export const SearchSorting = ({
     searchTerm,
     numHitsTotal,
 }: Props) => {
-    const bem = BEM('search-sorting');
     const [, dispatch] = useSearchContext();
-
     const setSort = (sort: SearchSort) =>
         dispatch({
             type: ActionType.SetSort,
             sort: sort,
         });
+    const searchSort = isSortDate ? SearchSort.Newest : SearchSort.BestMatch;
 
     return (
-        <div className={bem()}>
-            <div className={bem('selector')}>
-                <Normaltekst>{'Sorter etter:'}</Normaltekst>
-                <div className={bem('buttons')}>
-                    <Radio
-                        label={'Beste treff'}
-                        name={'search-sorting'}
-                        checked={!isSortDate}
-                        onChange={() => setSort(SearchSort.BestMatch)}
-                        id={'select-sort-best'}
-                    />
-                    <Radio
-                        label={'Dato'}
-                        name={'search-sorting'}
-                        checked={isSortDate}
-                        onChange={() => setSort(SearchSort.Newest)}
-                        id={'select-sort-date'}
-                    />
+        <div className={style.searchSorting}>
+            <RadioGroup
+                legend="Sorter etter:"
+                defaultValue={searchSort}
+                className={style.selector}
+                onChange={ (val:SearchSort) => setSort(val) }
+            >
+                <div className={style.buttons}>
+                    <Radio value={SearchSort.BestMatch}>
+                        {'Beste treff'}
+                    </Radio>
+                    <Radio value={SearchSort.Newest}>
+                        {'Dato'}
+                    </Radio>
                 </div>
-            </div>
-            <div className={bem('hits-and-tips')}>
-                <Lenke href={Config.PATHS.searchTips}>{'Søketips'}</Lenke>
-                <Normaltekst className={bem('hits')}>
+            </RadioGroup>
+            <div className={style.hitsAndTips}>
+                <Link href={Config.PATHS.searchTips}>{'Søketips'}</Link>
+                <BodyShort aria-live={'polite'} className={style.hits}>
                     {`${numHitsTotal} treff`}
-                    <span className={bem('hits-verbose')}>
+                    <span className={style.hitsVerbose}>
                         {searchTerm && (
                             <>
                                 {' for '}
-                                <span className={bem('term')}>
+                                <span className={style.term}>
                                     {quote(searchTerm)}
                                 </span>
                             </>
                         )}
                     </span>
-                </Normaltekst>
+                </BodyShort>
             </div>
         </div>
     );

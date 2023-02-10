@@ -1,9 +1,7 @@
-import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import React from 'react';
-import { Radio } from 'nav-frontend-skjema';
-import { Undertekst } from 'nav-frontend-typografi';
-import { BEM } from '../../../utils/bem';
-import './FilterRadioPanel.less';
+import { FilterOption } from '../filter-section-panel/FilterOption';
+
+import style from './FilterRadioPanel.module.scss';
 
 type Props = {
     label: string;
@@ -22,31 +20,22 @@ export const FilterRadioPanel = ({
     id,
     children,
 }: Props) => {
-    const bem = BEM('radio-expanding-panel');
-
-    const header = (
-        <div className={bem('header')}>
-            <Radio
-                name={'search-facet'}
-                label={label}
-                checked={isOpen}
-                readOnly={true}
-                id={id}
-                tabIndex={-1}
-            />
-            <Undertekst className={bem('count')}>{count}</Undertekst>
-        </div>
-    );
-
     return (
-        <EkspanderbartpanelBase
-            tittel={header}
-            apen={isOpen && !!children}
-            border={false}
-            className={bem()}
-            onClick={onClick}
-        >
-            {children}
-        </EkspanderbartpanelBase>
+        <div className={style.panel}>
+            <FilterOption
+                type={'radio'}
+                label={label}
+                count={count}
+                name={'search-facet'}
+                checked={isOpen}
+                onChange={onClick}
+                id={id}
+            />
+            {(isOpen && !!children) &&
+                <div className={style.panelContent} id={`panel-${id}`}>
+                    {children}
+                </div>
+            }
+        </div>
     );
 };

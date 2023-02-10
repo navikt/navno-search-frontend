@@ -1,7 +1,7 @@
-import { Checkbox, Radio } from 'nav-frontend-skjema';
-import { Undertekst } from 'nav-frontend-typografi';
 import React from 'react';
-import './FilterOption.less';
+import classNames from 'classnames';
+
+import style from './FilterOption.module.scss';
 
 export type FilterOptionType = 'radio' | 'checkbox';
 
@@ -9,9 +9,9 @@ type Props = {
     label: string;
     name: string;
     count: number;
-    checked?: boolean;
     defaultChecked?: boolean;
-    onChange: (args: any) => any;
+    checked?: boolean;
+    onChange?: (args: any) => any;
     type: FilterOptionType;
     id: string;
 };
@@ -20,32 +20,38 @@ export const FilterOption = ({
     label,
     name,
     count,
-    checked,
     defaultChecked,
+    checked,
     onChange,
     type,
     id,
 }: Props) => {
-    const buttonProps = {
-        label,
+    const disabled = !count;
+    const inputProps = {
+        value: label,
         name,
-        checked: checked && !!count,
         defaultChecked: defaultChecked && !!count,
+        checked: checked && !!count,
         onChange,
+        type,
         id,
-        disabled: !count,
+        disabled,
     };
+    const inputClass = `navds-${type}__input`;
+    const labelClass = `navds-${type}__label`;
 
     return (
-        <div className={'search-filter-option'}>
-            {type === 'radio' ? (
-                <Radio {...buttonProps} />
-            ) : (
-                <Checkbox {...buttonProps} />
-            )}
-            <Undertekst className={'search-filter-option__count'}>
-                {count}
-            </Undertekst>
-        </div>
+        <span className={classNames(style.filterOption, disabled ? style.disabled : '')}>
+            <input
+                className={inputClass}
+                {...inputProps}
+            />
+            <label className={labelClass} htmlFor={inputProps.id}>
+                {label}
+                <span className={style.count}>
+                    {count}
+                </span>
+            </label>
+        </span>
     );
 };
