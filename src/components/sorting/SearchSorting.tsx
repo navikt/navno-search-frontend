@@ -46,7 +46,7 @@ export const SearchSorting = ({
             </RadioGroup>
             <div className={style.hitsAndTips}>
                 <Link href={Config.PATHS.searchTips}>{'Søketips'}</Link>
-                <BodyShort className={style.hits}>
+                <BodyShort aria-live={'polite'} className={style.hits}>
                     {`${numHitsTotal} treff`}
                     <span className={style.hitsVerbose}>
                         {searchTerm && (
