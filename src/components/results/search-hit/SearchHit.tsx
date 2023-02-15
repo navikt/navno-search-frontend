@@ -67,6 +67,7 @@ export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
         highlight,
         priority,
         officeInformation,
+        audience
     } = hit;
 
     if (!displayName || !href) {
