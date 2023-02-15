@@ -19,15 +19,13 @@
         background-color: common.$a-surface-hover;
     }
 
+    :global(.navds-link-panel__title) {
+        color: common.$a-text-action;
+    }
+
     :global(.navds-link-panel__chevron) {
         display: none;
     }
-}
-
-.title {
-    display: flex;
-    justify-content: space-between;
-    color: common.$a-text-action;
 }
 
 .content {

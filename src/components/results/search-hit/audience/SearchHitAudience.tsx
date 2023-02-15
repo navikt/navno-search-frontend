@@ -8,9 +8,9 @@ const textAndVariant: Record<
     Audience,
     { text: string; variant: TagProps['variant'] }
 > = {
-    person: { text: 'Privatperson', variant: 'alt1-filled' },
-    employer: { text: 'Arbeidsgiver', variant: 'alt3-filled' },
-    provider: { text: 'Samarbeidspartner', variant: 'alt2-filled' },
+    person: { text: 'Privatperson', variant: 'info' },
+    employer: { text: 'Arbeidsgiver', variant: 'alt1' },
+    provider: { text: 'Samarbeidspartner', variant: 'alt2' },
 };
 
 type Props = {
