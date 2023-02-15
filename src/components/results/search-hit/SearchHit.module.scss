@@ -32,6 +32,10 @@
     width: 100%;
 }
 
+.highlight {
+    margin-top: 0.5rem;
+}
+
 .bottomRow {
     display: flex;
     justify-content: space-between;
@@ -43,25 +47,4 @@
         flex-direction: column-reverse;
         align-items: flex-start;
     }
-}
-
-.bottomLeft {
-    align-self: flex-end;
-
-    & > :not(:last-child) {
-        margin-bottom: 0.25rem;
-    }
-
-    @media #{common.$mq-screen-mobile} {
-        align-self: inherit;
-        margin-top: 0.5rem;
-    }
-}
-
-.highlight {
-    margin-top: 0.5rem;
-}
-
-.recommended {
-    font-weight: bold;
 }

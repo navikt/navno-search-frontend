@@ -1,0 +1,18 @@
+@use 'src/common' as common;
+
+.bottomText {
+    align-self: flex-end;
+
+    & > :not(:last-child) {
+        margin-bottom: 0.25rem;
+    }
+
+    @media #{common.$mq-screen-mobile} {
+        align-self: inherit;
+        margin-top: 0.5rem;
+    }
+}
+
+.recommended {
+    font-weight: bold;
+}
