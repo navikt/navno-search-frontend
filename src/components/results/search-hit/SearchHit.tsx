@@ -62,11 +62,10 @@ export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
     return (
         <LinkPanel
             href={href}
+            className={style.searchHit}
             onClick={() => logResultClick(href, searchTerm, hitIndex + 1)}
         >
-            <LinkPanel.Title className={style.title}>
-                {displayName}
-            </LinkPanel.Title>
+            <LinkPanel.Title>{displayName}</LinkPanel.Title>
             <div className={style.content}>
                 {highlight && (
                     <BodyLong className={style.highlight}>
