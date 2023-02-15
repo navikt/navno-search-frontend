@@ -2,11 +2,13 @@ import React from 'react';
 import htmlReactParser from 'html-react-parser';
 import { formatDate } from 'utils/datetime';
 import dayjs from 'dayjs';
-import { SearchHitProps } from 'types/search-result';
+import { Audience, SearchHitProps } from 'types/search-result';
 import { logResultClick } from 'utils/amplitude';
+import { BodyLong, BodyShort, LinkPanel } from '@navikt/ds-react';
+import { SearchHitOfficeInformation } from './office-information/SearchHitOfficeInformation';
+import { SearchHitAudience } from './audience/SearchHitAudience';
 
 import style from './SearchHit.module.scss';
-import { BodyLong, BodyShort, LinkPanel } from '@navikt/ds-react';
 
 const createPublishedAndModifiedString = ({
     publish,
@@ -33,27 +35,6 @@ const parseHighlight = (highlight: string) => {
     );
 };
 
-const officeInformationTable = (info: SearchHitProps['officeInformation']) => {
-    const { phone, audienceReception } = info;
-
-    return (
-        <>
-            {phone && (
-                <div>
-                    <span className={style.label}>{'Telefon:'}</span>
-                    {phone}
-                </div>
-            )}
-            {audienceReception && (
-                <div>
-                    <span className={style.label}>{'Publikumsmottak:'}</span>
-                    {audienceReception}
-                </div>
-            )}
-        </>
-    );
-};
-
 type Props = {
     hit: SearchHitProps;
     hitIndex: number;
@@ -67,7 +48,9 @@ export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
         highlight,
         priority,
         officeInformation,
-        audience
+        audience = (['person', 'employer', 'provider'] as Audience[])[
+            Math.floor(Math.random() * 3)
+        ],
     } = hit;
 
     if (!displayName || !href) {
@@ -82,7 +65,7 @@ export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
             className={style.searchHit}
             onClick={() => logResultClick(href, searchTerm, hitIndex + 1)}
         >
-            <LinkPanel.Title>
+            <LinkPanel.Title className={style.title}>
                 {displayName}
             </LinkPanel.Title>
             <div className={style.content}>
@@ -92,21 +75,28 @@ export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
                     </BodyLong>
                 )}
                 {officeInformation && (
-                    <div className={style.officeInfo}>
-                        {officeInformationTable(officeInformation)}
-                    </div>
+                    <SearchHitOfficeInformation {...officeInformation} />
                 )}
                 <div className={style.bottomRow}>
-                    {publishedString && (
-                        <BodyShort className={style.published}>
-                            {publishedString}
-                        </BodyShort>
-                    )}
-                    {priority && (
-                        <BodyShort className={style.recommended}>
-                            {'Anbefalt innhold'}
-                        </BodyShort>
-                    )}
+                    <div className={style.bottomLeft}>
+                        {publishedString && (
+                            <BodyShort
+                                className={style.published}
+                                size={'small'}
+                            >
+                                {publishedString}
+                            </BodyShort>
+                        )}
+                        {priority && (
+                            <BodyShort
+                                className={style.recommended}
+                                size={'small'}
+                            >
+                                {'Anbefalt innhold'}
+                            </BodyShort>
+                        )}
+                    </div>
+                    {audience && <SearchHitAudience audience={audience} />}
                 </div>
             </div>
         </LinkPanel>

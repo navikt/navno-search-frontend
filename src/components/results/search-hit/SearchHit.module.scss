@@ -19,13 +19,15 @@
         background-color: common.$a-surface-hover;
     }
 
-    :global(.navds-link-panel__title) {
-        color: common.$a-text-action;
-    }
-
     :global(.navds-link-panel__chevron) {
         display: none;
     }
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    color: common.$a-text-action;
 }
 
 .content {
@@ -33,25 +35,33 @@
 }
 
 .bottomRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 0.75rem;
     color: common.$a-text-subtle;
 
-    p {
-        font-size: 1rem;
+    @media #{common.$mq-screen-mobile} {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+}
+
+.bottomLeft {
+    align-self: flex-end;
+
+    & > :not(:last-child) {
+        margin-bottom: 0.25rem;
+    }
+
+    @media #{common.$mq-screen-mobile} {
+        align-self: inherit;
+        margin-top: 0.5rem;
     }
 }
 
 .highlight {
     margin-top: 0.5rem;
-}
-
-.officeInfo {
-    margin-top: 0.5rem;
-    .label {
-        display: inline-block;
-        font-weight: bold;
-        margin-right: 0.375rem;
-    }
 }
 
 .recommended {
