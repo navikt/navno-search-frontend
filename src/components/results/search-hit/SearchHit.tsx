@@ -1,6 +1,6 @@
 import React from 'react';
 import htmlReactParser from 'html-react-parser';
-import { Audience, SearchHitProps } from 'types/search-result';
+import { SearchHitProps } from 'types/search-result';
 import { logResultClick } from 'utils/amplitude';
 import { BodyLong, LinkPanel } from '@navikt/ds-react';
 import { SearchHitOfficeInformation } from './office-information/SearchHitOfficeInformation';
@@ -23,15 +23,7 @@ type Props = {
 };
 
 export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
-    const {
-        displayName,
-        href,
-        highlight,
-        officeInformation,
-        audience = (['person', 'employer', 'provider'] as Audience[])[
-            Math.floor(Math.random() * 3)
-        ],
-    } = hit;
+    const { displayName, href, highlight, officeInformation, audience } = hit;
 
     if (!displayName || !href) {
         return null;
