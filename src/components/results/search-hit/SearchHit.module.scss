@@ -32,28 +32,11 @@
     width: 100%;
 }
 
-.bottomRow {
-    margin-top: 0.75rem;
-    color: common.$a-text-subtle;
-
-    p {
-        font-size: 1rem;
-    }
-}
-
 .highlight {
     margin-top: 0.5rem;
 }
 
-.officeInfo {
-    margin-top: 0.5rem;
-    .label {
-        display: inline-block;
-        font-weight: bold;
-        margin-right: 0.375rem;
-    }
-}
-
-.recommended {
-    font-weight: bold;
+.bottomRow {
+    margin-top: 0.75rem;
+    color: common.$a-text-subtle;
 }

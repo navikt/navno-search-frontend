@@ -37,6 +37,8 @@ export type FacetBucketProps = DeepPartial<{
     default?: boolean;
 }>;
 
+export type Audience = 'person' | 'employer' | 'provider';
+
 export type SearchHitProps = DeepPartial<{
     priority: boolean;
     displayName: string;
@@ -56,6 +58,7 @@ export type SearchHitProps = DeepPartial<{
         phone: string;
         audienceReception: string;
     };
+    audience?: Audience | Audience[];
 }>;
 
 export type SearchResultProps = DeepPartial<{
