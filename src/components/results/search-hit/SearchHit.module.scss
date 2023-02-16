@@ -39,9 +39,4 @@
 .bottomRow {
     margin-top: 0.75rem;
     color: common.$a-text-subtle;
-
-    @media #{common.$mq-screen-mobile} {
-        flex-direction: column-reverse;
-        align-items: flex-start;
-    }
 }
