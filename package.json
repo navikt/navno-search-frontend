@@ -6,7 +6,8 @@
         "dev": "next dev -p 3001",
         "build": "next build",
         "start": "next start -p 3001",
-        "start-clean": "rm -fr .next && npm run build && npm start"
+        "start-clean": "rm -fr .next && npm run build && npm start",
+        "lint": "eslint src/"
     },
     "dependencies": {
         "@navikt/ds-css": "2.1.3",

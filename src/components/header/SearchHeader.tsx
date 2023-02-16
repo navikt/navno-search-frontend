@@ -29,18 +29,16 @@ export const SearchHeader = ({ result }: Props) => {
             </Heading>
             {underFacetNames?.length > 0 && (
                 <BodyLong>
-                    {underFacetNames.map(
-                        (uf, index) => {
-                            return (
-                                <span key={index}>
-                                    {`${index ? ' | ' : ''}`}
-                                    <span className={style.underFacets}>
-                                        {`${uf}`}
-                                    </span>
+                    {underFacetNames.map((uf, index) => {
+                        return (
+                            <span key={index}>
+                                {`${index ? ' | ' : ''}`}
+                                <span className={style.underFacets}>
+                                    {`${uf}`}
                                 </span>
-                            );
-                        })
-                    }
+                            </span>
+                        );
+                    })}
                     {' - '}
                     <Button
                         variant="tertiary"

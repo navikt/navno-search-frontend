@@ -1,3 +1,5 @@
-export default (req, res) => {
-    return res.status(200).json({ message: 'Ok!' });
+const isReadyHandler = (req, res) => {
+    return res.status(200).json({ message: 'I am ready!' });
 };
+
+export default isReadyHandler;

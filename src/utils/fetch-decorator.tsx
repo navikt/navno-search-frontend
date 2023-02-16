@@ -48,7 +48,7 @@ export const getDecorator = async () => {
                         id="decorator-env"
                         data-src={`${decoratorUrl}/env${query}`}
                     ></div>
-                    <script src={`${decoratorUrl}/client.js`}></script>
+                    <script async src={`${decoratorUrl}/client.js`}></script>
                 </>
             ),
         };

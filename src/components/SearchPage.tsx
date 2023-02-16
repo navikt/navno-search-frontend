@@ -53,6 +53,7 @@ const SearchPage = () => {
         if (enableClientsideFetch.current) {
             fetchAndSetNewResults();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [s, daterange, f, uf]);
 
     useEffect(() => {
@@ -61,6 +62,7 @@ const SearchPage = () => {
         if (searchTerm) {
             logSearchQuery(searchTerm);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
