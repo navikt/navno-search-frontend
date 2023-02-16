@@ -22,9 +22,10 @@ export const SearchHitAudience = ({ audience }: Props) => {
 
     return (
         <>
-            {audiences.map((audience) => {
-                const tagContent = textAndVariant[audience];
+            {audiences.map((aud) => {
+                const tagContent = textAndVariant[aud];
                 if (!tagContent) {
+                    console.error(`Invalid audience: ${aud}`);
                     return null;
                 }
 
@@ -35,7 +36,7 @@ export const SearchHitAudience = ({ audience }: Props) => {
                         variant={variant}
                         className={style.tag}
                         size={'small'}
-                        key={audience}
+                        key={aud}
                     >
                         {text}
                     </Tag>
