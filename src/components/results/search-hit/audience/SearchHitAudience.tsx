@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tag, TagProps } from '@navikt/ds-react';
-import { Audience } from '../../../../types/search-result';
+import { Audience, SearchHitProps } from '../../../../types/search-result';
 
 import style from './SearchHitAudience.module.scss';
 
@@ -14,15 +14,33 @@ const textAndVariant: Record<
 };
 
 type Props = {
-    audience: Audience;
+    audience: SearchHitProps['audience'];
 };
 
 export const SearchHitAudience = ({ audience }: Props) => {
-    const { text, variant } = textAndVariant[audience];
+    const audiences = Array.isArray(audience) ? audience : [audience];
 
     return (
-        <Tag variant={variant} className={style.tag}>
-            {text}
-        </Tag>
+        <>
+            {audiences.map((audience) => {
+                const tagContent = textAndVariant[audience];
+                if (!tagContent) {
+                    return null;
+                }
+
+                const { text, variant } = tagContent;
+
+                return (
+                    <Tag
+                        variant={variant}
+                        className={style.tag}
+                        size={'small'}
+                        key={audience}
+                    >
+                        {text}
+                    </Tag>
+                );
+            })}
+        </>
     );
 };

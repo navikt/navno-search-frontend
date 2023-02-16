@@ -4,7 +4,7 @@ import { SearchHitProps } from '../../../../types/search-result';
 import { formatDate } from '../../../../utils/datetime';
 import dayjs from 'dayjs';
 
-import style from './SearchHitBottomText.module.scss';
+import style from './SearchHitFooterText.module.scss';
 
 const createPublishedAndModifiedString = ({
     publish,
@@ -30,18 +30,18 @@ type Props = {
     hit: SearchHitProps;
 };
 
-export const SearchHitBottomText = ({ hit }: Props) => {
+export const SearchHitFooterText = ({ hit }: Props) => {
     const { priority } = hit;
     const publishedString = createPublishedAndModifiedString(hit);
 
     return (
-        <div className={style.bottomText}>
+        <>
             <BodyShort size={'small'}>{publishedString}</BodyShort>
             {priority && (
                 <BodyShort className={style.recommended} size={'small'}>
                     {'Anbefalt innhold'}
                 </BodyShort>
             )}
-        </div>
+        </>
     );
 };

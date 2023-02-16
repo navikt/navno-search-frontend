@@ -58,7 +58,7 @@ export type SearchHitProps = DeepPartial<{
         phone: string;
         audienceReception: string;
     };
-    audience?: Audience;
+    audience?: Audience | Audience[];
 }>;
 
 export type SearchResultProps = DeepPartial<{
