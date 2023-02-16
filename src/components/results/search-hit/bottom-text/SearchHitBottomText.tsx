@@ -12,14 +12,18 @@ const createPublishedAndModifiedString = ({
     createdTime,
 }: SearchHitProps) => {
     const publishedTime = publish?.first || createdTime;
-    const publisedString = `Publisert ${formatDate(publishedTime)}`;
-    const modifiedString =
-        modifiedTime && dayjs(modifiedTime).unix() > dayjs(publishedTime).unix()
-            ? `${publisedString ? ' | ' : ''}Sist endret ${formatDate(
-                  modifiedTime
-              )}`
-            : '';
-    return `${publisedString}${modifiedString}`;
+
+    const publishedString = `Publisert ${formatDate(publishedTime)}`;
+
+    const isModifiedSincePublishedTime =
+        modifiedTime &&
+        dayjs(modifiedTime).unix() > dayjs(publishedTime).unix();
+
+    if (!isModifiedSincePublishedTime) {
+        return publishedString;
+    }
+
+    return `${publishedString} | Sist endret ${formatDate(modifiedTime)}`;
 };
 
 type Props = {
