@@ -5,7 +5,7 @@ import { logResultClick } from 'utils/amplitude';
 import { BodyLong, LinkPanel } from '@navikt/ds-react';
 import { SearchHitOfficeInformation } from './office-information/SearchHitOfficeInformation';
 import { SearchHitAudience } from './audience/SearchHitAudience';
-import { SearchHitFooterText } from './footer-text/SearchHitFooterText';
+import { SearchHitTimestamps } from './timestamps/SearchHitTimestamps';
 
 import style from './SearchHit.module.scss';
 
@@ -47,7 +47,7 @@ export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
                 )}
                 <div className={style.bottomRow}>
                     {audience && <SearchHitAudience audience={audience} />}
-                    <SearchHitFooterText hit={hit} />
+                    <SearchHitTimestamps hit={hit} />
                 </div>
             </div>
         </LinkPanel>
