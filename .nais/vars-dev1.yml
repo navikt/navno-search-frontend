@@ -4,7 +4,7 @@ ingresses:
 replicas:
   min: 1
   max: 2
-resource:
+resources:
   limits:
     cpu: 1000m
     memory: 768Mi
