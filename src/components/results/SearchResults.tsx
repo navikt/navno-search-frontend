@@ -8,6 +8,8 @@ import { SearchResultsEmpty } from './search-results-empty/SearchResultsEmpty';
 
 import style from './SearchResults.module.scss';
 
+const { keys } = Config.VARS;
+
 const isEmptyDefaultQuery = (
     result: SearchResultProps,
     params: SearchParams
@@ -15,11 +17,7 @@ const isEmptyDefaultQuery = (
     const { word: searchTerm } = result;
     const { f, uf } = params;
 
-    return (
-        !searchTerm &&
-        (!f || f === Config.VARS.keys.defaultFacet) &&
-        (!uf || uf.length === 0)
-    );
+    return !searchTerm && f === keys.defaultFacet && uf.length === 0;
 };
 
 type Props = {

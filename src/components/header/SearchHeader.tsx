@@ -3,15 +3,19 @@ import { SearchResultProps } from 'types/search-result';
 import { useSearchContext } from 'context/ContextProvider';
 import { ActionType } from 'context/actions';
 import { BodyLong, Button, Heading } from '@navikt/ds-react';
+import Config from '../../config';
 
 import style from './SearchHeader.module.scss';
-import Config from '../../config';
+
+const { keys } = Config.VARS;
 
 type Props = {
     result: SearchResultProps;
 };
 
 export const SearchHeader = ({ result }: Props) => {
+    const [{ params }] = useSearchContext();
+
     const facetObject = result.aggregations?.fasetter?.buckets?.find(
         (f) => f.key === result.fasettKey
     );
@@ -23,9 +27,10 @@ export const SearchHeader = ({ result }: Props) => {
 
     const hasSelectedUnderfacets = underFacetNames.length > 0;
 
-    const hasSelectedNonDefaultFacets =
-        result.fasettKey !== Config.VARS.keys.defaultFacet ||
-        hasSelectedUnderfacets;
+    const hasSelectedNonDefaultFilters =
+        params.f !== keys.defaultFacet ||
+        params.uf.length > 0 ||
+        params.daterange !== keys.defaultDateRange;
 
     return (
         <div className={style.searchHeader} id={'search-header'}>
@@ -35,7 +40,7 @@ export const SearchHeader = ({ result }: Props) => {
             <Heading level="2" size="medium" className={style.facet}>
                 {result.fasett}
             </Heading>
-            {hasSelectedNonDefaultFacets && (
+            {hasSelectedNonDefaultFilters && (
                 <BodyLong>
                     {underFacetNames.map((uf, index) => {
                         return (
