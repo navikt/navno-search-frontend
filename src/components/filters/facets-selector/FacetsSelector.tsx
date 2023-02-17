@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FilterSectionPanel } from '../filter-section-panel/FilterSectionPanel';
 import { FilterOption } from '../filter-section-panel/FilterOption';
 import { FilterRadioPanel } from '../filter-radio-panel/FilterRadioPanel';
@@ -7,6 +7,9 @@ import { logFilterSelection } from 'utils/amplitude';
 import { SearchSort } from 'types/search-params';
 import { UFToggleProps } from 'context/reducer';
 import config from 'config';
+import { useSearchContext } from '../../../context/ContextProvider';
+
+const { keys } = config.VARS;
 
 type Props = {
     facetsProps: FacetBucketProps[];
@@ -18,12 +21,11 @@ type Props = {
 
 export const FacetsSelector = ({
     facetsProps,
-    initialFacet,
     setFacet,
     setUnderFacet,
     setSorting,
 }: Props) => {
-    const [currentFacetKey, setCurrentFacetKey] = useState(initialFacet);
+    const [{ params }] = useSearchContext();
 
     return (
         <FilterSectionPanel>
@@ -33,12 +35,13 @@ export const FacetsSelector = ({
                     <FilterRadioPanel
                         label={facet.name}
                         count={facet.docCount}
-                        isOpen={facet.key === currentFacetKey}
+                        isOpen={facet.key === params.f}
                         onClick={() => {
-                            setCurrentFacetKey(facet.key);
                             setFacet(facet.key);
-                            if (facet.key === config.VARS.keys.news) {
+                            if (facet.key === keys.newsFacet) {
                                 setSorting(SearchSort.Newest);
+                            } else if (facet.key === keys.defaultFacet) {
+                                setSorting(SearchSort.BestMatch);
                             }
                             logFilterSelection(facet.key);
                         }}
@@ -51,7 +54,9 @@ export const FacetsSelector = ({
                                     label={underFacet.name}
                                     name={underFacet.key}
                                     count={underFacet.docCount}
-                                    checked={underFacet.checked}
+                                    checked={params.uf?.includes(
+                                        underFacet.key
+                                    )}
                                     type={'checkbox'}
                                     onChange={(e) => {
                                         setUnderFacet({
@@ -68,8 +73,7 @@ export const FacetsSelector = ({
                                     key={underFacet.key}
                                     id={`select-uf-${fIndex}-${ufIndex}`}
                                 />
-                            ))
-                        }
+                            ))}
                     </FilterRadioPanel>
                 );
             })}

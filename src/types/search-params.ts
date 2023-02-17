@@ -1,4 +1,5 @@
 import { DaterangeKey, SearchResultProps } from './search-result';
+import Config from '../config';
 
 export const daterangeKeyToParam = {
     [DaterangeKey.All]: -1,
@@ -34,10 +35,11 @@ export type SearchParams = Partial<{
 }>;
 
 export const searchParamsDefault: SearchParams = {
-    f: '0',
+    f: Config.VARS.keys.defaultFacet,
+    uf: [],
     c: 1,
-    s: 0,
-    daterange: -1,
+    s: SearchSort.BestMatch,
+    daterange: Config.VARS.keys.defaultDateRange,
 };
 
 export const paramsFromResult = (searchResult: SearchResultProps) => {

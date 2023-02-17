@@ -1,4 +1,7 @@
-import { daterangeKeyToParam } from '../types/search-params';
+import {
+    daterangeKeyToParam,
+    searchParamsDefault,
+} from '../types/search-params';
 import { Action, ActionType } from './actions';
 import { SearchContext } from './ContextProvider';
 
@@ -34,7 +37,7 @@ export const reducer = (state: SearchContext, action: Action) => {
         case ActionType.SetFacet:
             return {
                 ...state,
-                params: { ...state.params, f: action.facet, uf: undefined },
+                params: { ...state.params, f: action.facet, uf: [] },
             };
         case ActionType.SetUnderfacet:
             const { uf, toggle } = action.underfacetToggle;
@@ -48,13 +51,16 @@ export const reducer = (state: SearchContext, action: Action) => {
                 ...state,
                 params: {
                     ...state.params,
-                    uf: newUf.length > 0 ? newUf : undefined,
+                    uf: newUf.length > 0 ? newUf : [],
                 },
             };
-        case ActionType.ResetUnderfacets:
+        case ActionType.ResetFacets:
             return {
                 ...state,
-                params: { ...state.params, uf: undefined },
+                params: {
+                    ...state.params,
+                    ...searchParamsDefault,
+                },
             };
         default:
             return state;

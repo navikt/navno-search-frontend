@@ -17,7 +17,9 @@ const VARS = {
         breadcrumbs: [{ title: 'Søk', url: '/sok' }],
     },
     keys: {
-        news: '1',
+        defaultFacet: '0',
+        newsFacet: '1',
+        defaultDateRange: -1,
     },
 };
 

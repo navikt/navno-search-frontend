@@ -5,6 +5,7 @@ import { ActionType } from 'context/actions';
 import { BodyLong, Button, Heading } from '@navikt/ds-react';
 
 import style from './SearchHeader.module.scss';
+import Config from '../../config';
 
 type Props = {
     result: SearchResultProps;
@@ -14,10 +15,17 @@ export const SearchHeader = ({ result }: Props) => {
     const facetObject = result.aggregations?.fasetter?.buckets?.find(
         (f) => f.key === result.fasettKey
     );
-    const underFacetNames = facetObject?.underaggregeringer?.buckets
-        ?.filter((uf) => uf.checked)
-        .map((uf) => uf.name);
+    const underFacetNames =
+        facetObject?.underaggregeringer?.buckets
+            ?.filter((uf) => uf.checked)
+            .map((uf) => uf.name) || [];
     const [, dispatch] = useSearchContext();
+
+    const hasSelectedUnderfacets = underFacetNames.length > 0;
+
+    const hasSelectedNonDefaultFacets =
+        result.fasettKey !== Config.VARS.keys.defaultFacet ||
+        hasSelectedUnderfacets;
 
     return (
         <div className={style.searchHeader} id={'search-header'}>
@@ -27,7 +35,7 @@ export const SearchHeader = ({ result }: Props) => {
             <Heading level="2" size="medium" className={style.facet}>
                 {result.fasett}
             </Heading>
-            {underFacetNames?.length > 0 && (
+            {hasSelectedNonDefaultFacets && (
                 <BodyLong>
                     {underFacetNames.map((uf, index) => {
                         return (
@@ -39,13 +47,13 @@ export const SearchHeader = ({ result }: Props) => {
                             </span>
                         );
                     })}
-                    {' - '}
+                    {hasSelectedUnderfacets && ' - '}
                     <Button
                         variant="tertiary"
                         className={style.resetUnderFacets}
                         onClick={(e) => {
                             e.preventDefault();
-                            dispatch({ type: ActionType.ResetUnderfacets });
+                            dispatch({ type: ActionType.ResetFacets });
                         }}
                     >
                         {'Nullstill filter'}

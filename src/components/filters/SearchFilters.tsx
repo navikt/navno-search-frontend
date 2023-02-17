@@ -21,7 +21,8 @@ export const SearchFilters = ({ result }: Props) => {
 
     return (
         <div
-            className={classNames( style.searchFilters,
+            className={classNames(
+                style.searchFilters,
                 openMobile ? style.visibleMobile : ''
             )}
         >

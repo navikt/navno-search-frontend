@@ -33,32 +33,26 @@ export const SearchSorting = ({
                 legend="Sorter etter:"
                 defaultValue={searchSort}
                 className={style.selector}
-                onChange={ (val:SearchSort) => setSort(val) }
+                onChange={(val: SearchSort) => setSort(val)}
             >
                 <div className={style.buttons}>
-                    <Radio value={SearchSort.BestMatch}>
-                        {'Beste treff'}
-                    </Radio>
-                    <Radio value={SearchSort.Newest}>
-                        {'Dato'}
-                    </Radio>
+                    <Radio value={SearchSort.BestMatch}>{'Beste treff'}</Radio>
+                    <Radio value={SearchSort.Newest}>{'Dato'}</Radio>
                 </div>
             </RadioGroup>
             <div className={style.hitsAndTips}>
                 <Link href={Config.PATHS.searchTips}>{'Søketips'}</Link>
-                <BodyShort aria-live={'polite'} className={style.hits}>
-                    {`${numHitsTotal} treff`}
-                    <span className={style.hitsVerbose}>
-                        {searchTerm && (
-                            <>
-                                {' for '}
-                                <span className={style.term}>
-                                    {quote(searchTerm)}
-                                </span>
-                            </>
-                        )}
-                    </span>
-                </BodyShort>
+                {searchTerm && (
+                    <BodyShort aria-live={'polite'} className={style.hits}>
+                        {`${numHitsTotal} treff`}
+                        <span className={style.hitsVerbose}>
+                            {' for '}
+                            <span className={style.term}>
+                                {quote(searchTerm)}
+                            </span>
+                        </span>
+                    </BodyShort>
+                )}
             </div>
         </div>
     );

@@ -10,7 +10,7 @@ export enum ActionType {
     SetSort,
     SetFacet,
     SetUnderfacet,
-    ResetUnderfacets,
+    ResetFacets,
 }
 
 export type Action =
@@ -43,5 +43,5 @@ export type Action =
           underfacetToggle: UFToggleProps;
       }
     | {
-          type: ActionType.ResetUnderfacets;
+          type: ActionType.ResetFacets;
       };
