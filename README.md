@@ -2,7 +2,7 @@ Frontend for søk på nav.no
 
 ## Lokal kjøring
 
-Kjører lokalt på [http://localhost:3001](http://localhost:3001).
+Kjører lokalt på [http://localhost:3001/sok](http://localhost:3001/sok).
 
 #### Development mode:
 ```
