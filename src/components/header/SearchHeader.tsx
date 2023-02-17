@@ -55,7 +55,7 @@ export const SearchHeader = ({ result }: Props) => {
                     {hasSelectedUnderfacets && ' - '}
                     <Button
                         variant="tertiary"
-                        className={style.resetUnderFacets}
+                        className={style.reset}
                         onClick={(e) => {
                             e.preventDefault();
                             dispatch({ type: ActionType.ResetFacets });
