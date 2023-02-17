@@ -48,14 +48,18 @@ export const SearchResultsList = ({ result }: Props) => {
         <>
             {' '}
             {result.hits?.length > 0 ? (
-                result.hits.map((hitProps, index) => (
-                    <SearchHit
-                        hit={hitProps}
-                        hitIndex={index}
-                        searchTerm={result.word}
-                        key={index}
-                    />
-                ))
+                result.hits.map((hitProps, index) => {
+                    const key = `${hitProps.href}-${hitProps.displayName}`;
+
+                    return (
+                        <SearchHit
+                            hit={hitProps}
+                            hitIndex={index}
+                            searchTerm={result.word}
+                            key={key}
+                        />
+                    );
+                })
             ) : (
                 <div className={style.noHits}>
                     <Heading size="medium" level="2">

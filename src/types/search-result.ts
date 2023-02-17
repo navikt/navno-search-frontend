@@ -51,9 +51,6 @@ export type SearchHitProps = DeepPartial<{
     };
     createdTime: string;
     modifiedTime: string;
-    id: string;
-    score: number;
-    keywords: string[];
     officeInformation: {
         phone: string;
         audienceReception: string;
