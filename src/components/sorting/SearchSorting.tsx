@@ -9,29 +9,26 @@ import { BodyShort, Link, Radio, RadioGroup } from '@navikt/ds-react';
 import style from './SearchSorting.module.scss';
 
 type Props = {
-    isSortDate: boolean;
     searchTerm: string;
     numHitsTotal: number;
 };
 
-export const SearchSorting = ({
-    isSortDate,
-    searchTerm,
-    numHitsTotal,
-}: Props) => {
-    const [, dispatch] = useSearchContext();
+export const SearchSorting = ({ searchTerm, numHitsTotal }: Props) => {
+    const [{ params }, dispatch] = useSearchContext();
+
+    const { s: sort } = params;
+
     const setSort = (sort: SearchSort) =>
         dispatch({
             type: ActionType.SetSort,
             sort: sort,
         });
-    const searchSort = isSortDate ? SearchSort.Newest : SearchSort.BestMatch;
 
     return (
         <div className={style.searchSorting}>
             <RadioGroup
                 legend="Sorter etter:"
-                defaultValue={searchSort}
+                value={sort}
                 className={style.selector}
                 onChange={(val: SearchSort) => setSort(val)}
             >
