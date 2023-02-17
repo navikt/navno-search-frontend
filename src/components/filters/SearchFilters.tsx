@@ -44,7 +44,6 @@ export const SearchFilters = ({ result }: Props) => {
             <div className={style.filters}>
                 {fasetter?.buckets && (
                     <FacetsSelector
-                        initialFacet={result.fasettKey}
                         facetsProps={fasetter.buckets}
                         setFacet={(facet) =>
                             dispatch({
@@ -67,15 +66,7 @@ export const SearchFilters = ({ result }: Props) => {
                     />
                 )}
                 {Tidsperiode && (
-                    <DaterangeSelector
-                        daterangeProps={Tidsperiode}
-                        setDaterange={(daterangeKey) =>
-                            dispatch({
-                                type: ActionType.SetDaterange,
-                                daterangeKey: daterangeKey,
-                            })
-                        }
-                    />
+                    <DaterangeSelector daterangeProps={Tidsperiode} />
                 )}
             </div>
         </div>

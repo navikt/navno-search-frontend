@@ -37,20 +37,18 @@ export const FilterOption = ({
         id,
         disabled,
     };
-    const inputClass = `navds-${type}__input`;
-    const labelClass = `navds-${type}__label`;
 
     return (
-        <span className={classNames(style.filterOption, disabled ? style.disabled : '')}>
-            <input
-                className={inputClass}
-                {...inputProps}
-            />
-            <label className={labelClass} htmlFor={inputProps.id}>
+        <span
+            className={classNames(
+                style.filterOption,
+                disabled ? style.disabled : ''
+            )}
+        >
+            <input className={`navds-${type}__input`} {...inputProps} />
+            <label className={`navds-${type}__label`} htmlFor={inputProps.id}>
                 {label}
-                <span className={style.count}>
-                    {count}
-                </span>
+                <span className={style.count}>{count}</span>
             </label>
         </span>
     );

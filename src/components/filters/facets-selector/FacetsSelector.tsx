@@ -13,7 +13,6 @@ const { keys } = config.VARS;
 
 type Props = {
     facetsProps: FacetBucketProps[];
-    initialFacet: string;
     setFacet: (f: string) => void;
     setUnderFacet: ({ uf, toggle }: UFToggleProps) => void;
     setSorting: (sorting: SearchSort) => void;
