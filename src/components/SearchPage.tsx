@@ -8,7 +8,7 @@ import { useSearchContext } from '../context/ContextProvider';
 import { ActionType } from '../context/actions';
 import { SearchInput } from './input/SearchInput';
 import { SearchSorting } from './sorting/SearchSorting';
-import Spinner from './spinner/Spinner';
+import { Spinner } from './spinner/Spinner';
 import { SearchResults } from './results/SearchResults';
 import { SearchFilters } from './filters/SearchFilters';
 

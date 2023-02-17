@@ -13,5 +13,3 @@ export const Spinner = ({ text }: Props) => (
         <Loader size="2xlarge" className={style.spinner} />
     </div>
 );
-
-export default Spinner;
