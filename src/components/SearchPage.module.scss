@@ -1,7 +1,7 @@
 @use 'src/common' as common;
 
-$left-col-width:
-        common.$desktopMinWidth - common.$filters-width - common.$filters-margin - common.$padding-sides-desktop * 2;
+$left-col-width: common.$desktopMinWidth - common.$filters-width -
+    common.$filters-margin - common.$padding-sides-desktop * 2;
 $breakpoint: $left-col-width + common.$padding-sides-desktop-small * 2;
 
 .search {
