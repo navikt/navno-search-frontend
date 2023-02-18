@@ -57,9 +57,7 @@ export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
             />
 
             <div className={style.searchButtons}>
-                <Button className={style.searchSubmit}>
-                    {'Søk'}
-                </Button>
+                <Button className={style.searchSubmit}>{'Søk'}</Button>
                 {inputValue && (
                     <Button
                         icon={<Close aria-hidden />}

@@ -4,7 +4,7 @@ import { DaterangeSelector } from './daterange-selector/DaterangeSelector';
 import { SearchResultProps } from 'types/search-result';
 import { ActionType } from 'context/actions';
 import { useSearchContext } from 'context/ContextProvider';
-import classNames from 'classnames';
+import { classNames } from '../../utils/classnames';
 import { Button, Heading } from '@navikt/ds-react';
 import { Expand } from '@navikt/ds-icons';
 
