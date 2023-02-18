@@ -60,7 +60,6 @@ export type SearchHitProps = DeepPartial<{
 
 export type SearchResultProps = DeepPartial<{
     c: number;
-    isSortDate: boolean; // note: this value is inverted!
     s: SearchSort;
     daterange: number;
     isMore: boolean;
