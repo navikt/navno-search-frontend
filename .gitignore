@@ -34,3 +34,4 @@ yarn-error.log*
 .vercel
 /.idea/
 /navno-search-frontend.iml
+/tsconfig.tsbuildinfo

@@ -14,7 +14,7 @@ const textAndVariant: Record<
 };
 
 type Props = {
-    audience: SearchHitProps['audience'];
+    audience: Required<SearchHitProps>['audience'];
 };
 
 export const SearchHitAudience = ({ audience }: Props) => {

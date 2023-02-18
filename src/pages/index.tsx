@@ -5,48 +5,50 @@ import { ContextProvider } from 'context/ContextProvider';
 import { fetchSearchResults } from 'utils/fetch-search-result';
 import { SearchResultProps } from 'types/search-result';
 import SearchPage from 'components/SearchPage';
-import { paramsFromResult } from 'types/search-params';
+import { paramsFromResult, SearchParams } from 'types/search-params';
 import { Alert } from '@navikt/ds-react';
 
 type Props = {
-    initialResult: SearchResultProps;
+    initialResult: SearchResultProps | null;
 };
 
 const SearchBase = (props: Props) => {
     const { initialResult } = props;
 
     return (
-        <ContextProvider
-            initialResult={initialResult}
-            initialParams={paramsFromResult(initialResult)}
-        >
-            <div className={'app'}>
-                <Head>
-                    <title>{'Søk - nav.no'}</title>
-                </Head>
-                <main
-                    role={'main'}
-                    className={'content-wrapper'}
-                    id={'maincontent'}
-                    tabIndex={-1}
-                >
-                    {initialResult?.fasettKey ? (
+        <div className={'app'}>
+            <Head>
+                <title>{'Søk - nav.no'}</title>
+            </Head>
+            <main
+                role={'main'}
+                className={'content-wrapper'}
+                id={'maincontent'}
+                tabIndex={-1}
+            >
+                {initialResult?.fasettKey ? (
+                    <ContextProvider
+                        initialResult={initialResult}
+                        initialParams={paramsFromResult(initialResult)}
+                    >
                         <SearchPage />
-                    ) : (
-                        <Alert variant="error">
-                            {'Feil - søketjenesten er ikke tilgjengelig'}
-                        </Alert>
-                    )}
-                </main>
-            </div>
-        </ContextProvider>
+                    </ContextProvider>
+                ) : (
+                    <Alert variant="error">
+                        {'Feil - søketjenesten er ikke tilgjengelig'}
+                    </Alert>
+                )}
+            </main>
+        </div>
     );
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async (
     context
 ) => {
-    const result = await fetchSearchResults(context.query).catch((err) => {
+    const result = await fetchSearchResults(
+        context.query as unknown as SearchParams
+    ).catch((err) => {
         console.error(err);
         return null;
     });

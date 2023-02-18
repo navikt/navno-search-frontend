@@ -19,35 +19,14 @@ const cssModulesNoDashesInClassnames = (config) => {
     });
 };
 
-// Prevents errors due to client-side imports of server-side only libraries
-const resolveNodeLibsClientSide = (config, options) => {
-    if (!options.isServer) {
-        config.resolve.fallback = {
-            buffer: false,
-            fs: false,
-            process: false,
-        };
-    }
-};
-
 module.exports = {
     basePath: process.env.APP_BASE_PATH,
     env: {
         APP_BASE_PATH: process.env.APP_BASE_PATH,
         XP_ORIGIN: process.env.XP_ORIGIN,
     },
-    webpack: (config, options) => {
+    webpack: (config) => {
         cssModulesNoDashesInClassnames(config);
-        resolveNodeLibsClientSide(config, options);
-
-        const { webpack, buildId } = options;
-
-        config.plugins.push(
-            new webpack.DefinePlugin({
-                'process.env.BUILD_ID': JSON.stringify(buildId),
-            })
-        );
-
         return config;
     },
 };

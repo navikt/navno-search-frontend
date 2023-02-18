@@ -16,12 +16,13 @@ type Props = {
 export const SearchHeader = ({ result }: Props) => {
     const [{ params }, dispatch] = useSearchContext();
 
-    const selectedFacet = result.aggregations?.fasetter?.buckets?.find(
+    const selectedFacet = result.aggregations.fasetter.buckets.find(
         (f) => f.key === params.f
     );
+
     const underFacetNames =
-        selectedFacet?.underaggregeringer?.buckets
-            ?.filter((uf) => params.uf.includes(uf.key))
+        selectedFacet?.underaggregeringer.buckets
+            .filter((uf) => params.uf.includes(uf.key))
             .map((uf) => uf.name) || [];
 
     const hasSelectedUnderfacets = underFacetNames.length > 0;
@@ -36,9 +37,11 @@ export const SearchHeader = ({ result }: Props) => {
             <Heading level="1" size="large">
                 {'Søk på nav.no'}
             </Heading>
-            <Heading level="2" size="medium" className={style.facet}>
-                {selectedFacet.name}
-            </Heading>
+            {selectedFacet && (
+                <Heading level="2" size="medium" className={style.facet}>
+                    {selectedFacet.name}
+                </Heading>
+            )}
             {hasSelectedNonDefaultFilters && (
                 <BodyLong>
                     {underFacetNames.map((uf, index) => {

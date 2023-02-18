@@ -12,7 +12,8 @@ const searchHandler = async (
     req: NextApiRequest,
     res: NextApiResponse<SearchApiResponse>
 ) => {
-    const searchParams = req.query as SearchParams;
+    const searchParams = req.query as unknown as SearchParams;
+
     await fetchSearchResults(searchParams)
         .then((searchRes) => {
             res.status(200).json({ result: searchRes });

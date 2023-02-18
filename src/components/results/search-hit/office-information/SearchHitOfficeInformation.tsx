@@ -3,7 +3,7 @@ import { SearchHitProps } from '../../../../types/search-result';
 
 import style from './SearchHitOfficeInformation.module.scss';
 
-type Props = SearchHitProps['officeInformation'];
+type Props = Required<SearchHitProps>['officeInformation'];
 
 export const SearchHitOfficeInformation = ({
     audienceReception,

@@ -14,35 +14,33 @@ export enum SearchSort {
     Newest = 1,
 }
 
-export type SearchParams = Partial<{
+export type SearchParams = {
     // Search string
     ord: string;
-
     // Facet
     f: string;
-
     // Under-facets
     uf: string[];
-
     // Number of results to retrieve (20 * c)
     c: number;
-
-    // Skip first (20 * start) results
+    // Skips first (20 * start) results
     start: number;
 
     s: SearchSort;
     daterange: number;
-}>;
+};
 
 export const searchParamsDefault: SearchParams = {
+    ord: '',
     f: Config.VARS.keys.defaultFacet,
     uf: [],
     c: 1,
+    start: 0,
     s: SearchSort.BestMatch,
     daterange: Config.VARS.keys.defaultDateRange,
 };
 
-export const paramsFromResult = (searchResult: SearchResultProps) => {
+export const paramsFromResult = (searchResult: SearchResultProps | null) => {
     if (!searchResult) {
         return searchParamsDefault;
     }
@@ -51,10 +49,9 @@ export const paramsFromResult = (searchResult: SearchResultProps) => {
         (bucket) => bucket.key === searchResult.fasettKey
     );
 
-    const initialUfKeys = initialFacet?.underaggregeringer?.buckets?.reduce(
-        (acc, bucket) => (bucket.checked ? [...acc, bucket.key] : acc),
-        []
-    );
+    const initialUfKeys = initialFacet?.underaggregeringer?.buckets?.reduce<
+        string[]
+    >((acc, bucket) => (bucket.checked ? [...acc, bucket.key] : acc), []);
 
     return {
         ...searchParamsDefault,
