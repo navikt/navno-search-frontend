@@ -10,14 +10,19 @@ import style from './SearchResults.module.scss';
 
 const { keys } = Config.VARS;
 
-const isEmptyDefaultQuery = (
+const isInitialDefaultQuery = (
     result: SearchResultProps,
     params: SearchParams
 ) => {
-    const { word: searchTerm } = result;
+    const { word: searchTerm, isInitialResult } = result;
     const { f, uf } = params;
 
-    return !searchTerm && f === keys.defaultFacet && uf.length === 0;
+    return (
+        !searchTerm &&
+        isInitialResult &&
+        f === keys.defaultFacet &&
+        uf.length === 0
+    );
 };
 
 type Props = {
@@ -29,7 +34,7 @@ export const SearchResults = ({ result }: Props) => {
 
     return (
         <div className={style.searchResults}>
-            {isEmptyDefaultQuery(result, params) ? (
+            {isInitialDefaultQuery(result, params) ? (
                 <SearchResultsEmpty />
             ) : (
                 <SearchResultsList result={result} />

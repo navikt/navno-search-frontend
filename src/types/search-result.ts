@@ -75,4 +75,5 @@ export type SearchResultProps = DeepPartial<{
     };
     hits: SearchHitProps[];
     prioritized: SearchHitProps[];
+    isInitialResult?: boolean;
 }>;

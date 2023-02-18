@@ -43,19 +43,26 @@ const SearchBase = (props: Props) => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const result = await fetchSearchResults(context.query).catch((err) =>
-        console.error(err)
-    );
+export const getServerSideProps: GetServerSideProps<Props> = async (
+    context
+) => {
+    const result = await fetchSearchResults(context.query).catch((err) => {
+        console.error(err);
+        return null;
+    });
 
-    if (!result) {
-        const resultWithoutQuery = await fetchSearchResults().catch((err) =>
-            console.error(err)
-        );
-        return { props: { initialResult: resultWithoutQuery || null } };
+    if (result) {
+        return {
+            props: { initialResult: { ...result, isInitialResult: true } },
+        };
     }
 
-    return { props: { initialResult: result || null } };
+    const resultWithoutQuery = await fetchSearchResults().catch((err) => {
+        console.error(err);
+        return null;
+    });
+
+    return { props: { initialResult: resultWithoutQuery } };
 };
 
 export default SearchBase;
