@@ -10,7 +10,6 @@ $breakpoint: $left-col-width + common.$padding-sides-desktop-small * 2;
 }
 
 .leftCol {
-    flex-grow: 1;
     width: $left-col-width;
 
     @media (max-width: $breakpoint) {
