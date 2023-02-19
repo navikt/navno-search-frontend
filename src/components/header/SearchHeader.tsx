@@ -2,12 +2,34 @@ import React from 'react';
 import { SearchResultProps } from 'types/search-result';
 import { useSearchContext } from 'context/ContextProvider';
 import { ActionType } from 'context/actions';
-import { BodyLong, Button, Heading } from '@navikt/ds-react';
+import { BodyLong, BodyShort, Button, Heading } from '@navikt/ds-react';
 import Config from '../../config';
+import { paramToDaterangeKey } from '../../types/search-params';
 
 import style from './SearchHeader.module.scss';
 
 const { keys } = Config.VARS;
+
+const UfDisplay = ({ ufNames }: { ufNames: string[] }) => (
+    <>
+        {ufNames.map((uf, index) => (
+            <span key={index}>
+                {`${index ? ', ' : ''}`}
+                <span className={style.underFacets}>{`${uf}`}</span>
+            </span>
+        ))}
+        {' - '}
+    </>
+);
+
+const DateRangeDisplay = ({ daterange }: { daterange: number }) => (
+    <>
+        <BodyShort className={style.daterange} as={'span'}>
+            {paramToDaterangeKey[daterange]}
+        </BodyShort>
+        {' - '}
+    </>
+);
 
 type Props = {
     result: SearchResultProps;
@@ -20,17 +42,17 @@ export const SearchHeader = ({ result }: Props) => {
         (f) => f.key === params.f
     );
 
-    const underFacetNames =
+    const ufNames =
         selectedFacet?.underaggregeringer.buckets
             .filter((uf) => params.uf.includes(uf.key))
             .map((uf) => uf.name) || [];
 
-    const hasSelectedUnderfacets = underFacetNames.length > 0;
+    const isDefaultDaterange = params.daterange === keys.defaultDateRange;
 
     const hasSelectedNonDefaultFilters =
         params.f !== keys.defaultFacet ||
         params.uf.length > 0 ||
-        params.daterange !== keys.defaultDateRange;
+        !isDefaultDaterange;
 
     return (
         <div className={style.searchHeader} id={'search-header'}>
@@ -44,17 +66,10 @@ export const SearchHeader = ({ result }: Props) => {
             )}
             {hasSelectedNonDefaultFilters && (
                 <BodyLong>
-                    {underFacetNames.map((uf, index) => {
-                        return (
-                            <span key={index}>
-                                {`${index ? ' | ' : ''}`}
-                                <span className={style.underFacets}>
-                                    {`${uf}`}
-                                </span>
-                            </span>
-                        );
-                    })}
-                    {hasSelectedUnderfacets && ' - '}
+                    {ufNames.length > 0 && <UfDisplay ufNames={ufNames} />}
+                    {!isDefaultDaterange && (
+                        <DateRangeDisplay daterange={params.daterange} />
+                    )}
                     <Button
                         variant="tertiary"
                         className={style.reset}

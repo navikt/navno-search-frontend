@@ -9,6 +9,13 @@ export const daterangeKeyToParam = {
     [DaterangeKey.Last7Days]: 3,
 };
 
+export const paramToDaterangeKey = [
+    [DaterangeKey.Over12Months],
+    [DaterangeKey.Last12Months],
+    [DaterangeKey.Last30Days],
+    [DaterangeKey.Last7Days],
+];
+
 export enum SearchSort {
     BestMatch = 0,
     Newest = 1,
