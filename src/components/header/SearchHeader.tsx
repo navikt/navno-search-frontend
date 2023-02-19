@@ -60,7 +60,7 @@ export const SearchHeader = ({ result }: Props) => {
                         className={style.reset}
                         onClick={(e) => {
                             e.preventDefault();
-                            dispatch({ type: ActionType.ResetFacets });
+                            dispatch({ type: ActionType.ResetFilters });
                         }}
                     >
                         {'Nullstill filter'}

@@ -30,14 +30,18 @@ export type SearchParams = {
     daterange: number;
 };
 
-export const searchParamsDefault: SearchParams = {
-    ord: '',
+export const searchParamsDefaultFilters = {
     f: Config.VARS.keys.defaultFacet,
     uf: [],
-    c: 1,
-    start: 0,
     s: SearchSort.BestMatch,
     daterange: Config.VARS.keys.defaultDateRange,
+};
+
+export const searchParamsDefault: SearchParams = {
+    ord: '',
+    c: 1,
+    start: 0,
+    ...searchParamsDefaultFilters,
 };
 
 export const paramsFromResult = (searchResult: SearchResultProps | null) => {

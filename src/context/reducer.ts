@@ -1,6 +1,6 @@
 import {
     daterangeKeyToParam,
-    searchParamsDefault,
+    searchParamsDefaultFilters,
 } from '../types/search-params';
 import { Action, ActionType } from './actions';
 import { SearchContext } from './ContextProvider';
@@ -54,12 +54,12 @@ export const reducer = (state: SearchContext, action: Action) => {
                     uf: newUf.length > 0 ? newUf : [],
                 },
             };
-        case ActionType.ResetFacets:
+        case ActionType.ResetFilters:
             return {
                 ...state,
                 params: {
                     ...state.params,
-                    ...searchParamsDefault,
+                    ...searchParamsDefaultFilters,
                 },
             };
         default:
