@@ -72,10 +72,7 @@ const SearchPage = () => {
                     initialSearchTerm={searchTerm}
                     fetchNewResults={fetchAndSetNewResults}
                 />
-                <SearchSorting
-                    searchTerm={searchTerm}
-                    numHitsTotal={Number(result.total)}
-                />
+                <SearchSorting result={result} />
                 {isAwaitingResults ? (
                     <Spinner text={'Henter søke-resultater...'} />
                 ) : (

@@ -5,15 +5,17 @@ import { quote } from 'utils/quote';
 import { useSearchContext } from 'context/ContextProvider';
 import { ActionType } from 'context/actions';
 import { BodyShort, Link, Radio, RadioGroup } from '@navikt/ds-react';
+import { SearchResultProps } from '../../types/search-result';
+import { isInitialDefaultQuery } from '../../utils/isInitialDefaultQuery';
 
 import style from './SearchSorting.module.scss';
 
 type Props = {
-    searchTerm: string;
-    numHitsTotal: number;
+    result: SearchResultProps;
 };
 
-export const SearchSorting = ({ searchTerm, numHitsTotal }: Props) => {
+export const SearchSorting = ({ result }: Props) => {
+    const { word, total } = result;
     const [{ params }, dispatch] = useSearchContext();
 
     const { s: sort } = params;
@@ -39,15 +41,17 @@ export const SearchSorting = ({ searchTerm, numHitsTotal }: Props) => {
             </RadioGroup>
             <div className={style.hitsAndTips}>
                 <Link href={Config.PATHS.searchTips}>{'Søketips'}</Link>
-                {searchTerm && (
+                {!isInitialDefaultQuery(result, params) && (
                     <BodyShort aria-live={'polite'} className={style.hits}>
-                        {`${numHitsTotal} treff`}
-                        <span className={style.hitsVerbose}>
-                            {' for '}
-                            <span className={style.term}>
-                                {quote(searchTerm)}
+                        {`${total} treff`}
+                        {word && (
+                            <span className={style.hitsVerbose}>
+                                {' for '}
+                                <span className={style.term}>
+                                    {quote(word)}
+                                </span>
                             </span>
-                        </span>
+                        )}
                     </BodyShort>
                 )}
             </div>
