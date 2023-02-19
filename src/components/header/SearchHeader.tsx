@@ -10,27 +10,6 @@ import style from './SearchHeader.module.scss';
 
 const { keys } = Config.VARS;
 
-const UfDisplay = ({ ufNames }: { ufNames: string[] }) => (
-    <>
-        {ufNames.map((uf, index) => (
-            <span key={index}>
-                {`${index ? ', ' : ''}`}
-                <span className={style.underFacets}>{`${uf}`}</span>
-            </span>
-        ))}
-        {' - '}
-    </>
-);
-
-const DateRangeDisplay = ({ daterange }: { daterange: number }) => (
-    <>
-        <BodyShort className={style.daterange} as={'span'}>
-            {paramToDaterangeKey[daterange]}
-        </BodyShort>
-        {' - '}
-    </>
-);
-
 type Props = {
     result: SearchResultProps;
 };
@@ -66,9 +45,26 @@ export const SearchHeader = ({ result }: Props) => {
             )}
             {hasSelectedNonDefaultFilters && (
                 <BodyLong>
-                    {ufNames.length > 0 && <UfDisplay ufNames={ufNames} />}
+                    {ufNames.length > 0 && (
+                        <>
+                            {ufNames.map((uf, index) => (
+                                <span key={index}>
+                                    {`${index ? ', ' : ''}`}
+                                    <span
+                                        className={style.underFacets}
+                                    >{`${uf}`}</span>
+                                </span>
+                            ))}
+                            {' - '}
+                        </>
+                    )}
                     {!isDefaultDaterange && (
-                        <DateRangeDisplay daterange={params.daterange} />
+                        <>
+                            <BodyShort as={'span'}>
+                                {paramToDaterangeKey[params.daterange]}
+                            </BodyShort>
+                            {' - '}
+                        </>
                     )}
                     <Button
                         variant="tertiary"
