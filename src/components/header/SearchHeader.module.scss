@@ -3,7 +3,7 @@
 }
 
 .facet {
-    margin-top: 0.25rem;
+    margin-top: 0.5rem;
 }
 
 .underFacets {
@@ -11,11 +11,12 @@
     font-style: italic;
 }
 
-.resetUnderFacets {
+.reset {
     text-decoration: none;
     font-weight: bold;
     font-style: normal;
     padding: 0;
+    margin-top: 0.25rem;
 
     &:hover {
         text-decoration: underline;

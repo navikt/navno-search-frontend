@@ -8,8 +8,7 @@ import { useSearchContext } from '../context/ContextProvider';
 import { ActionType } from '../context/actions';
 import { SearchInput } from './input/SearchInput';
 import { SearchSorting } from './sorting/SearchSorting';
-import { SearchSort } from '../types/search-params';
-import Spinner from './spinner/Spinner';
+import { Spinner } from './spinner/Spinner';
 import { SearchResults } from './results/SearchResults';
 import { SearchFilters } from './filters/SearchFilters';
 
@@ -73,11 +72,7 @@ const SearchPage = () => {
                     initialSearchTerm={searchTerm}
                     fetchNewResults={fetchAndSetNewResults}
                 />
-                <SearchSorting
-                    isSortDate={Number(result.s) === SearchSort.Newest}
-                    searchTerm={searchTerm}
-                    numHitsTotal={Number(result.total)}
-                />
+                <SearchSorting result={result} />
                 {isAwaitingResults ? (
                     <Spinner text={'Henter søke-resultater...'} />
                 ) : (

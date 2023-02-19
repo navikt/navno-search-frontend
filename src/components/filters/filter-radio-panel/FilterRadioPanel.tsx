@@ -31,11 +31,11 @@ export const FilterRadioPanel = ({
                 onChange={onClick}
                 id={id}
             />
-            {(isOpen && !!children) &&
+            {isOpen && !!children && (
                 <div className={style.panelContent} id={`panel-${id}`}>
                     {children}
                 </div>
-            }
+            )}
         </div>
     );
 };

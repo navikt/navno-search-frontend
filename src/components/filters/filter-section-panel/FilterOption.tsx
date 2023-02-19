@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
+import { classNames } from '../../../utils/classnames';
 
 import style from './FilterOption.module.scss';
 
@@ -9,7 +9,6 @@ type Props = {
     label: string;
     name: string;
     count: number;
-    defaultChecked?: boolean;
     checked?: boolean;
     onChange?: (args: any) => any;
     type: FilterOptionType;
@@ -20,7 +19,6 @@ export const FilterOption = ({
     label,
     name,
     count,
-    defaultChecked,
     checked,
     onChange,
     type,
@@ -30,27 +28,26 @@ export const FilterOption = ({
     const inputProps = {
         value: label,
         name,
-        defaultChecked: defaultChecked && !!count,
-        checked: checked && !!count,
+        checked,
         onChange,
         type,
         id,
-        disabled,
+        // If the option is checked, we want the user to be able to uncheck it even if
+        // it had 0 hits and is styled as "disabled"
+        disabled: disabled && !checked,
     };
-    const inputClass = `navds-${type}__input`;
-    const labelClass = `navds-${type}__label`;
 
     return (
-        <span className={classNames(style.filterOption, disabled ? style.disabled : '')}>
-            <input
-                className={inputClass}
-                {...inputProps}
-            />
-            <label className={labelClass} htmlFor={inputProps.id}>
+        <span
+            className={classNames(
+                style.filterOption,
+                disabled && style.disabled
+            )}
+        >
+            <input className={`navds-${type}__input`} {...inputProps} />
+            <label className={`navds-${type}__label`} htmlFor={inputProps.id}>
                 {label}
-                <span className={style.count}>
-                    {count}
-                </span>
+                <span className={style.count}>{count}</span>
             </label>
         </span>
     );

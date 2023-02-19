@@ -1,6 +1,6 @@
-export const classNames = (...classNames: string[]) =>
+export const classNames = (...classNames: any[]): string =>
     classNames
-        .reduce(
+        .reduce<string>(
             (acc, className) =>
                 typeof className === 'string' ? `${acc} ${className}` : acc,
             ''

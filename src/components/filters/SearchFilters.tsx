@@ -4,7 +4,7 @@ import { DaterangeSelector } from './daterange-selector/DaterangeSelector';
 import { SearchResultProps } from 'types/search-result';
 import { ActionType } from 'context/actions';
 import { useSearchContext } from 'context/ContextProvider';
-import classNames from 'classnames';
+import { classNames } from '../../utils/classnames';
 import { Button, Heading } from '@navikt/ds-react';
 import { Expand } from '@navikt/ds-icons';
 
@@ -21,7 +21,8 @@ export const SearchFilters = ({ result }: Props) => {
 
     return (
         <div
-            className={classNames( style.searchFilters,
+            className={classNames(
+                style.searchFilters,
                 openMobile ? style.visibleMobile : ''
             )}
         >
@@ -43,7 +44,6 @@ export const SearchFilters = ({ result }: Props) => {
             <div className={style.filters}>
                 {fasetter?.buckets && (
                     <FacetsSelector
-                        initialFacet={result.fasettKey}
                         facetsProps={fasetter.buckets}
                         setFacet={(facet) =>
                             dispatch({
@@ -66,15 +66,7 @@ export const SearchFilters = ({ result }: Props) => {
                     />
                 )}
                 {Tidsperiode && (
-                    <DaterangeSelector
-                        daterangeProps={Tidsperiode}
-                        setDaterange={(daterangeKey) =>
-                            dispatch({
-                                type: ActionType.SetDaterange,
-                                daterangeKey: daterangeKey,
-                            })
-                        }
-                    />
+                    <DaterangeSelector daterangeProps={Tidsperiode} />
                 )}
             </div>
         </div>

@@ -1,4 +1,5 @@
 import { DaterangeKey, SearchResultProps } from './search-result';
+import Config from '../config';
 
 export const daterangeKeyToParam = {
     [DaterangeKey.All]: -1,
@@ -8,39 +9,49 @@ export const daterangeKeyToParam = {
     [DaterangeKey.Last7Days]: 3,
 };
 
+export const paramToDaterangeKey = [
+    [DaterangeKey.Over12Months],
+    [DaterangeKey.Last12Months],
+    [DaterangeKey.Last30Days],
+    [DaterangeKey.Last7Days],
+];
+
 export enum SearchSort {
     BestMatch = 0,
     Newest = 1,
 }
 
-export type SearchParams = Partial<{
+export type SearchParams = {
     // Search string
     ord: string;
-
     // Facet
     f: string;
-
     // Under-facets
     uf: string[];
-
     // Number of results to retrieve (20 * c)
     c: number;
-
-    // Skip first (20 * start) results
+    // Skips first (20 * start) results
     start: number;
 
     s: SearchSort;
     daterange: number;
-}>;
-
-export const searchParamsDefault: SearchParams = {
-    f: '0',
-    c: 1,
-    s: 0,
-    daterange: -1,
 };
 
-export const paramsFromResult = (searchResult: SearchResultProps) => {
+export const searchParamsDefaultFilters = {
+    f: Config.VARS.keys.defaultFacet,
+    uf: [],
+    s: SearchSort.BestMatch,
+    daterange: Config.VARS.keys.defaultDateRange,
+};
+
+export const searchParamsDefault: SearchParams = {
+    ord: '',
+    c: 1,
+    start: 0,
+    ...searchParamsDefaultFilters,
+};
+
+export const paramsFromResult = (searchResult: SearchResultProps | null) => {
     if (!searchResult) {
         return searchParamsDefault;
     }
@@ -49,10 +60,9 @@ export const paramsFromResult = (searchResult: SearchResultProps) => {
         (bucket) => bucket.key === searchResult.fasettKey
     );
 
-    const initialUfKeys = initialFacet?.underaggregeringer?.buckets?.reduce(
-        (acc, bucket) => (bucket.checked ? [...acc, bucket.key] : acc),
-        []
-    );
+    const initialUfKeys = initialFacet?.underaggregeringer?.buckets?.reduce<
+        string[]
+    >((acc, bucket) => (bucket.checked ? [...acc, bucket.key] : acc), []);
 
     return {
         ...searchParamsDefault,
