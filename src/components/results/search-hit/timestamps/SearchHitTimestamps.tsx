@@ -3,15 +3,19 @@ import { BodyShort } from '@navikt/ds-react';
 import { SearchHitProps } from '../../../../types/search-result';
 import { formatDate } from '../../../../utils/datetime';
 import dayjs from 'dayjs';
+import { getTranslations } from '../translations';
 
 const createPublishedAndModifiedString = ({
     publish,
     modifiedTime,
     createdTime,
+    language,
 }: SearchHitProps) => {
     const publishedTime = publish?.first || createdTime;
 
-    const publishedString = `Publisert ${formatDate(publishedTime)}`;
+    const publishedString = `${
+        getTranslations(language).published
+    } ${formatDate(publishedTime)}`;
 
     const isModifiedSincePublishedTime =
         modifiedTime &&
@@ -21,7 +25,9 @@ const createPublishedAndModifiedString = ({
         return publishedString;
     }
 
-    return `${publishedString} | Sist endret ${formatDate(modifiedTime)}`;
+    return `${publishedString} | ${
+        getTranslations(language).lastModified
+    } ${formatDate(modifiedTime)}`;
 };
 
 type Props = {

@@ -46,7 +46,7 @@ export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
                     <SearchHitOfficeInformation {...officeInformation} />
                 )}
                 <div className={style.bottomRow}>
-                    {audience && <SearchHitAudience audience={audience} />}
+                    {audience && <SearchHitAudience audience={audience} language={hit.language} />}
                     <SearchHitTimestamps hit={hit} />
                 </div>
             </div>

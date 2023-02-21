@@ -34,6 +34,8 @@ export type FacetBucketProps = {
 
 export type Audience = 'person' | 'employer' | 'provider';
 
+export type Language = 'no' | 'nn' | 'en';
+
 export type SearchHitProps = {
     priority: boolean;
     displayName: string;
@@ -51,6 +53,7 @@ export type SearchHitProps = {
         audienceReception?: string;
     };
     audience?: Audience | Audience[];
+    language: Language;
 };
 
 export type SearchResultProps = {
