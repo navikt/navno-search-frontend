@@ -25,5 +25,8 @@ const translations = {
 };
 
 export const getTranslations = (language: Language) => {
+    console.log("language");
+    console.log(translations[language])
+    console.log(translations[language] || translations['no'])
     return translations[language] || translations['no'];
 };
