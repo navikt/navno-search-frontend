@@ -18,9 +18,9 @@ const translations = {
     en: {
         published: 'Published',
         lastModified: 'Last modified',
-        person: 'Person',
-        employer: 'Employer',
-        provider: 'Provider',
+        person: 'Individuals',
+        employer: 'Employers',
+        provider: 'Partners',
     },
 };
 
