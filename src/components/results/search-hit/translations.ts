@@ -12,7 +12,7 @@ const translations = {
         published: 'Publisert',
         lastModified: 'Sist endra',
         person: 'Privatperson',
-        employer: 'Arbeidsgjevar',
+        employer: 'Arbeidsgivar',
         provider: 'Samarbeidspartnar',
     },
     en: {
