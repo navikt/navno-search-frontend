@@ -22,6 +22,15 @@ const translations = {
         employer: 'Employers',
         provider: 'Partners',
     },
+    se: {
+        // Mangler et par oversettelser her.
+        // Disse står på lista og vil bli tatt med i neste bestilling.
+        published: 'Publisert',
+        lastModified: 'Sist endret',
+        person: 'Priváhtaolmmoš',
+        employer: 'Bargoaddi',
+        provider: 'Ovttasbargoguoibmi',
+    },
 };
 
 export const getTranslations = (language: Language) => {
