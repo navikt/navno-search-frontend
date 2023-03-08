@@ -1,7 +1,7 @@
-import { Checkbox, Radio } from 'nav-frontend-skjema';
-import { Undertekst } from 'nav-frontend-typografi';
 import React from 'react';
-import './FilterOption.less';
+import { classNames } from '../../../utils/classnames';
+
+import style from './FilterOption.module.scss';
 
 export type FilterOptionType = 'radio' | 'checkbox';
 
@@ -10,8 +10,7 @@ type Props = {
     name: string;
     count: number;
     checked?: boolean;
-    defaultChecked?: boolean;
-    onChange: (args: any) => any;
+    onChange?: (args: any) => any;
     type: FilterOptionType;
     id: string;
 };
@@ -21,31 +20,35 @@ export const FilterOption = ({
     name,
     count,
     checked,
-    defaultChecked,
     onChange,
     type,
     id,
 }: Props) => {
-    const buttonProps = {
-        label,
+    const disabled = !count;
+    const inputProps = {
+        value: label,
         name,
-        checked: checked && !!count,
-        defaultChecked: defaultChecked && !!count,
+        checked,
         onChange,
+        type,
         id,
-        disabled: !count,
+        // If the option is checked, we want the user to be able to uncheck it even if
+        // it had 0 hits and is styled as "disabled"
+        disabled: disabled && !checked,
     };
 
     return (
-        <div className={'search-filter-option'}>
-            {type === 'radio' ? (
-                <Radio {...buttonProps} />
-            ) : (
-                <Checkbox {...buttonProps} />
+        <span
+            className={classNames(
+                style.filterOption,
+                disabled && style.disabled
             )}
-            <Undertekst className={'search-filter-option__count'}>
-                {count}
-            </Undertekst>
-        </div>
+        >
+            <input className={`navds-${type}__input`} {...inputProps} />
+            <label className={`navds-${type}__label`} htmlFor={inputProps.id}>
+                {label}
+                <span className={style.count}>{count}</span>
+            </label>
+        </span>
     );
 };

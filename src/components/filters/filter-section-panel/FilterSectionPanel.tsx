@@ -1,6 +1,7 @@
-import Panel from 'nav-frontend-paneler';
 import React from 'react';
-import './FilterSectionPanel.less';
+import { Panel } from '@navikt/ds-react';
+
+import style from './FilterSectionPanel.module.scss';
 
 type Props = {
     children: React.ReactNode | React.ReactNode[];
@@ -8,7 +9,7 @@ type Props = {
 
 export const FilterSectionPanel = ({ children }: Props) => {
     return (
-        <Panel border={true} className={'search-filter-panel'}>
+        <Panel border className={style.searchFilterPanel}>
             {children}
         </Panel>
     );

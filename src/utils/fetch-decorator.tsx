@@ -48,7 +48,7 @@ export const getDecorator = async () => {
                         id="decorator-env"
                         data-src={`${decoratorUrl}/env${query}`}
                     ></div>
-                    <script src={`${decoratorUrl}/client.js`}></script>
+                    <script async src={`${decoratorUrl}/client.js`}></script>
                 </>
             ),
         };
@@ -57,9 +57,19 @@ export const getDecorator = async () => {
     const { document } = new JSDOM(decoratorBody).window;
 
     return {
-        HEADER: parse(document.getElementById('header-withmenu').innerHTML),
-        STYLES: parse(document.getElementById('styles').innerHTML),
-        FOOTER: parse(document.getElementById('footer-withmenu').innerHTML),
-        SCRIPTS: parse(document.getElementById('scripts').innerHTML),
+        HEADER: parse(
+            (document.getElementById('header-withmenu') as HTMLElement)
+                .innerHTML
+        ),
+        STYLES: parse(
+            (document.getElementById('styles') as HTMLElement).innerHTML
+        ),
+        FOOTER: parse(
+            (document.getElementById('footer-withmenu') as HTMLElement)
+                .innerHTML
+        ),
+        SCRIPTS: parse(
+            (document.getElementById('scripts') as HTMLElement).innerHTML
+        ),
     };
 };

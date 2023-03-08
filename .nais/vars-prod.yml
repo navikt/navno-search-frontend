@@ -1,3 +1,13 @@
 appName: navno-search-frontend
 ingresses:
   - https://www.nav.no/sok($|\/.+)
+replicas:
+  min: 2
+  max: 4
+resources:
+  limits:
+    cpu: 1000m
+    memory: 768Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi

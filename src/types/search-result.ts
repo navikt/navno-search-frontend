@@ -1,9 +1,5 @@
 import { SearchSort } from './search-params';
 
-type DeepPartial<T> = {
-    [P in keyof T]?: DeepPartial<T[P]>;
-};
-
 export enum DaterangeKey {
     Last7Days = 'Siste 7 dager',
     Last30Days = 'Siste 30 dager',
@@ -12,21 +8,21 @@ export enum DaterangeKey {
     All = 'Alle datoer',
 }
 
-export type DaterangeBucketProps = DeepPartial<{
+export type DaterangeBucketProps = {
     key: DaterangeKey;
     docCount: number;
     checked: boolean;
     to?: string;
     from?: string;
-}>;
+};
 
-export type DaterangeProps = DeepPartial<{
+export type DaterangeProps = {
     docCount: number;
     checked: boolean;
     buckets: DaterangeBucketProps[];
-}>;
+};
 
-export type FacetBucketProps = DeepPartial<{
+export type FacetBucketProps = {
     key: string;
     name: string;
     docCount: number;
@@ -34,33 +30,34 @@ export type FacetBucketProps = DeepPartial<{
     underaggregeringer: {
         buckets: FacetBucketProps[];
     };
-    default?: boolean;
-}>;
+};
 
-export type SearchHitProps = DeepPartial<{
+export type Audience = 'person' | 'employer' | 'provider';
+
+export type Language = 'no' | 'nn' | 'en';
+
+export type SearchHitProps = {
     priority: boolean;
     displayName: string;
     href: string;
     displayPath: string;
     highlight: string;
-    publish: {
-        from: string;
-        first: string;
+    publish?: {
+        from?: string;
+        first?: string;
     };
     createdTime: string;
-    modifiedTime: string;
-    id: string;
-    score: number;
-    keywords: string[];
-    officeInformation: {
-        phone: string;
-        audienceReception: string;
+    modifiedTime?: string;
+    officeInformation?: {
+        phone?: string;
+        audienceReception?: string;
     };
-}>;
+    audience?: Audience | Audience[];
+    language: Language;
+};
 
-export type SearchResultProps = DeepPartial<{
+export type SearchResultProps = {
     c: number;
-    isSortDate: boolean; // note: this value is inverted!
     s: SearchSort;
     daterange: number;
     isMore: boolean;
@@ -75,5 +72,5 @@ export type SearchResultProps = DeepPartial<{
         Tidsperiode: DaterangeProps;
     };
     hits: SearchHitProps[];
-    prioritized: SearchHitProps[];
-}>;
+    isInitialResult?: boolean;
+};

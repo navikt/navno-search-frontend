@@ -1,0 +1,8 @@
+{
+  "plugins": ["css-modules"],
+  "extends": ["next/core-web-vitals", "plugin:css-modules/recommended"],
+  "rules": {
+    "css-modules/no-unused-class": [1, { "camelCase": true }],
+    "css-modules/no-undef-class": [2, { "camelCase": true }]
+  }
+}

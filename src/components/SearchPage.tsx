@@ -1,28 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { SearchHeader } from './header/SearchHeader';
-import { BEM } from '../utils/bem';
 import { useRouter } from 'next/router';
 import { fetchSearchResultsClientside } from '../utils/fetch-search-result';
-import { initAmplitude, logPageview, logSearchQuery } from '../utils/amplitude';
+import { logPageview, logSearchQuery } from '../utils/amplitude';
 import { objectToQueryString } from '../utils/fetch-utils';
 import { useSearchContext } from '../context/ContextProvider';
 import { ActionType } from '../context/actions';
 import { SearchInput } from './input/SearchInput';
 import { SearchSorting } from './sorting/SearchSorting';
-import { SearchSort } from '../types/search-params';
-import Spinner from './spinner/Spinner';
+import { Spinner } from './spinner/Spinner';
 import { SearchResults } from './results/SearchResults';
 import { SearchFilters } from './filters/SearchFilters';
-import './SearchPage.less';
+
+import style from './SearchPage.module.scss';
 
 const SearchPage = () => {
-    const bem = BEM('search');
     const [{ result, params }, dispatch] = useSearchContext();
     const { word: searchTerm } = result;
-
     const enableClientsideFetch = useRef(false);
     const [isAwaitingResults, setIsAwaitingResults] = useState(false);
-
     const router = useRouter();
 
     const fetchAndSetNewResults = async () => {
@@ -47,39 +43,36 @@ const SearchPage = () => {
         }
 
         setIsAwaitingResults(false);
-
         logSearchQuery(params.ord);
     };
 
     const { s, daterange, f, uf } = params;
+
     useEffect(() => {
         if (enableClientsideFetch.current) {
             fetchAndSetNewResults();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [s, daterange, f, uf]);
 
     useEffect(() => {
         enableClientsideFetch.current = true;
-        initAmplitude();
         logPageview();
         if (searchTerm) {
             logSearchQuery(searchTerm);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
-        <div className={bem()}>
-            <div className={bem('left-col')}>
+        <div className={style.search}>
+            <div className={style.leftCol}>
                 <SearchHeader result={result} />
                 <SearchInput
                     initialSearchTerm={searchTerm}
                     fetchNewResults={fetchAndSetNewResults}
                 />
-                <SearchSorting
-                    isSortDate={Number(result.s) === SearchSort.Newest}
-                    searchTerm={searchTerm}
-                    numHitsTotal={Number(result.total)}
-                />
+                <SearchSorting result={result} />
                 {isAwaitingResults ? (
                     <Spinner text={'Henter søke-resultater...'} />
                 ) : (

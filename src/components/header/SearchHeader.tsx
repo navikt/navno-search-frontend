@@ -1,58 +1,83 @@
 import React from 'react';
-import {
-    Innholdstittel,
-    Undertekst,
-    Undertittel,
-} from 'nav-frontend-typografi';
-import { SearchResultProps } from '../../types/search-result';
-import { BEM } from '../../utils/bem';
-import Lenke from 'nav-frontend-lenker';
-import { useSearchContext } from '../../context/ContextProvider';
-import { ActionType } from '../../context/actions';
-import './SearchHeader.less';
+import { SearchResultProps } from 'types/search-result';
+import { useSearchContext } from 'context/ContextProvider';
+import { ActionType } from 'context/actions';
+import { BodyLong, BodyShort, Button, Heading } from '@navikt/ds-react';
+import Config from '../../config';
+import { paramToDaterangeKey } from '../../types/search-params';
+
+import style from './SearchHeader.module.scss';
+
+const { keys } = Config.VARS;
 
 type Props = {
     result: SearchResultProps;
 };
 
 export const SearchHeader = ({ result }: Props) => {
-    const bem = BEM('search-header');
-    const facetObject = result.aggregations?.fasetter?.buckets?.find(
-        (f) => f.key === result.fasettKey
+    const [{ params }, dispatch] = useSearchContext();
+
+    const selectedFacet = result.aggregations.fasetter.buckets.find(
+        (f) => f.key === params.f
     );
-    const underFacetNames = facetObject?.underaggregeringer?.buckets
-        ?.filter((uf) => uf.checked)
-        .map((uf) => uf.name);
-    const [, dispatch] = useSearchContext();
+
+    const ufNames =
+        selectedFacet?.underaggregeringer.buckets
+            .filter((uf) => params.uf.includes(uf.key))
+            .map((uf) => uf.name) || [];
+
+    const isDefaultDaterange = params.daterange === keys.defaultDateRange;
+
+    const hasSelectedNonDefaultFilters =
+        params.f !== keys.defaultFacet ||
+        params.uf.length > 0 ||
+        !isDefaultDaterange;
 
     return (
-        <div className={bem()} id={'search-header'}>
-            <div>
-                <Innholdstittel className={bem('title')}>
-                    {'Søk på nav.no'}
-                </Innholdstittel>
-                <Undertittel className={bem('facet')}>
-                    {result.fasett}
-                </Undertittel>
-                {underFacetNames?.length > 0 && (
-                    <Undertekst className={bem('under-facets')}>
-                        {underFacetNames.map(
-                            (uf, index) => `${index ? ' | ' : ''}${uf}`
-                        )}
-                        {' - '}
-                        <Lenke
-                            href={'#'}
-                            className={bem('clear-uf')}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                dispatch({ type: ActionType.ClearUnderfacets });
-                            }}
-                        >
-                            {'Nullstill filter'}
-                        </Lenke>
-                    </Undertekst>
-                )}
-            </div>
+        <div className={style.searchHeader} id={'search-header'}>
+            <Heading level="1" size="large">
+                {'Søk på nav.no'}
+            </Heading>
+            {selectedFacet && (
+                <Heading level="2" size="medium" className={style.facet}>
+                    {selectedFacet.name}
+                </Heading>
+            )}
+            {hasSelectedNonDefaultFilters && (
+                <BodyLong>
+                    {ufNames.length > 0 && (
+                        <>
+                            {ufNames.map((uf, index) => (
+                                <span key={index}>
+                                    {`${index ? ', ' : ''}`}
+                                    <span
+                                        className={style.underFacets}
+                                    >{`${uf}`}</span>
+                                </span>
+                            ))}
+                            {' - '}
+                        </>
+                    )}
+                    {!isDefaultDaterange && (
+                        <>
+                            <BodyShort as={'span'}>
+                                {paramToDaterangeKey[params.daterange]}
+                            </BodyShort>
+                            {' - '}
+                        </>
+                    )}
+                    <Button
+                        variant="tertiary"
+                        className={style.reset}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            dispatch({ type: ActionType.ResetFilters });
+                        }}
+                    >
+                        {'Nullstill filter'}
+                    </Button>
+                </BodyLong>
+            )}
         </div>
     );
 };

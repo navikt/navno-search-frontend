@@ -7,7 +7,7 @@ import Document, {
     Head,
 } from 'next/document';
 import { DecoratorFragments, getDecorator } from '../utils/fetch-decorator';
-import Config from '../config';
+import { Config } from 'config';
 
 type Props = {
     decoratorFragments: DecoratorFragments;
@@ -29,7 +29,8 @@ class MyDocument extends Document<Props> {
         const { decoratorFragments } = this.props;
         const { HEADER, FOOTER, SCRIPTS, STYLES } = decoratorFragments;
         const title = 'Søk - nav.no';
-        const description = 'Søk på hele nav.no. Du kan filtrere på innhold og dato.';
+        const description =
+            'Søk på hele nav.no. Du kan filtrere på innhold og dato.';
         const previewImg = '/gfx/social-share-fallback.png';
         const canonicalUrl = `${appOrigin}${appBasePathProd}`;
 
