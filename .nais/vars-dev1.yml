@@ -1,4 +1,5 @@
 appName: navno-search-frontend-dev1
+xpHost: www.dev.nav.no
 ingresses:
   - https://www.dev.nav.no/sok($|\/.+)
 replicas:

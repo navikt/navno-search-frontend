@@ -28,6 +28,12 @@ spec:
     min: {{min}}
     max: {{max}}
   {{/with}}
+  accessPolicy:
+    outbound:
+      rules:
+        - application: nav-dekoratoren
+      external:
+        - host: {{xpHost}}
   resources:
   {{#with resources}}
     limits:
