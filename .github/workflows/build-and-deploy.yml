@@ -14,9 +14,6 @@ on:
       APP_ORIGIN:
         required: true
         type: string
-      DECORATOR_URL:
-        required: true
-        type: string
       XP_ORIGIN:
         required: true
         type: string
@@ -48,8 +45,8 @@ jobs:
           NODE_ENV=production
           APP_BASE_PATH=/sok
           APP_ORIGIN=${{ inputs.APP_ORIGIN }}
-          DECORATOR_URL=${{ inputs.DECORATOR_URL }}
           XP_ORIGIN=${{ inputs.XP_ORIGIN }}
+          ENV=${{ inputs.deployEnv }}
           EOF
       - name: Nextjs cache
         uses: actions/cache@v3
