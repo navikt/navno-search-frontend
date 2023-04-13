@@ -1,75 +1,33 @@
 import React from 'react';
-import { fetchWithTimeout, objectToQueryString } from './fetch-utils';
-import { JSDOM } from 'jsdom';
-import parse from 'html-react-parser';
 import Config from '../config';
+import {
+    DecoratorEnvProps,
+    fetchDecoratorReact,
+} from '@navikt/nav-dekoratoren-moduler/ssr';
 
-const decoratorUrl = process.env.DECORATOR_URL;
+const { DECORATOR_LOCAL_URL, ENV } = process.env;
 
-export type DecoratorFragments = {
-    HEADER: React.ReactNode;
-    FOOTER: React.ReactNode;
-    SCRIPTS: React.ReactNode;
-    STYLES: React.ReactNode;
+const envMap: Record<typeof ENV, DecoratorEnvProps['env']> = {
+    localhost: 'localhost',
+    dev1: 'dev',
+    dev2: 'beta',
+    prod: 'prod',
 };
 
-const fetchDecorator = (queryString?: string) => {
-    const url = `${decoratorUrl}/${queryString ? queryString : ''}`;
-    return fetchWithTimeout(url, 5000)
-        .then((res) => {
-            if (res.ok) {
-                return res.text();
-            }
-            const error = `Failed to fetch decorator from ${url}: ${res.status} - ${res.statusText}`;
-            throw Error(error);
-        })
-        .catch(console.error);
-};
+const decoratorEnv = envMap[process.env.ENV] || 'prod';
+
+const envProps =
+    decoratorEnv === 'localhost'
+        ? {
+              env: decoratorEnv,
+              localUrl: DECORATOR_LOCAL_URL,
+          }
+        : {
+              env: decoratorEnv,
+          };
+
+const decoratorProps = { ...envProps, params: Config.VARS.decoratorParams };
 
 export const getDecorator = async () => {
-    const query = objectToQueryString(Config.VARS.decoratorParams);
-
-    const decoratorBody = await fetchDecorator(query);
-
-    if (!decoratorBody) {
-        const decoratorUrl = process.env.DECORATOR_URL;
-        return {
-            HEADER: <div id="decorator-header"></div>,
-            STYLES: (
-                <link
-                    href={`${decoratorUrl}/css/client.css`}
-                    rel="stylesheet"
-                />
-            ),
-            FOOTER: <div id="decorator-footer"></div>,
-            SCRIPTS: (
-                <>
-                    <div
-                        id="decorator-env"
-                        data-src={`${decoratorUrl}/env${query}`}
-                    ></div>
-                    <script async src={`${decoratorUrl}/client.js`}></script>
-                </>
-            ),
-        };
-    }
-
-    const { document } = new JSDOM(decoratorBody).window;
-
-    return {
-        HEADER: parse(
-            (document.getElementById('header-withmenu') as HTMLElement)
-                .innerHTML
-        ),
-        STYLES: parse(
-            (document.getElementById('styles') as HTMLElement).innerHTML
-        ),
-        FOOTER: parse(
-            (document.getElementById('footer-withmenu') as HTMLElement)
-                .innerHTML
-        ),
-        SCRIPTS: parse(
-            (document.getElementById('scripts') as HTMLElement).innerHTML
-        ),
-    };
+    return fetchDecoratorReact(decoratorProps);
 };

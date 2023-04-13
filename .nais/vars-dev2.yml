@@ -1,4 +1,6 @@
 appName: navno-search-frontend-dev2
+dekoratorenAppName: nav-dekoratoren-beta
+xpHost: www-q6.nav.no
 ingresses:
   - https://www-2.dev.nav.no/sok($|\/.+)
 replicas:

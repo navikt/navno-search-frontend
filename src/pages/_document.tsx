@@ -6,28 +6,28 @@ import Document, {
     DocumentContext,
     Head,
 } from 'next/document';
-import { DecoratorFragments, getDecorator } from '../utils/fetch-decorator';
+import { getDecorator } from '../utils/fetch-decorator';
 import { Config } from 'config';
+import { DecoratorComponents } from '@navikt/nav-dekoratoren-moduler/ssr';
 
 type Props = {
-    decoratorFragments: DecoratorFragments;
+    Decorator: DecoratorComponents;
 };
 
 class MyDocument extends Document<Props> {
     static async getInitialProps(ctx: DocumentContext) {
         const initialProps = await Document.getInitialProps(ctx);
-        const decoratorFragments = await getDecorator();
+        const Decorator = await getDecorator();
         return {
             ...initialProps,
-            decoratorFragments,
+            Decorator,
         };
     }
 
     render() {
         const { APP_ORIGIN: appOrigin } = process.env;
         const { appBasePathProd } = Config.PATHS;
-        const { decoratorFragments } = this.props;
-        const { HEADER, FOOTER, SCRIPTS, STYLES } = decoratorFragments;
+        const { Decorator } = this.props;
         const title = 'Søk - nav.no';
         const description =
             'Søk på hele nav.no. Du kan filtrere på innhold og dato.';
@@ -50,13 +50,13 @@ class MyDocument extends Document<Props> {
                     <meta name="twitter:description" content={description} />
                     <meta name="twitter:image:src" content={previewImg} />
                     <meta name="robots" content="noindex, nofollow" />
-                    {STYLES}
+                    <Decorator.Styles />
                 </Head>
                 <body>
-                    {HEADER}
+                    <Decorator.Header />
                     <Main />
-                    {FOOTER}
-                    {SCRIPTS}
+                    <Decorator.Footer />
+                    <Decorator.Scripts />
                     <NextScript />
                 </body>
             </Html>
