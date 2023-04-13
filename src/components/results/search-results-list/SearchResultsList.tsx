@@ -55,7 +55,6 @@ export const SearchResultsList = ({ result }: Props) => {
                         <SearchHit
                             hit={hitProps}
                             hitIndex={index}
-                            searchTerm={result.word}
                             key={key}
                         />
                     );

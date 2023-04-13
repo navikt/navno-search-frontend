@@ -14,21 +14,19 @@ const logAmplitudeEvent = (
 
 export const logPageview = () => logAmplitudeEvent('sidevisning');
 
-export const logSearchQuery = (searchTerm: string) =>
+export const logSearchQuery = () =>
     logAmplitudeEvent('søk', {
         destinasjon: Config.URLS.xpSearchService,
-        sokeord: searchTerm?.toLowerCase(),
+        sokeord: '[redacted]',
         komponent: 'søkeside',
     });
 
 export const logResultClick = (
-    href: string,
-    searchTerm?: string,
     hitIndex?: number
 ) =>
     logAmplitudeEvent('resultat-klikk', {
-        destinasjon: href,
-        sokeord: searchTerm?.toLowerCase(),
+        destinasjon: '[redacted]',
+        sokeord: '[redacted]',
         treffnr: hitIndex,
     });
 

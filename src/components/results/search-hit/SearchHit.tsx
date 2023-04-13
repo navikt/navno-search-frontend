@@ -19,10 +19,9 @@ const parseHighlight = (highlight: string) => {
 type Props = {
     hit: SearchHitProps;
     hitIndex: number;
-    searchTerm: string;
 };
 
-export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
+export const SearchHit = ({ hit, hitIndex }: Props) => {
     const { displayName, href, highlight, officeInformation, audience } = hit;
 
     if (!displayName || !href) {
@@ -33,7 +32,7 @@ export const SearchHit = ({ hit, hitIndex, searchTerm }: Props) => {
         <LinkPanel
             href={href}
             className={style.searchHit}
-            onClick={() => logResultClick(href, searchTerm, hitIndex + 1)}
+            onClick={() => logResultClick(hitIndex + 1)}
         >
             <LinkPanel.Title>{displayName}</LinkPanel.Title>
             <div className={style.content}>
