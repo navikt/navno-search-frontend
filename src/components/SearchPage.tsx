@@ -43,7 +43,7 @@ const SearchPage = () => {
         }
 
         setIsAwaitingResults(false);
-        logSearchQuery(params.ord);
+        logSearchQuery();
     };
 
     const { s, daterange, f, uf } = params;
@@ -59,7 +59,7 @@ const SearchPage = () => {
         enableClientsideFetch.current = true;
         logPageview();
         if (searchTerm) {
-            logSearchQuery(searchTerm);
+            logSearchQuery();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
