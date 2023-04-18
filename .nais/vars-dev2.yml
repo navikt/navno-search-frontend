@@ -8,9 +8,8 @@ replicas:
   max: 1
 resources:
   limits:
-    cpu: 1000m
     memory: 768Mi
   requests:
-    cpu: 100m
+    cpu: 50m
     memory: 192Mi
 
