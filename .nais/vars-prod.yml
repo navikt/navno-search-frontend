@@ -1,6 +1,7 @@
 appName: navno-search-frontend
 dekoratorenAppName: nav-dekoratoren
 xpHost: www.nav.no
+appHost: www.nav.no
 ingresses:
   - https://www.nav.no/sok($|\/.+)
 replicas:

@@ -34,6 +34,7 @@ spec:
         - application: {{dekoratorenAppName}}
       external:
         - host: {{xpHost}}
+        - host: {{appHost}}
   resources:
   {{#with resources}}
     limits:
