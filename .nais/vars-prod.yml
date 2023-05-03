@@ -8,8 +8,8 @@ replicas:
   min: 2
   max: 4
 resources:
-limits:
-  memory: 768Mi
-requests:
-  cpu: 250m
-  memory: 256Mi
+  limits:
+    memory: 768Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
