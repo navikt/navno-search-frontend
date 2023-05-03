@@ -1,16 +1,16 @@
 name: Deploy to dev1
-on: 
-	workflow_dispatch
+on:
+  workflow_dispatch
 
 jobs:
-	deploy:
-		uses: ./.github/workflows/build-and-deploy.yml
-		with:
-			cluster: dev-gcp
-			deployEnv: dev1
-			imagename: dev1-deploy
-			APP_ORIGIN: https://www.intern.dev.nav.no
-			XP_ORIGIN: https://www.dev.nav.no
-		secrets:
-			READER_TOKEN: ${{ secrets.READER_TOKEN }}
-			NAIS_DEPLOY_APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+  deploy:
+    uses: ./.github/workflows/build-and-deploy.yml
+    with:
+      cluster: dev-gcp
+      deployEnv: dev1
+      imagename: dev1-deploy
+      APP_ORIGIN: https://www.intern.dev.nav.no
+      XP_ORIGIN: https://www.dev.nav.no
+    secrets:
+      READER_TOKEN: ${{ secrets.READER_TOKEN }}
+      NAIS_DEPLOY_APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
