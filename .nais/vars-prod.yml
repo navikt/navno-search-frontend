@@ -1,4 +1,5 @@
 appName: navno-search-frontend
+appHost: www.nav.no
 dekoratorenAppName: nav-dekoratoren
 xpHost: www.nav.no
 ingresses:

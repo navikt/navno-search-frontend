@@ -1,8 +1,9 @@
 appName: navno-search-frontend-dev2
+appHost: www-2.intern.dev.nav.no
 dekoratorenAppName: nav-dekoratoren-beta
 xpHost: www-q6.nav.no
 ingresses:
-  - https://www-2.dev.nav.no/sok($|\/.+)
+  - https://www-2.intern.dev.nav.no/sok($|\/.+)
 replicas:
   min: 1
   max: 1
@@ -12,4 +13,3 @@ resources:
   requests:
     cpu: 50m
     memory: 192Mi
-

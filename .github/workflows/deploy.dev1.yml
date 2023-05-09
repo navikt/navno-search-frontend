@@ -9,7 +9,7 @@ jobs:
       cluster: dev-gcp
       deployEnv: dev1
       imagename: dev1-deploy
-      APP_ORIGIN: https://www.dev.nav.no
+      APP_ORIGIN: https://www.intern.dev.nav.no
       XP_ORIGIN: https://www.dev.nav.no
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
