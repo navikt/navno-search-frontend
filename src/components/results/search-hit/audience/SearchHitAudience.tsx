@@ -5,14 +5,15 @@ import {
     Language,
     SearchHitProps,
 } from '../../../../types/search-result';
+import { getTranslations } from '../translations';
 
 import style from './SearchHitAudience.module.scss';
-import {getTranslations} from "../translations";
 
 const variant: Record<Audience, TagProps['variant']> = {
     person: 'info',
     employer: 'alt1',
     provider: 'alt2',
+    other: 'neutral',
 };
 
 type Props = {

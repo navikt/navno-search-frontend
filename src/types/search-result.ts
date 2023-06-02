@@ -32,7 +32,7 @@ export type FacetBucketProps = {
     };
 };
 
-export type Audience = 'person' | 'employer' | 'provider';
+export type Audience = 'person' | 'employer' | 'provider' | 'other';
 
 export type Language = 'no' | 'nn' | 'en';
 

@@ -7,6 +7,7 @@ const translations = {
         person: 'Privatperson',
         employer: 'Arbeidsgiver',
         provider: 'Samarbeidspartner',
+        other: 'Annet',
     },
     nn: {
         published: 'Publisert',
@@ -14,6 +15,7 @@ const translations = {
         person: 'Privatperson',
         employer: 'Arbeidsgivar',
         provider: 'Samarbeidspartnar',
+        other: 'Anna',
     },
     en: {
         published: 'Published',
@@ -21,6 +23,7 @@ const translations = {
         person: 'Individuals',
         employer: 'Employers',
         provider: 'Partners',
+        other: 'Other',
     },
     se: {
         // Mangler et par oversettelser her.
@@ -30,6 +33,7 @@ const translations = {
         person: 'Priváhtaolmmoš',
         employer: 'Bargoaddi',
         provider: 'Ovttasbargoguoibmi',
+        other: 'Annet',
     },
 };
 
