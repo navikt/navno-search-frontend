@@ -3,7 +3,7 @@ import { Language } from '../../../types/search-result';
 const translations = {
     no: {
         published: 'Publisert',
-        lastModified: 'Sist endret',
+        lastModified: 'Oppdatert',
         person: 'Privatperson',
         employer: 'Arbeidsgiver',
         provider: 'Samarbeidspartner',
@@ -11,7 +11,7 @@ const translations = {
     },
     nn: {
         published: 'Publisert',
-        lastModified: 'Sist endra',
+        lastModified: 'Oppdatert',
         person: 'Privatperson',
         employer: 'Arbeidsgivar',
         provider: 'Samarbeidspartnar',
@@ -19,7 +19,7 @@ const translations = {
     },
     en: {
         published: 'Published',
-        lastModified: 'Last modified',
+        lastModified: 'Updated',
         person: 'Individuals',
         employer: 'Employers',
         provider: 'Partners',
@@ -29,7 +29,7 @@ const translations = {
         // Mangler et par oversettelser her.
         // Disse står på lista og vil bli tatt med i neste bestilling.
         published: 'Publisert',
-        lastModified: 'Sist endret',
+        lastModified: 'Oppdatert',
         person: 'Priváhtaolmmoš',
         employer: 'Bargoaddi',
         provider: 'Ovttasbargoguoibmi',
