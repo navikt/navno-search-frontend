@@ -11,7 +11,12 @@ const createPublishedAndModifiedString = ({
     createdTime,
     language,
     hidePublishDate,
+    hideModifiedDate,
 }: SearchHitProps) => {
+    if (hidePublishDate && hideModifiedDate) {
+        return '';
+    }
+
     const publishedTime = publish?.first || createdTime;
 
     if (hidePublishDate) {
