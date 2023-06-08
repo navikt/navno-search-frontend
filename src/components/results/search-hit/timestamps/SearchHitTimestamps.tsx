@@ -10,8 +10,17 @@ const createPublishedAndModifiedString = ({
     modifiedTime,
     createdTime,
     language,
+    hidePublishDate,
 }: SearchHitProps) => {
     const publishedTime = publish?.first || createdTime;
+
+    if (hidePublishDate) {
+        return modifiedTime
+            ? `${getTranslations(language).lastModified} ${formatDate(
+                  modifiedTime
+              )}`
+            : '';
+    }
 
     const publishedString = `${
         getTranslations(language).published
