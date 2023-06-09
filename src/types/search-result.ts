@@ -54,6 +54,8 @@ export type SearchHitProps = {
     };
     audience?: Audience | Audience[];
     language: Language;
+    hidePublishDate: boolean;
+    hideModifiedDate: boolean;
 };
 
 export type SearchResultProps = {
