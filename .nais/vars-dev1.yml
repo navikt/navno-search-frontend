@@ -4,6 +4,7 @@ dekoratorenAppName: nav-dekoratoren
 xpHost: www.dev.nav.no
 ingresses:
   - https://www.intern.dev.nav.no/sok($|\/.+)
+  - https://www.ekstern.dev.nav.no/sok($|\/.+)
 replicas:
   min: 1
   max: 2
