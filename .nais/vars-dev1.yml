@@ -1,9 +1,8 @@
 appName: navno-search-frontend-dev1
-appHost: www.intern.dev.nav.no
+appHost: www.ekstern.dev.nav.no
 dekoratorenAppName: nav-dekoratoren
-xpHost: www.dev.nav.no
+xpHost: portal-admin-dev.oera.no
 ingresses:
-  - https://www.intern.dev.nav.no/sok($|\/.+)
   - https://www.ekstern.dev.nav.no/sok($|\/.+)
 replicas:
   min: 1

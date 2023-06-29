@@ -1,9 +1,9 @@
 appName: navno-search-frontend-dev2
-appHost: www-2.intern.dev.nav.no
+appHost: www-2.ekstern.dev.nav.no
 dekoratorenAppName: nav-dekoratoren-beta
-xpHost: www-q6.nav.no
+xpHost: portal-admin-q6.oera.no
 ingresses:
-  - https://www-2.intern.dev.nav.no/sok($|\/.+)
+  - https://www-2.ekstern.dev.nav.no/sok($|\/.+)
 replicas:
   min: 1
   max: 1
