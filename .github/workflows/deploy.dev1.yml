@@ -11,6 +11,8 @@ jobs:
       imagename: dev1-deploy
       APP_ORIGIN: https://www.ekstern.dev.nav.no
       XP_ORIGIN: https://portal-admin-dev.oera.no
+    permissions:
+      packages: write
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       NAIS_DEPLOY_APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
