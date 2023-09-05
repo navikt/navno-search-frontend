@@ -5,6 +5,8 @@ on:
 jobs:
   deploy:
     uses: ./.github/workflows/build-and-deploy.yml
+    permissions:
+      packages: "write"
     with:
       cluster: dev-gcp
       deployEnv: dev1

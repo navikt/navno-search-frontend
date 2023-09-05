@@ -18,6 +18,8 @@ export const middleware =
                   req.headers.get('x-real-ip') ||
                   req.headers.get('x-forwarded-for');
 
+              console.log(req);
+
               if (!(isNavIp(ip) || req.cookies.get(LOGIN_COOKIE))) {
                   console.log(`Non-authorized client ip: ${ip}`);
                   return new NextResponse('Ingen tilgang', { status: 401 });
