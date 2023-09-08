@@ -75,5 +75,5 @@ jobs:
           CLUSTER: ${{ inputs.cluster }}
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: .nais/config.yml
-          VAR: image=${{ jobs.build_image.outputs.image }}
+          VAR: image=${{ steps.docker-push.outputs.image }}
           VARS: .nais/vars-${{ inputs.deployEnv }}.yml
