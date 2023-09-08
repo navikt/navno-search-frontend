@@ -6,7 +6,8 @@ jobs:
   deploy:
     uses: ./.github/workflows/build-and-deploy.yml
     permissions:
-      packages: "write"
+      contents: "read"
+      id-token: "write"
     with:
       cluster: dev-gcp
       deployEnv: dev1
@@ -16,3 +17,4 @@ jobs:
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       NAIS_DEPLOY_APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+      NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
