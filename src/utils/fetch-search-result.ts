@@ -11,7 +11,7 @@ export const fetchSearchResults = (
         ...searchParamsDefault,
         ...params,
     });
-    const url = `${Config.URLS.xpSearchService}${queryString}`;
+    const url = `${Config.URLS.searchService}${queryString}`;
     return fetchWithTimeout(url, 5000).then((res) => {
         if (res.ok) {
             return res.json();

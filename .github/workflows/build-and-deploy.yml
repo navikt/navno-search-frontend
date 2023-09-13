@@ -14,7 +14,7 @@ on:
       APP_ORIGIN:
         required: true
         type: string
-      XP_ORIGIN:
+      SEARCH_URL:
         required: true
         type: string
     secrets:
@@ -48,7 +48,7 @@ jobs:
           NODE_ENV=production
           APP_BASE_PATH=/sok
           APP_ORIGIN=${{ inputs.APP_ORIGIN }}
-          XP_ORIGIN=${{ inputs.XP_ORIGIN }}
+          SEARCH_URL=${{ inputs.SEARCH_URL }}
           ENV=${{ inputs.deployEnv }}
           EOF
       - name: Nextjs cache

@@ -13,7 +13,7 @@ jobs:
       deployEnv: dev2
       imagename: dev2-deploy
       APP_ORIGIN: https://www-2.ekstern.dev.nav.no
-      XP_ORIGIN: https://portal-admin-q6.oera.no
+      SEARCH_URL: https://portal-admin-q6.oera.no
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       NAIS_DEPLOY_APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}

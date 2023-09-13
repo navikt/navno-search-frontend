@@ -16,7 +16,7 @@ export const logPageview = () => logAmplitudeEvent('sidevisning');
 
 export const logSearchQuery = () =>
     logAmplitudeEvent('søk', {
-        destinasjon: Config.URLS.xpSearchService,
+        destinasjon: Config.URLS.searchService,
         sokeord: '[redacted]',
         komponent: 'søkeside',
     });
