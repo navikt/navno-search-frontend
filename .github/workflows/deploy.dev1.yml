@@ -13,7 +13,7 @@ jobs:
       deployEnv: dev1
       imagename: dev1-deploy
       APP_ORIGIN: https://www.ekstern.dev.nav.no
-      SEARCH_URL: https://portal-admin-dev.oera.no
+      SEARCH_URL: https://navno-search-api.intern.dev.nav.no/content/compatible-search
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       NAIS_DEPLOY_APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
