@@ -11,10 +11,10 @@ spec:
   team: personbruker
   port: 3001
   liveness:
-    path: /sok/api/internal/isAlive
+    path: /nytt-sok/api/internal/isAlive
     initialDelay: 5
   readiness:
-    path: /sok/api/internal/isReady
+    path: /nytt-sok/api/internal/isReady
     initialDelay: 5
   ingresses:
   {{#each ingresses as |url|}}

@@ -46,7 +46,7 @@ jobs:
         run: |
           cat > .env <<EOF
           NODE_ENV=production
-          APP_BASE_PATH=/sok
+          APP_BASE_PATH=/nytt-sok
           APP_ORIGIN=${{ inputs.APP_ORIGIN }}
           SEARCH_URL=${{ inputs.SEARCH_URL }}
           ENV=${{ inputs.deployEnv }}

@@ -2,7 +2,7 @@ const PATHS = {
     searchApi: `${process.env.APP_BASE_PATH}/api/search`,
     searchTips:
         '/no/nav-og-samfunn/kontakt-nav/teknisk-brukerstotte/nyttig-a-vite/soketips',
-    appBasePathProd: '/sok',
+    appBasePathProd: '/nytt-sok',
 };
 
 const URLS = {
