@@ -3,7 +3,7 @@ appHost: www.ekstern.dev.nav.no
 dekoratorenAppName: nav-dekoratoren
 xpHost: portal-admin-dev.oera.no
 ingresses:
-  - https://www.ekstern.dev.nav.no/sok($|\/.+)
+  - https://www.ekstern.dev.nav.no/sok-ny($|\/.+)
 replicas:
   min: 1
   max: 2
