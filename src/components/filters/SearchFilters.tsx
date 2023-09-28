@@ -16,7 +16,7 @@ type Props = {
 
 export const SearchFilters = ({ result }: Props) => {
     const [, dispatch] = useSearchContext();
-    const { fasetter, Tidsperiode } = result.aggregations;
+    const { fasetter, tidsperiode } = result.aggregations;
     const [openMobile, setOpenMobile] = useState(false);
 
     return (
@@ -65,8 +65,8 @@ export const SearchFilters = ({ result }: Props) => {
                         }
                     />
                 )}
-                {Tidsperiode && (
-                    <DaterangeSelector daterangeProps={Tidsperiode} />
+                {tidsperiode && (
+                    <DaterangeSelector daterangeProps={tidsperiode} />
                 )}
             </div>
         </div>
