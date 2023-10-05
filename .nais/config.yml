@@ -32,10 +32,10 @@ spec:
     outbound:
       rules:
         - application: {{dekoratorenAppName}}
-        - application: navno-search-api
       external:
         - host: {{xpHost}}
         - host: {{appHost}}
+        - host: navno-search-api.intern.dev.nav.no
   resources:
   {{#with resources}}
     limits:
