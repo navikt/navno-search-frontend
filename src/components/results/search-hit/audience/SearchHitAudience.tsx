@@ -10,10 +10,10 @@ import { getTranslations } from '../translations';
 import style from './SearchHitAudience.module.scss';
 
 const variant: Record<Audience, TagProps['variant']> = {
-    person: 'info',
-    employer: 'alt1',
-    provider: 'alt2',
-    other: 'neutral',
+    privatperson: 'info',
+    arbeidsgiver: 'alt1',
+    samarbeidspartner: 'alt2',
+    andre: 'neutral',
 };
 
 type Props = {
