@@ -67,8 +67,8 @@ const SearchPage = () => {
     return (
         <div className={style.search}>
             <div className={style.leftCol}>
-                <SearchHeader result={result} />
                 <SearchInput
+                    label={<SearchHeader result={result} />}
                     initialSearchTerm={searchTerm}
                     fetchNewResults={fetchAndSetNewResults}
                 />

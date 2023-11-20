@@ -34,7 +34,7 @@ const SearchBase = (props: Props) => {
                         <SearchPage />
                     </ContextProvider>
                 ) : (
-                    <Alert variant="error">
+                    <Alert role="alert" variant="error">
                         {'Feil - søketjenesten er ikke tilgjengelig'}
                     </Alert>
                 )}
