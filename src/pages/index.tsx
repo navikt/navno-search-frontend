@@ -21,7 +21,6 @@ const SearchBase = (props: Props) => {
                 <title>{'Søk - nav.no'}</title>
             </Head>
             <main
-                role={'main'}
                 className={'content-wrapper'}
                 id={'maincontent'}
                 tabIndex={-1}
