@@ -17,6 +17,8 @@ type Props = {
 export const SearchHeader = ({ result }: Props) => {
     const [{ params }, dispatch] = useSearchContext();
 
+    const mainTitle = 'Søk på nav.no';
+
     const selectedFacet = result.aggregations.fasetter.buckets.find(
         (f) => f.key === params.f
     );
@@ -34,9 +36,18 @@ export const SearchHeader = ({ result }: Props) => {
         !isDefaultDaterange;
 
     return (
-        <>
+        <div
+            className={style.searchHeader}
+            id={'search-header'}
+            aria-label={`${mainTitle} 
+            ${hasSelectedNonDefaultFilters ? selectedFacet?.name : ''} 
+            ${ufNames} 
+            ${
+                !isDefaultDaterange ? paramToDaterangeKey[params.daterange] : ''
+            }`}
+        >
             <Heading level="1" size="large">
-                {'Søk på nav.no'}
+                {mainTitle}
             </Heading>
             {selectedFacet && (
                 <Heading level="2" size="medium" className={style.facet}>
@@ -78,6 +89,6 @@ export const SearchHeader = ({ result }: Props) => {
                     </Button>
                 </BodyLong>
             )}
-        </>
+        </div>
     );
 };

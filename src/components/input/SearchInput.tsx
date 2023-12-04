@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 import { useSearchContext } from 'context/ContextProvider';
 import { ActionType } from 'context/actions';
 import Cookies from 'js-cookie';
@@ -17,12 +17,11 @@ const setSubmitTrackerCookie = () => {
 };
 
 type Props = {
-    label: ReactNode;
     initialSearchTerm: string;
     fetchNewResults: () => void;
 };
 
-export const SearchInput = ({ label, initialSearchTerm, fetchNewResults }: Props) => {
+export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
     const [inputValue, _setInputValue] = useState(
         initialSearchTerm.slice(0, maxInputLength)
     );
@@ -47,7 +46,9 @@ export const SearchInput = ({ label, initialSearchTerm, fetchNewResults }: Props
             className={style.searchForm}
         >
             <TextField
-                label={label}
+                aria-labelledby="search-header"
+                label=""
+                hideLabel
                 className={style.searchField}
                 onChange={(e) => setInputValue(e.target.value)}
                 value={inputValue}
