@@ -34,7 +34,7 @@ export const SearchDescription = ({ result }: Props) => {
         !isDefaultDaterange;
 
     return (
-        <div className={style.searchDescription} id={'search-header'}>
+        <div className={style.searchDescription}>
             {hasSelectedNonDefaultFilters && (
                 <BodyLong>
                     {ufNames.length > 0 && (
