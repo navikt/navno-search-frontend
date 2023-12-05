@@ -4,6 +4,7 @@ import { ActionType } from 'context/actions';
 import Cookies from 'js-cookie';
 import { Close } from '@navikt/ds-icons';
 import { Button, Heading, TextField } from '@navikt/ds-react';
+import { SearchResultProps } from 'types/search-result';
 
 import style from './SearchInput.module.scss';
 
@@ -17,7 +18,7 @@ const setSubmitTrackerCookie = () => {
 };
 
 type Props = {
-    result: any;
+    result: SearchResultProps;
     description: ReactNode;
     initialSearchTerm: string;
     fetchNewResults: () => void;
