@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import { Close } from '@navikt/ds-icons';
 import { Button, Heading, TextField } from '@navikt/ds-react';
 import { SearchResultProps } from 'types/search-result';
+import { SearchDescription } from 'components/header/SearchDescription';
 
 import style from './SearchInput.module.scss';
 
@@ -19,14 +20,12 @@ const setSubmitTrackerCookie = () => {
 
 type Props = {
     result: SearchResultProps;
-    description: ReactNode;
     initialSearchTerm: string;
     fetchNewResults: () => void;
 };
 
 export const SearchInput = ({
     result,
-    description,
     initialSearchTerm,
     fetchNewResults,
 }: Props) => {
@@ -71,7 +70,7 @@ export const SearchInput = ({
                         </Heading>
                     )
                 }
-                description={description}
+                description={<SearchDescription result={result} />}
                 className={style.searchField}
                 onChange={(e) => setInputValue(e.target.value)}
                 value={inputValue}

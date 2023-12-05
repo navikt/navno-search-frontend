@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { SearchDescription } from './header/SearchDescription';
 import { useRouter } from 'next/router';
 import { fetchSearchResultsClientside } from '../utils/fetch-search-result';
 import { logPageview, logSearchQuery } from '../utils/amplitude';
@@ -73,7 +72,6 @@ const SearchPage = () => {
                 </Heading>
                 <SearchInput
                     result={result}
-                    description={<SearchDescription result={result} />}
                     initialSearchTerm={searchTerm}
                     fetchNewResults={fetchAndSetNewResults}
                 />
