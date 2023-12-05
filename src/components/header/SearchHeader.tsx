@@ -34,7 +34,7 @@ export const SearchHeader = ({ result }: Props) => {
         !isDefaultDaterange;
 
     return (
-        <div className={style.searchHeader} id={'search-header'}>
+        <div className={style.searchHeader}>
             <Heading level="1" size="large">
                 {'Søk på nav.no'}
             </Heading>
