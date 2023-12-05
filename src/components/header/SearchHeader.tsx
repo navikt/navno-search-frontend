@@ -2,7 +2,7 @@ import React from 'react';
 import { SearchResultProps } from 'types/search-result';
 import { useSearchContext } from 'context/ContextProvider';
 import { ActionType } from 'context/actions';
-import { BodyLong, BodyShort, Button, Heading } from '@navikt/ds-react';
+import { BodyLong, BodyShort, Button } from '@navikt/ds-react';
 import Config from '../../config';
 import { paramToDaterangeKey } from '../../types/search-params';
 

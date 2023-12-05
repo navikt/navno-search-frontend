@@ -68,7 +68,7 @@ const SearchPage = () => {
     return (
         <div className={style.search}>
             <div className={style.leftCol}>
-                <Heading level="1" size="large">
+                <Heading level="1" size="large" spacing>
                     {'Søk på nav.no'}
                 </Heading>
                 <SearchInput

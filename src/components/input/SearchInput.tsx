@@ -63,9 +63,7 @@ export const SearchInput = ({
                 label={
                     selectedFacet && (
                         <Heading
-                            level="2"
                             size="medium"
-                            className={style.facet}
                             as="span"
                             aria-label={`Søk i ${selectedFacet.name}`}
                         >
