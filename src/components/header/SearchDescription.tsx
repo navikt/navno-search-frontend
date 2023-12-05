@@ -6,7 +6,7 @@ import { BodyLong, BodyShort, Button } from '@navikt/ds-react';
 import Config from '../../config';
 import { paramToDaterangeKey } from '../../types/search-params';
 
-import style from './SearchHeader.module.scss';
+import style from './SearchDescription.module.scss';
 
 const { keys } = Config.VARS;
 
@@ -14,7 +14,7 @@ type Props = {
     result: SearchResultProps;
 };
 
-export const SearchHeader = ({ result }: Props) => {
+export const SearchDescription = ({ result }: Props) => {
     const [{ params }, dispatch] = useSearchContext();
 
     const selectedFacet = result.aggregations.fasetter.buckets.find(
@@ -34,7 +34,7 @@ export const SearchHeader = ({ result }: Props) => {
         !isDefaultDaterange;
 
     return (
-        <div className={style.searchHeader} id={'search-header'}>
+        <div className={style.searchDescription} id={'search-header'}>
             {hasSelectedNonDefaultFilters && (
                 <BodyLong>
                     {ufNames.length > 0 && (
