@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 import { useSearchContext } from 'context/ContextProvider';
 import { ActionType } from 'context/actions';
 import Cookies from 'js-cookie';
