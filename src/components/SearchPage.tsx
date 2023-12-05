@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { SearchHeader } from './header/SearchHeader';
 import { useRouter } from 'next/router';
 import { fetchSearchResultsClientside } from '../utils/fetch-search-result';
 import { logPageview, logSearchQuery } from '../utils/amplitude';
@@ -11,6 +10,7 @@ import { SearchSorting } from './sorting/SearchSorting';
 import { Spinner } from './spinner/Spinner';
 import { SearchResults } from './results/SearchResults';
 import { SearchFilters } from './filters/SearchFilters';
+import { Heading } from '@navikt/ds-react';
 
 import style from './SearchPage.module.scss';
 
@@ -67,8 +67,11 @@ const SearchPage = () => {
     return (
         <div className={style.search}>
             <div className={style.leftCol}>
+                <Heading className={style.heading} level="1" size="large">
+                    {'Søk på nav.no'}
+                </Heading>
                 <SearchInput
-                    label={<SearchHeader result={result} />}
+                    result={result}
                     initialSearchTerm={searchTerm}
                     fetchNewResults={fetchAndSetNewResults}
                 />
