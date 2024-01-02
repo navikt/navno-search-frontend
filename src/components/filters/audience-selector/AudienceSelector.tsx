@@ -13,8 +13,6 @@ type Props = {
 export const AudienceSelector = ({ setAudience }: Props) => {
     const [{ params }] = useSearchContext();
 
-    console.log(params)
-
     return (
         <FilterSectionPanel>
             <Heading level="3" size="small">
