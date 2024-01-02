@@ -46,14 +46,14 @@ const SearchPage = () => {
         logSearchQuery();
     };
 
-    const { s, daterange, f, uf, audience } = params;
+    const { s, daterange, f, uf, audience, preferredLanguage } = params;
 
     useEffect(() => {
         if (enableClientsideFetch.current) {
             fetchAndSetNewResults();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [s, daterange, f, uf, audience]);
+    }, [s, daterange, f, uf, audience, preferredLanguage]);
 
     useEffect(() => {
         enableClientsideFetch.current = true;

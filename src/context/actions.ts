@@ -11,6 +11,7 @@ export enum ActionType {
     SetFacet,
     SetUnderfacet,
     SetAudience,
+    SetPreferredLanguage,
     ResetFilters,
 }
 
@@ -46,6 +47,10 @@ export type Action =
     | {
           type: ActionType.SetAudience;
           audienceToggle: CheckboxToggleProps;
+      }
+    | {
+          type: ActionType.SetPreferredLanguage;
+          preferredLanguage: string;
       }
     | {
           type: ActionType.ResetFilters;

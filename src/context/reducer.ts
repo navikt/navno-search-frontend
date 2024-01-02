@@ -40,7 +40,7 @@ export const reducer = (state: SearchContext, action: Action) => {
                 params: { ...state.params, f: action.facet, uf: [] },
             };
         case ActionType.SetUnderfacet:
-            const { key: ufKey,toggle: ufToggle } = action.underfacetToggle;
+            const { key: ufKey, toggle: ufToggle } = action.underfacetToggle;
             const oldUf = state.params.uf || [];
             const newUf = ufToggle
                 ? oldUf.includes(ufKey)
@@ -55,7 +55,8 @@ export const reducer = (state: SearchContext, action: Action) => {
                 },
             };
         case ActionType.SetAudience:
-            const { key: audienceKey, toggle: audienceToggle } = action.audienceToggle;
+            const { key: audienceKey, toggle: audienceToggle } =
+                action.audienceToggle;
             const oldAudience = state.params.audience || [];
             const newAudience = audienceToggle
                 ? oldAudience.includes(audienceKey)
@@ -67,6 +68,14 @@ export const reducer = (state: SearchContext, action: Action) => {
                 params: {
                     ...state.params,
                     audience: newAudience.length > 0 ? newAudience : [],
+                },
+            };
+        case ActionType.SetPreferredLanguage:
+            return {
+                ...state,
+                params: {
+                    ...state.params,
+                    preferredLanguage: action.preferredLanguage,
                 },
             };
         case ActionType.ResetFilters:
