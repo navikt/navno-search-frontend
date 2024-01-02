@@ -30,7 +30,7 @@ export const objectToQueryString = (params: object) =>
               const encodedValue =
                   typeof v === 'object'
                       ? // workaround for strange xp search behaviour when sending array as parameter
-                        k === 'uf'
+                        k === 'uf' || k === "audience"
                           ? arrayToQueryString(k, v)
                           : encodeURIComponent(JSON.stringify(v))
                       : encodeURIComponent(v);

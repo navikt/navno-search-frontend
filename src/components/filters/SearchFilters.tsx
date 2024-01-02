@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AudienceSelector } from './audience-selector/AudienceSelector';
 import { FacetsSelector } from './facets-selector/FacetsSelector';
 import { DaterangeSelector } from './daterange-selector/DaterangeSelector';
 import { SearchResultProps } from 'types/search-result';
@@ -6,8 +7,8 @@ import { ActionType } from 'context/actions';
 import { useSearchContext } from 'context/ContextProvider';
 import { classNames } from '../../utils/classnames';
 import { Button, Heading } from '@navikt/ds-react';
-import { Expand } from '@navikt/ds-icons';
 
+import { Expand } from '@navikt/ds-icons';
 import style from './SearchFilters.module.scss';
 
 type Props = {
@@ -42,6 +43,14 @@ export const SearchFilters = ({ result }: Props) => {
                 {`${openMobile ? 'Skjul' : 'Vis'} søkefilter`}
             </Button>
             <div className={style.filters}>
+                <AudienceSelector
+                    setAudience={(audienceToggle) =>
+                        dispatch({
+                            type: ActionType.SetAudience,
+                            audienceToggle: audienceToggle,
+                        })
+                    }
+                />
                 {fasetter?.buckets && (
                     <FacetsSelector
                         facetsProps={fasetter.buckets}

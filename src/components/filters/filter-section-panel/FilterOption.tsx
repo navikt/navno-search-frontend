@@ -8,11 +8,12 @@ export type FilterOptionType = 'radio' | 'checkbox';
 type Props = {
     label: string;
     name: string;
-    count: number;
+    count?: number;
     checked?: boolean;
     onChange?: (args: any) => any;
     type: FilterOptionType;
     id: string;
+    alwaysEnabled?: boolean;
 };
 
 export const FilterOption = ({
@@ -23,8 +24,9 @@ export const FilterOption = ({
     onChange,
     type,
     id,
+    alwaysEnabled,
 }: Props) => {
-    const disabled = !count;
+    const disabled = alwaysEnabled !== true && !count;
     const inputProps = {
         value: label,
         name,

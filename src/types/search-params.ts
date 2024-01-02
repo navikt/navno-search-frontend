@@ -35,6 +35,7 @@ export type SearchParams = {
 
     s: SearchSort;
     daterange: number;
+    audience: string[];
 };
 
 export const searchParamsDefaultFilters = {
@@ -42,6 +43,7 @@ export const searchParamsDefaultFilters = {
     uf: [],
     s: SearchSort.BestMatch,
     daterange: Config.VARS.keys.defaultDateRange,
+    audience:  Config.VARS.keys.defaultAudience,
 };
 
 export const searchParamsDefault: SearchParams = {

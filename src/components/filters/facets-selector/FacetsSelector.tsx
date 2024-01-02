@@ -5,7 +5,7 @@ import { FilterRadioPanel } from '../filter-radio-panel/FilterRadioPanel';
 import { FacetBucketProps } from 'types/search-result';
 import { logFilterSelection } from 'utils/amplitude';
 import { SearchSort } from 'types/search-params';
-import { UFToggleProps } from 'context/reducer';
+import { CheckboxToggleProps } from 'context/reducer';
 import config from 'config';
 import { useSearchContext } from '../../../context/ContextProvider';
 
@@ -14,7 +14,7 @@ const { keys } = config.VARS;
 type Props = {
     facetsProps: FacetBucketProps[];
     setFacet: (f: string) => void;
-    setUnderFacet: ({ uf, toggle }: UFToggleProps) => void;
+    setUnderFacet: ({ key, toggle }: CheckboxToggleProps) => void;
     setSorting: (sorting: SearchSort) => void;
 };
 
@@ -59,7 +59,7 @@ export const FacetsSelector = ({
                                     type={'checkbox'}
                                     onChange={(e) => {
                                         setUnderFacet({
-                                            uf: underFacet.key,
+                                            key: underFacet.key,
                                             toggle: e.target.checked,
                                         });
                                         if (e.target.checked) {
