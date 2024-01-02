@@ -8,6 +8,7 @@ import { SearchSort } from 'types/search-params';
 import { CheckboxToggleProps } from 'context/reducer';
 import config from 'config';
 import { useSearchContext } from '../../../context/ContextProvider';
+import {Heading} from "@navikt/ds-react";
 
 const { keys } = config.VARS;
 
@@ -28,6 +29,9 @@ export const FacetsSelector = ({
 
     return (
         <FilterSectionPanel>
+            <Heading level="3" size="small">
+                {'Kategori'}
+            </Heading>
             {facetsProps.map((facet, fIndex) => {
                 const underFacets = facet.underaggregeringer.buckets;
                 return (
