@@ -33,7 +33,7 @@ const SearchPage = () => {
             const newUrl = `${
                 window.location.href.split('?')[0]
             }${objectToQueryString(params)}`;
-            router.push(newUrl, undefined, {
+            router.replace(newUrl, undefined, {
                 shallow: true,
             });
         }
