@@ -27,6 +27,7 @@ export type FacetBucketProps = {
     name: string;
     docCount: number;
     checked: boolean;
+    default?: boolean;
     underaggregeringer: {
         buckets: FacetBucketProps[];
     };
@@ -56,6 +57,7 @@ export type SearchHitProps = {
     language: Language;
     hidePublishDate: boolean;
     hideModifiedDate: boolean;
+    score: number;
 };
 
 export type SearchResultProps = {
@@ -64,7 +66,7 @@ export type SearchResultProps = {
     daterange: number;
     isMore: boolean;
     word: string;
-    total: string;
+    total: number;
     fasett: string;
     fasettKey: string;
     aggregations: {
