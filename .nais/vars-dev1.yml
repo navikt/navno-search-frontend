@@ -1,15 +1,15 @@
 appName: navno-search-frontend-dev1
+appHost: www.ekstern.dev.nav.no
 dekoratorenAppName: nav-dekoratoren
-xpHost: www.dev.nav.no
+xpHost: portal-admin-dev.oera.no
 ingresses:
-  - https://www.dev.nav.no/sok($|\/.+)
+  - https://www.ekstern.dev.nav.no/sok($|\/.+)
 replicas:
   min: 1
   max: 2
 resources:
   limits:
-    cpu: 1000m
     memory: 768Mi
   requests:
-    cpu: 250m
-    memory: 256Mi
+    cpu: 100m
+    memory: 192Mi

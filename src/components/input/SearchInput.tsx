@@ -3,7 +3,9 @@ import { useSearchContext } from 'context/ContextProvider';
 import { ActionType } from 'context/actions';
 import Cookies from 'js-cookie';
 import { Close } from '@navikt/ds-icons';
-import { Button, TextField } from '@navikt/ds-react';
+import { Button, Heading, TextField } from '@navikt/ds-react';
+import { SearchResultProps } from 'types/search-result';
+import { SearchDescription } from 'components/header/SearchDescription';
 
 import style from './SearchInput.module.scss';
 
@@ -17,11 +19,22 @@ const setSubmitTrackerCookie = () => {
 };
 
 type Props = {
+    result: SearchResultProps;
     initialSearchTerm: string;
     fetchNewResults: () => void;
 };
 
-export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
+export const SearchInput = ({
+    result,
+    initialSearchTerm,
+    fetchNewResults,
+}: Props) => {
+    const [{ params }] = useSearchContext();
+
+    const selectedFacet = result.aggregations.fasetter.buckets.find(
+        (f) => f.key === params.f
+    );
+
     const [inputValue, _setInputValue] = useState(
         initialSearchTerm.slice(0, maxInputLength)
     );
@@ -46,14 +59,24 @@ export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
             className={style.searchForm}
         >
             <TextField
-                aria-labelledby="search-header"
-                label={''}
-                hideLabel={true}
+                label={
+                    selectedFacet && (
+                        <Heading
+                            size="medium"
+                            as="span"
+                            aria-label={`Søk i ${selectedFacet.name}`}
+                        >
+                            {selectedFacet.name}
+                        </Heading>
+                    )
+                }
+                description={<SearchDescription result={result} />}
                 className={style.searchField}
                 onChange={(e) => setInputValue(e.target.value)}
                 value={inputValue}
                 maxLength={maxInputLength}
                 id="search-input"
+                autoComplete="off"
             />
 
             <div className={style.searchButtons}>
