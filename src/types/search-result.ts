@@ -32,7 +32,7 @@ export type FacetBucketProps = {
     };
 };
 
-export type Audience = 'person' | 'employer' | 'provider';
+export type Audience = 'person' | 'employer' | 'provider' | 'other';
 
 export type Language = 'no' | 'nn' | 'en';
 
@@ -54,6 +54,8 @@ export type SearchHitProps = {
     };
     audience?: Audience | Audience[];
     language: Language;
+    hidePublishDate: boolean;
+    hideModifiedDate: boolean;
 };
 
 export type SearchResultProps = {

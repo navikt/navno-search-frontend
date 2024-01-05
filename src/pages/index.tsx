@@ -21,7 +21,6 @@ const SearchBase = (props: Props) => {
                 <title>{'Søk - nav.no'}</title>
             </Head>
             <main
-                role={'main'}
                 className={'content-wrapper'}
                 id={'maincontent'}
                 tabIndex={-1}
@@ -34,7 +33,7 @@ const SearchBase = (props: Props) => {
                         <SearchPage />
                     </ContextProvider>
                 ) : (
-                    <Alert variant="error">
+                    <Alert role="alert" variant="error">
                         {'Feil - søketjenesten er ikke tilgjengelig'}
                     </Alert>
                 )}
