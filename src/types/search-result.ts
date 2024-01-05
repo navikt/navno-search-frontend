@@ -47,6 +47,8 @@ export type SearchResultProps = {
     c: number;
     s: SearchSort;
     daterange: number;
+    audience: string;
+    preferredLanguage: string;
     isMore: boolean;
     word: string;
     total: string;

@@ -78,5 +78,9 @@ export const paramsFromResult = (searchResult: SearchResultProps | null) => {
         ...(searchResult.daterange && {
             daterange: Number(searchResult.daterange),
         }),
+        ...(searchResult.audience && { audience: searchResult.audience }),
+        ...(searchResult.preferredLanguage && {
+            preferredLanguage: searchResult.preferredLanguage,
+        }),
     };
 };
