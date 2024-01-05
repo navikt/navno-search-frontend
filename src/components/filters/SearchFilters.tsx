@@ -53,10 +53,10 @@ export const SearchFilters = ({ result }: Props) => {
                     }
                 />
                 <AudienceSelector
-                    setAudience={(audienceToggle) =>
+                    setAudience={(audience) =>
                         dispatch({
                             type: ActionType.SetAudience,
-                            audienceToggle: audienceToggle,
+                            audience: audience,
                         })
                     }
                 />

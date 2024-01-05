@@ -35,7 +35,7 @@ export type SearchParams = {
 
     s: SearchSort;
     daterange: number;
-    audience: string[];
+    audience: string;
     preferredLanguage: string;
 };
 

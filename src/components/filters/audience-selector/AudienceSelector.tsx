@@ -3,11 +3,10 @@ import { FilterSectionPanel } from '../filter-section-panel/FilterSectionPanel';
 import { FilterOption } from '../filter-section-panel/FilterOption';
 import { Heading } from '@navikt/ds-react';
 import { logFilterSelection } from '../../../utils/amplitude';
-import { CheckboxToggleProps } from '../../../context/reducer';
 import { useSearchContext } from '../../../context/ContextProvider';
 
 type Props = {
-    setAudience: ({ key, toggle }: CheckboxToggleProps) => void;
+    setAudience: (audience: string) => void;
 };
 
 export const AudienceSelector = ({ setAudience }: Props) => {
@@ -21,14 +20,11 @@ export const AudienceSelector = ({ setAudience }: Props) => {
             <FilterOption
                 label={'Privatperson'}
                 name={'privatperson'}
-                type={'checkbox'}
+                type={'radio'}
                 id={'privatperson'}
-                checked={params.audience?.includes('privatperson')}
+                checked={params.audience === 'privatperson'}
                 onChange={(e) => {
-                    setAudience({
-                        key: 'privatperson',
-                        toggle: e.target.checked,
-                    });
+                    setAudience('privatperson');
                     if (e.target.checked) {
                         logFilterSelection('privatperson');
                     }
@@ -38,14 +34,11 @@ export const AudienceSelector = ({ setAudience }: Props) => {
             <FilterOption
                 label={'Arbeidsgiver'}
                 name={'arbeidsgiver'}
-                type={'checkbox'}
+                type={'radio'}
                 id={'arbeidsgiver'}
-                checked={params.audience?.includes('arbeidsgiver')}
+                checked={params.audience === 'arbeidsgiver'}
                 onChange={(e) => {
-                    setAudience({
-                        key: 'arbeidsgiver',
-                        toggle: e.target.checked,
-                    });
+                  setAudience('arbeidsgiver');
                     if (e.target.checked) {
                         logFilterSelection('arbeidsgiver');
                     }
@@ -55,14 +48,11 @@ export const AudienceSelector = ({ setAudience }: Props) => {
             <FilterOption
                 label={'Samarbeidspartner'}
                 name={'samarbeidspartner'}
-                type={'checkbox'}
+                type={'radio'}
                 id={'samarbeidspartner'}
-                checked={params.audience?.includes('samarbeidspartner')}
+                checked={params.audience === 'samarbeidspartner'}
                 onChange={(e) => {
-                    setAudience({
-                        key: 'samarbeidspartner',
-                        toggle: e.target.checked,
-                    });
+                  setAudience('samarbeidspartner');
                     if (e.target.checked) {
                         logFilterSelection('samarbeidspartner');
                     }

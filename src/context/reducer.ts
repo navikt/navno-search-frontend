@@ -55,19 +55,11 @@ export const reducer = (state: SearchContext, action: Action) => {
                 },
             };
         case ActionType.SetAudience:
-            const { key: audienceKey, toggle: audienceToggle } =
-                action.audienceToggle;
-            const oldAudience = state.params.audience || [];
-            const newAudience = audienceToggle
-                ? oldAudience.includes(audienceKey)
-                    ? oldAudience
-                    : [...oldAudience, audienceKey]
-                : oldAudience.filter((item) => item !== audienceKey);
             return {
                 ...state,
                 params: {
                     ...state.params,
-                    audience: newAudience.length > 0 ? newAudience : [],
+                    audience: action.audience,
                 },
             };
         case ActionType.SetPreferredLanguage:

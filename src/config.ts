@@ -19,7 +19,7 @@ const VARS = {
         defaultFacet: '0',
         newsFacet: '1',
         defaultDateRange: -1,
-        defaultAudience: ["privatperson"],
+        defaultAudience: "privatperson",
         defaultPreferredLanguage: "nb",
     },
 };

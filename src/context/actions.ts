@@ -46,7 +46,7 @@ export type Action =
       }
     | {
           type: ActionType.SetAudience;
-          audienceToggle: CheckboxToggleProps;
+          audience: string;
       }
     | {
           type: ActionType.SetPreferredLanguage;
