@@ -12,6 +12,7 @@ const envMap: Record<typeof ENV, DecoratorEnvProps['env']> = {
     dev1: 'dev',
     dev2: 'beta',
     prod: 'prod',
+    prodbeta: 'prod',
 };
 
 const decoratorEnv = envMap[process.env.ENV] || 'prod';
