@@ -15,7 +15,7 @@ jobs:
       deployEnv: prod
       imagename: release-${{ github.ref_name }}
       APP_ORIGIN: https://www.nav.no
-      SEARCH_URL: https://www.nav.no
+      SEARCH_URL: https://navno-search-api.intern.nav.no/content/search
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
