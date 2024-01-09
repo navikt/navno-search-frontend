@@ -61,5 +61,4 @@ export type SearchResultProps = {
     };
     hits: SearchHitProps[];
     isInitialResult?: boolean;
-    autoComplete: string
 };
