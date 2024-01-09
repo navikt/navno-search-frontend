@@ -1,4 +1,4 @@
-name: Deploy to prod on dispatch
+name: Deploy to prod beta
 on:
   workflow_dispatch
 
