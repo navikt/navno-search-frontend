@@ -1,6 +1,6 @@
 import { DaterangeKey, SearchResultProps } from '../types/search-result';
 import { SearchParams, SearchSort } from '../types/search-params';
-import { CheckboxToggleProps } from './reducer';
+import { UFToggleProps } from './reducer';
 
 export enum ActionType {
     SetResults,
@@ -42,7 +42,7 @@ export type Action =
       }
     | {
           type: ActionType.SetUnderfacet;
-          underfacetToggle: CheckboxToggleProps;
+          underfacetToggle: UFToggleProps;
       }
     | {
           type: ActionType.SetAudience;

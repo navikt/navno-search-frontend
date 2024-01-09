@@ -5,8 +5,8 @@ import {
 import { Action, ActionType } from './actions';
 import { SearchContext } from './ContextProvider';
 
-export type CheckboxToggleProps = {
-    key: string;
+export type UFToggleProps = {
+    uf: string;
     toggle: boolean;
 };
 
@@ -40,13 +40,13 @@ export const reducer = (state: SearchContext, action: Action) => {
                 params: { ...state.params, f: action.facet, uf: [] },
             };
         case ActionType.SetUnderfacet:
-            const { key: ufKey, toggle: ufToggle } = action.underfacetToggle;
+            const { uf, toggle } = action.underfacetToggle;
             const oldUf = state.params.uf || [];
-            const newUf = ufToggle
-                ? oldUf.includes(ufKey)
+            const newUf = toggle
+                ? oldUf.includes(uf)
                     ? oldUf
-                    : [...oldUf, ufKey]
-                : oldUf.filter((item) => item !== ufKey);
+                    : [...oldUf, uf]
+                : oldUf.filter((item) => item !== uf);
             return {
                 ...state,
                 params: {
