@@ -1,7 +1,7 @@
 appName: navno-search-frontend-dev1-ny
 appHost: www.ekstern.dev.nav.no
 dekoratorenAppName: nav-dekoratoren
-xpHost: portal-admin-dev.oera.no
+searchHost: navno-search-api.intern.dev.nav.no
 ingresses:
   - https://www.ekstern.dev.nav.no/nytt-sok($|\/.+)
 replicas:

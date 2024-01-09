@@ -33,9 +33,8 @@ spec:
       rules:
         - application: {{dekoratorenAppName}}
       external:
-        - host: {{xpHost}}
         - host: {{appHost}}
-        - host: navno-search-api.intern.dev.nav.no
+        - host: {{searchHost}}
   resources:
   {{#with resources}}
     limits:
