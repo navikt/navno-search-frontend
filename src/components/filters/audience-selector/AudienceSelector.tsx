@@ -11,6 +11,9 @@ type Props = {
 
 export const AudienceSelector = ({ setAudience }: Props) => {
     const [{ params }] = useSearchContext();
+    const PRIVATPERSON = 'privatperson';
+    const ARBEIDSGIVER = 'arbeidsgiver';
+    const SAMARBEIDSPARTNER = 'samarbeidspartner';
 
     return (
         <FilterSectionPanel>
@@ -19,42 +22,42 @@ export const AudienceSelector = ({ setAudience }: Props) => {
             </Heading>
             <FilterOption
                 label={'Privatperson'}
-                name={'privatperson'}
+                name={PRIVATPERSON}
                 type={'radio'}
-                id={'privatperson'}
-                checked={params.audience === 'privatperson'}
+                id={PRIVATPERSON}
+                checked={params.audience === PRIVATPERSON}
                 onChange={(e) => {
-                    setAudience('privatperson');
+                    setAudience(PRIVATPERSON);
                     if (e.target.checked) {
-                        logFilterSelection('privatperson');
+                        logFilterSelection(PRIVATPERSON);
                     }
                 }}
                 alwaysEnabled={true}
             />
             <FilterOption
                 label={'Arbeidsgiver'}
-                name={'arbeidsgiver'}
+                name={ARBEIDSGIVER}
                 type={'radio'}
-                id={'arbeidsgiver'}
-                checked={params.audience === 'arbeidsgiver'}
+                id={ARBEIDSGIVER}
+                checked={params.audience === ARBEIDSGIVER}
                 onChange={(e) => {
-                  setAudience('arbeidsgiver');
+                    setAudience(ARBEIDSGIVER);
                     if (e.target.checked) {
-                        logFilterSelection('arbeidsgiver');
+                        logFilterSelection(ARBEIDSGIVER);
                     }
                 }}
                 alwaysEnabled={true}
             />
             <FilterOption
                 label={'Samarbeidspartner'}
-                name={'samarbeidspartner'}
+                name={SAMARBEIDSPARTNER}
                 type={'radio'}
-                id={'samarbeidspartner'}
-                checked={params.audience === 'samarbeidspartner'}
+                id={SAMARBEIDSPARTNER}
+                checked={params.audience === SAMARBEIDSPARTNER}
                 onChange={(e) => {
-                  setAudience('samarbeidspartner');
+                    setAudience(SAMARBEIDSPARTNER);
                     if (e.target.checked) {
-                        logFilterSelection('samarbeidspartner');
+                        logFilterSelection(SAMARBEIDSPARTNER);
                     }
                 }}
                 alwaysEnabled={true}

@@ -12,6 +12,10 @@ type Props = {
 export const PreferredLanguageSelector = ({ setPreferredLanguage }: Props) => {
     const [{ params }] = useSearchContext();
 
+    const NB = "nb"
+    const NN = "nn"
+    const EN = "en"
+
     return (
         <FilterSectionPanel>
             <Heading level="3" size="small">
@@ -19,42 +23,42 @@ export const PreferredLanguageSelector = ({ setPreferredLanguage }: Props) => {
             </Heading>
             <FilterOption
                 label={'Bokmål'}
-                name={'nb'}
+                name={NB}
                 type={'radio'}
-                id={'nb'}
-                checked={params.preferredLanguage === 'nb'}
+                id={NB}
+                checked={params.preferredLanguage === NB}
                 onChange={(e) => {
-                    setPreferredLanguage('nb');
+                    setPreferredLanguage(NB);
                     if (e.target.checked) {
-                        logFilterSelection('nb');
+                        logFilterSelection(NB);
                     }
                 }}
                 alwaysEnabled={true}
             />
             <FilterOption
                 label={'Nynorsk'}
-                name={'nn'}
+                name={NN}
                 type={'radio'}
-                id={'nn'}
-                checked={params.preferredLanguage === 'nn'}
+                id={NN}
+                checked={params.preferredLanguage === NN}
                 onChange={(e) => {
-                    setPreferredLanguage('nn');
+                    setPreferredLanguage(NN);
                     if (e.target.checked) {
-                        logFilterSelection('nn');
+                        logFilterSelection(NN);
                     }
                 }}
                 alwaysEnabled={true}
             />
             <FilterOption
                 label={'English'}
-                name={'en'}
+                name={EN}
                 type={'radio'}
-                id={'en'}
-                checked={params.preferredLanguage === 'en'}
+                id={EN}
+                checked={params.preferredLanguage === EN}
                 onChange={(e) => {
-                    setPreferredLanguage('en');
+                    setPreferredLanguage(EN);
                     if (e.target.checked) {
-                        logFilterSelection('en');
+                        logFilterSelection(EN);
                     }
                 }}
                 alwaysEnabled={true}
