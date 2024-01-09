@@ -5,10 +5,16 @@ import { SearchResultProps } from '../types/search-result';
 import { fetchWithTimeout, objectToQueryString } from './fetch-utils';
 
 export const fetchSearchResults = (
-    params?: SearchParams
+    params?: SearchParams,
+    defaultAudienceOverride?: string,
+    defaultLanguageOverride?: string
 ): Promise<SearchResultProps> => {
     const queryString = objectToQueryString({
         ...searchParamsDefault,
+        ...(defaultAudienceOverride && { audience: defaultAudienceOverride }),
+        ...(defaultLanguageOverride && {
+            preferredLanguage: defaultLanguageOverride,
+        }),
         ...params,
     });
     const url = `${Config.URLS.searchService}${queryString}`;
