@@ -10,7 +10,7 @@ import { SearchSorting } from './sorting/SearchSorting';
 import { Spinner } from './spinner/Spinner';
 import { SearchResults } from './results/SearchResults';
 import { SearchFilters } from './filters/SearchFilters';
-import { Heading } from '@navikt/ds-react';
+import {Alert, Heading} from '@navikt/ds-react';
 
 import style from './SearchPage.module.scss';
 
@@ -67,6 +67,9 @@ const SearchPage = () => {
     return (
         <div className={style.search}>
             <div className={style.leftCol}>
+                <Alert role="alert" variant="warning" style={{marginBottom:"1rem"}}>
+                    {'Obs! Denne siden er i beta og kun ment for intern testing.'}
+                </Alert>
                 <Heading className={style.heading} level="1" size="large">
                     {'Søk på nav.no'}
                 </Heading>
