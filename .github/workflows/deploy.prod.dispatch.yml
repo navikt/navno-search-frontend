@@ -10,7 +10,7 @@ jobs:
       id-token: "write"
     with:
       cluster: prod-gcp
-      deployEnv: prod
+      deployEnv: prodbeta
       imagename: release-${{ github.ref_name }}
       APP_ORIGIN: https://www.nav.no
       XP_ORIGIN: https://www.nav.no
