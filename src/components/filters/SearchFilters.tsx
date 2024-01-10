@@ -10,7 +10,7 @@ import { Button, Heading } from '@navikt/ds-react';
 
 import { Expand } from '@navikt/ds-icons';
 import style from './SearchFilters.module.scss';
-import {PreferredLanguageSelector} from "./preferred-language-selector/PreferredLanguageSelector";
+import { PreferredLanguageSelector } from './preferred-language-selector/PreferredLanguageSelector';
 
 type Props = {
     result: SearchResultProps;
@@ -44,19 +44,19 @@ export const SearchFilters = ({ result }: Props) => {
                 {`${openMobile ? 'Skjul' : 'Vis'} søkefilter`}
             </Button>
             <div className={style.filters}>
-                <PreferredLanguageSelector
-                    setPreferredLanguage={(preferredLanguage) =>
-                        dispatch({
-                            type: ActionType.SetPreferredLanguage,
-                            preferredLanguage: preferredLanguage,
-                        })
-                    }
-                />
                 <AudienceSelector
                     setAudience={(audience) =>
                         dispatch({
                             type: ActionType.SetAudience,
                             audience: audience,
+                        })
+                    }
+                />
+                <PreferredLanguageSelector
+                    setPreferredLanguage={(preferredLanguage) =>
+                        dispatch({
+                            type: ActionType.SetPreferredLanguage,
+                            preferredLanguage: preferredLanguage,
                         })
                     }
                 />
