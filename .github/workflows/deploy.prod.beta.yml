@@ -1,21 +1,19 @@
-name: Deploy to prod
+name: Deploy to prod beta
 on:
-  release:
-    types: [released]
+  workflow_dispatch
 
 jobs:
   deploy:
-    if: github.event.release.target_commitish == 'master'
     uses: ./.github/workflows/build-and-deploy.yml
     permissions:
       contents: "read"
       id-token: "write"
     with:
       cluster: prod-gcp
-      deployEnv: prod
+      deployEnv: prodbeta
       imagename: release-${{ github.ref_name }}
       APP_ORIGIN: https://www.nav.no
-      XP_ORIGIN: https://www.nav.no
+      SEARCH_URL: https://navno-search-api.intern.nav.no/content/search
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}

@@ -16,5 +16,4 @@ jobs:
       XP_ORIGIN: https://portal-admin-q6.oera.no
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
-      NAIS_DEPLOY_APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
       NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
