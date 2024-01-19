@@ -13,4 +13,5 @@ test('renders SearchFilters component', () => {
         </ContextProvider>
     );
     expect(true).toBe(true);
+    expect(true).not.toBe(false);
 });

@@ -31,8 +31,6 @@ export const SearchInput = ({
 }: Props) => {
     const [{ params }] = useSearchContext();
 
-    console.log(result);
-
     const selectedFacet = result.aggregations.fasetter.buckets.find(
         (f) => f.key === params.f
     );
