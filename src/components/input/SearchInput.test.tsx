@@ -9,13 +9,13 @@ import { SearchParams, paramsFromResult } from 'types/search-params';
 const mockFetchNewResults = jest.fn();
 
 type SetupConfig = {
-    initialSearch: string;
+    initialSearch?: string;
     initialResult: SearchResultProps;
     initialParams?: SearchParams;
 };
 
 const setup = ({
-    initialSearch,
+    initialSearch = '',
     initialResult,
     initialParams,
 }: SetupConfig) => {
@@ -39,39 +39,41 @@ const setup = ({
     };
 };
 
-test('It sets the correct label for the search field', async () => {
-    const initialResult = mockResults();
-    initialResult.fasettKey = '1';
-    const initialParams = paramsFromResult(initialResult);
+describe('SearchInput', () => {
+    test('It sets the correct label for the search field', async () => {
+        const initialResult = mockResults();
+        initialResult.fasettKey = '1';
+        const initialParams = paramsFromResult(initialResult);
 
-    const { getByLabelText } = setup({
-        initialSearch: '',
-        initialResult,
-        initialParams,
+        const { getByLabelText } = setup({
+            initialSearch: '',
+            initialResult,
+            initialParams,
+        });
+
+        expect(getByLabelText('Nyheter')).toBeInTheDocument();
     });
 
-    expect(getByLabelText('Nyheter')).toBeInTheDocument();
-});
+    test('It updates the search field value', async () => {
+        const initialSearch = 'Barnebidrag';
+        const newSearch = 'Foreldrepenger';
 
-test('It updates the search field value', async () => {
-    const initialSearch = 'Barnebidrag';
-    const newSearch = 'Foreldrepenger';
+        const { input } = setup({
+            initialSearch,
+            initialResult: mockResults(),
+        });
 
-    const { input } = setup({ initialSearch, initialResult: mockResults() });
+        expect(input).toBeInTheDocument();
 
-    expect(input).toBeInTheDocument();
+        fireEvent.change(input, { target: { value: newSearch } });
+        expect(input.value).toBe(newSearch);
+    });
 
-    fireEvent.change(input, { target: { value: newSearch } });
-    expect(input.value).toBe(newSearch);
-});
+    test('It calls fetchNewResults when the form is submitted', async () => {
+        const { input } = setup({ initialResult: mockResults() });
 
-test('It calls fetchNewResults when the form is submitted', async () => {
-    const initialSearch = 'Barnebidrag';
-    const newSearch = 'Foreldrepenger';
-
-    const { input } = setup({ initialSearch, initialResult: mockResults() });
-
-    expect(mockFetchNewResults).toHaveBeenCalledTimes(0);
-    fireEvent.submit(input);
-    expect(mockFetchNewResults).toHaveBeenCalledTimes(1);
+        expect(mockFetchNewResults).toHaveBeenCalledTimes(0);
+        fireEvent.submit(input);
+        expect(mockFetchNewResults).toHaveBeenCalledTimes(1);
+    });
 });

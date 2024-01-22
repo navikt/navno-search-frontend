@@ -25,6 +25,7 @@ export const SearchFilters = ({ result }: Props) => {
                 style.searchFilters,
                 openMobile ? style.visibleMobile : ''
             )}
+            data-testid="search-filter-panel"
         >
             <Heading level="2" size="medium" className={style.titleDesktop}>
                 {'Søkefilter'}
