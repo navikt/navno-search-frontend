@@ -9,7 +9,7 @@ export type SearchContext = {
     result: SearchResultProps;
 };
 
-const SearchContext = React.createContext(
+export const SearchContext = React.createContext(
     {} as [SearchContext, Dispatch<Action>]
 );
 
