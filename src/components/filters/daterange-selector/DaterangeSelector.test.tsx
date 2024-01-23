@@ -28,7 +28,7 @@ const setup = ({ initialResult, initialParams }: SetupConfig) => {
     };
 };
 
-describe('SearchFilters', () => {
+describe('DateRangeSelector', () => {
     test('It selects the correct date range radiobox', () => {
         const initialParams = {
             c: 1,
