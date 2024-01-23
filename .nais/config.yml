@@ -8,7 +8,6 @@ metadata:
     team: personbruker
 spec:
   image: {{image}}
-  team: personbruker
   port: 3001
   liveness:
     path: /nytt-sok/api/internal/isAlive
