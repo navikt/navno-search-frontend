@@ -272,15 +272,15 @@ export const mockResults = () => {
                 buckets: [
                     {
                         key: DaterangeKey.Last7Days,
-                        docCount: 0,
+                        docCount: 20,
                         from: '2023-12-28T09:31:44.826Z',
                         checked: false,
                     },
                     {
                         key: DaterangeKey.Last30Days,
-                        docCount: 0,
+                        docCount: 10,
                         from: '2023-12-05T09:31:44.826Z',
-                        checked: false,
+                        checked: true,
                     },
                     {
                         key: DaterangeKey.Last12Months,

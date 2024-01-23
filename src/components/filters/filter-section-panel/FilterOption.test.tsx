@@ -1,14 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import {
-    FilterOption,
-    FilterOptionProps,
-    FilterOptionType,
-} from './FilterOption';
-import { mockResults } from 'testHelpers/mockResults';
-import { ContextProvider } from 'context/ContextProvider';
-import { SearchResultProps } from 'types/search-result';
-import { SearchParams } from 'types/search-params';
+import { FilterOption, FilterOptionProps } from './FilterOption';
 
 const mockFunction = jest.fn();
 

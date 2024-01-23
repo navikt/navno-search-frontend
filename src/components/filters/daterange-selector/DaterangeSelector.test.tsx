@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { DaterangeSelector } from './DaterangeSelector';
 import { mockResults } from 'testHelpers/mockResults';
 import { ContextProvider } from 'context/ContextProvider';
@@ -29,9 +29,23 @@ const setup = ({ initialResult, initialParams }: SetupConfig) => {
 };
 
 describe('SearchFilters', () => {
-    test('Expands the filter when clicking the expand button (mobile)', () => {
-        setup({
+    test('It selects the correct date range radiobox', () => {
+        const initialParams = {
+            c: 1,
+            daterange: 2,
+            f: '1',
+            ord: 'test',
+            s: 1,
+            start: 0,
+            uf: [],
+        };
+
+        const { getByDisplayValue } = setup({
             initialResult: mockResults(),
+            initialParams,
         });
+
+        expect(getByDisplayValue('Siste 30 dager')).toBeInTheDocument();
+        expect(getByDisplayValue('Siste 30 dager')).toBeChecked();
     });
 });
