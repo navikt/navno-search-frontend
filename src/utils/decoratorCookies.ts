@@ -17,7 +17,7 @@ export const getDecoratorAudienceIfValid = (cookies: NextApiRequestCookies) => {
 export function getDecoratorLanguageIfValid(cookies: NextApiRequestCookies) {
     const validLanguages = ['nb', 'nn', 'en'];
 
-    const decoratorLanguage = cookies['decorator-context'];
+    const decoratorLanguage = cookies['decorator-language'];
 
     return decoratorLanguage && validLanguages.includes(decoratorLanguage)
         ? decoratorLanguage
