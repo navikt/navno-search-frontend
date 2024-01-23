@@ -10,11 +10,11 @@ import style from './SearchDescription.module.scss';
 
 const { keys } = Config.VARS;
 
-type Props = {
+export type SearchDescriptionProps = {
     result: SearchResultProps;
 };
 
-export const SearchDescription = ({ result }: Props) => {
+export const SearchDescription = ({ result }: SearchDescriptionProps) => {
     const [{ params }, dispatch] = useSearchContext();
 
     const selectedFacet = result.aggregations.fasetter.buckets.find(
@@ -36,7 +36,7 @@ export const SearchDescription = ({ result }: Props) => {
     return (
         <div className={style.searchDescription}>
             {hasSelectedNonDefaultFilters && (
-                <BodyLong>
+                <BodyLong data-testid="search-description">
                     {ufNames.length > 0 && (
                         <>
                             {ufNames.map((uf, index) => (
