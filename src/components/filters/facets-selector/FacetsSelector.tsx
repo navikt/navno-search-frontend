@@ -41,6 +41,7 @@ export const FacetsSelector = ({
                         isOpen={facet.key === params.f}
                         onClick={() => {
                             setFacet(facet.key);
+                            //todo: Kanskje endre dette?
                             if (facet.key === keys.newsFacet) {
                                 setSorting(SearchSort.Newest);
                             } else if (facet.key === keys.defaultFacet) {
