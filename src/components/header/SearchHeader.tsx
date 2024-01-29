@@ -15,7 +15,7 @@ type Props = {
 };
 
 export const SearchHeader = ({ result }: Props) => {
-    const [{ params }] = useSearchContext();
+    const [{ params }, dispatch] = useSearchContext();
 
     const selectedFacet = result.aggregations.fasetter.buckets.find(
         (f) => f.key === params.f
@@ -66,6 +66,16 @@ export const SearchHeader = ({ result }: Props) => {
                             {' - '}
                         </>
                     )}
+                    <Button
+                        variant="tertiary"
+                        className={style.reset}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            dispatch({ type: ActionType.ResetFilters });
+                        }}
+                    >
+                        {'Nullstill filter'}
+                    </Button>
                 </BodyLong>
             )}
         </div>

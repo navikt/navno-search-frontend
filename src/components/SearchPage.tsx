@@ -13,7 +13,6 @@ import { SearchFilters } from './filters/SearchFilters';
 import { SearchHeader } from './header/SearchHeader';
 
 import style from './SearchPage.module.scss';
-import { Button } from '@navikt/ds-react';
 
 const SearchPage = () => {
     const [{ result, params }, dispatch] = useSearchContext();
@@ -69,16 +68,6 @@ const SearchPage = () => {
         <div className={style.search}>
             <div className={style.leftCol}>
                 <SearchHeader result={result} />
-                <Button
-                    variant="tertiary"
-                    className={style.reset}
-                    onClick={(e) => {
-                        e.preventDefault();
-                        dispatch({ type: ActionType.ResetFilters });
-                    }}
-                >
-                    {'Nullstill filter'}
-                </Button>
                 <SearchInput
                     initialSearchTerm={searchTerm}
                     fetchNewResults={fetchAndSetNewResults}
