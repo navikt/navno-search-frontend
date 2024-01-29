@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import { Close } from '@navikt/ds-icons';
 import { Button, Heading, TextField } from '@navikt/ds-react';
 import { SearchResultProps } from 'types/search-result';
-import { SearchDescription } from 'components/header/SearchDescription';
+import { SearchHeader } from 'components/header/SearchHeader';
 
 import style from './SearchInput.module.scss';
 
@@ -19,22 +19,12 @@ const setSubmitTrackerCookie = () => {
 };
 
 type Props = {
-    result: SearchResultProps;
+    // result: SearchResultProps; //TODO hvor?
     initialSearchTerm: string;
     fetchNewResults: () => void;
 };
 
-export const SearchInput = ({
-    result,
-    initialSearchTerm,
-    fetchNewResults,
-}: Props) => {
-    const [{ params }] = useSearchContext();
-
-    const selectedFacet = result.aggregations.fasetter.buckets.find(
-        (f) => f.key === params.f
-    );
-
+export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
     const [inputValue, _setInputValue] = useState(
         initialSearchTerm.slice(0, maxInputLength)
     );
@@ -59,18 +49,9 @@ export const SearchInput = ({
             className={style.searchForm}
         >
             <TextField
-                label={
-                    selectedFacet && (
-                        <Heading
-                            size="medium"
-                            as="span"
-                            aria-label={`Søk i ${selectedFacet.name}`}
-                        >
-                            {selectedFacet.name}
-                        </Heading>
-                    )
-                }
-                description={<SearchDescription result={result} />}
+                aria-labelledby="search-header"
+                label={''}
+                hideLabel={true}
                 className={style.searchField}
                 onChange={(e) => setInputValue(e.target.value)}
                 value={inputValue}
