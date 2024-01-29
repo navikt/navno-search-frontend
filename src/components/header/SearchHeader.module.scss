@@ -1,13 +1,15 @@
 .searchHeader {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .facet {
     margin-top: 0.5rem;
+    margin-bottom: 0.125rem;
 }
 
 .underFacets {
     font-style: italic;
+    color: var(--a-text-subtle);
 }
 
 .reset {
