@@ -3,9 +3,7 @@ import { useSearchContext } from 'context/ContextProvider';
 import { ActionType } from 'context/actions';
 import Cookies from 'js-cookie';
 import { Close } from '@navikt/ds-icons';
-import { Button, Heading, TextField } from '@navikt/ds-react';
-import { SearchResultProps } from 'types/search-result';
-import { SearchHeader } from 'components/header/SearchHeader';
+import { Button, TextField } from '@navikt/ds-react';
 
 import style from './SearchInput.module.scss';
 
@@ -19,7 +17,6 @@ const setSubmitTrackerCookie = () => {
 };
 
 type Props = {
-    // result: SearchResultProps; //TODO hvor?
     initialSearchTerm: string;
     fetchNewResults: () => void;
 };
