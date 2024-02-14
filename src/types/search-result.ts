@@ -44,7 +44,7 @@ export type SearchHitProps = {
 };
 
 export type SearchResultProps = {
-    c: number;
+    page: number;
     s: SearchSort;
     daterange: number;
     audience: string;

@@ -24,8 +24,7 @@ export const SearchResultsList = ({ result }: Props) => {
         setIsAwaitingMore(true);
         const { result: moreHits, error } = await fetchSearchResultsClientside({
             ...params,
-            c: result.c + 1,
-            start: result.c,
+            page: result.page + 1,
         });
         setIsAwaitingMore(false);
 

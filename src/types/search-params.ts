@@ -28,10 +28,8 @@ export type SearchParams = {
     f: string;
     // Under-facets
     uf: string[];
-    // Number of results to retrieve (20 * c)
-    c: number;
-    // Skips first (20 * start) results
-    start: number;
+    // Page number
+    page: number;
 
     s: SearchSort;
     daterange: number;
@@ -50,8 +48,7 @@ export const searchParamsDefaultFilters = {
 
 export const searchParamsDefault: SearchParams = {
     ord: '',
-    c: 1,
-    start: 0,
+    page: 0,
     ...searchParamsDefaultFilters,
 };
 
@@ -73,7 +70,6 @@ export const paramsFromResult = (searchResult: SearchResultProps | null) => {
         ...(searchResult.word && { ord: searchResult.word }),
         ...(initialFacet && { f: initialFacet.key }),
         ...(initialUfKeys && initialUfKeys.length > 0 && { uf: initialUfKeys }),
-        ...(searchResult.c && { c: Number(searchResult.c) }),
         ...(searchResult.s && { s: Number(searchResult.s) }),
         ...(searchResult.daterange && {
             daterange: Number(searchResult.daterange),
