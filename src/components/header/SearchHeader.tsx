@@ -35,9 +35,6 @@ export const SearchHeader = ({ result }: Props) => {
 
     return (
         <div className={style.searchHeader} id={'search-header'}>
-            <Heading level="1" size="large">
-                {'Søk på nav.no'}
-            </Heading>
             {selectedFacet && (
                 <Heading level="2" size="medium" className={style.facet}>
                     {selectedFacet.name} for {result.audience}
