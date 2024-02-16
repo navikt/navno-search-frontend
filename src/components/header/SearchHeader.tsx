@@ -40,7 +40,7 @@ export const SearchHeader = ({ result }: Props) => {
             </Heading>
             {selectedFacet && (
                 <Heading level="2" size="medium" className={style.facet}>
-                    {selectedFacet.name}
+                    {selectedFacet.name} for {result.audience}
                 </Heading>
             )}{' '}
             {hasSelectedNonDefaultFilters && (
