@@ -4,7 +4,6 @@ import { useSearchContext } from 'context/ContextProvider';
 import { ActionType } from 'context/actions';
 import { BodyLong, BodyShort, Button, Heading } from '@navikt/ds-react';
 import Config from '../../config';
-import { paramToDaterangeKey } from '../../types/search-params';
 
 import style from './SearchHeader.module.scss';
 
@@ -26,12 +25,9 @@ export const SearchHeader = ({ result }: Props) => {
             .filter((uf) => params.uf.includes(uf.key))
             .map((uf) => uf.name) || [];
 
-    const isDefaultDaterange = params.daterange === keys.defaultDateRange;
-
     const hasSelectedNonDefaultFilters =
         params.f !== keys.defaultFacet ||
-        params.uf.length > 0 ||
-        !isDefaultDaterange;
+        params.uf.length > 0;
 
     return (
         <div className={style.searchHeader} id={'search-header'}>
@@ -52,14 +48,6 @@ export const SearchHeader = ({ result }: Props) => {
                                     >{`${uf}`}</span>
                                 </span>
                             ))}
-                            {' - '}
-                        </>
-                    )}
-                    {!isDefaultDaterange && (
-                        <>
-                            <BodyShort as={'span'}>
-                                {paramToDaterangeKey[params.daterange]}
-                            </BodyShort>
                             {' - '}
                         </>
                     )}

@@ -1,25 +1,5 @@
 import { SearchSort } from './search-params';
 
-export enum DaterangeKey {
-    Last7Days = 'Siste 7 dager',
-    Last30Days = 'Siste 30 dager',
-    Last12Months = 'Siste 12 måneder',
-    Over12Months = 'Eldre enn 12 måneder',
-    All = 'Alle datoer',
-}
-
-export type DaterangeBucketProps = {
-    key: DaterangeKey;
-    docCount: number;
-    checked: boolean;
-};
-
-export type DaterangeProps = {
-    docCount: number;
-    checked: boolean;
-    buckets: DaterangeBucketProps[];
-};
-
 export type FacetBucketProps = {
     key: string;
     name: string;
@@ -30,7 +10,11 @@ export type FacetBucketProps = {
     };
 };
 
-export type Audience = 'privatperson' | 'arbeidsgiver' | 'samarbeidspartner' | 'andre';
+export type Audience =
+    | 'privatperson'
+    | 'arbeidsgiver'
+    | 'samarbeidspartner'
+    | 'andre';
 
 export type Language = 'no' | 'nn' | 'en';
 
@@ -46,7 +30,6 @@ export type SearchHitProps = {
 export type SearchResultProps = {
     page: number;
     s: SearchSort;
-    daterange: number;
     audience: string;
     preferredLanguage: string;
     isMore: boolean;
@@ -57,7 +40,6 @@ export type SearchResultProps = {
         fasetter: {
             buckets: FacetBucketProps[];
         };
-        tidsperiode: DaterangeProps;
     };
     hits: SearchHitProps[];
     isInitialResult?: boolean;

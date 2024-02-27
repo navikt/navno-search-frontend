@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { AudienceSelector } from './audience-selector/AudienceSelector';
 import { FacetsSelector } from './facets-selector/FacetsSelector';
-import { DaterangeSelector } from './daterange-selector/DaterangeSelector';
 import { SearchResultProps } from 'types/search-result';
 import { ActionType } from 'context/actions';
 import { useSearchContext } from 'context/ContextProvider';
@@ -18,7 +17,7 @@ type Props = {
 
 export const SearchFilters = ({ result }: Props) => {
     const [, dispatch] = useSearchContext();
-    const { fasetter, tidsperiode } = result.aggregations;
+    const { fasetter } = result.aggregations;
     const [openMobile, setOpenMobile] = useState(false);
 
     return (
@@ -82,9 +81,6 @@ export const SearchFilters = ({ result }: Props) => {
                             })
                         }
                     />
-                )}
-                {tidsperiode && (
-                    <DaterangeSelector daterangeProps={tidsperiode} />
                 )}
             </div>
         </div>

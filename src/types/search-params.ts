@@ -1,20 +1,5 @@
-import { DaterangeKey, SearchResultProps } from './search-result';
+import { SearchResultProps } from './search-result';
 import Config from '../config';
-
-export const daterangeKeyToParam = {
-    [DaterangeKey.All]: -1,
-    [DaterangeKey.Over12Months]: 0,
-    [DaterangeKey.Last12Months]: 1,
-    [DaterangeKey.Last30Days]: 2,
-    [DaterangeKey.Last7Days]: 3,
-};
-
-export const paramToDaterangeKey = [
-    [DaterangeKey.Over12Months],
-    [DaterangeKey.Last12Months],
-    [DaterangeKey.Last30Days],
-    [DaterangeKey.Last7Days],
-];
 
 export enum SearchSort {
     BestMatch = 0,
@@ -32,7 +17,6 @@ export type SearchParams = {
     page: number;
 
     s: SearchSort;
-    daterange: number;
     audience: string;
     preferredLanguage: string;
 };
@@ -41,7 +25,6 @@ export const searchParamsDefaultFilters = {
     f: Config.VARS.keys.defaultFacet,
     uf: [],
     s: SearchSort.BestMatch,
-    daterange: Config.VARS.keys.defaultDateRange,
     audience: Config.VARS.keys.defaultAudience,
     preferredLanguage: Config.VARS.keys.defaultPreferredLanguage,
 };
@@ -71,9 +54,6 @@ export const paramsFromResult = (searchResult: SearchResultProps | null) => {
         ...(initialFacet && { f: initialFacet.key }),
         ...(initialUfKeys && initialUfKeys.length > 0 && { uf: initialUfKeys }),
         ...(searchResult.s && { s: Number(searchResult.s) }),
-        ...(searchResult.daterange && {
-            daterange: Number(searchResult.daterange),
-        }),
         ...(searchResult.audience && { audience: searchResult.audience }),
         ...(searchResult.preferredLanguage && {
             preferredLanguage: searchResult.preferredLanguage,
