@@ -51,14 +51,6 @@ export const SearchFilters = ({ result }: Props) => {
                         })
                     }
                 />
-                <PreferredLanguageSelector
-                    setPreferredLanguage={(preferredLanguage) =>
-                        dispatch({
-                            type: ActionType.SetPreferredLanguage,
-                            preferredLanguage: preferredLanguage,
-                        })
-                    }
-                />
                 {fasetter?.buckets && (
                     <FacetsSelector
                         facetsProps={fasetter.buckets}
@@ -82,6 +74,14 @@ export const SearchFilters = ({ result }: Props) => {
                         }
                     />
                 )}
+                <PreferredLanguageSelector
+                    setPreferredLanguage={(preferredLanguage) =>
+                        dispatch({
+                            type: ActionType.SetPreferredLanguage,
+                            preferredLanguage: preferredLanguage,
+                        })
+                    }
+                />
             </div>
         </div>
     );
