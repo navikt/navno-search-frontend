@@ -6,12 +6,12 @@ import { fetchWithTimeout, objectToQueryString } from './fetch-utils';
 
 export const fetchSearchResults = (
     params?: SearchParams,
-    defaultAudienceOverride?: string,
+    defaultFacetOverride?: string,
     defaultLanguageOverride?: string
 ): Promise<SearchResultProps> => {
     const queryString = objectToQueryString({
         ...searchParamsDefault,
-        ...(defaultAudienceOverride && { audience: defaultAudienceOverride }),
+        ...(defaultFacetOverride && { f: defaultFacetOverride }),
         ...(defaultLanguageOverride && {
             preferredLanguage: defaultLanguageOverride,
         }),

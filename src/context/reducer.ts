@@ -43,14 +43,6 @@ export const reducer = (state: SearchContext, action: Action) => {
                     uf: newUf.length > 0 ? newUf : [],
                 },
             };
-        case ActionType.SetAudience:
-            return {
-                ...state,
-                params: {
-                    ...state.params,
-                    audience: action.audience,
-                },
-            };
         case ActionType.SetPreferredLanguage:
             return {
                 ...state,

@@ -9,7 +9,6 @@ export enum ActionType {
     SetSort,
     SetFacet,
     SetUnderfacet,
-    SetAudience,
     SetPreferredLanguage,
     ResetFilters,
 }
@@ -38,10 +37,6 @@ export type Action =
     | {
           type: ActionType.SetUnderfacet;
           underfacetToggle: UFToggleProps;
-      }
-    | {
-          type: ActionType.SetAudience;
-          audience: string;
       }
     | {
           type: ActionType.SetPreferredLanguage;

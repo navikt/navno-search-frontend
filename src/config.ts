@@ -17,8 +17,7 @@ const VARS = {
     },
     keys: {
         defaultFacet: '0',
-        newsFacet: '1',
-        defaultAudience: "privatperson",
+        newsFacet: '3',
         defaultPreferredLanguage: "nb",
     },
 };

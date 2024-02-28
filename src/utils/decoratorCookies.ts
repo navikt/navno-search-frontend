@@ -1,16 +1,16 @@
 import { NextApiRequestCookies } from 'next/dist/server/api-utils';
 
 export const getDecoratorAudienceIfValid = (cookies: NextApiRequestCookies) => {
-    const validAudiences = [
-        'privatperson',
-        'arbeidsgiver',
-        'samarbeidspartner',
-    ];
+    const validAudiences: { [key: string]: string }  = {
+        privatperson: '0',
+        arbeidsgiver: '1',
+        samarbeidspartner: '2',
+    };
 
     const decoratorAudience = cookies['decorator-context'];
 
-    return decoratorAudience && validAudiences.includes(decoratorAudience)
-        ? decoratorAudience
+    return decoratorAudience && decoratorAudience in validAudiences
+        ? validAudiences[decoratorAudience]
         : undefined;
 };
 

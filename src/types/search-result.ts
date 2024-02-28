@@ -30,7 +30,6 @@ export type SearchHitProps = {
 export type SearchResultProps = {
     page: number;
     s: SearchSort;
-    audience: string;
     preferredLanguage: string;
     isMore: boolean;
     word: string;

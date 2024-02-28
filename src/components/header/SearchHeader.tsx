@@ -33,7 +33,7 @@ export const SearchHeader = ({ result }: Props) => {
         <div className={style.searchHeader} id={'search-header'}>
             {selectedFacet && (
                 <Heading level="2" size="medium" className={style.facet}>
-                    {selectedFacet.name} for {result.audience}
+                    {selectedFacet.name}
                 </Heading>
             )}{' '}
             {hasSelectedNonDefaultFilters && (

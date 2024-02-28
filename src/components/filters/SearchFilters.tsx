@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { AudienceSelector } from './audience-selector/AudienceSelector';
 import { FacetsSelector } from './facets-selector/FacetsSelector';
 import { SearchResultProps } from 'types/search-result';
 import { ActionType } from 'context/actions';
@@ -43,14 +42,6 @@ export const SearchFilters = ({ result }: Props) => {
                 {`${openMobile ? 'Skjul' : 'Vis'} søkefilter`}
             </Button>
             <div className={style.filters}>
-                <AudienceSelector
-                    setAudience={(audience) =>
-                        dispatch({
-                            type: ActionType.SetAudience,
-                            audience: audience,
-                        })
-                    }
-                />
                 {fasetter?.buckets && (
                     <FacetsSelector
                         facetsProps={fasetter.buckets}
