@@ -29,9 +29,6 @@ export const FacetsSelector = ({
 
     return (
         <FilterSectionPanel>
-            <Heading level="3" size="small">
-                {'Kategori'}
-            </Heading>
             {facetsProps.map((facet, fIndex) => {
                 const underFacets = facet.underaggregeringer.buckets;
                 return (
