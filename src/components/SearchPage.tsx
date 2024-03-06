@@ -68,15 +68,6 @@ const SearchPage = () => {
     return (
         <div className={style.search}>
             <div className={style.leftCol}>
-                <Alert
-                    role="alert"
-                    variant="warning"
-                    style={{ marginBottom: '1rem' }}
-                >
-                    {
-                        'Obs! Denne siden er i beta og kun ment for intern testing.'
-                    }
-                </Alert>
                 <SearchHeader result={result} />
                 <SearchInput
                     initialSearchTerm={searchTerm}
