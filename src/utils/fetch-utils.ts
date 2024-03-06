@@ -14,12 +14,6 @@ export const fetchWithTimeout = (url: string, timeout: number): Promise<any> =>
         ),
     ]);
 
-const arrayToQueryString = (key: string, array: any[]) =>
-    array.reduce(
-        (acc, v, i) => `${acc}${i ? `&${key}=` : ''}${encodeURIComponent(v)}`,
-        ''
-    );
-
 export const objectToQueryString = (params: object) =>
     params
         ? Object.entries(params).reduce((acc, [k, v], i) => {
@@ -27,14 +21,6 @@ export const objectToQueryString = (params: object) =>
                   return acc;
               }
 
-              const encodedValue =
-                  typeof v === 'object'
-                      ? // workaround for strange xp search behaviour when sending array as parameter
-                        k === 'uf'
-                          ? arrayToQueryString(k, v)
-                          : encodeURIComponent(JSON.stringify(v))
-                      : encodeURIComponent(v);
-
-              return `${acc}${i ? '&' : '?'}${k}=${encodedValue}`;
+              return `${acc}${i ? '&' : '?'}${k}=${v}`;
           }, '')
         : '';
