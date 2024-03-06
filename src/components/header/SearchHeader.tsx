@@ -2,7 +2,7 @@ import React from 'react';
 import { SearchResultProps } from 'types/search-result';
 import { useSearchContext } from 'context/ContextProvider';
 import { ActionType } from 'context/actions';
-import { BodyLong, BodyShort, Button, Heading } from '@navikt/ds-react';
+import { BodyLong, Button, Heading } from '@navikt/ds-react';
 import Config from '../../config';
 
 import style from './SearchHeader.module.scss';
@@ -26,8 +26,7 @@ export const SearchHeader = ({ result }: Props) => {
             .map((uf) => uf.name) || [];
 
     const hasSelectedNonDefaultFilters =
-        params.f !== keys.defaultFacet ||
-        params.uf.length > 0;
+        params.f !== keys.defaultFacet || params.uf.length > 0;
 
     return (
         <div className={style.searchHeader} id={'search-header'}>

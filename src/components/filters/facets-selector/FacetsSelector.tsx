@@ -8,7 +8,6 @@ import { SearchSort } from 'types/search-params';
 import { UFToggleProps } from 'context/reducer';
 import config from 'config';
 import { useSearchContext } from '../../../context/ContextProvider';
-import {Heading} from "@navikt/ds-react";
 
 const { keys } = config.VARS;
 

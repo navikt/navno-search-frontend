@@ -11,7 +11,6 @@ import { Spinner } from './spinner/Spinner';
 import { SearchResults } from './results/SearchResults';
 import { SearchFilters } from './filters/SearchFilters';
 import { SearchHeader } from './header/SearchHeader';
-import { Alert } from '@navikt/ds-react';
 
 import style from './SearchPage.module.scss';
 
