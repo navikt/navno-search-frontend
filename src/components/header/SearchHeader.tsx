@@ -2,11 +2,11 @@ import React from 'react';
 import { SearchResultProps } from 'types/search-result';
 import { useSearchContext } from 'context/ContextProvider';
 import { ActionType } from 'context/actions';
-import { BodyLong, BodyShort, Button } from '@navikt/ds-react';
+import { BodyLong, BodyShort, Button, Heading } from '@navikt/ds-react';
 import Config from '../../config';
 import { paramToDaterangeKey } from '../../types/search-params';
 
-import style from './SearchDescription.module.scss';
+import style from './SearchHeader.module.scss';
 
 const { keys } = Config.VARS;
 
@@ -14,7 +14,7 @@ export type SearchDescriptionProps = {
     result: SearchResultProps;
 };
 
-export const SearchDescription = ({ result }: SearchDescriptionProps) => {
+export const SearchHeader = ({ result }: SearchDescriptionProps) => {
     const [{ params }, dispatch] = useSearchContext();
 
     const selectedFacet = result.aggregations.fasetter.buckets.find(
@@ -34,7 +34,15 @@ export const SearchDescription = ({ result }: SearchDescriptionProps) => {
         !isDefaultDaterange;
 
     return (
-        <div className={style.searchDescription}>
+        <div className={style.searchHeader} id={'search-header'}>
+            <Heading level="1" size="large">
+                {'Søk på nav.no'}
+            </Heading>
+            {selectedFacet && (
+                <Heading level="2" size="medium" className={style.facet}>
+                    {selectedFacet.name}
+                </Heading>
+            )}{' '}
             {hasSelectedNonDefaultFilters && (
                 <BodyLong data-testid="search-description">
                     {ufNames.length > 0 && (
