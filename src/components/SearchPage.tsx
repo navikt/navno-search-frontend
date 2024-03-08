@@ -11,7 +11,7 @@ import { Spinner } from './spinner/Spinner';
 import { SearchResults } from './results/SearchResults';
 import { SearchFilters } from './filters/SearchFilters';
 import { SearchHeader } from './header/SearchHeader';
-import { Alert } from '@navikt/ds-react';
+import { Alert, Heading } from '@navikt/ds-react';
 
 import style from './SearchPage.module.scss';
 
@@ -68,6 +68,9 @@ const SearchPage = () => {
     return (
         <div className={style.search}>
             <div className={style.leftCol}>
+                <Heading className={style.heading} level="1" size="large">
+                    {'Søk på nav.no'}
+                </Heading>
                 <Alert
                     role="alert"
                     variant="warning"
