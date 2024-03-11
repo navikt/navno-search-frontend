@@ -10,11 +10,7 @@ export type FacetBucketProps = {
     };
 };
 
-export type Audience =
-    | 'privatperson'
-    | 'arbeidsgiver'
-    | 'samarbeidspartner'
-    | 'andre';
+export type Audience = 'person' | 'employer' | 'provider' | 'other';
 
 export type Language = 'no' | 'nn' | 'en';
 
