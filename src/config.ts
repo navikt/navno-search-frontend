@@ -17,7 +17,6 @@ const VARS = {
     },
     keys: {
         defaultFacet: '0',
-        newsFacet: '3',
         defaultPreferredLanguage: "nb",
     },
 };
