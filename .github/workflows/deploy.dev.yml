@@ -1,4 +1,4 @@
-name: Deploy to dev1
+name: Deploy to dev
 on:
   workflow_dispatch
 
@@ -10,8 +10,8 @@ jobs:
       id-token: "write"
     with:
       cluster: dev-gcp
-      deployEnv: dev1
-      imagename: dev1-deploy
+      deployEnv: dev
+      imagename: dev-deploy
       APP_ORIGIN: https://www.ekstern.dev.nav.no
       SEARCH_URL: https://navno-search-api.intern.dev.nav.no/content/search
     secrets:
