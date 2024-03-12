@@ -5,16 +5,16 @@ import { Heading } from '@navikt/ds-react';
 import { logFilterSelection } from '../../../utils/amplitude';
 import { useSearchContext } from '../../../context/ContextProvider';
 
+const NB = "nb"
+const NN = "nn"
+const EN = "en"
+
 type Props = {
     setPreferredLanguage: (preferredLanguage: string) => void;
 };
 
 export const PreferredLanguageSelector = ({ setPreferredLanguage }: Props) => {
     const [{ params }] = useSearchContext();
-
-    const NB = "nb"
-    const NN = "nn"
-    const EN = "en"
 
     return (
         <FilterSectionPanel>
