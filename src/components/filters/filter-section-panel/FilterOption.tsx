@@ -26,7 +26,7 @@ export const FilterOption = ({
     id,
     alwaysEnabled,
 }: Props) => {
-    const disabled = alwaysEnabled !== true && !count;
+    const disabled = !alwaysEnabled && !count;
     const inputProps = {
         value: label,
         name,
