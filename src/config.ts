@@ -16,7 +16,7 @@ const VARS = {
         breadcrumbs: [{ title: 'Søk', url: '/sok' }],
     },
     keys: {
-        defaultFacet: '0',
+        defaultFacet: 'privatperson',
         defaultPreferredLanguage: "nb",
     },
 };
