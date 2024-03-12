@@ -21,9 +21,7 @@ export const logSearchQuery = () =>
         komponent: 'søkeside',
     });
 
-export const logResultClick = (
-    hitIndex?: number
-) =>
+export const logResultClick = (hitIndex?: number) =>
     logAmplitudeEvent('resultat-klikk', {
         destinasjon: '[redacted]',
         sokeord: '[redacted]',
@@ -35,3 +33,7 @@ export const logFilterSelection = (filter: string, subFilter?: string) =>
         filter,
         subFilter,
     });
+
+export const logShowMore = (page: number) => {
+    logAmplitudeEvent('vis-flere-treff', { page });
+};
