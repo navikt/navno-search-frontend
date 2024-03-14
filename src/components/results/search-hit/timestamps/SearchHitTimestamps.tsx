@@ -6,13 +6,17 @@ import { getTranslations } from '../translations';
 
 const createPublishedAndModifiedString = ({
     modifiedTime,
+    publishedTime,
     language,
 }: SearchHitProps) => {
-    return modifiedTime
-        ? `${getTranslations(language).lastModified} ${formatDate(
-              modifiedTime
-          )}`
-        : '';
+    const publishedPart =
+        publishedTime &&
+        `${getTranslations(language).published} ${formatDate(publishedTime)}`;
+    const modifiedPart =
+        modifiedTime &&
+        `${getTranslations(language).lastModified} ${formatDate(modifiedTime)}`;
+
+    return [publishedPart, modifiedPart].filter(Boolean).join(' | ');
 };
 
 type Props = {
