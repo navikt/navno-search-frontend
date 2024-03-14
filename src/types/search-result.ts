@@ -30,6 +30,7 @@ export type SearchHitProps = {
     href: string;
     highlight: string;
     modifiedTime?: string;
+    publishedTime?: string;
     audience?: Audience | Audience[];
     language: Language;
 };
