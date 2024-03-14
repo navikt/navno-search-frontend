@@ -1,10 +1,4 @@
 .filterOption {
-    &.disabled {
-        > * {
-            color: var(--a-text-subtle);
-        }
-    }
-
     label {
         padding: 0.375rem 0;
     }
