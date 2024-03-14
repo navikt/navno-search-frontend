@@ -17,7 +17,7 @@ export const fetchSearchResults = (
         }),
         ...params,
     });
-    const url = `${Config.URLS.searchService}${queryString}`;
+    const url = encodeURI(`${Config.URLS.searchService}${queryString}`);
     return fetchWithTimeout(url, 5000).then((res) => {
         if (res.ok) {
             return res.json();
