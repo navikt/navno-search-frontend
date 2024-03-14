@@ -1,4 +1,4 @@
-name: Deploy to dev2
+name: Deploy to dev
 on:
   workflow_dispatch
 
@@ -10,10 +10,10 @@ jobs:
       id-token: "write"
     with:
       cluster: dev-gcp
-      deployEnv: dev2
-      imagename: dev2-deploy
-      APP_ORIGIN: https://www-2.ekstern.dev.nav.no
-      XP_ORIGIN: https://portal-admin-q6.oera.no
+      deployEnv: dev
+      imagename: dev-deploy
+      APP_ORIGIN: https://www.ekstern.dev.nav.no
+      SEARCH_URL: https://navno-search-api.intern.dev.nav.no/content/search
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}

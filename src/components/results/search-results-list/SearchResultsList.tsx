@@ -9,6 +9,7 @@ import { ActionType } from '../../../context/actions';
 import { useSearchContext } from '../../../context/ContextProvider';
 
 import style from './SearchResultsList.module.scss';
+import { logShowMore } from '../../../utils/amplitude';
 
 type Props = {
     result: SearchResultProps;
@@ -21,11 +22,14 @@ export const SearchResultsList = ({ result }: Props) => {
     const { word: searchTerm } = result;
 
     const showMore = async () => {
+        const nextPage = result.page + 1
+
+        logShowMore(nextPage)
+
         setIsAwaitingMore(true);
         const { result: moreHits, error } = await fetchSearchResultsClientside({
             ...params,
-            c: result.c + 1,
-            start: result.c,
+            page: nextPage
         });
         setIsAwaitingMore(false);
 

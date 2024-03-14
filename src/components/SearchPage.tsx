@@ -11,6 +11,7 @@ import { Spinner } from './spinner/Spinner';
 import { SearchResults } from './results/SearchResults';
 import { SearchFilters } from './filters/SearchFilters';
 import { SearchHeader } from './header/SearchHeader';
+import { Heading } from '@navikt/ds-react';
 
 import style from './SearchPage.module.scss';
 
@@ -46,14 +47,14 @@ const SearchPage = () => {
         logSearchQuery();
     };
 
-    const { s, daterange, f, uf } = params;
+    const { s, f, uf, preferredLanguage } = params;
 
     useEffect(() => {
         if (enableClientsideFetch.current) {
             fetchAndSetNewResults();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [s, daterange, f, uf]);
+    }, [s, f, uf, preferredLanguage]);
 
     useEffect(() => {
         enableClientsideFetch.current = true;
@@ -67,6 +68,9 @@ const SearchPage = () => {
     return (
         <div className={style.search}>
             <div className={style.leftCol}>
+                <Heading className={style.heading} level="1" size="large">
+                    {'Søk på nav.no'}
+                </Heading>
                 <SearchHeader result={result} />
                 <SearchInput
                     initialSearchTerm={searchTerm}

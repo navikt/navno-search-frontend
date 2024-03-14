@@ -1,27 +1,5 @@
 import { SearchSort } from './search-params';
 
-export enum DaterangeKey {
-    Last7Days = 'Siste 7 dager',
-    Last30Days = 'Siste 30 dager',
-    Last12Months = 'Siste 12 måneder',
-    Over12Months = 'Eldre enn 12 måneder',
-    All = 'Alle datoer',
-}
-
-export type DaterangeBucketProps = {
-    key: DaterangeKey;
-    docCount: number;
-    checked: boolean;
-    to?: string;
-    from?: string;
-};
-
-export type DaterangeProps = {
-    docCount: number;
-    checked: boolean;
-    buckets: DaterangeBucketProps[];
-};
-
 export type FacetBucketProps = {
     key: string;
     name: string;
@@ -32,46 +10,42 @@ export type FacetBucketProps = {
     };
 };
 
-export type Audience = 'person' | 'employer' | 'provider' | 'other';
+export type Audience =
+    | 'person'
+    | 'employer'
+    | 'provider'
+    | 'provider_doctor'
+    | 'provider_municipality_employed'
+    | 'provider_optician'
+    | 'provider_administrator'
+    | 'provider_measures_organizer'
+    | 'provider_aid_supplier'
+    | 'provider_other'
+    | 'other';
 
 export type Language = 'no' | 'nn' | 'en';
 
 export type SearchHitProps = {
-    priority: boolean;
     displayName: string;
     href: string;
-    displayPath: string;
     highlight: string;
-    publish?: {
-        from?: string;
-        first?: string;
-    };
-    createdTime: string;
     modifiedTime?: string;
-    officeInformation?: {
-        phone?: string;
-        audienceReception?: string;
-    };
     audience?: Audience | Audience[];
     language: Language;
-    hidePublishDate: boolean;
-    hideModifiedDate: boolean;
 };
 
 export type SearchResultProps = {
-    c: number;
+    page: number;
     s: SearchSort;
-    daterange: number;
+    preferredLanguage: string;
     isMore: boolean;
     word: string;
     total: string;
-    fasett: string;
     fasettKey: string;
     aggregations: {
         fasetter: {
             buckets: FacetBucketProps[];
         };
-        Tidsperiode: DaterangeProps;
     };
     hits: SearchHitProps[];
     isInitialResult?: boolean;

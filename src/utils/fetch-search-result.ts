@@ -5,13 +5,19 @@ import { SearchResultProps } from '../types/search-result';
 import { fetchWithTimeout, objectToQueryString } from './fetch-utils';
 
 export const fetchSearchResults = (
-    params?: SearchParams
+    params?: SearchParams,
+    defaultFacetOverride?: string,
+    defaultLanguageOverride?: string
 ): Promise<SearchResultProps> => {
     const queryString = objectToQueryString({
         ...searchParamsDefault,
+        ...(defaultFacetOverride && { f: defaultFacetOverride }),
+        ...(defaultLanguageOverride && {
+            preferredLanguage: defaultLanguageOverride,
+        }),
         ...params,
     });
-    const url = `${Config.URLS.xpSearchService}${queryString}`;
+    const url = `${Config.URLS.searchService}${queryString}`;
     return fetchWithTimeout(url, 5000).then((res) => {
         if (res.ok) {
             return res.json();

@@ -7,6 +7,10 @@ import { SearchResultProps } from 'types/search-result';
 import SearchPage from 'components/SearchPage';
 import { paramsFromResult, SearchParams } from 'types/search-params';
 import { Alert } from '@navikt/ds-react';
+import {
+    getDecoratorAudienceIfValid,
+    getDecoratorLanguageIfValid,
+} from '../utils/decoratorCookies';
 
 type Props = {
     initialResult: SearchResultProps | null;
@@ -46,7 +50,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     context
 ) => {
     const result = await fetchSearchResults(
-        context.query as unknown as SearchParams
+        context.query as unknown as SearchParams,
+        getDecoratorAudienceIfValid(context.req.cookies),
+        getDecoratorLanguageIfValid(context.req.cookies)
     ).catch((err) => {
         console.error(err);
         return null;

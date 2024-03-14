@@ -1,4 +1,4 @@
-import { DaterangeKey, SearchResultProps } from '../types/search-result';
+import { SearchResultProps } from '../types/search-result';
 import { SearchParams, SearchSort } from '../types/search-params';
 import { UFToggleProps } from './reducer';
 
@@ -6,10 +6,10 @@ export enum ActionType {
     SetResults,
     SetParams,
     SetSearchTerm,
-    SetDaterange,
     SetSort,
     SetFacet,
     SetUnderfacet,
+    SetPreferredLanguage,
     ResetFilters,
 }
 
@@ -27,10 +27,6 @@ export type Action =
           searchTerm: string;
       }
     | {
-          type: ActionType.SetDaterange;
-          daterangeKey: DaterangeKey;
-      }
-    | {
           type: ActionType.SetSort;
           sort: SearchSort;
       }
@@ -41,6 +37,10 @@ export type Action =
     | {
           type: ActionType.SetUnderfacet;
           underfacetToggle: UFToggleProps;
+      }
+    | {
+          type: ActionType.SetPreferredLanguage;
+          preferredLanguage: string;
       }
     | {
           type: ActionType.ResetFilters;

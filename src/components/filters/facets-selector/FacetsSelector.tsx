@@ -6,10 +6,7 @@ import { FacetBucketProps } from 'types/search-result';
 import { logFilterSelection } from 'utils/amplitude';
 import { SearchSort } from 'types/search-params';
 import { UFToggleProps } from 'context/reducer';
-import config from 'config';
 import { useSearchContext } from '../../../context/ContextProvider';
-
-const { keys } = config.VARS;
 
 type Props = {
     facetsProps: FacetBucketProps[];
@@ -22,7 +19,6 @@ export const FacetsSelector = ({
     facetsProps,
     setFacet,
     setUnderFacet,
-    setSorting,
 }: Props) => {
     const [{ params }] = useSearchContext();
 
@@ -37,11 +33,6 @@ export const FacetsSelector = ({
                         isOpen={facet.key === params.f}
                         onClick={() => {
                             setFacet(facet.key);
-                            if (facet.key === keys.newsFacet) {
-                                setSorting(SearchSort.Newest);
-                            } else if (facet.key === keys.defaultFacet) {
-                                setSorting(SearchSort.BestMatch);
-                            }
                             logFilterSelection(facet.key);
                         }}
                         id={`select-facet-${fIndex}`}

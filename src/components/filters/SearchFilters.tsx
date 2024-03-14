@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { FacetsSelector } from './facets-selector/FacetsSelector';
-import { DaterangeSelector } from './daterange-selector/DaterangeSelector';
 import { SearchResultProps } from 'types/search-result';
 import { ActionType } from 'context/actions';
 import { useSearchContext } from 'context/ContextProvider';
 import { classNames } from '../../utils/classnames';
 import { Button, Heading } from '@navikt/ds-react';
-import { Expand } from '@navikt/ds-icons';
 
+import { Expand } from '@navikt/ds-icons';
 import style from './SearchFilters.module.scss';
+import { PreferredLanguageSelector } from './preferred-language-selector/PreferredLanguageSelector';
 
 type Props = {
     result: SearchResultProps;
@@ -16,7 +16,7 @@ type Props = {
 
 export const SearchFilters = ({ result }: Props) => {
     const [, dispatch] = useSearchContext();
-    const { fasetter, Tidsperiode } = result.aggregations;
+    const { fasetter } = result.aggregations;
     const [openMobile, setOpenMobile] = useState(false);
 
     return (
@@ -65,9 +65,14 @@ export const SearchFilters = ({ result }: Props) => {
                         }
                     />
                 )}
-                {Tidsperiode && (
-                    <DaterangeSelector daterangeProps={Tidsperiode} />
-                )}
+                <PreferredLanguageSelector
+                    setPreferredLanguage={(preferredLanguage) =>
+                        dispatch({
+                            type: ActionType.SetPreferredLanguage,
+                            preferredLanguage: preferredLanguage,
+                        })
+                    }
+                />
             </div>
         </div>
     );
