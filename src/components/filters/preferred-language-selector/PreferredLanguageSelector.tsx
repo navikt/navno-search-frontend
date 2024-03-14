@@ -5,9 +5,9 @@ import { Heading } from '@navikt/ds-react';
 import { logFilterSelection } from '../../../utils/amplitude';
 import { useSearchContext } from '../../../context/ContextProvider';
 
-const NB = "nb"
-const NN = "nn"
-const EN = "en"
+const NB = 'nb';
+const NN = 'nn';
+const EN = 'en';
 
 type Props = {
     setPreferredLanguage: (preferredLanguage: string) => void;
@@ -33,7 +33,6 @@ export const PreferredLanguageSelector = ({ setPreferredLanguage }: Props) => {
                         logFilterSelection(NB);
                     }
                 }}
-                alwaysEnabled={true}
             />
             <FilterOption
                 label={'Nynorsk'}
@@ -47,7 +46,6 @@ export const PreferredLanguageSelector = ({ setPreferredLanguage }: Props) => {
                         logFilterSelection(NN);
                     }
                 }}
-                alwaysEnabled={true}
             />
             <FilterOption
                 label={'English'}
@@ -61,7 +59,6 @@ export const PreferredLanguageSelector = ({ setPreferredLanguage }: Props) => {
                         logFilterSelection(EN);
                     }
                 }}
-                alwaysEnabled={true}
             />
         </FilterSectionPanel>
     );
