@@ -7,6 +7,7 @@ import { SearchHitAudience } from './audience/SearchHitAudience';
 import { SearchHitTimestamps } from './timestamps/SearchHitTimestamps';
 
 import style from './SearchHit.module.scss';
+import { useSearchContext } from '../../../context/ContextProvider';
 
 const parseHighlight = (highlight: string) => {
     return htmlReactParser(
@@ -22,6 +23,7 @@ type Props = {
 
 export const SearchHit = ({ hit, hitIndex }: Props) => {
     const { displayName, href, highlight, audience } = hit;
+    const [{ params }] = useSearchContext();
 
     if (!displayName || !href) {
         return null;
@@ -31,7 +33,7 @@ export const SearchHit = ({ hit, hitIndex }: Props) => {
         <LinkPanel
             href={href}
             className={style.searchHit}
-            onClick={() => logResultClick(hitIndex + 1)}
+            onClick={() => logResultClick(params.ord, hitIndex + 1)}
         >
             <LinkPanel.Title>{displayName}</LinkPanel.Title>
             <div className={style.content}>
@@ -41,7 +43,12 @@ export const SearchHit = ({ hit, hitIndex }: Props) => {
                     </BodyLong>
                 )}
                 <div className={style.bottomRow}>
-                    {audience && <SearchHitAudience audience={audience} language={hit.language} />}
+                    {audience && (
+                        <SearchHitAudience
+                            audience={audience}
+                            language={hit.language}
+                        />
+                    )}
                     <SearchHitTimestamps hit={hit} />
                 </div>
             </div>
