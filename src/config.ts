@@ -11,7 +11,6 @@ const URLS = {
 const VARS = {
     decoratorParams: {
         chatbot: true,
-        feedback: true,
         breadcrumbs: [{ title: 'Søk', url: '/sok' }],
     },
     keys: {
