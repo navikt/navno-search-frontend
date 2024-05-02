@@ -6,8 +6,6 @@ import { Search } from '@navikt/ds-react';
 
 import style from './SearchInput.module.scss';
 
-const maxInputLength = 100;
-
 const setSubmitTrackerCookie = () => {
     Cookies.set('nav-search-use', Date.now().toString(), {
         expires: 30,
@@ -52,7 +50,7 @@ export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
                 variant="primary"
                 hideLabel={true}
                 onChange={(value) => setInputValue(value)}
-                maxLength={maxInputLength}
+                maxLength={100}
                 id="search-input"
                 autoComplete="off"
             />
