@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { useSearchContext } from 'context/ContextProvider';
 import { ActionType } from 'context/actions';
 import Cookies from 'js-cookie';
-import { Close } from '@navikt/ds-icons';
-import { Button, TextField } from '@navikt/ds-react';
+import { Search } from '@navikt/ds-react';
 
 import style from './SearchInput.module.scss';
 
-const maxInputLength = 200;
+const maxInputLength = 100;
 
 const setSubmitTrackerCookie = () => {
     Cookies.set('nav-search-use', Date.now().toString(), {
@@ -36,6 +35,7 @@ export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
 
     return (
         <form
+            role="search"
             onSubmit={(e) => {
                 e.preventDefault();
                 // remove focus to close on-screen keyboards etc
@@ -45,30 +45,17 @@ export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
             }}
             className={style.searchForm}
         >
-            <TextField
+            <Search
                 aria-labelledby="search-header"
-                label={''}
-                hideLabel={true}
-                className={style.searchField}
-                onChange={(e) => setInputValue(e.target.value)}
                 value={inputValue}
+                label="Søk på siden"
+                variant="primary"
+                hideLabel={true}
+                onChange={(value) => setInputValue(value)}
                 maxLength={maxInputLength}
                 id="search-input"
                 autoComplete="off"
             />
-
-            <div className={style.searchButtons}>
-                <Button className={style.searchSubmit}>{'Søk'}</Button>
-                {inputValue && (
-                    <Button
-                        icon={<Close aria-hidden />}
-                        variant="tertiary"
-                        aria-label={'Nullstill søk'}
-                        onClick={() => setInputValue('')}
-                        className={style.searchReset}
-                    />
-                )}
-            </div>
         </form>
     );
 };
