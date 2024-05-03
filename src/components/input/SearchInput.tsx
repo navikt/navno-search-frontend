@@ -20,7 +20,7 @@ type Props = {
 
 export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
     const [inputValue, _setInputValue] = useState(
-        initialSearchTerm.slice(0, maxInputLength)
+        initialSearchTerm.slice(0, 100)
     );
     const [, dispatch] = useSearchContext();
     const setInputValue = (value: string) => {
