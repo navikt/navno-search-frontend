@@ -5,11 +5,6 @@ $collapsed-width: 10rem;
 
 .searchFilters {
     min-width: common.$filters-width;
-
-    @media #{common.$mq-screen-desktop} {
-        margin-left: common.$filters-margin;
-
-    }
 }
 
 .filters {

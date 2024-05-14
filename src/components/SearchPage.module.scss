@@ -36,6 +36,6 @@ $breakpoint: $left-col-width + common.$padding-sides-desktop-small * 2;
     }
     .search :global(.searchFilters) {
         grid-column: side;
-        grid-row: 2 / span 4;
+        grid-row: 2 / span 8;
     }
 }

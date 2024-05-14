@@ -83,7 +83,7 @@ const SearchPage = () => {
                     />
                 )}
                 {isAwaitingResults ? (
-                    <Spinner text={'Henter søke-resultater...'} />
+                    <Spinner text={'Henter søkeresultater...'} />
                 ) : (
                     <SearchResults
                         result={result}
