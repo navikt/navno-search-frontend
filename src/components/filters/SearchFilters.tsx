@@ -4,10 +4,10 @@ import { SearchResultProps } from 'types/search-result';
 import { ActionType } from 'context/actions';
 import { useSearchContext } from 'context/ContextProvider';
 import { classNames } from '../../utils/classnames';
-import { Button, Heading } from '@navikt/ds-react';
+import { Box, Button, Heading } from '@navikt/ds-react';
 import style from './SearchFilters.module.scss';
 import { PreferredLanguageSelector } from './preferred-language-selector/PreferredLanguageSelector';
-import { Expand } from '@navikt/ds-icons';
+import { ChevronDownIcon, FilterIcon } from '@navikt/aksel-icons';
 
 type Props = {
     result: SearchResultProps;
@@ -20,25 +20,28 @@ export const SearchFilters = ({ result, className }: Props) => {
     const [showFiltersMobile, setShowFiltersMobile] = useState(false);
 
     return (
-        <div
+        <>
+            <Button
+                variant="tertiary"
+                icon={<ChevronDownIcon aria-hidden />}
+                iconPosition={"right"}
+                className={style.buttonMobile}
+                onClick={(e) => {
+                    e.preventDefault();
+                    setShowFiltersMobile(!showFiltersMobile);
+                }}
+            >
+                <FilterIcon aria-hidden/>
+                {`Søkefilter`}{' '}
+            </Button>
+
+            <Box
             className={classNames(
                 className,
                 style.searchFilters,
                 showFiltersMobile ? style.visibleMobile : ''
             )}
         >
-            <Button
-                variant="tertiary"
-                icon={<Expand aria-hidden />}
-                iconPosition="right"
-                className={style.buttonMobile}
-                onClick={(e) => {
-                    e.preventDefault();
-                    setShowFiltersMobile(!showFiltersMobile)
-                }}
-            >
-                {`${showFiltersMobile ? 'Skjul' : 'Vis'} søkefilter`}
-            </Button>
             <Heading level="2" size="medium" className={style.titleDesktop}>
                 {'Søkefilter'}
             </Heading>
@@ -75,6 +78,7 @@ export const SearchFilters = ({ result, className }: Props) => {
                     }
                 />
             </div>
-        </div>
+        </Box>
+        </>
     );
 };

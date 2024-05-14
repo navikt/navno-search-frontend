@@ -1,5 +1,4 @@
 import React from 'react';
-import { FilterSectionPanel } from '../filter-section-panel/FilterSectionPanel';
 import { FilterOption } from '../filter-section-panel/FilterOption';
 import { FilterRadioPanel } from '../filter-radio-panel/FilterRadioPanel';
 import { FacetBucketProps } from 'types/search-result';
@@ -23,7 +22,7 @@ export const FacetsSelector = ({
     const [{ params }] = useSearchContext();
 
     return (
-        <FilterSectionPanel>
+        <>
             {facetsProps.map((facet, fIndex) => {
                 const underFacets = facet.underaggregeringer.buckets;
                 return (
@@ -67,6 +66,6 @@ export const FacetsSelector = ({
                     </FilterRadioPanel>
                 );
             })}
-        </FilterSectionPanel>
+        </>
     );
 };
