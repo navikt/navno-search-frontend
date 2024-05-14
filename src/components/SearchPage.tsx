@@ -21,7 +21,6 @@ const SearchPage = () => {
     const enableClientsideFetch = useRef(false);
     const [isAwaitingResults, setIsAwaitingResults] = useState(false);
     const router = useRouter();
-    const [showFiltersMobile, setShowFiltersMobile] = useState(false);
 
     const fetchAndSetNewResults = async () => {
         setIsAwaitingResults(true);
@@ -79,8 +78,8 @@ const SearchPage = () => {
                 <SearchSorting result={result} />
                 {result.aggregations && (
                     <SearchFilters
+                        className={"searchFilters"}
                         result={result}
-                        showFiltersMobile={showFiltersMobile}
                     />
                 )}
                 {isAwaitingResults ? (
@@ -88,11 +87,6 @@ const SearchPage = () => {
                 ) : (
                     <SearchResults
                         result={result}
-                        showFiltersMobile={showFiltersMobile}
-                        showFiltersHandler={(e) => {
-                            e.preventDefault();
-                            setShowFiltersMobile(!showFiltersMobile)
-                        }}
                     />
                 )}
         </div>

@@ -23,7 +23,24 @@ $collapsed-width: 10rem;
     }
 }
 
+.buttonMobile {
+    display: none;
+    align-items: center;
+    text-decoration: none;
+    padding: 0;
+    width: 100%;
+
+    svg {
+        margin-left: 0.25rem;
+        transition: transform $transition-duration linear;
+    }
+}
+
 @media #{common.$mq-screen-tablet-and-mobile} {
+    .buttonMobile {
+        display: flex;
+    }
+
     .titleDesktop {
         display: none;
     }
