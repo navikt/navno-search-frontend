@@ -3,20 +3,24 @@
 $transition-duration: 0.35s;
 $collapsed-width: 10rem;
 
+.searchFilterWrapper {
+    border: 1px solid var(--a-border-subtle);
+    border-radius: var(--a-border-radius-medium);
+    height: fit-content;
+}
+
 .searchFilters {
-    width: fit-content;
-    box-shadow: 0 1px 4px 0 #aab0ba;
     padding: 1rem 2rem;
+
+    @media #{common.$mq-screen-tablet-and-mobile} {
+        border-top: 1px solid var(--a-border-subtle);
+        display: none
+    }
 }
 
 .filters {
-    & > * {
-        overflow: hidden;
-        width: calc(#{common.$filters-width} - 1rem);
-        @media #{common.$mq-screen-tablet-and-mobile} {
-            width: 536px;
-        }
-    }
+    display: grid;
+    gap: var(--a-spacing-4)
 }
 
 .buttonMobile {
@@ -24,7 +28,6 @@ $collapsed-width: 10rem;
     padding: .25rem;
     justify-content: space-between;
     width: 100%;
-    box-shadow: 0 1px 4px 0 #aab0ba;
     & > * {
         padding: .25rem;
     }
@@ -46,19 +49,13 @@ $collapsed-width: 10rem;
     }
     .filters {
         position: relative;
-        visibility: hidden;
-        overflow: hidden;
-        max-height: 0;
-        transition-property: max-height, visibility;
-        transition-duration: $transition-duration;
-        transition-timing-function: ease-in;
     }
     .visibleMobile {
         z-index: 9999;
         min-width: common.$filters-width;
+        display: block;
 
         .filters {
-            visibility: visible;
             max-height: 100rem;
         }
         .buttonMobile svg {

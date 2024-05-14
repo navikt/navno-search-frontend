@@ -16,7 +16,7 @@ export const PreferredLanguageSelector = ({ setPreferredLanguage }: Props) => {
     const [{ params }] = useSearchContext();
 
     return (
-        <>
+        <div>
             <Heading level="3" size="small">
                 {'Foretrukket språk'}
             </Heading>
@@ -59,6 +59,6 @@ export const PreferredLanguageSelector = ({ setPreferredLanguage }: Props) => {
                     }
                 }}
             />
-        </>
+        </div>
     );
 };

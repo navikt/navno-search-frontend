@@ -20,7 +20,7 @@ export const SearchFilters = ({ result, className }: Props) => {
     const [showFiltersMobile, setShowFiltersMobile] = useState(false);
 
     return (
-        <>
+        <div className={classNames(style.searchFilterWrapper, className)}>
             <Button
                 variant="tertiary"
                 icon={<ChevronDownIcon aria-hidden />}
@@ -37,7 +37,6 @@ export const SearchFilters = ({ result, className }: Props) => {
 
             <Box
             className={classNames(
-                className,
                 style.searchFilters,
                 showFiltersMobile ? style.visibleMobile : ''
             )}
@@ -79,6 +78,6 @@ export const SearchFilters = ({ result, className }: Props) => {
                 />
             </div>
         </Box>
-        </>
+        </div>
     );
 };

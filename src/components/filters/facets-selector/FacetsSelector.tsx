@@ -22,7 +22,7 @@ export const FacetsSelector = ({
     const [{ params }] = useSearchContext();
 
     return (
-        <>
+        <div>
             {facetsProps.map((facet, fIndex) => {
                 const underFacets = facet.underaggregeringer.buckets;
                 return (
@@ -66,6 +66,6 @@ export const FacetsSelector = ({
                     </FilterRadioPanel>
                 );
             })}
-        </>
+        </div>
     );
 };
