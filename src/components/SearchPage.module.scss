@@ -11,6 +11,13 @@ $breakpoint: $left-col-width + common.$padding-sides-desktop-small * 2;
 .search {
     display: flex;
     justify-content: center;
+
+    @media #{common.$mq-screen-tablet-and-mobile} {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 600px;
+    }
 }
 
 .leftCol {

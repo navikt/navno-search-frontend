@@ -1,5 +1,31 @@
+@use 'src/common' as common;
+
+$transition-duration: 0.35s;
+
 .searchResults {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+
+.buttonMobile {
+  display: none;
+  align-items: center;
+  text-decoration: none;
+  padding: 0;
+  width: 100%;
+
+  svg {
+    margin-left: 0.25rem;
+    transition: transform $transition-duration linear;
+  }
+}
+
+@media #{common.$mq-screen-tablet-and-mobile} {
+  .titleDesktop {
+    display: none;
+  }
+  .buttonMobile {
     display: flex;
-    flex-direction: column;
-    margin-top: 0.5rem;
+  }
 }

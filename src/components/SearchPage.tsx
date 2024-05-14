@@ -21,6 +21,7 @@ const SearchPage = () => {
     const enableClientsideFetch = useRef(false);
     const [isAwaitingResults, setIsAwaitingResults] = useState(false);
     const router = useRouter();
+    const [showFiltersMobile, setShowFiltersMobile] = useState(false);
 
     const fetchAndSetNewResults = async () => {
         setIsAwaitingResults(true);
@@ -67,7 +68,6 @@ const SearchPage = () => {
 
     return (
         <div className={style.search}>
-            <div className={style.leftCol}>
                 <Heading className={style.heading} level="1" size="large">
                     {'Søk på nav.no'}
                 </Heading>
@@ -77,13 +77,24 @@ const SearchPage = () => {
                     fetchNewResults={fetchAndSetNewResults}
                 />
                 <SearchSorting result={result} />
+                {result.aggregations && (
+                    <SearchFilters
+                        result={result}
+                        showFiltersMobile={showFiltersMobile}
+                    />
+                )}
                 {isAwaitingResults ? (
                     <Spinner text={'Henter søke-resultater...'} />
                 ) : (
-                    <SearchResults result={result} />
+                    <SearchResults
+                        result={result}
+                        showFiltersMobile={showFiltersMobile}
+                        showFiltersHandler={(e) => {
+                            e.preventDefault();
+                            setShowFiltersMobile(!showFiltersMobile)
+                        }}
+                    />
                 )}
-            </div>
-            {result.aggregations && <SearchFilters result={result} />}
         </div>
     );
 };
