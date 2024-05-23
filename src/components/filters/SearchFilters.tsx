@@ -15,9 +15,13 @@ type Props = {
 };
 
 export const SearchFilters = ({ result, className }: Props) => {
-    const [, dispatch] = useSearchContext();
+    const [{ params }, dispatch] = useSearchContext();
     const { fasetter } = result.aggregations;
     const [showFiltersMobile, setShowFiltersMobile] = useState(false);
+
+    const selectedFacet = result.aggregations.fasetter.buckets.find(
+        (f) => f.key === params.f
+    );
 
     return (
         <div className={classNames(style.searchFilterWrapper, className)}>
@@ -28,11 +32,11 @@ export const SearchFilters = ({ result, className }: Props) => {
                 className={style.buttonMobile}
                 onClick={(e) => {
                     e.preventDefault();
-                    setShowFiltersMobile(!showFiltersMobile);
+                    setShowFiltersMobile((state) => !state);
                 }}
             >
                 <FilterIcon aria-hidden/>
-                {`Søkefilter`}{' '}
+                {`Søkefilter: ${selectedFacet?.name}`}{' '}
             </Button>
 
             <Box

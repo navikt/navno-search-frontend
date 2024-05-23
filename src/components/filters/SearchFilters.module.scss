@@ -7,6 +7,10 @@ $collapsed-width: 10rem;
     border: 1px solid var(--a-border-subtle);
     border-radius: var(--a-border-radius-medium);
     height: fit-content;
+
+    @media #{common.$mq-screen-tablet-and-mobile} {
+        margin-top: .5rem;
+    }
 }
 
 .searchFilters {
