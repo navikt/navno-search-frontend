@@ -31,9 +31,9 @@ export const SearchSorting = () => {
                     <Radio value={SearchSort.Newest}>{'Dato'}</Radio>
                 </div>
             </RadioGroup>
-            <div className={style.hitsAndTips}>
-                <Link href={Config.PATHS.searchTips}>{'Søketips'}</Link>
-            </div>
+            <Link href={Config.PATHS.searchTips} className={style.searchTips}>
+                {'Søketips'}
+            </Link>
         </div>
     );
 };
