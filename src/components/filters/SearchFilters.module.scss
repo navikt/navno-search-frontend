@@ -3,70 +3,64 @@
 $transition-duration: 0.35s;
 $collapsed-width: 10rem;
 
-.searchFilters {
-    margin-left: common.$filters-margin;
-    min-width: common.$filters-width;
+.searchFilterWrapper {
+    height: fit-content;
 
     @media #{common.$mq-screen-tablet-and-mobile} {
-        position: absolute;
-        right: 1rem;
-        margin: 0;
-        padding: 0.5rem;
-        background-color: white;
-        border-radius: common.$a-border-radius-medium;
-        box-shadow: 0 1px 4px 0 common.$a-border-default;
-        min-width: $collapsed-width;
-        max-width: $collapsed-width;
-        transition-property: min-width, max-width;
-        transition-duration: $transition-duration;
-        transition-timing-function: ease-in;
+        margin-top: .5rem;
     }
 }
 
-.buttonMobile {
-    display: none;
-    align-items: center;
-    text-decoration: none;
-    padding: 0;
-    width: 100%;
-
-    svg {
-        margin-left: 0.25rem;
-        transition: transform $transition-duration linear;
+.searchFilters {
+    @media #{common.$mq-screen-tablet-and-mobile} {
+        border-top: 1px solid var(--a-border-subtle);
+        display: none
     }
 }
 
 .filters {
-    & > * {
-        margin-top: 1rem;
-        overflow: hidden;
-        width: calc(#{common.$filters-width} - 1rem);
+    display: grid;
+    gap: var(--a-spacing-4)
+}
+
+.buttonMobile {
+    display: none;
+    padding: var(--a-spacing-3);
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid var(--a-border-subtle);
+    border-radius: var(--a-border-radius-medium);
+
+    span {
+        display: flex;
+        gap: var(--a-spacing-1)
+    }
+
+    svg {
+        transition: transform $transition-duration linear;
+        font-size: 1.5rem;
+        transform: translateY(-1px);
     }
 }
 
 @media #{common.$mq-screen-tablet-and-mobile} {
-    .titleDesktop {
-        display: none;
-    }
     .buttonMobile {
         display: flex;
     }
+
+    .titleDesktop {
+        display: none;
+    }
     .filters {
         position: relative;
-        visibility: hidden;
-        overflow: hidden;
-        max-height: 0;
-        transition-property: max-height, visibility;
-        transition-duration: $transition-duration;
-        transition-timing-function: ease-in;
     }
     .visibleMobile {
+        margin-top: -1px;
         z-index: 9999;
-        max-width: common.$filters-width;
         min-width: common.$filters-width;
+        display: block;
 
         .filters {
-            visibility: visible;
             max-height: 100rem;
         }
         .buttonMobile svg {

@@ -1,10 +1,8 @@
 import React from 'react';
-import { FilterSectionPanel } from '../filter-section-panel/FilterSectionPanel';
 import { FilterOption } from '../filter-section-panel/FilterOption';
 import { FilterRadioPanel } from '../filter-radio-panel/FilterRadioPanel';
 import { FacetBucketProps } from 'types/search-result';
 import { logFilterSelection } from 'utils/amplitude';
-import { SearchSort } from 'types/search-params';
 import { UFToggleProps } from 'context/reducer';
 import { useSearchContext } from '../../../context/ContextProvider';
 
@@ -12,7 +10,6 @@ type Props = {
     facetsProps: FacetBucketProps[];
     setFacet: (f: string) => void;
     setUnderFacet: ({ uf, toggle }: UFToggleProps) => void;
-    setSorting: (sorting: SearchSort) => void;
 };
 
 export const FacetsSelector = ({
@@ -23,7 +20,7 @@ export const FacetsSelector = ({
     const [{ params }] = useSearchContext();
 
     return (
-        <FilterSectionPanel>
+        <div>
             {facetsProps.map((facet, fIndex) => {
                 const underFacets = facet.underaggregeringer.buckets;
                 return (
@@ -67,6 +64,6 @@ export const FacetsSelector = ({
                     </FilterRadioPanel>
                 );
             })}
-        </FilterSectionPanel>
+        </div>
     );
 };

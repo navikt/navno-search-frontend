@@ -1,5 +1,4 @@
 import React from 'react';
-import { FilterSectionPanel } from '../filter-section-panel/FilterSectionPanel';
 import { FilterOption } from '../filter-section-panel/FilterOption';
 import { Heading } from '@navikt/ds-react';
 import { logFilterSelection } from '../../../utils/amplitude';
@@ -17,7 +16,7 @@ export const PreferredLanguageSelector = ({ setPreferredLanguage }: Props) => {
     const [{ params }] = useSearchContext();
 
     return (
-        <FilterSectionPanel>
+        <div>
             <Heading level="3" size="small">
                 {'Foretrukket språk'}
             </Heading>
@@ -60,6 +59,6 @@ export const PreferredLanguageSelector = ({ setPreferredLanguage }: Props) => {
                     }
                 }}
             />
-        </FilterSectionPanel>
+        </div>
     );
 };

@@ -41,7 +41,7 @@ export type SearchResultProps = {
     preferredLanguage: string;
     isMore: boolean;
     word: string;
-    total: string;
+    total: number;
     fasettKey: string;
     aggregations: {
         fasetter: {

@@ -12,7 +12,7 @@ jobs:
       cluster: dev-gcp
       deployEnv: dev
       imagename: dev-deploy
-      APP_ORIGIN: https://www.ekstern.dev.nav.no
+      APP_ORIGIN: https://www.ansatt.dev.nav.no
       SEARCH_URL: https://navno-search-api.ekstern.dev.nav.no/content/search
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
