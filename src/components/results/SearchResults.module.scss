@@ -5,7 +5,7 @@ $transition-duration: 0.35s;
 .searchResults {
   display: flex;
   flex-direction: column;
-  margin-top: 0.5rem;
+  margin-top: var(--a-spacing-2);
 }
 
 @media #{common.$mq-screen-tablet-and-mobile} {

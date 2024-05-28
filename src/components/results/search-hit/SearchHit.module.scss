@@ -4,7 +4,7 @@
     display: block;
     border: none;
     padding-inline: 0;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--a-spacing-2);
     word-break: break-word;
     transition-property: background-color, box-shadow;
     transition-duration: 0.1s;
@@ -29,7 +29,7 @@
 }
 
 .highlight {
-    margin-top: 0.5rem;
+    margin-top: var(--a-spacing-2);
 }
 
 .bottomRow {
