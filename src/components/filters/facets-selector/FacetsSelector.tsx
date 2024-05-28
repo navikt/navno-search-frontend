@@ -3,7 +3,6 @@ import { FilterOption } from '../filter-section-panel/FilterOption';
 import { FilterRadioPanel } from '../filter-radio-panel/FilterRadioPanel';
 import { FacetBucketProps } from 'types/search-result';
 import { logFilterSelection } from 'utils/amplitude';
-import { SearchSort } from 'types/search-params';
 import { UFToggleProps } from 'context/reducer';
 import { useSearchContext } from '../../../context/ContextProvider';
 
@@ -11,7 +10,6 @@ type Props = {
     facetsProps: FacetBucketProps[];
     setFacet: (f: string) => void;
     setUnderFacet: ({ uf, toggle }: UFToggleProps) => void;
-    setSorting: (sorting: SearchSort) => void;
 };
 
 export const FacetsSelector = ({

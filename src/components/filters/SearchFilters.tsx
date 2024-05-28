@@ -68,12 +68,6 @@ export const SearchFilters = ({ result, className }: Props) => {
                                     underfacetToggle: ufToggle,
                                 })
                             }
-                            setSorting={(sort) =>
-                                dispatch({
-                                    type: ActionType.SetSort,
-                                    sort: sort,
-                                })
-                            }
                         />
                     )}
                     <PreferredLanguageSelector
