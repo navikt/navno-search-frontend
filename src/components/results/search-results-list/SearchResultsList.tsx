@@ -34,7 +34,7 @@ export const SearchResultsList = ({ result }: Props) => {
                 type: ActionType.SetResults,
                 result: {
                     ...moreHits,
-                    hits: [...result?.hits, ...moreHits.hits],
+                    hits: [...result.hits, ...moreHits.hits],
                 },
             });
         }
