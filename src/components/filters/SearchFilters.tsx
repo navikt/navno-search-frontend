@@ -28,60 +28,64 @@ export const SearchFilters = ({ result, className }: Props) => {
             <Button
                 variant="tertiary"
                 icon={<ChevronDownIcon aria-hidden />}
-                iconPosition={"right"}
+                iconPosition={'right'}
                 className={style.buttonMobile}
                 onClick={(e) => {
                     e.preventDefault();
                     setShowFiltersMobile((state) => !state);
                 }}
             >
-                <FilterIcon aria-hidden/>
+                <FilterIcon aria-hidden />
                 {`Søkefilter: ${selectedFacet?.name}`}{' '}
             </Button>
 
             <Box
-            className={classNames(
-                style.searchFilters,
-                showFiltersMobile ? style.visibleMobile : ''
-            )}
-        >
-            <Heading level="2" size="medium" className={style.titleDesktop}>
-                {'Søkefilter'}
-            </Heading>
-            <div className={style.filters}>
-                {fasetter?.buckets && (
-                    <FacetsSelector
-                        facetsProps={fasetter.buckets}
-                        setFacet={(facet) =>
+                className={classNames(
+                    style.searchFilters,
+                    showFiltersMobile ? style.visibleMobile : ''
+                )}
+                padding={'4'}
+                borderColor={'border-subtle'}
+                borderWidth={'1'}
+                borderRadius={'medium'}
+            >
+                <Heading level="3" size="small" className={style.titleDesktop}>
+                    {'Søkefilter'}
+                </Heading>
+                <div className={style.filters}>
+                    {fasetter?.buckets && (
+                        <FacetsSelector
+                            facetsProps={fasetter.buckets}
+                            setFacet={(facet) =>
+                                dispatch({
+                                    type: ActionType.SetFacet,
+                                    facet: facet,
+                                })
+                            }
+                            setUnderFacet={(ufToggle) =>
+                                dispatch({
+                                    type: ActionType.SetUnderfacet,
+                                    underfacetToggle: ufToggle,
+                                })
+                            }
+                            setSorting={(sort) =>
+                                dispatch({
+                                    type: ActionType.SetSort,
+                                    sort: sort,
+                                })
+                            }
+                        />
+                    )}
+                    <PreferredLanguageSelector
+                        setPreferredLanguage={(preferredLanguage) =>
                             dispatch({
-                                type: ActionType.SetFacet,
-                                facet: facet,
-                            })
-                        }
-                        setUnderFacet={(ufToggle) =>
-                            dispatch({
-                                type: ActionType.SetUnderfacet,
-                                underfacetToggle: ufToggle,
-                            })
-                        }
-                        setSorting={(sort) =>
-                            dispatch({
-                                type: ActionType.SetSort,
-                                sort: sort,
+                                type: ActionType.SetPreferredLanguage,
+                                preferredLanguage: preferredLanguage,
                             })
                         }
                     />
-                )}
-                <PreferredLanguageSelector
-                    setPreferredLanguage={(preferredLanguage) =>
-                        dispatch({
-                            type: ActionType.SetPreferredLanguage,
-                            preferredLanguage: preferredLanguage,
-                        })
-                    }
-                />
-            </div>
-        </Box>
+                </div>
+            </Box>
         </div>
     );
 };

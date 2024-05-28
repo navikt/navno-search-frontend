@@ -4,8 +4,6 @@ $transition-duration: 0.35s;
 $collapsed-width: 10rem;
 
 .searchFilterWrapper {
-    border: 1px solid var(--a-border-subtle);
-    border-radius: var(--a-border-radius-medium);
     height: fit-content;
 
     @media #{common.$mq-screen-tablet-and-mobile} {
@@ -14,8 +12,6 @@ $collapsed-width: 10rem;
 }
 
 .searchFilters {
-    padding: 1rem 2rem;
-
     @media #{common.$mq-screen-tablet-and-mobile} {
         border-top: 1px solid var(--a-border-subtle);
         display: none
@@ -29,17 +25,21 @@ $collapsed-width: 10rem;
 
 .buttonMobile {
     display: none;
-    padding: .25rem;
+    padding: var(--a-spacing-3);
     justify-content: space-between;
     width: 100%;
-    & > * {
-        padding: .25rem;
+    border: 1px solid var(--a-border-subtle);
+    border-radius: var(--a-border-radius-medium);
+
+    span {
+        display: flex;
+        gap: var(--a-spacing-1)
     }
 
     svg {
-        margin-left: 0.25rem;
-        margin-right: 0.25rem;
         transition: transform $transition-duration linear;
+        font-size: 1.5rem;
+        transform: translateY(-1px);
     }
 }
 
@@ -55,6 +55,7 @@ $collapsed-width: 10rem;
         position: relative;
     }
     .visibleMobile {
+        margin-top: -1px;
         z-index: 9999;
         min-width: common.$filters-width;
         display: block;
