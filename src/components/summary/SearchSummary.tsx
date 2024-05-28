@@ -21,7 +21,9 @@ export const SearchSummary = ({ result }: Props) => {
         !isInitialDefaultQuery(result, params) && (
             <div className={style.searchSummary}>
                 <Heading size="small" level="2">
-                    {`${numHits} treff ${searchTerm && `for ${quote(searchTerm)}`} med valgte søkefilter`}
+                    {searchTerm
+                        ? `${numHits} treff for ${quote(searchTerm)} med valgte søkefilter`
+                        : `${numHits} treff med valgte søkefilter`}
                 </Heading>
 
                 {numHits == 0 && (
