@@ -25,14 +25,7 @@ export const SearchSummary = ({ result }: Props) => {
                         ? `${numHits} treff for ${quote(searchTerm)} med valgte søkefilter`
                         : `${numHits} treff med valgte søkefilter`}
                 </Heading>
-
-                {numHits == 0 && (
-                    <BodyLong>
-                        {
-                            'Prøv andre søkeord eller endre søkefilter for å se andre treff.'
-                        }
-                    </BodyLong>
-                )}
+                <BodyLong>{'Endre søkefilter for å se andre treff.'}</BodyLong>
             </div>
         )
     );
