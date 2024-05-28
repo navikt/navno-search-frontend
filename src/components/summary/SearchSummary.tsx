@@ -22,8 +22,8 @@ export const SearchSummary = ({ result }: Props) => {
             <div className={style.searchSummary}>
                 <Heading size="small" level="2">
                     {searchTerm
-                        ? `${numHits} treff for ${quote(searchTerm)} med valgte søkefilter`
-                        : `${numHits} treff med valgte søkefilter`}
+                        ? `${numHits} treff for ${quote(searchTerm)} med valgte søkefilter.`
+                        : `${numHits} treff med valgte søkefilter.`}
                 </Heading>
                 <BodyLong>{'Endre søkefilter for å se andre treff.'}</BodyLong>
             </div>
