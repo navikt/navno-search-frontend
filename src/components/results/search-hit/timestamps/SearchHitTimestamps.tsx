@@ -9,15 +9,15 @@ const createPublishedAndModifiedString = ({ modifiedTime, publishedTime, languag
         return null;
     }
 
-    const publishedString =
-        `${getTranslations(language).published} ${formatDate(publishedTime)}`;
+    const translations = getTranslations(language);
+
+    const publishedString = `${translations.published} ${formatDate(publishedTime)}`;
 
     if (!modifiedTime || publishedTime >= modifiedTime) {
         return publishedString;
     }
 
-    const modifiedString =
-        `${getTranslations(language).lastModified} ${formatDate(modifiedTime)}`;
+    const modifiedString = `${translations.lastModified} ${formatDate(modifiedTime)}`;
 
     return `${publishedString} | ${modifiedString}`;
 };
