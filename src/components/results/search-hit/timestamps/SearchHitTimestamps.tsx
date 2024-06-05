@@ -4,19 +4,22 @@ import { SearchHitProps } from '../../../../types/search-result';
 import { formatDate } from '../../../../utils/datetime';
 import { getTranslations } from '../translations';
 
-const createPublishedAndModifiedString = ({
-    modifiedTime,
-    publishedTime,
-    language,
-}: SearchHitProps) => {
-    const publishedPart =
-        publishedTime &&
+const createPublishedAndModifiedString = ({ modifiedTime, publishedTime, language }: SearchHitProps) => {
+    if (!publishedTime) {
+        return null;
+    }
+
+    const publishedString =
         `${getTranslations(language).published} ${formatDate(publishedTime)}`;
-    const modifiedPart =
-        modifiedTime &&
+
+    if (!modifiedTime || publishedTime >= modifiedTime) {
+        return publishedString;
+    }
+
+    const modifiedString =
         `${getTranslations(language).lastModified} ${formatDate(modifiedTime)}`;
 
-    return [publishedPart, modifiedPart].filter(Boolean).join(' | ');
+    return `${publishedString} | ${modifiedString}`;
 };
 
 type Props = {
@@ -25,6 +28,10 @@ type Props = {
 
 export const SearchHitTimestamps = ({ hit }: Props) => {
     const publishedString = createPublishedAndModifiedString(hit);
+
+    if (!publishedString) {
+        return null;
+    }
 
     return <BodyShort size={'small'}>{publishedString}</BodyShort>;
 };
