@@ -25,14 +25,13 @@ const setup = ({
             initialParams={initialParams}
         >
             <SearchInput
-                result={initialResult}
                 initialSearchTerm={initialSearch}
                 fetchNewResults={mockFetchNewResults}
             />
         </ContextProvider>
     );
 
-    const input = screen.getByRole('textbox') as HTMLInputElement;
+    const input = screen.getByRole('searchbox') as HTMLInputElement;
     return {
         input,
         ...utils,
@@ -51,7 +50,7 @@ describe('SearchInput', () => {
             initialParams,
         });
 
-        expect(getByLabelText('Nyheter')).toBeInTheDocument();
+        expect(getByLabelText('Søk på siden')).toBeInTheDocument();
     });
 
     test('It updates the search field value', async () => {

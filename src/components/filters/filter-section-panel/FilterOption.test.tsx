@@ -46,15 +46,15 @@ describe('FilterOption', () => {
         expect(mockFunction).toHaveBeenCalledTimes(1);
     });
 
-    test('It Disables the radio when count === 0', () => {
+    test('It checks the option when prop "checked" is true', () => {
         const utils = setup({
             label: 'Filter option label',
             count: 0,
-            checked: false,
+            checked: true,
         });
 
         const input = utils.getByDisplayValue('Filter option label');
 
-        expect(input).toBeDisabled();
+        expect(input).toBeChecked();
     });
 });

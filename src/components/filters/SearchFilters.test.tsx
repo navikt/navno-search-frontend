@@ -12,11 +12,7 @@ type SetupConfig = {
     initialParams?: SearchParams;
 };
 
-const setup = ({
-    initialSearch = '',
-    initialResult,
-    initialParams,
-}: SetupConfig) => {
+const setup = ({ initialResult, initialParams }: SetupConfig) => {
     const utils = render(
         <ContextProvider
             initialResult={initialResult}
@@ -32,15 +28,15 @@ const setup = ({
 };
 
 describe('SearchFilters', () => {
-    test('Expands the filter when clicking the expand button (mobile)', () => {
+    test('Expands the filter when clicking the expand button (mobile)', async () => {
         setup({
             initialResult: mockResults(),
         });
 
         const filterPanel = screen.getByTestId('search-filter-panel');
         expect(filterPanel.classList.contains('visibleMobile')).toBe(false);
-        const button = screen.getByText('Vis søkefilter');
-        fireEvent.click(button);
+        const button = await screen.findAllByText(/Søkefilter/);
+        fireEvent.click(button[0]);
         expect(filterPanel.classList.contains('visibleMobile')).toBe(true);
     });
 });
