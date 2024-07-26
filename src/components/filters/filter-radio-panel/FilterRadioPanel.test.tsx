@@ -50,6 +50,7 @@ describe('FilterRadioPanel', () => {
             },
         });
 
+        // expect(true).toBe(true);
         expect(getByDisplayValue('Filter option label')).toBeInTheDocument();
     });
 

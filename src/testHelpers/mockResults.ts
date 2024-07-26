@@ -1,14 +1,13 @@
-import { DaterangeKey, SearchResultProps } from 'types/search-result';
+import { SearchResultProps } from 'types/search-result';
 
 export const mockResults = () => {
     const result: SearchResultProps = {
-        c: 1,
+        page: 0,
         s: 0,
-        daterange: -1,
         isMore: true,
         word: 'stønad',
+        preferredLanguage: 'no',
         total: 336,
-        fasett: 'Innhold',
         fasettKey: '0',
         aggregations: {
             fasetter: {
@@ -268,36 +267,6 @@ export const mockResults = () => {
                     },
                 ],
             },
-            Tidsperiode: {
-                buckets: [
-                    {
-                        key: DaterangeKey.Last7Days,
-                        docCount: 20,
-                        from: '2023-12-28T09:31:44.826Z',
-                        checked: false,
-                    },
-                    {
-                        key: DaterangeKey.Last30Days,
-                        docCount: 10,
-                        from: '2023-12-05T09:31:44.826Z',
-                        checked: true,
-                    },
-                    {
-                        key: DaterangeKey.Last12Months,
-                        docCount: 135,
-                        from: '2023-01-04T09:31:44.826Z',
-                        checked: false,
-                    },
-                    {
-                        key: DaterangeKey.Over12Months,
-                        docCount: 201,
-                        to: '2023-01-04T09:31:44.826Z',
-                        checked: false,
-                    },
-                ],
-                docCount: 336,
-                checked: true,
-            },
         },
         hits: [
             {
@@ -305,19 +274,10 @@ export const mockResults = () => {
                 href: 'https://www.nav.no/okonomisk-sosialhjelp/nn',
                 highlight:
                     'Ei mellombels støtte når du ikkje klarer å dekkje nødvendige utgifter på eiga hand. ',
-                publish: {
-                    first: '2023-03-28T15:28:58.022Z',
-                    from: '2023-03-28T15:28:58.022Z',
-                },
-                createdTime: '2023-03-28T14:23:49.774Z',
+                publishedTime: '2023-03-28T15:28:58.022Z',
                 modifiedTime: '2024-01-02T10:46:08.682Z',
-                score: 2.690218925476074,
                 audience: ['person'],
                 language: 'nn',
-                hidePublishDate: true,
-                hideModifiedDate: false,
-                priority: false,
-                displayPath: '/okonomisk-sosialhjelp',
             },
         ],
     };
