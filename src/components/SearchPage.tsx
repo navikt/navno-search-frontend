@@ -10,9 +10,10 @@ import { SearchSorting } from './sorting/SearchSorting';
 import { Spinner } from './spinner/Spinner';
 import { SearchResults } from './results/SearchResults';
 import { SearchFilters } from './filters/SearchFilters';
-import { SearchHeader } from './header/SearchHeader';
+import { Heading } from '@navikt/ds-react';
 
 import style from './SearchPage.module.scss';
+import { SearchSummary } from './summary/SearchSummary';
 
 const SearchPage = () => {
     const [{ result, params }, dispatch] = useSearchContext();
@@ -46,14 +47,14 @@ const SearchPage = () => {
         logSearchQuery();
     };
 
-    const { s, daterange, f, uf } = params;
+    const { s, f, uf, preferredLanguage } = params;
 
     useEffect(() => {
         if (enableClientsideFetch.current) {
             fetchAndSetNewResults();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [s, daterange, f, uf]);
+    }, [s, f, uf, preferredLanguage]);
 
     useEffect(() => {
         enableClientsideFetch.current = true;
@@ -66,20 +67,23 @@ const SearchPage = () => {
 
     return (
         <div className={style.search}>
-            <div className={style.leftCol}>
-                <SearchHeader result={result} />
-                <SearchInput
-                    initialSearchTerm={searchTerm}
-                    fetchNewResults={fetchAndSetNewResults}
-                />
-                <SearchSorting result={result} />
-                {isAwaitingResults ? (
-                    <Spinner text={'Henter søke-resultater...'} />
-                ) : (
-                    <SearchResults result={result} />
-                )}
-            </div>
-            {result.aggregations && <SearchFilters result={result} />}
+            <Heading className={style.heading} level="1" size="large">
+                {'Søk på nav.no'}
+            </Heading>
+            <SearchInput
+                initialSearchTerm={searchTerm}
+                fetchNewResults={fetchAndSetNewResults}
+            />
+            <SearchSorting />
+            <SearchSummary result={result} />
+            {result.aggregations && (
+                <SearchFilters className={'searchFilters'} result={result} />
+            )}
+            {isAwaitingResults ? (
+                <Spinner text={'Henter søkeresultater...'} />
+            ) : (
+                <SearchResults result={result} />
+            )}
         </div>
     );
 };

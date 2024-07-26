@@ -1,7 +1,4 @@
-import {
-    daterangeKeyToParam,
-    searchParamsDefaultFilters,
-} from '../types/search-params';
+import { searchParamsDefaultFilters } from '../types/search-params';
 import { Action, ActionType } from './actions';
 import { SearchContext } from './ContextProvider';
 
@@ -20,14 +17,6 @@ export const reducer = (state: SearchContext, action: Action) => {
             return {
                 ...state,
                 params: { ...state.params, ord: action.searchTerm },
-            };
-        case ActionType.SetDaterange:
-            return {
-                ...state,
-                params: {
-                    ...state.params,
-                    daterange: daterangeKeyToParam[action.daterangeKey],
-                },
             };
         case ActionType.SetSort:
             return {
@@ -52,6 +41,14 @@ export const reducer = (state: SearchContext, action: Action) => {
                 params: {
                     ...state.params,
                     uf: newUf.length > 0 ? newUf : [],
+                },
+            };
+        case ActionType.SetPreferredLanguage:
+            return {
+                ...state,
+                params: {
+                    ...state.params,
+                    preferredLanguage: action.preferredLanguage,
                 },
             };
         case ActionType.ResetFilters:

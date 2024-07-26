@@ -8,7 +8,7 @@ export type FilterOptionType = 'radio' | 'checkbox';
 export type FilterOptionProps = {
     label: string;
     name: string;
-    count: number;
+    count?: number;
     checked?: boolean;
     onChange?: (args: any) => any;
     type: FilterOptionType;
@@ -24,7 +24,6 @@ export const FilterOption = ({
     type,
     id,
 }: FilterOptionProps) => {
-    const disabled = !count;
     const inputProps = {
         value: label,
         name,
@@ -32,18 +31,10 @@ export const FilterOption = ({
         onChange,
         type,
         id,
-        // If the option is checked, we want the user to be able to uncheck it even if
-        // it had 0 hits and is styled as "disabled"
-        disabled: disabled && !checked,
     };
 
     return (
-        <span
-            className={classNames(
-                style.filterOption,
-                disabled && style.disabled
-            )}
-        >
+        <span className={classNames(style.filterOption)}>
             <input className={`navds-${type}__input`} {...inputProps} />
             <label className={`navds-${type}__label`} htmlFor={inputProps.id}>
                 {label}

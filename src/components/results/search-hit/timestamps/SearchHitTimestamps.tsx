@@ -2,46 +2,24 @@ import React from 'react';
 import { BodyShort } from '@navikt/ds-react';
 import { SearchHitProps } from '../../../../types/search-result';
 import { formatDate } from '../../../../utils/datetime';
-import dayjs from 'dayjs';
 import { getTranslations } from '../translations';
 
-const createPublishedAndModifiedString = ({
-    publish,
-    modifiedTime,
-    createdTime,
-    language,
-    hidePublishDate,
-    hideModifiedDate,
-}: SearchHitProps) => {
-    if (hidePublishDate && hideModifiedDate) {
-        return '';
+const createPublishedAndModifiedString = ({ modifiedTime, publishedTime, language }: SearchHitProps) => {
+    if (!publishedTime) {
+        return null;
     }
 
-    const publishedTime = publish?.first || createdTime;
+    const translations = getTranslations(language);
 
-    if (hidePublishDate) {
-        return modifiedTime
-            ? `${getTranslations(language).lastModified} ${formatDate(
-                  modifiedTime
-              )}`
-            : '';
-    }
+    const publishedString = `${translations.published} ${formatDate(publishedTime)}`;
 
-    const publishedString = `${
-        getTranslations(language).published
-    } ${formatDate(publishedTime)}`;
-
-    const isModifiedSincePublishedTime =
-        modifiedTime &&
-        dayjs(modifiedTime).unix() > dayjs(publishedTime).unix();
-
-    if (!isModifiedSincePublishedTime) {
+    if (!modifiedTime || publishedTime >= modifiedTime) {
         return publishedString;
     }
 
-    return `${publishedString} | ${
-        getTranslations(language).lastModified
-    } ${formatDate(modifiedTime)}`;
+    const modifiedString = `${translations.lastModified} ${formatDate(modifiedTime)}`;
+
+    return `${publishedString} | ${modifiedString}`;
 };
 
 type Props = {
@@ -50,6 +28,10 @@ type Props = {
 
 export const SearchHitTimestamps = ({ hit }: Props) => {
     const publishedString = createPublishedAndModifiedString(hit);
+
+    if (!publishedString) {
+        return null;
+    }
 
     return <BodyShort size={'small'}>{publishedString}</BodyShort>;
 };

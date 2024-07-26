@@ -5,18 +5,35 @@ $left-col-width: common.$desktopMinWidth - common.$filters-width -
 $breakpoint: $left-col-width + common.$padding-sides-desktop-small * 2;
 
 .heading {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--a-spacing-2);
 }
 
 .search {
-    display: flex;
+    display: grid;
+    row-gap: var(--a-spacing-3);
+    max-width: 960px;
+    margin-inline: auto;
     justify-content: center;
+
+    @media #{common.$mq-screen-tablet-and-mobile} {
+        display: block;
+        margin-inline: auto;
+    }
 }
 
-.leftCol {
-    width: $left-col-width;
-
-    @media (max-width: $breakpoint) {
-        width: 100%;
+@media #{common.$mq-screen-desktop} {
+    .search {
+        grid-template-columns: [full-start main] minmax(0, 580fr) [side] minmax(0, 300fr) [full-end];
+        column-gap: var(--a-spacing-12);
+    }
+    .heading {
+        grid-column: full;
+    }
+    .search > * {
+        grid-column: main;
+    }
+    .search :global(.searchFilters) {
+        grid-column: side;
+        grid-row: 2 / span 8;
     }
 }

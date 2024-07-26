@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { SearchHit } from '../search-hit/SearchHit';
-import { BodyLong, Button, Heading, Link } from '@navikt/ds-react';
-import { quote } from '../../../utils/quote';
+import { Button } from '@navikt/ds-react';
 import { SearchResultProps } from '../../../types/search-result';
-import Config from '../../../config';
 import { fetchSearchResultsClientside } from '../../../utils/fetch-search-result';
 import { ActionType } from '../../../context/actions';
 import { useSearchContext } from '../../../context/ContextProvider';
 
 import style from './SearchResultsList.module.scss';
+import { logShowMore } from '../../../utils/amplitude';
 
 type Props = {
     result: SearchResultProps;
@@ -18,14 +17,15 @@ export const SearchResultsList = ({ result }: Props) => {
     const [{ params }, dispatch] = useSearchContext();
     const [isAwaitingMore, setIsAwaitingMore] = useState(false);
 
-    const { word: searchTerm } = result;
-
     const showMore = async () => {
+        const nextPage = result.page + 1;
+
+        logShowMore(nextPage);
+
         setIsAwaitingMore(true);
         const { result: moreHits, error } = await fetchSearchResultsClientside({
             ...params,
-            c: result.c + 1,
-            start: result.c,
+            page: nextPage,
         });
         setIsAwaitingMore(false);
 
@@ -34,7 +34,7 @@ export const SearchResultsList = ({ result }: Props) => {
                 type: ActionType.SetResults,
                 result: {
                     ...moreHits,
-                    hits: [...result?.hits, ...moreHits.hits],
+                    hits: [...result.hits, ...moreHits.hits],
                 },
             });
         }
@@ -44,38 +44,18 @@ export const SearchResultsList = ({ result }: Props) => {
         }
     };
 
+    let numHits = result.hits?.length;
+
     return (
         <>
-            {' '}
-            {result.hits?.length > 0 ? (
+            {numHits > 0 &&
                 result.hits.map((hitProps, index) => {
                     const key = `${hitProps.href}-${hitProps.displayName}`;
 
                     return (
-                        <SearchHit
-                            hit={hitProps}
-                            hitIndex={index}
-                            key={key}
-                        />
+                        <SearchHit hit={hitProps} hitIndex={index} key={key} />
                     );
-                })
-            ) : (
-                <div className={style.noHits}>
-                    <Heading size="medium" level="2">
-                        {`Ingen treff${
-                            searchTerm ? ` for ${quote(searchTerm)}` : ''
-                        }.`}
-                    </Heading>
-                    <BodyLong>
-                        {
-                            'Prøv igjen med mer generelle søkeord, eller forsøk andre søkefiltre. '
-                        }
-                        <Link href={Config.PATHS.searchTips}>
-                            {'Se søketips'}
-                        </Link>
-                    </BodyLong>
-                </div>
-            )}
+                })}
             {result.isMore && (
                 <Button
                     variant={'secondary'}

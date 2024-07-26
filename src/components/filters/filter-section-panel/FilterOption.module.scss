@@ -1,9 +1,5 @@
 .filterOption {
-    &.disabled {
-        > * {
-            color: var(--a-text-subtle);
-        }
-    }
+    position: relative;
 
     label {
         padding: 0.375rem 0;

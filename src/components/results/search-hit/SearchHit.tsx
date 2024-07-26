@@ -3,7 +3,6 @@ import htmlReactParser from 'html-react-parser';
 import { SearchHitProps } from 'types/search-result';
 import { logResultClick } from 'utils/amplitude';
 import { BodyLong, LinkPanel } from '@navikt/ds-react';
-import { SearchHitOfficeInformation } from './office-information/SearchHitOfficeInformation';
 import { SearchHitAudience } from './audience/SearchHitAudience';
 import { SearchHitTimestamps } from './timestamps/SearchHitTimestamps';
 
@@ -22,7 +21,7 @@ type Props = {
 };
 
 export const SearchHit = ({ hit, hitIndex }: Props) => {
-    const { displayName, href, highlight, officeInformation, audience } = hit;
+    const { displayName, href, highlight, audience } = hit;
 
     if (!displayName || !href) {
         return null;
@@ -40,9 +39,6 @@ export const SearchHit = ({ hit, hitIndex }: Props) => {
                     <BodyLong className={style.highlight}>
                         {parseHighlight(highlight)}
                     </BodyLong>
-                )}
-                {officeInformation && (
-                    <SearchHitOfficeInformation {...officeInformation} />
                 )}
                 <div className={style.bottomRow}>
                     {audience && <SearchHitAudience audience={audience} language={hit.language} />}

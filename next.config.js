@@ -23,7 +23,7 @@ module.exports = {
     basePath: process.env.APP_BASE_PATH,
     env: {
         APP_BASE_PATH: process.env.APP_BASE_PATH,
-        XP_ORIGIN: process.env.XP_ORIGIN,
+        SEARCH_URL: process.env.SEARCH_URL,
     },
     webpack: (config) => {
         cssModulesNoDashesInClassnames(config);
