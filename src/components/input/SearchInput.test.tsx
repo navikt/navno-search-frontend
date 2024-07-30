@@ -1,67 +1,42 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, RenderResult } from '@testing-library/react';
 import { SearchInput } from './SearchInput';
 import { mockResults } from 'testHelpers/mockResults';
-import { ContextProvider } from 'context/ContextProvider';
-import { SearchResultProps } from 'types/search-result';
-import { SearchParams, paramsFromResult } from 'types/search-params';
-
-const mockFetchNewResults = jest.fn();
-
-type SetupConfig = {
-    initialSearch?: string;
-    initialResult: SearchResultProps;
-    initialParams?: SearchParams;
-};
-
-const setup = ({
-    initialSearch = '',
-    initialResult,
-    initialParams,
-}: SetupConfig) => {
-    const utils = render(
-        <ContextProvider
-            initialResult={initialResult}
-            initialParams={initialParams}
-        >
-            <SearchInput
-                initialSearchTerm={initialSearch}
-                fetchNewResults={mockFetchNewResults}
-            />
-        </ContextProvider>
-    );
-
-    const input = screen.getByRole('searchbox') as HTMLInputElement;
-    return {
-        input,
-        ...utils,
-    };
-};
+import { paramsFromResult } from 'types/search-params';
+import { componentSetup } from '../../testHelpers/componentSetup';
 
 describe('SearchInput', () => {
-    test('It sets the correct label for the search field', async () => {
+    let setupResult: RenderResult;
+    const mockFetchNewResults = jest.fn();
+
+    beforeEach(() => {
         const initialResult = mockResults();
-        initialResult.fasettKey = '1';
         const initialParams = paramsFromResult(initialResult);
 
-        const { getByLabelText } = setup({
-            initialSearch: '',
-            initialResult,
-            initialParams,
+        setupResult = componentSetup({
+            Component: SearchInput,
+            contextProps: {
+                initialResult,
+                initialParams,
+            },
+            componentProps: {
+                initialSearchTerm: '',
+                fetchNewResults: mockFetchNewResults,
+            },
         });
+    });
+
+    test('It sets the correct label for the search field', async () => {
+        const { getByLabelText } = setupResult;
 
         expect(getByLabelText('Søk på siden')).toBeInTheDocument();
     });
 
     test('It updates the search field value', async () => {
-        const initialSearch = 'Barnebidrag';
         const newSearch = 'Foreldrepenger';
 
-        const { input } = setup({
-            initialSearch,
-            initialResult: mockResults(),
-        });
+        const { getByRole } = setupResult;
 
+        const input = getByRole('searchbox') as HTMLInputElement;
         expect(input).toBeInTheDocument();
 
         fireEvent.change(input, { target: { value: newSearch } });
@@ -69,9 +44,10 @@ describe('SearchInput', () => {
     });
 
     test('It calls fetchNewResults when the form is submitted', async () => {
-        const { input } = setup({ initialResult: mockResults() });
+        const { getByRole } = setupResult;
 
         expect(mockFetchNewResults).toHaveBeenCalledTimes(0);
+        const input = getByRole('searchbox');
         fireEvent.submit(input);
         expect(mockFetchNewResults).toHaveBeenCalledTimes(1);
     });

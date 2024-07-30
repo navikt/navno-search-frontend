@@ -12,7 +12,6 @@ import { SearchParams } from 'types/search-params';
 import { mock } from 'node:test';
 
 type SetupConfig = {
-    initialSearch?: string;
     initialResult: SearchResultProps;
     initialParams?: SearchParams;
     mockConfig?: any;

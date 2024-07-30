@@ -1,41 +1,34 @@
-import React from 'react';
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { fireEvent, RenderResult } from '@testing-library/react';
 import { SearchFilters } from './SearchFilters';
 import { mockResults } from 'testHelpers/mockResults';
-import { ContextProvider } from 'context/ContextProvider';
-import { SearchResultProps } from 'types/search-result';
-import { SearchParams } from 'types/search-params';
-
-type SetupConfig = {
-    initialSearch?: string;
-    initialResult: SearchResultProps;
-    initialParams?: SearchParams;
-};
-
-const setup = ({ initialResult, initialParams }: SetupConfig) => {
-    const utils = render(
-        <ContextProvider
-            initialResult={initialResult}
-            initialParams={initialParams}
-        >
-            <SearchFilters result={initialResult} />
-        </ContextProvider>
-    );
-
-    return {
-        ...utils,
-    };
-};
+import { paramsFromResult } from 'types/search-params';
+import { componentSetup } from 'testHelpers/componentSetup';
 
 describe('SearchFilters', () => {
-    test('Expands the filter when clicking the expand button (mobile)', async () => {
-        setup({
-            initialResult: mockResults(),
-        });
+    let setupResult: RenderResult;
 
-        const filterPanel = screen.getByTestId('search-filter-panel');
+    beforeEach(() => {
+        const initialResult = mockResults();
+        const initialParams = paramsFromResult(initialResult);
+
+        setupResult = componentSetup({
+            Component: SearchFilters,
+            contextProps: {
+                initialResult,
+                initialParams,
+            },
+            componentProps: {
+                result: initialResult,
+            },
+        });
+    });
+
+    test('Expands the filter when clicking the expand button (mobile)', async () => {
+        const { getByTestId, findAllByText } = setupResult;
+
+        const filterPanel = getByTestId('search-filter-panel');
         expect(filterPanel.classList.contains('visibleMobile')).toBe(false);
-        const button = await screen.findAllByText(/Søkefilter/);
+        const button = await findAllByText(/Søkefilter/);
         fireEvent.click(button[0]);
         expect(filterPanel.classList.contains('visibleMobile')).toBe(true);
     });
