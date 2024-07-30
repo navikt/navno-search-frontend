@@ -42,6 +42,7 @@ export const PreferredLanguageSelector = ({
                 id={NN}
                 checked={params.preferredLanguage === NN}
                 onChange={(e) => {
+                    console.log('onChangeClicked');
                     setPreferredLanguage(NN);
                     if (e.target.checked) {
                         logFilterSelection(NN);
