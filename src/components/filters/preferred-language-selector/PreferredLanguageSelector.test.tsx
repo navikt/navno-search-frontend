@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, RenderResult } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
     PreferredLanguageSelector,
@@ -8,8 +8,9 @@ import {
 import { mockResults } from 'testHelpers/mockResults';
 import { ContextProvider } from 'context/ContextProvider';
 import { SearchResultProps } from 'types/search-result';
-import { SearchParams } from 'types/search-params';
+import { paramsFromResult, SearchParams } from 'types/search-params';
 import { mock } from 'node:test';
+import { componentSetup } from 'testHelpers/componentSetup';
 
 type SetupConfig = {
     initialResult: SearchResultProps;
@@ -42,10 +43,26 @@ const setup = ({
 };
 
 describe('SearchFilters', () => {
-    test('Has all expected languages', async () => {
-        const { findByLabelText } = setup({
-            initialResult: mockResults(),
+    let setupResult: RenderResult;
+    const mockSetPreferredLanguage = jest.fn();
+
+    beforeEach(() => {
+        const initialResult = mockResults();
+        const initialParams = paramsFromResult(initialResult);
+
+        setupResult = componentSetup({
+            Component: PreferredLanguageSelector,
+            contextProps: {
+                initialResult,
+                initialParams,
+            },
+            componentProps: {
+                setPreferredLanguage: mockSetPreferredLanguage,
+            },
         });
+    });
+    test('Has all expected languages', async () => {
+        const { findByLabelText } = setupResult;
 
         const inputNb = await findByLabelText('Bokmål');
         const inputNn = await findByLabelText('Nynorsk');
@@ -58,13 +75,7 @@ describe('SearchFilters', () => {
 
     test('Calls the callback function when clicked', async () => {
         const user = userEvent.setup();
-        const mockSetPreferredLanguage = jest.fn();
-        const { findByLabelText } = setup({
-            initialResult: mockResults(),
-            mockConfig: {
-                setPreferredLanguage: mockSetPreferredLanguage,
-            },
-        });
+        const { findByLabelText } = setupResult;
 
         const inputNb = await findByLabelText('Bokmål');
         const inputNn = await findByLabelText('Nynorsk');

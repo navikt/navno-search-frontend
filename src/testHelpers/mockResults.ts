@@ -6,7 +6,7 @@ export const mockResults = () => {
         s: 0,
         isMore: true,
         word: 'stønad',
-        preferredLanguage: 'no',
+        preferredLanguage: 'nb',
         total: 336,
         fasettKey: '0',
         aggregations: {
