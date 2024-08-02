@@ -1,15 +1,8 @@
-import React from 'react';
-import {
-    fireEvent,
-    getByDisplayValue,
-    render,
-    RenderResult,
-} from '@testing-library/react';
-import { FacetsSelector, FacetsSelectorProps } from './FacetsSelector';
+import { fireEvent, RenderResult } from '@testing-library/react';
+import { FacetsSelector } from './FacetsSelector';
 import { mockResults } from 'testHelpers/mockResults';
 import { mockFacets } from 'testHelpers/mockFacets';
-import { ContextProvider } from 'context/ContextProvider';
-import { FacetBucketProps, SearchResultProps } from 'types/search-result';
+import { SearchResultProps } from 'types/search-result';
 import {
     paramsFromResult,
     SearchParams,
@@ -47,7 +40,6 @@ const setupTest = ({
 
 describe('FacetsSelector', () => {
     let setupResult: RenderResult;
-    let rerender;
     const mockSetFacet = jest.fn();
     const mockSetUnderFacet = jest.fn();
 
@@ -63,8 +55,6 @@ describe('FacetsSelector', () => {
             mockSetFacet,
             mockSetUnderFacet,
         });
-
-        rerender = setupResult.rerender;
     });
 
     test('renders the facet options correctly and is checked', async () => {
@@ -74,13 +64,13 @@ describe('FacetsSelector', () => {
         expect(input).toBeChecked();
     });
 
-    test('does not check the other facets', async () => {
+    test('does not check the other facets from the start', async () => {
         const { findByDisplayValue } = setupResult;
         const input = await findByDisplayValue('Arbeidsgiver');
         expect(input).not.toBeChecked();
     });
 
-    test('checks a facet when clicked and calls setFacet', async () => {
+    test('calls setFacet when an option is clicked', async () => {
         const { findByDisplayValue } = setupResult;
         const input = await findByDisplayValue('Arbeidsgiver');
 
@@ -88,7 +78,7 @@ describe('FacetsSelector', () => {
         expect(mockSetFacet).toHaveBeenCalledTimes(1);
     });
 
-    test('checks the correct facet when updated', async () => {
+    test('checks the correct facet when props are updated', async () => {
         setupResult.unmount();
 
         const initialParams: SearchParams = {

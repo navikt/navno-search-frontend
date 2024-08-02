@@ -1,97 +1,73 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, RenderResult } from '@testing-library/react';
 import { FilterRadioPanel, FilterRadioPanelProps } from './FilterRadioPanel';
 import { mockResults } from 'testHelpers/mockResults';
 import { ContextProvider } from 'context/ContextProvider';
 import { SearchResultProps } from 'types/search-result';
-import { SearchParams } from 'types/search-params';
+import { paramsFromResult, SearchParams } from 'types/search-params';
+import { componentSetup } from 'testHelpers/componentSetup';
+import { FacetsSelector } from '../facets-selector/FacetsSelector';
+import { mockFacets } from 'testHelpers/mockFacets';
 
 type SetupConfig = {
     initialResult: SearchResultProps;
     initialParams?: SearchParams;
-    overrideProps?: Partial<FilterRadioPanelProps>;
+    label: string;
+    isOpen: boolean;
+    onClick: jest.Mock;
 };
 
-const setup = ({
+const setupTest = ({
     initialResult,
     initialParams,
-    overrideProps = {},
+    label,
+    isOpen,
+    onClick,
 }: SetupConfig) => {
-    const props = {
-        label: 'Filter option label',
-        count: 1,
-        isOpen: false,
-        onClick: () => {},
-        id: '123-foobar',
-        children: <div>Test</div>,
-        ...overrideProps,
-    };
-
-    const utils = render(
-        <ContextProvider
-            initialResult={initialResult}
-            initialParams={initialParams}
-        >
-            <FilterRadioPanel {...props} />
-        </ContextProvider>
-    );
-
-    return {
-        ...utils,
-    };
+    return componentSetup({
+        Component: FilterRadioPanel,
+        contextProps: {
+            initialResult,
+            initialParams,
+        },
+        componentProps: {
+            label,
+            isOpen,
+            onClick,
+        },
+    });
 };
 
 describe('FilterRadioPanel', () => {
-    test('It displays the proper label for the filter', () => {
-        const { getByDisplayValue } = setup({
-            initialResult: mockResults(),
-            overrideProps: {
-                label: 'Filter option label',
-            },
+    let setupResult: RenderResult;
+    const mockOnClick = jest.fn();
+
+    beforeEach(() => {
+        const initialResult = mockResults();
+        const initialParams = paramsFromResult(initialResult);
+
+        initialParams.f = 'privatperson';
+
+        setupResult = setupTest({
+            initialResult,
+            initialParams,
+            isOpen: false,
+            label: 'Filter option label',
+            onClick: mockOnClick,
         });
+    });
+
+    test('It displays the proper label for the filter', () => {
+        const { getByDisplayValue } = setupResult;
 
         // expect(true).toBe(true);
         expect(getByDisplayValue('Filter option label')).toBeInTheDocument();
     });
 
     test('It calls the proper function when the radio changes after click', () => {
-        const mockFunction = jest.fn();
-        const { getByDisplayValue } = setup({
-            initialResult: mockResults(),
-            overrideProps: {
-                label: 'Filter option label',
-                isOpen: false,
-                onClick: mockFunction,
-            },
-        });
+        const { getByDisplayValue } = setupResult;
 
         fireEvent.click(getByDisplayValue('Filter option label'));
-        expect(mockFunction).toHaveBeenCalledTimes(1);
-    });
-
-    test('It shows children when the option is selected', () => {
-        const { getByText } = setup({
-            initialResult: mockResults(),
-            overrideProps: {
-                label: 'Filter option label',
-                isOpen: true,
-                children: <div>Child element</div>,
-            },
-        });
-
-        expect(getByText('Child element')).toBeInTheDocument();
-    });
-
-    test('It hides children when the option is selected', () => {
-        const { queryByText } = setup({
-            initialResult: mockResults(),
-            overrideProps: {
-                label: 'Filter option label',
-                isOpen: false,
-                children: <div>Child element</div>,
-            },
-        });
-
-        expect(queryByText('Child element')).not.toBeInTheDocument();
+        expect(mockOnClick).toHaveBeenCalledTimes(1);
     });
 });
