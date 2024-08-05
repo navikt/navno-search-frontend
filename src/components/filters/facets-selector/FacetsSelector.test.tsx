@@ -9,7 +9,6 @@ import {
     SearchSort,
 } from 'types/search-params';
 import { componentSetup } from 'testHelpers/componentSetup';
-import { init } from 'next/dist/compiled/webpack/webpack';
 
 type SetupConfig = {
     initialResult: SearchResultProps;

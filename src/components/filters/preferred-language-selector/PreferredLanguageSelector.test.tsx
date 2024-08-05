@@ -1,46 +1,9 @@
-import React from 'react';
-import { render, RenderResult } from '@testing-library/react';
+import { RenderResult } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {
-    PreferredLanguageSelector,
-    SetPreferredLanguageProps,
-} from './PreferredLanguageSelector';
+import { PreferredLanguageSelector } from './PreferredLanguageSelector';
 import { mockResults } from 'testHelpers/mockResults';
-import { ContextProvider } from 'context/ContextProvider';
-import { SearchResultProps } from 'types/search-result';
-import { paramsFromResult, SearchParams } from 'types/search-params';
-import { mock } from 'node:test';
+import { paramsFromResult } from 'types/search-params';
 import { componentSetup } from 'testHelpers/componentSetup';
-
-type SetupConfig = {
-    initialResult: SearchResultProps;
-    initialParams?: SearchParams;
-    mockConfig?: any;
-};
-
-const setup = ({
-    initialResult,
-    initialParams,
-    mockConfig = {},
-}: SetupConfig) => {
-    const props: SetPreferredLanguageProps = {
-        setPreferredLanguage: mockConfig.setPreferredLanguage ?? jest.fn(),
-    };
-
-    const utils = render(
-        <ContextProvider
-            initialResult={initialResult}
-            initialParams={initialParams}
-            mockConfig={mockConfig}
-        >
-            <PreferredLanguageSelector {...props} />
-        </ContextProvider>
-    );
-
-    return {
-        ...utils,
-    };
-};
 
 describe('SearchFilters', () => {
     let setupResult: RenderResult;

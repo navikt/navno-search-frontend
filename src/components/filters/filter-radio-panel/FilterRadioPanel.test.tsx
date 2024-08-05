@@ -1,13 +1,9 @@
-import React from 'react';
-import { fireEvent, render, RenderResult } from '@testing-library/react';
-import { FilterRadioPanel, FilterRadioPanelProps } from './FilterRadioPanel';
+import { fireEvent, RenderResult } from '@testing-library/react';
+import { FilterRadioPanel } from './FilterRadioPanel';
 import { mockResults } from 'testHelpers/mockResults';
-import { ContextProvider } from 'context/ContextProvider';
 import { SearchResultProps } from 'types/search-result';
 import { paramsFromResult, SearchParams } from 'types/search-params';
 import { componentSetup } from 'testHelpers/componentSetup';
-import { FacetsSelector } from '../facets-selector/FacetsSelector';
-import { mockFacets } from 'testHelpers/mockFacets';
 
 type SetupConfig = {
     initialResult: SearchResultProps;
