@@ -31,7 +31,6 @@ export type SearchHitTimestampsProps = {
 };
 
 export const SearchHitTimestamps = ({ hit }: SearchHitTimestampsProps) => {
-    console.log(hit);
     const publishedString = createPublishedAndModifiedString(hit);
 
     if (!publishedString) {

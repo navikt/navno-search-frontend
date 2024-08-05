@@ -6,7 +6,7 @@ import { SearchHitProps } from 'types/search-result';
 describe('SearchHitTimestamps', () => {
     const hit: SearchHitProps = {
         displayName: 'Barnehage',
-        href: 'http:///www.nav.no',
+        href: 'https:///www.nav.no',
         highlight: '<b>Barnehagen</b> er en sosial arena og hjelpemidler.',
         modifiedTime: '2022-01-01T00:00:00Z',
         publishedTime: '2021-12-31T00:00:00Z',

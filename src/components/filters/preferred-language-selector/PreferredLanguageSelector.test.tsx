@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, RenderResult } from '@testing-library/react';
+import { render, RenderResult } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
     PreferredLanguageSelector,

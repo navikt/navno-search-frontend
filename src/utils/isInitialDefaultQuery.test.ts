@@ -7,7 +7,7 @@ describe('isInitialDefaultQuery', () => {
     const initialResult = mockResults();
     const initialParams = paramsFromResult(initialResult);
 
-    it('should return true when theres no search query', () => {
+    test('should return true when theres no search query', () => {
         const result: SearchResultProps = {
             ...initialResult,
             word: '',
@@ -23,7 +23,7 @@ describe('isInitialDefaultQuery', () => {
         expect(isInitial).toBe(true);
     });
 
-    it('should return false if result is not empty', () => {
+    test('should return false if result is not empty', () => {
         const result: SearchResultProps = {
             ...initialResult,
             word: 'Foo bar',
