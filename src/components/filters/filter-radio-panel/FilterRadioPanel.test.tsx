@@ -56,7 +56,6 @@ describe('FilterRadioPanel', () => {
     test('It displays the proper label for the filter', () => {
         const { getByDisplayValue } = setupResult;
 
-        // expect(true).toBe(true);
         expect(getByDisplayValue('Filter option label')).toBeInTheDocument();
     });
 
