@@ -50,4 +50,5 @@ export type SearchResultProps = {
     };
     hits: SearchHitProps[];
     isInitialResult?: boolean;
+    didYouMean: string;
 };
