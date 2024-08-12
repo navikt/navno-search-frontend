@@ -27,8 +27,10 @@ const envProps =
               env: decoratorEnv,
           };
 
-const decoratorProps = { ...envProps, params: Config.VARS.decoratorParams };
-
-export const getDecorator = async () => {
+export const getDecorator = async (context: any) => {
+    const decoratorProps = {
+        ...envProps,
+        params: { ...Config.VARS.decoratorParams, context },
+    };
     return fetchDecoratorReact(decoratorProps);
 };

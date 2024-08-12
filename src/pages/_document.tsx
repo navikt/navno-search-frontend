@@ -17,7 +17,9 @@ type Props = {
 class MyDocument extends Document<Props> {
     static async getInitialProps(ctx: DocumentContext) {
         const initialProps = await Document.getInitialProps(ctx);
-        const Decorator = await getDecorator();
+        const context = ctx.query?.f ?? 'privatperson';
+        const flatContext = Array.isArray(context) ? context[0] : context;
+        const Decorator = await getDecorator(flatContext);
         return {
             ...initialProps,
             Decorator,
