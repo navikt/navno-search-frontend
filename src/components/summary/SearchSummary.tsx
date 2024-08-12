@@ -28,10 +28,11 @@ export const SearchSummary = ({ result }: Props) => {
                 </Heading>
                 {didYouMean && (
                     <BodyLong>
-                        {'Mente du'}{' '}
+                        {'Mente du '}
                         <Link href={suggestionUrl(params, didYouMean)}>
                             {didYouMean}
                         </Link>
+                        {'?'}
                     </BodyLong>
                 )}
                 <BodyLong>{'Endre søkefilter for å se andre treff.'}</BodyLong>
