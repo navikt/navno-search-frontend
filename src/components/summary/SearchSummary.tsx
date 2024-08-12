@@ -5,6 +5,7 @@ import { quote } from '../../utils/quote';
 import { isInitialDefaultQuery } from '../../utils/isInitialDefaultQuery';
 import { useSearchContext } from '../../context/ContextProvider';
 import style from './SearchSummary.module.scss';
+import { objectToQueryString } from '../../utils/fetch-utils';
 
 type Props = {
     result: SearchResultProps;
@@ -28,7 +29,9 @@ export const SearchSummary = ({ result }: Props) => {
                 {didYouMean && (
                     <BodyLong>
                         {'Mente du'}{' '}
-                        <Link href={suggestionUrl(didYouMean)}>{didYouMean}</Link>?
+                        <Link href={suggestionUrl(params, didYouMean)}>
+                            {didYouMean}
+                        </Link>
                     </BodyLong>
                 )}
                 <BodyLong>{'Endre søkefilter for å se andre treff.'}</BodyLong>
@@ -37,9 +40,9 @@ export const SearchSummary = ({ result }: Props) => {
     );
 };
 
-const suggestionUrl = (suggestion: string) => {
-    let currentUrl = new URL(window.location.href);
-    let params = currentUrl.searchParams
-    params.set("ord", suggestion)
-    return `${currentUrl.pathname}?${params}`
-}
+const suggestionUrl = (params: object, suggestion: string) => {
+    return objectToQueryString({
+        ...params,
+        ord: encodeURIComponent(suggestion),
+    });
+};
