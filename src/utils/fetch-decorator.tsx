@@ -7,7 +7,7 @@ import {
 } from '@navikt/nav-dekoratoren-moduler/ssr';
 
 const { DECORATOR_LOCAL_URL, ENV } = process.env;
-export type DecoratorContext = DecoratorParams['context'];
+type DecoratorContext = DecoratorParams['context'];
 
 const envMap: Record<typeof ENV, DecoratorEnvProps['env']> = {
     localhost: 'localhost',
