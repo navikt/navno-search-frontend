@@ -1,4 +1,3 @@
-import React from 'react';
 import Config from '../config';
 import {
     DecoratorEnvProps,
@@ -6,6 +5,7 @@ import {
     fetchDecoratorReact,
 } from '@navikt/nav-dekoratoren-moduler/ssr';
 
+// eslint-disable-next-line
 const { DECORATOR_LOCAL_URL, ENV } = process.env;
 type DecoratorContext = DecoratorParams['context'];
 

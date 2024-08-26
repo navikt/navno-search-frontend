@@ -1,4 +1,4 @@
-export const classNames = (...classNames: any[]): string =>
+export const classNames = (...classNames: string[]): string =>
     classNames
         .reduce<string>(
             (acc, className) =>

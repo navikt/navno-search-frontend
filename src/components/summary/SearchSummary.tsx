@@ -15,7 +15,7 @@ export const SearchSummary = ({ result }: Props) => {
 
     const [{ params }] = useSearchContext();
 
-    let numHits = result.total;
+    const numHits = result.total;
 
     return (
         !isInitialDefaultQuery(result, params) && (

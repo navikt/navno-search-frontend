@@ -3,8 +3,8 @@ import { logAmplitudeEvent as logAmplitudeEventDecorator } from '@navikt/nav-dek
 
 const logAmplitudeEvent = (
     eventName: string,
-    data?: Record<string, any>
-): Promise<any> => {
+    data?: Record<string, unknown>
+): Promise<unknown> => {
     return logAmplitudeEventDecorator({
         eventName,
         origin: 'navno-search-frontend',
