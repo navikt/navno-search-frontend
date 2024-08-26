@@ -1,8 +1,14 @@
 {
-  "plugins": ["css-modules"],
-  "extends": ["next/core-web-vitals", "plugin:css-modules/recommended"],
-  "rules": {
-    "css-modules/no-unused-class": [1, { "camelCase": true }],
-    "css-modules/no-undef-class": [2, { "camelCase": true }]
-  }
+    "plugins": ["css-modules", "@typescript-eslint"],
+    "extends": [
+        "next/core-web-vitals",
+        "plugin:css-modules/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "rules": {
+        "css-modules/no-unused-class": [1, { "camelCase": true }],
+        "css-modules/no-undef-class": [2, { "camelCase": true }],
+        "@typescript-eslint/no-unused-vars": "warn"
+    }
 }

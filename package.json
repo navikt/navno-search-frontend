@@ -10,8 +10,8 @@
         "lint": "eslint src/"
     },
     "dependencies": {
-        "@navikt/ds-css": "6.16.1",
         "@navikt/aksel-icons": "6.16.1",
+        "@navikt/ds-css": "6.16.1",
         "@navikt/ds-react": "6.16.1",
         "@navikt/ds-tokens": "6.16.1",
         "@navikt/nav-dekoratoren-moduler": "2.1.6",
@@ -27,6 +27,8 @@
         "@types/node": "20.14.12",
         "@types/react": "18.3.4",
         "@types/react-dom": "18.3.0",
+        "@typescript-eslint/eslint-plugin": "^8.2.0",
+        "@typescript-eslint/parser": "^8.2.0",
         "eslint": "8.57.0",
         "eslint-config-next": "14.2.6",
         "eslint-plugin-css-modules": "2.12.0",
