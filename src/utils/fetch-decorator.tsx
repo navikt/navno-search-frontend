@@ -2,10 +2,12 @@ import React from 'react';
 import Config from '../config';
 import {
     DecoratorEnvProps,
+    DecoratorParams,
     fetchDecoratorReact,
 } from '@navikt/nav-dekoratoren-moduler/ssr';
 
 const { DECORATOR_LOCAL_URL, ENV } = process.env;
+type DecoratorContext = DecoratorParams['context'];
 
 const envMap: Record<typeof ENV, DecoratorEnvProps['env']> = {
     localhost: 'localhost',
@@ -27,8 +29,10 @@ const envProps =
               env: decoratorEnv,
           };
 
-const decoratorProps = { ...envProps, params: Config.VARS.decoratorParams };
-
-export const getDecorator = async () => {
+export const getDecorator = async (context: DecoratorContext) => {
+    const decoratorProps = {
+        ...envProps,
+        params: { ...Config.VARS.decoratorParams, context },
+    };
     return fetchDecoratorReact(decoratorProps);
 };

@@ -14,10 +14,30 @@ type Props = {
     Decorator: DecoratorComponents;
 };
 
+// Decorator will crash if invalid context ('privatperson', 'arbeidsgiver', 'samarbeidspartner') is passed.
+// Also, if context is an array, we will default to 'privatperson' as the header can only indicate one single context.
+const normalizeDecoratorContext = (context: string | string[]) => {
+    if (Array.isArray(context)) {
+        return 'privatperson';
+    }
+    if (
+        context !== 'privatperson' &&
+        context !== 'arbeidsgiver' &&
+        context !== 'samarbeidspartner'
+    ) {
+        return 'privatperson';
+    }
+    return context;
+};
+
 class MyDocument extends Document<Props> {
     static async getInitialProps(ctx: DocumentContext) {
         const initialProps = await Document.getInitialProps(ctx);
-        const Decorator = await getDecorator();
+        const context = ctx.query?.f ?? 'privatperson';
+        const Decorator = await getDecorator(
+            normalizeDecoratorContext(context)
+        );
+
         return {
             ...initialProps,
             Decorator,
