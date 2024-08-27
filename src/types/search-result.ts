@@ -5,6 +5,7 @@ export type FacetBucketProps = {
     name: string;
     docCount: number;
     checked: boolean;
+    default?: boolean;
     underaggregeringer: {
         buckets: FacetBucketProps[];
     };

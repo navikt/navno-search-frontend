@@ -44,7 +44,6 @@ export const SearchInput = ({ initialSearchTerm, fetchNewResults }: Props) => {
             className={style.searchForm}
         >
             <Search
-                aria-labelledby="search-header"
                 value={inputValue}
                 label="Søk på siden"
                 variant="primary"

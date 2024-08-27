@@ -11,7 +11,7 @@ import { ChevronDownIcon, FilterIcon } from '@navikt/aksel-icons';
 
 type Props = {
     result: SearchResultProps;
-    className: string;
+    className?: string;
 };
 
 export const SearchFilters = ({ result, className }: Props) => {
@@ -48,6 +48,7 @@ export const SearchFilters = ({ result, className }: Props) => {
                 borderColor={'border-subtle'}
                 borderWidth={'1'}
                 borderRadius={'medium'}
+                data-testid="search-filter-panel"
             >
                 <Heading level="3" size="small" className={style.titleDesktop}>
                     {'Søkefilter'}
