@@ -10,7 +10,7 @@ type Props = {
     name: string;
     count?: number;
     checked?: boolean;
-    onChange?: (e: ChangeEvent) => void;
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     type: FilterOptionType;
     id: string;
 };

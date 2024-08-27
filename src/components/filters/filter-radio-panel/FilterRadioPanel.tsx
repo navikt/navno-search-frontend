@@ -7,7 +7,7 @@ type Props = {
     label: string;
     count: number;
     isOpen: boolean;
-    onClick: (args: ChangeEvent) => void;
+    onClick: (args: ChangeEvent<HTMLInputElement>) => void;
     id: string;
     children: React.ReactNode | React.ReactNode[];
 };
