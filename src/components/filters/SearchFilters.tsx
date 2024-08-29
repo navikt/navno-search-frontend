@@ -14,7 +14,7 @@ type Props = {
     className?: string;
 };
 
-export const SearchFilters = ({ result, className }: Props) => {
+export const SearchFilters = ({ result, className = '' }: Props) => {
     const [{ params }, dispatch] = useSearchContext();
     const { fasetter } = result.aggregations;
     const [showFiltersMobile, setShowFiltersMobile] = useState(false);

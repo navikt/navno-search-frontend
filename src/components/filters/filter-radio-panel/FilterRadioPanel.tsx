@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { FilterOption } from '../filter-section-panel/FilterOption';
 
 import style from './FilterRadioPanel.module.scss';
@@ -7,7 +7,7 @@ export type FilterRadioPanelProps = {
     label: string;
     count: number;
     isOpen: boolean;
-    onClick: (args: any) => any;
+    onClick: (args: ChangeEvent<HTMLInputElement>) => void;
     id: string;
     children: React.ReactNode | React.ReactNode[];
 };

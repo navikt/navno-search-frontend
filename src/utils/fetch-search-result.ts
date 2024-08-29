@@ -19,10 +19,11 @@ export const fetchSearchResults = (
     });
     const url = encodeURI(`${Config.URLS.searchService}${queryString}`);
     return fetchWithTimeout(url, 5000).then((res) => {
-        if (res.ok) {
-            return res.json();
+        const typedRes = res as Response;
+        if (typedRes.ok) {
+            return typedRes.json();
         }
-        const error = `Failed to fetch search results from "${url}" - Error: ${res.statusText}`;
+        const error = `Failed to fetch search results from "${url}" - Error: ${typedRes.statusText}`;
         throw Error(error);
     });
 };

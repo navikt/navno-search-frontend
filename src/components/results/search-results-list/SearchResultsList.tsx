@@ -44,7 +44,7 @@ export const SearchResultsList = ({ result }: Props) => {
         }
     };
 
-    let numHits = result.hits?.length;
+    const numHits = result.hits?.length;
 
     return (
         <>

@@ -46,7 +46,7 @@ describe('objectToQueryString', () => {
     test('returns an empty string when the params object is undefined', () => {
         const params = undefined;
 
-        // @ts-expect-error
+        // @ts-expect-error Testing the behaviour when params is unexpectedly undefined
         const queryString = objectToQueryString(params);
 
         expect(queryString).toBe('');

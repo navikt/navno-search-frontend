@@ -1,4 +1,4 @@
-export const fetchWithTimeout = (url: string, timeout: number): Promise<any> =>
+export const fetchWithTimeout = (url: string, timeout: number) =>
     Promise.race([
         fetch(url),
         new Promise((res) =>

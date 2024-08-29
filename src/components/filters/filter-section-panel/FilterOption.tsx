@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { classNames } from '../../../utils/classnames';
 
 import style from './FilterOption.module.scss';
@@ -10,7 +10,7 @@ export type FilterOptionProps = {
     name: string;
     count?: number;
     checked?: boolean;
-    onChange?: (args: any) => any;
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     type: FilterOptionType;
     id: string;
 };
