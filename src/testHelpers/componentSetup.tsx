@@ -9,10 +9,10 @@ type ContextProps = {
     initialParams?: SearchParams;
 };
 
-type ComponentProps = { [key: string]: any };
+type ComponentProps = { [key: string]: unknown };
 
 type TestConfigProps = {
-    Component: React.FC<any>;
+    Component: React.FC<unknown>;
     contextProps: ContextProps;
     componentProps?: ComponentProps;
 };

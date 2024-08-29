@@ -16,7 +16,7 @@ export const SearchContext = React.createContext(
 type Props = {
     initialResult: SearchResultProps;
     initialParams?: SearchParams;
-    mockConfig?: any;
+    mockConfig?: { mockDispatch?: Dispatch<Action> };
     children: React.ReactNode;
 };
 

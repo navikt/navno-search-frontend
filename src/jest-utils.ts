@@ -6,7 +6,7 @@ export const endFetchMock = () => {
 
 export const startFetchMock = () => {
     const mockResponse = (
-        body: any,
+        body: unknown,
         status: number = 200,
         ok: boolean = true
     ): Response => {
@@ -39,10 +39,7 @@ export const startFetchMock = () => {
         } as Response;
     };
 
-    window.fetch = async (
-        url: RequestInfo | URL,
-        options?: RequestInit
-    ): Promise<Response> => {
+    window.fetch = async (url: RequestInfo | URL): Promise<Response> => {
         // Check the URL or options to return different mock responses
         if (typeof url === 'string' && url.includes('/fetch-mock')) {
             return Promise.resolve(mockResponse({ data: 'Foo bar' }));
