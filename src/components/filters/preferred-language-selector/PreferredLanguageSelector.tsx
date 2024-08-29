@@ -8,11 +8,13 @@ const NB = 'nb';
 const NN = 'nn';
 const EN = 'en';
 
-type Props = {
+export type SetPreferredLanguageProps = {
     setPreferredLanguage: (preferredLanguage: string) => void;
 };
 
-export const PreferredLanguageSelector = ({ setPreferredLanguage }: Props) => {
+export const PreferredLanguageSelector = ({
+    setPreferredLanguage,
+}: SetPreferredLanguageProps) => {
     const [{ params }] = useSearchContext();
 
     return (

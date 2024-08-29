@@ -6,7 +6,7 @@ import { logFilterSelection } from 'utils/amplitude';
 import { UFToggleProps } from 'context/reducer';
 import { useSearchContext } from '../../../context/ContextProvider';
 
-type Props = {
+export type FacetsSelectorProps = {
     facetsProps: FacetBucketProps[];
     setFacet: (f: string) => void;
     setUnderFacet: ({ uf, toggle }: UFToggleProps) => void;
@@ -16,7 +16,7 @@ export const FacetsSelector = ({
     facetsProps,
     setFacet,
     setUnderFacet,
-}: Props) => {
+}: FacetsSelectorProps) => {
     const [{ params }] = useSearchContext();
 
     return (

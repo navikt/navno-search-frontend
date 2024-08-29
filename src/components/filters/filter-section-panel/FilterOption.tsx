@@ -5,7 +5,7 @@ import style from './FilterOption.module.scss';
 
 export type FilterOptionType = 'radio' | 'checkbox';
 
-type Props = {
+export type FilterOptionProps = {
     label: string;
     name: string;
     count?: number;
@@ -23,7 +23,7 @@ export const FilterOption = ({
     onChange,
     type,
     id,
-}: Props) => {
+}: FilterOptionProps) => {
     const inputProps = {
         value: label,
         name,

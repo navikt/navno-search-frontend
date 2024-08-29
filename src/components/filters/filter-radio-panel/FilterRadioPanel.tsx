@@ -3,7 +3,7 @@ import { FilterOption } from '../filter-section-panel/FilterOption';
 
 import style from './FilterRadioPanel.module.scss';
 
-type Props = {
+export type FilterRadioPanelProps = {
     label: string;
     count: number;
     isOpen: boolean;
@@ -19,7 +19,7 @@ export const FilterRadioPanel = ({
     onClick,
     id,
     children,
-}: Props) => {
+}: FilterRadioPanelProps) => {
     return (
         <div className={style.panel}>
             <FilterOption
