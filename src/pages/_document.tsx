@@ -8,10 +8,10 @@ import Document, {
 } from 'next/document';
 import { getDecorator } from '../utils/fetch-decorator';
 import { Config } from 'config';
-import { DecoratorComponents } from '@navikt/nav-dekoratoren-moduler/ssr';
+import { DecoratorComponentsReact } from '@navikt/nav-dekoratoren-moduler/ssr';
 
 type Props = {
-    Decorator: DecoratorComponents;
+    Decorator: DecoratorComponentsReact;
 };
 
 // Decorator will crash if invalid context ('privatperson', 'arbeidsgiver', 'samarbeidspartner') is passed.
@@ -70,7 +70,7 @@ class MyDocument extends Document<Props> {
                     <meta name="twitter:description" content={description} />
                     <meta name="twitter:image:src" content={previewImg} />
                     <meta name="robots" content="noindex, nofollow" />
-                    <Decorator.Styles />
+                    <Decorator.HeadAssets />
                 </Head>
                 <body>
                     <Decorator.Header />

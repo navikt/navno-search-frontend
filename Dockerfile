@@ -14,4 +14,4 @@ COPY [".env", "next.config.js", "/usr/src/app/"]
 
 # Start app
 EXPOSE 3001
-CMD "npm" "start"
+CMD ["npm", "run", "start"]
