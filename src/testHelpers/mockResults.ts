@@ -104,7 +104,7 @@ export const mockResults = () => {
                                 },
                                 {
                                     key: '5',
-                                    name: 'NAV og samfunn',
+                                    name: 'Nav og samfunn',
                                     docCount: 34,
                                     underaggregeringer: {
                                         buckets: [],
