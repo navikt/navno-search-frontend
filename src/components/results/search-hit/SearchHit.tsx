@@ -31,7 +31,7 @@ export const SearchHit = ({ hit, hitIndex }: Props) => {
         <LinkPanel
             href={href}
             className={style.searchHit}
-            onClick={() => logResultClick(hitIndex + 1)}
+            onClick={() => logResultClick(displayName, hitIndex + 1)}
         >
             <LinkPanel.Title>{displayName}</LinkPanel.Title>
             <div className={style.content}>

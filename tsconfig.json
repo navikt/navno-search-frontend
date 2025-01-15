@@ -2,7 +2,10 @@
     "compilerOptions": {
         "target": "esnext",
         "lib": ["dom", "dom.iterable", "esnext"],
-        "types": ["@testing-library/jest-dom"],
+        "types": [
+            "@testing-library/jest-dom",
+            "@types/umami"
+        ],
         "allowJs": false,
         "skipLibCheck": true,
         "strict": true,

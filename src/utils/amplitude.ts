@@ -1,4 +1,4 @@
-import Config from 'config';
+import Config from "config";
 import { logAmplitudeEvent as logAmplitudeEventDecorator } from '@navikt/nav-dekoratoren-moduler';
 
 const logAmplitudeEvent = (
@@ -12,21 +12,34 @@ const logAmplitudeEvent = (
     });
 };
 
-export const logPageview = () => logAmplitudeEvent('sidevisning');
+export const logPageview = () => {
+    logAmplitudeEvent('sidevisning');
+    umami.track('besøk');
+}
 
-export const logSearchQuery = () =>
+export const logSearchQuery = (sokeord: string) => {
     logAmplitudeEvent('søk', {
         destinasjon: Config.URLS.searchService,
         sokeord: '[redacted]',
         komponent: 'søkeside',
     });
-
-export const logResultClick = (hitIndex?: number) =>
-    logAmplitudeEvent('resultat-klikk', {
-        destinasjon: '[redacted]',
-        sokeord: '[redacted]',
-        treffnr: hitIndex,
+    umami.track('søk', {
+        sokeord,
+        komponent: 'søkeside',
     });
+}
+export const logResultClick = (destinasjon: string, treffnr: number, sokeord?: string) => {
+    logAmplitudeEvent('resultat-klikk', {
+        destinasjon,
+        sokeord: '[redacted]',
+        treffnr,
+    });
+    umami.track('resultat-klikk', {
+        destinasjon,
+        sokeord,
+        treffnr,
+    })
+}
 
 export const logFilterSelection = (filter: string, subFilter?: string) =>
     logAmplitudeEvent('filter-valg', {

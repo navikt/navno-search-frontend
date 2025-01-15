@@ -57,26 +57,32 @@ class MyDocument extends Document<Props> {
         return (
             <Html lang={'no'}>
                 <Head>
-                    <meta name="description" content={description} />
-                    <link rel={'canonical'} href={canonicalUrl} />
-                    <meta property={'og:title'} content={title} />
-                    <meta property={'og:site_name'} content={'nav.no'} />
-                    <meta property={'og:url'} content={canonicalUrl} />
-                    <meta property={'og:description'} content={description} />
-                    <meta property={'og:image'} content={previewImg} />
-                    <meta name="twitter:card" content={'summary_large_image'} />
-                    <meta name="twitter:domain" content={'nav.no'} />
-                    <meta name="twitter:title" content={title} />
-                    <meta name="twitter:description" content={description} />
-                    <meta name="twitter:image:src" content={previewImg} />
-                    <meta name="robots" content="noindex, nofollow" />
-                    <Decorator.HeadAssets />
+                    <meta name="description" content={description}/>
+                    <link rel={'canonical'} href={canonicalUrl}/>
+                    <meta property={'og:title'} content={title}/>
+                    <meta property={'og:site_name'} content={'nav.no'}/>
+                    <meta property={'og:url'} content={canonicalUrl}/>
+                    <meta property={'og:description'} content={description}/>
+                    <meta property={'og:image'} content={previewImg}/>
+                    <meta name="twitter:card" content={'summary_large_image'}/>
+                    <meta name="twitter:domain" content={'nav.no'}/>
+                    <meta name="twitter:title" content={title}/>
+                    <meta name="twitter:description" content={description}/>
+                    <meta name="twitter:image:src" content={previewImg}/>
+                    <meta name="robots" content="noindex, nofollow"/>
+                    <script defer
+                            src="https://cdn.nav.no/team-researchops/sporing/sporing.js"
+                            data-host-url="https://umami.nav.no"
+                            data-website-id="c44a6db3-c974-4316-b433-214f87e80b4d"
+                    >
+                    </script>
+                    <Decorator.HeadAssets/>
                 </Head>
                 <body>
-                    <Decorator.Header />
-                    <Main />
-                    <Decorator.Footer />
-                    <Decorator.Scripts />
+                    <Decorator.Header/>
+                    <Main/>
+                    <Decorator.Footer/>
+                    <Decorator.Scripts/>
                     <NextScript />
                 </body>
             </Html>
