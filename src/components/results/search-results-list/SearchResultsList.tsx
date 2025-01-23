@@ -7,7 +7,7 @@ import { ActionType } from '../../../context/actions';
 import { useSearchContext } from '../../../context/ContextProvider';
 
 import style from './SearchResultsList.module.scss';
-import { logShowMore } from '../../../utils/amplitude';
+import { logShowMore } from '../../../utils/analytics';
 
 type Props = {
     result: SearchResultProps;

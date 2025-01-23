@@ -2,7 +2,7 @@ import React from 'react';
 import { FilterOption } from '../filter-section-panel/FilterOption';
 import { FilterRadioPanel } from '../filter-radio-panel/FilterRadioPanel';
 import { FacetBucketProps } from 'types/search-result';
-import { logFilterSelection } from 'utils/amplitude';
+import { logFilterSelection } from 'utils/analytics';
 import { UFToggleProps } from 'context/reducer';
 import { useSearchContext } from '../../../context/ContextProvider';
 

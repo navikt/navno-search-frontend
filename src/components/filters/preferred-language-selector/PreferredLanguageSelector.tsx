@@ -1,7 +1,7 @@
 import React from 'react';
 import { FilterOption } from '../filter-section-panel/FilterOption';
 import { Heading } from '@navikt/ds-react';
-import { logFilterSelection } from '../../../utils/amplitude';
+import { logFilterSelection } from '../../../utils/analytics';
 import { useSearchContext } from '../../../context/ContextProvider';
 
 const NB = 'nb';

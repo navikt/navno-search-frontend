@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { fetchSearchResultsClientside } from '../utils/fetch-search-result';
-import { logPageview, logSearchQuery } from '../utils/amplitude';
+import { logPageview, logSearchQuery } from '../utils/analytics';
 import { objectToQueryString } from '../utils/fetch-utils';
 import { useSearchContext } from '../context/ContextProvider';
 import { ActionType } from '../context/actions';

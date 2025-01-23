@@ -1,7 +1,7 @@
 import React from 'react';
 import htmlReactParser from 'html-react-parser';
 import { SearchHitProps } from 'types/search-result';
-import { logResultClick } from 'utils/amplitude';
+import { logResultClick } from 'utils/analytics';
 import { BodyLong, LinkPanel } from '@navikt/ds-react';
 import { SearchHitAudience } from './audience/SearchHitAudience';
 import { SearchHitTimestamps } from './timestamps/SearchHitTimestamps';
