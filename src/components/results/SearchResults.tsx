@@ -1,9 +1,9 @@
 import React from 'react';
 import { SearchResultProps } from 'types/search-result';
+import { isInitialDefaultQuery } from 'utils/isInitialDefaultQuery';
 import { useSearchContext } from 'context/ContextProvider';
 import { SearchResultsList } from './search-results-list/SearchResultsList';
 import { SearchResultsEmpty } from './search-results-empty/SearchResultsEmpty';
-import { isInitialDefaultQuery } from '../../utils/isInitialDefaultQuery';
 
 import style from './SearchResults.module.scss';
 

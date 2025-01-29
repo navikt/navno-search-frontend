@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useSearchContext } from 'context/ContextProvider';
-import { ActionType } from 'context/actions';
 import Cookies from 'js-cookie';
 import { Search } from '@navikt/ds-react';
+import { useSearchContext } from 'context/ContextProvider';
+import { ActionType } from 'context/actions';
 
 import style from './SearchInput.module.scss';
 

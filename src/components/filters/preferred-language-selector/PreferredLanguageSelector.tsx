@@ -1,8 +1,8 @@
 import React from 'react';
-import { FilterOption } from '../filter-section-panel/FilterOption';
 import { Heading } from '@navikt/ds-react';
-import { logFilterSelection } from '../../../utils/analytics';
-import { useSearchContext } from '../../../context/ContextProvider';
+import { logFilterSelection } from 'utils/analytics';
+import { useSearchContext } from 'context/ContextProvider';
+import { FilterOption } from '../filter-section-panel/FilterOption';
 
 const NB = 'nb';
 const NN = 'nn';

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Heading } from '@navikt/ds-react';
-import { fetchSearchResultsClientside } from '../utils/fetch-search-result';
+import { fetchSearchResultsClientside } from 'utils/fetch-search-result';
 import { logSearchQuery } from 'utils/analytics';
 import { objectToQueryString } from 'utils/fetch-utils';
 import { useSearchContext } from 'context/ContextProvider';
