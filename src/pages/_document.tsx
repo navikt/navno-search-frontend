@@ -70,14 +70,14 @@ class MyDocument extends Document<Props> {
                     <meta name="twitter:description" content={description}/>
                     <meta name="twitter:image:src" content={previewImg}/>
                     <meta name="robots" content="noindex, nofollow"/>
-                    <Decorator.HeadAssets />
+                    <Decorator.HeadAssets/>
                 </Head>
                 <body>
-                    <Decorator.Header />
-                    <Main />
-                    <Decorator.Footer />
-                    <Decorator.Scripts />
-                    <NextScript />
+                    <Decorator.Header/>
+                    <Main/>
+                    <Decorator.Footer/>
+                    <Decorator.Scripts/>
+                    <NextScript/>
                 </body>
             </Html>
         );
