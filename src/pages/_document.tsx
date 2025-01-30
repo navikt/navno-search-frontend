@@ -51,7 +51,7 @@ class MyDocument extends Document<Props> {
         const title = 'Søk - nav.no';
         const description =
             'Søk på hele nav.no. Du kan filtrere på innhold og dato.';
-        const previewImg = '/gfx/social-share-fallback.png';
+        const previewImg = `${appOrigin}/gfx/social-share-fallback.png`;
         const canonicalUrl = `${appOrigin}${appBasePathProd}`;
 
         return (
