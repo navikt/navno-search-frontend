@@ -1,10 +1,10 @@
 import React from 'react';
+import { UFToggleProps } from 'context/reducer';
+import { useSearchContext } from 'context/ContextProvider';
+import { FacetBucketProps } from 'types/search-result';
+import { logFilterSelection } from 'utils/analytics';
 import { FilterOption } from '../filter-section-panel/FilterOption';
 import { FilterRadioPanel } from '../filter-radio-panel/FilterRadioPanel';
-import { FacetBucketProps } from 'types/search-result';
-import { logFilterSelection } from 'utils/amplitude';
-import { UFToggleProps } from 'context/reducer';
-import { useSearchContext } from '../../../context/ContextProvider';
 
 export type FacetsSelectorProps = {
     facetsProps: FacetBucketProps[];

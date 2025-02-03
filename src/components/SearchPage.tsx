@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import { fetchSearchResultsClientside } from '../utils/fetch-search-result';
-import { logPageview, logSearchQuery } from '../utils/amplitude';
-import { objectToQueryString } from '../utils/fetch-utils';
-import { useSearchContext } from '../context/ContextProvider';
-import { ActionType } from '../context/actions';
+import { Heading } from '@navikt/ds-react';
+import { fetchSearchResultsClientside } from 'utils/fetch-search-result';
+import { logSearchQuery } from 'utils/analytics';
+import { objectToQueryString } from 'utils/fetch-utils';
+import { useSearchContext } from 'context/ContextProvider';
+import { ActionType } from 'context/actions';
 import { SearchInput } from './input/SearchInput';
 import { SearchSorting } from './sorting/SearchSorting';
 import { Spinner } from './spinner/Spinner';
 import { SearchResults } from './results/SearchResults';
 import { SearchFilters } from './filters/SearchFilters';
-import { Heading } from '@navikt/ds-react';
+import { SearchSummary } from './summary/SearchSummary';
 
 import style from './SearchPage.module.scss';
-import { SearchSummary } from './summary/SearchSummary';
 
 const SearchPage = () => {
     const [{ result, params }, dispatch] = useSearchContext();
@@ -44,7 +44,7 @@ const SearchPage = () => {
         }
 
         setIsAwaitingResults(false);
-        logSearchQuery();
+        logSearchQuery(params.ord);
     };
 
     const { s, f, uf, preferredLanguage } = params;
@@ -58,9 +58,8 @@ const SearchPage = () => {
 
     useEffect(() => {
         enableClientsideFetch.current = true;
-        logPageview();
         if (searchTerm) {
-            logSearchQuery();
+            logSearchQuery(searchTerm);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

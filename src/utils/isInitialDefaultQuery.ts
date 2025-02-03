@@ -1,6 +1,6 @@
-import { SearchResultProps } from '../types/search-result';
-import { SearchParams } from '../types/search-params';
-import Config from '../config';
+import { SearchResultProps } from 'types/search-result';
+import { SearchParams } from 'types/search-params';
+import Config from 'config';
 
 const { keys } = Config.VARS;
 

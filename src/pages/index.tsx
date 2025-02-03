@@ -1,16 +1,16 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import { Alert } from '@navikt/ds-react';
 import { ContextProvider } from 'context/ContextProvider';
 import { fetchSearchResults } from 'utils/fetch-search-result';
+import { paramsFromResult, SearchParams } from 'types/search-params';
 import { SearchResultProps } from 'types/search-result';
 import SearchPage from 'components/SearchPage';
-import { paramsFromResult, SearchParams } from 'types/search-params';
-import { Alert } from '@navikt/ds-react';
 import {
     getDecoratorAudienceIfValid,
     getDecoratorLanguageIfValid,
-} from '../utils/decoratorCookies';
+} from 'utils/decoratorCookies';
 
 type Props = {
     initialResult: SearchResultProps | null;

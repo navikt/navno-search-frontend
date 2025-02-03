@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { classNames } from '../../../utils/classnames';
+import { classNames } from 'utils/classnames';
 
 import style from './FilterOption.module.scss';
 

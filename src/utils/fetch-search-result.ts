@@ -1,7 +1,7 @@
 import { SearchApiResponse } from '../pages/api/search';
-import { Config } from '../config';
-import { SearchParams, searchParamsDefault } from '../types/search-params';
-import { SearchResultProps } from '../types/search-result';
+import { Config } from 'config';
+import { SearchParams, searchParamsDefault } from 'types/search-params';
+import { SearchResultProps } from 'types/search-result';
 import { fetchWithTimeout, objectToQueryString } from './fetch-utils';
 
 export const fetchSearchResults = (

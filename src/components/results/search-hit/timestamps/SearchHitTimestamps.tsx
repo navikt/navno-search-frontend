@@ -1,7 +1,7 @@
 import React from 'react';
 import { BodyShort } from '@navikt/ds-react';
-import { SearchHitProps } from '../../../../types/search-result';
-import { formatDate } from '../../../../utils/datetime';
+import { SearchHitProps } from 'types/search-result';
+import { formatDate } from 'utils/datetime';
 import { getTranslations } from '../translations';
 
 const createPublishedAndModifiedString = ({

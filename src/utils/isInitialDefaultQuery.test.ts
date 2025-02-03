@@ -1,6 +1,6 @@
-import { isInitialDefaultQuery } from '../utils/isInitialDefaultQuery';
-import { SearchResultProps } from '../types/search-result';
-import { paramsFromResult, SearchParams } from '../types/search-params';
+import { isInitialDefaultQuery } from 'utils/isInitialDefaultQuery';
+import { SearchResultProps } from 'types/search-result';
+import { paramsFromResult, SearchParams } from 'types/search-params';
 import { mockResults } from 'testHelpers/mockResults';
 
 describe('isInitialDefaultQuery', () => {

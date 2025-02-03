@@ -1,7 +1,7 @@
 import React from 'react';
 import htmlReactParser from 'html-react-parser';
 import { SearchHitProps } from 'types/search-result';
-import { logResultClick } from 'utils/amplitude';
+import { logResultClick } from 'utils/analytics';
 import { BodyLong, LinkPanel } from '@navikt/ds-react';
 import { SearchHitAudience } from './audience/SearchHitAudience';
 import { SearchHitTimestamps } from './timestamps/SearchHitTimestamps';
@@ -31,7 +31,7 @@ export const SearchHit = ({ hit, hitIndex }: Props) => {
         <LinkPanel
             href={href}
             className={style.searchHit}
-            onClick={() => logResultClick(hitIndex + 1)}
+            onClick={() => logResultClick(displayName, hitIndex + 1)}
         >
             <LinkPanel.Title>{displayName}</LinkPanel.Title>
             <div className={style.content}>
