@@ -1,9 +1,10 @@
 import React from 'react';
 import { BodyLong, Heading } from '@navikt/ds-react';
-import { SearchResultProps } from '../../types/search-result';
-import { quote } from '../../utils/quote';
-import { isInitialDefaultQuery } from '../../utils/isInitialDefaultQuery';
-import { useSearchContext } from '../../context/ContextProvider';
+import { SearchResultProps } from 'types/search-result';
+import { quote } from 'utils/quote';
+import { isInitialDefaultQuery } from 'utils/isInitialDefaultQuery';
+import { useSearchContext } from 'context/ContextProvider';
+
 import style from './SearchSummary.module.scss';
 
 type Props = {

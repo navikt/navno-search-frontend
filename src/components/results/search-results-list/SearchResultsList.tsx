@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { SearchHit } from '../search-hit/SearchHit';
 import { Button } from '@navikt/ds-react';
-import { SearchResultProps } from '../../../types/search-result';
-import { fetchSearchResultsClientside } from '../../../utils/fetch-search-result';
-import { ActionType } from '../../../context/actions';
-import { useSearchContext } from '../../../context/ContextProvider';
+import { SearchHit } from '../search-hit/SearchHit';
+import { SearchResultProps } from 'types/search-result';
+import { fetchSearchResultsClientside } from 'utils/fetch-search-result';
+import { ActionType } from 'context/actions';
+import { useSearchContext } from 'context/ContextProvider';
+import { logShowMore } from 'utils/analytics';
 
 import style from './SearchResultsList.module.scss';
-import { logShowMore } from '../../../utils/amplitude';
 
 type Props = {
     result: SearchResultProps;
