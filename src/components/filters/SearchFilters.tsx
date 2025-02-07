@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { FacetsSelector } from './facets-selector/FacetsSelector';
+import { Box, Button, Heading } from '@navikt/ds-react';
+import { ChevronDownIcon, FilterIcon } from '@navikt/aksel-icons';
 import { SearchResultProps } from 'types/search-result';
 import { ActionType } from 'context/actions';
 import { useSearchContext } from 'context/ContextProvider';
-import { classNames } from '../../utils/classnames';
-import { Box, Button, Heading } from '@navikt/ds-react';
-import style from './SearchFilters.module.scss';
+import { classNames } from 'utils/classnames';
 import { PreferredLanguageSelector } from './preferred-language-selector/PreferredLanguageSelector';
-import { ChevronDownIcon, FilterIcon } from '@navikt/aksel-icons';
+import { FacetsSelector } from './facets-selector/FacetsSelector';
+
+import style from './SearchFilters.module.scss';
 
 type Props = {
     result: SearchResultProps;

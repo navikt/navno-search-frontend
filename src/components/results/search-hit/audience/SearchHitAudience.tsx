@@ -1,10 +1,6 @@
 import React from 'react';
 import { Tag, TagProps } from '@navikt/ds-react';
-import {
-    Audience,
-    Language,
-    SearchHitProps,
-} from '../../../../types/search-result';
+import { Audience, Language, SearchHitProps } from 'types/search-result';
 import { getTranslations } from '../translations';
 
 import style from './SearchHitAudience.module.scss';

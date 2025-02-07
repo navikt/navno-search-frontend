@@ -1,6 +1,6 @@
 import React, { Dispatch, useContext, useReducer } from 'react';
-import { SearchParams, searchParamsDefault } from '../types/search-params';
-import { SearchResultProps } from '../types/search-result';
+import { SearchParams, searchParamsDefault } from 'types/search-params';
+import { SearchResultProps } from 'types/search-result';
 import { reducer } from './reducer';
 import { Action } from './actions';
 
