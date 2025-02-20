@@ -22,4 +22,4 @@ npm run build && npm start
 
 ## Prodsetting
 
-Publiser en ny release på main for å starte deploy til prod
+En automatisk release vil oppstå ved deploy til main

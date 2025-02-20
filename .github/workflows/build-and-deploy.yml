@@ -29,15 +29,15 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.deployEnv }}
     permissions:
-      contents: "read"
-      id-token: "write"
+      contents: read
+      id-token: write
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
       - name: Setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: 20
           registry-url: 'https://npm.pkg.github.com'
           cache: 'npm'
       - name: Set app environmment

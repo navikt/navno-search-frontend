@@ -3,11 +3,11 @@ on:
   workflow_dispatch
 
 jobs:
-  deploy:
+  deploy-dev:
     uses: ./.github/workflows/build-and-deploy.yml
     permissions:
-      contents: "read"
-      id-token: "write"
+      contents: read
+      id-token: write
     with:
       cluster: dev-gcp
       deployEnv: dev
