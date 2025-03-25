@@ -24,9 +24,9 @@ export const logResultClick = (destinasjon: string, treffnr: number, sokeord?: s
         treffnr,
     });
 
-export const logFilterSelection = (filter: string, subFilter?: string) =>
-    logAnalyticsEvent('filter-valg', {
-        filter,
+export const logFilterSelection = (filternavn: string, subFilter?: string) =>
+    logAnalyticsEvent('filtervalg', {
+        filternavn,
         subFilter,
     });
 
