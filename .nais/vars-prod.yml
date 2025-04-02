@@ -6,10 +6,10 @@ ingresses:
   - https://www.nav.no/sok($|\/.+)
 replicas:
   min: 2
-  max: 4
+  max: 20
 resources:
   limits:
     memory: 768Mi
   requests:
-    cpu: 250m
+    cpu: 150m
     memory: 256Mi
