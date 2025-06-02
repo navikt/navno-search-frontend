@@ -13,8 +13,8 @@
         "test:watch": "jest --watch"
     },
     "dependenciesComments": {
-        "eslint": "Holdes på versjon 8.57.1. Nyeste versjon 9.27.0. From ESLint v9.0.0, the default configuration file is now eslint.config.js. ",
-        "next": "Holdes på versjon 14.2.28. Holdes på versjon 15.3.2"
+        "eslint": "Holdes på versjon 8.57.1. Nyeste versjon 9.28.0. From ESLint v9.0.0, the default configuration file is now eslint.config.js. ",
+        "next": "Holdes på versjon 14.2.28. Nyeste versjon 15.3.3"
     },
     "dependencies": {
         "@navikt/aksel-icons": "7.22.0",
