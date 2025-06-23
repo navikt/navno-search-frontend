@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { classNames } from 'utils/classnames';
+import { Checkbox, Radio } from "@navikt/ds-react";
 
 import style from './FilterOption.module.scss';
 
@@ -34,12 +35,10 @@ export const FilterOption = ({
     };
 
     return (
-        <span className={classNames(style.filterOption)}>
-            <input className={`navds-${type}__input`} {...inputProps} />
-            <label className={`navds-${type}__label`} htmlFor={inputProps.id}>
-                {label}
-                <span className={style.count}>{count}</span>
-            </label>
-        </span>
+        <div className={classNames(style.filterOption)}>
+          { inputProps.type === "radio" &&  <Radio {...inputProps}>{label}</Radio>}
+          { inputProps.type === "checkbox" && <Checkbox {...inputProps}>{label}</Checkbox>}
+          <span className={style.count}>{count}</span>
+        </div>
     );
 };
