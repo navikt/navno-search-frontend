@@ -13,15 +13,19 @@
         "test:watch": "jest --watch"
     },
     "dependenciesComments": {
-        "eslint": "Holdes på versjon 8.57.1. Nyeste versjon 9.28.0. From ESLint v9.0.0, the default configuration file is now eslint.config.js. ",
-        "next": "Holdes på versjon 14.2.28. Nyeste versjon 15.3.3"
+        "eslint": "Holdes på versjon 8.57.1. Nyeste versjon 9.29.0. From ESLint v9.0.0, the default configuration file is now eslint.config.js. ",
+        "next": "Holdes på versjon 14.2.28. Nyeste versjon 15.3.4",
+        "eslint-config-next": "Holdes på versjon 14.2.28. Nyeste versjon 15.3.4",
+        "@types/node": "Holdes på versjon 22.15.23. Nyeste versjon 24.0.4",
+        "jest": "Holdes på versjon 29.7.0. Nyeste versjon 30.0.3",
+        "jest-environment-jsdom": "Holdes på versjon 29.7.0. Nyeste versjon 30.0.2"
     },
     "dependencies": {
-        "@navikt/aksel-icons": "7.22.0",
-        "@navikt/ds-css": "7.22.0",
-        "@navikt/ds-react": "7.22.0",
-        "@navikt/ds-tokens": "7.22.0",
-        "@navikt/nav-dekoratoren-moduler": "3.2.3",
+        "@navikt/aksel-icons": "7.23.2",
+        "@navikt/ds-css": "7.23.2",
+        "@navikt/ds-react": "7.23.2",
+        "@navikt/ds-tokens": "7.23.2",
+        "@navikt/nav-dekoratoren-moduler": "3.3.0",
         "dayjs": "1.11.13",
         "html-react-parser": "5.2.5",
         "js-cookie": "3.0.5",
@@ -32,8 +36,8 @@
         "@testing-library/react": "16.3.0",
         "@testing-library/user-event": "14.6.1",
         "@types/node": "22.15.23",
-        "@typescript-eslint/eslint-plugin": "8.33.0",
-        "@typescript-eslint/parser": "8.33.0",
+        "@typescript-eslint/eslint-plugin": "8.35.0",
+        "@typescript-eslint/parser": "8.35.0",
         "@types/js-cookie": "3.0.6",
         "eslint": "8.57.1",
         "eslint-config-next": "14.2.28",
@@ -42,7 +46,7 @@
         "jest": "29.7.0",
         "jest-environment-jsdom": "29.7.0",
         "jsdom": "26.1.0",
-        "prettier": "3.5.3",
+        "prettier": "3.6.1",
         "typescript": "5.8.3"
     },
     "browserslist": {
