@@ -35,6 +35,7 @@ spec:
     outbound:
       rules:
         - application: {{dekoratorenAppName}}
+          namespace: personbruker
       external:
         - host: {{appHost}}
         - host: {{searchHost}}
