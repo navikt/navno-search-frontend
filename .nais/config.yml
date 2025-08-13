@@ -36,6 +36,8 @@ spec:
       rules:
         - application: {{dekoratorenAppName}}
           namespace: personbruker
+        - application: navno-search-api
+          namespace: navno
       external:
         - host: {{appHost}}
         - host: {{searchHost}}
