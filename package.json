@@ -15,10 +15,7 @@
     "dependenciesComments": {
         "eslint": "Holdes på versjon 8.57.1. Nyeste versjon 9.34.0. From ESLint v9.0.0, the default configuration file is now eslint.config.js. ",
         "next": "Holdes på versjon 14.2.28. Nyeste versjon 15.5.0",
-        "eslint-config-next": "Holdes på versjon 14.2.28. Nyeste versjon 15.5.0",
-        "@types/node": "Holdes på versjon 22.15.23. Nyeste versjon 24.3.0",
-        "jest": "Holdes på versjon 29.7.0. Nyeste versjon 30.0.5",
-        "jest-environment-jsdom": "Holdes på versjon 29.7.0. Nyeste versjon 30.0.5"
+        "eslint-config-next": "Holdes på versjon 14.2.28. Nyeste versjon 15.5.0"
     },
     "dependencies": {
         "@navikt/aksel-icons": "7.28.1",
