@@ -41,7 +41,7 @@ export const reducer = (state: SearchContext, action: Action) => {
             );
 
             // Check if selected underfacets have been sanitized
-            // Must be done to avoid endles state update loop.
+            // Must be done to avoid endless state update loop.
             const ufChanged =
                 JSON.stringify(state.params.uf || []) !==
                 JSON.stringify(sanitizedUf);
