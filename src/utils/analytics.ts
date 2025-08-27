@@ -11,13 +11,13 @@ const logAnalyticsEvent = (
     });
 };
 
-export const logSearchQuery = (sokeord: string) =>
+export const logSearchQuery = () =>
     logAnalyticsEvent('søk', {
         sokeord: '[redacted]',
         komponent: 'søkeside',
     });
 
-export const logResultClick = (destinasjon: string, treffnr: number, sokeord?: string) =>
+export const logResultClick = (destinasjon: string, treffnr: number) =>
     logAnalyticsEvent('resultat-klikk', {
         destinasjon,
         sokeord: '[redacted]',
