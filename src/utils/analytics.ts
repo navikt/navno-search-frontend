@@ -11,13 +11,19 @@ const logAnalyticsEvent = (
     });
 };
 
-export const logSearchQuery = () =>
+// eslint-disable-next-line
+export const logSearchQuery = (sokeord: string) =>
     logAnalyticsEvent('søk', {
         sokeord: '[redacted]',
         komponent: 'søkeside',
     });
 
-export const logResultClick = (destinasjon: string, treffnr: number) =>
+export const logResultClick = (
+    destinasjon: string,
+    treffnr: number,
+    // eslint-disable-next-line
+    sokeord?: string
+) =>
     logAnalyticsEvent('resultat-klikk', {
         destinasjon,
         sokeord: '[redacted]',
