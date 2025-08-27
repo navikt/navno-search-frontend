@@ -1,7 +1,21 @@
 .panel {
-  padding-top: var(--a-spacing-1);
+    padding-top: var(--a-spacing-1);
+}
+
+.radioWrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.radio {
+    flex: 1;
+}
+
+.count {
+    margin-left: auto;
 }
 
 .panelContent {
-    padding: var(--a-spacing-1) 0 var(--a-spacing-4) var(--a-spacing-8)
+    padding: var(--a-spacing-1) 0 var(--a-spacing-4) var(--a-spacing-8);
 }
