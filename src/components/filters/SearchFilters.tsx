@@ -58,6 +58,7 @@ export const SearchFilters = ({ result, className = '' }: Props) => {
                     {fasetter?.buckets && (
                         <RadioGroup
                             legend={'Søkefilter'}
+                            hideLegend={true}
                             value={params.f}
                             onChange={(facet) => {
                                 dispatch({
@@ -77,8 +78,12 @@ export const SearchFilters = ({ result, className = '' }: Props) => {
                             />
                         </RadioGroup>
                     )}
-                    <RadioGroup 
+                    <Heading level="3" size="small">
+                        {'Foretrukket språk'}
+                    </Heading>
+                    <RadioGroup
                         legend={'Foretrukket språk'}
+                        hideLegend={true}
                         value={params.preferredLanguage}
                         onChange={(preferredLanguage) =>
                             dispatch({
