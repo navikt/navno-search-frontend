@@ -8,19 +8,17 @@ import { FilterRadioPanel } from '../filter-radio-panel/FilterRadioPanel';
 
 export type FacetsSelectorProps = {
     facetsProps: FacetBucketProps[];
-    setFacet: (f: string) => void;
     setUnderFacet: ({ uf, toggle }: UFToggleProps) => void;
 };
 
 export const FacetsSelector = ({
     facetsProps,
-    setFacet,
     setUnderFacet,
 }: FacetsSelectorProps) => {
     const [{ params }] = useSearchContext();
 
     return (
-        <div>
+        <>
             {facetsProps.map((facet, fIndex) => {
                 const underFacets = facet.underaggregeringer.buckets;
                 return (
@@ -29,16 +27,16 @@ export const FacetsSelector = ({
                         count={facet.docCount}
                         isOpen={facet.key === params.f}
                         onClick={() => {
-                            setFacet(facet.key);
                             logFilterSelection(facet.key);
                         }}
-                        id={`select-facet-${fIndex}`}
+                        value={facet.key}
                         key={facet.key}
                     >
                         {underFacets.length > 0 &&
                             underFacets.map((underFacet, ufIndex) => (
                                 <FilterOption
                                     label={underFacet.name}
+                                    value={underFacet.key}
                                     name={underFacet.key}
                                     count={underFacet.docCount}
                                     checked={params.uf?.includes(
@@ -64,6 +62,6 @@ export const FacetsSelector = ({
                     </FilterRadioPanel>
                 );
             })}
-        </div>
+        </>
     );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, Heading } from '@navikt/ds-react';
+import { Box, Button, Heading, RadioGroup } from '@navikt/ds-react';
 import { ChevronDownIcon, FilterIcon } from '@navikt/aksel-icons';
 import { SearchResultProps } from 'types/search-result';
 import { ActionType } from 'context/actions';
@@ -56,30 +56,44 @@ export const SearchFilters = ({ result, className = '' }: Props) => {
                 </Heading>
                 <div className={style.filters}>
                     {fasetter?.buckets && (
-                        <FacetsSelector
-                            facetsProps={fasetter.buckets}
-                            setFacet={(facet) =>
+                        <RadioGroup
+                            legend={'Søkefilter'}
+                            hideLegend={true}
+                            value={params.f}
+                            onChange={(facet) => {
                                 dispatch({
                                     type: ActionType.SetFacet,
                                     facet: facet,
-                                })
-                            }
-                            setUnderFacet={(ufToggle) =>
-                                dispatch({
-                                    type: ActionType.SetUnderfacet,
-                                    underfacetToggle: ufToggle,
-                                })
-                            }
-                        />
+                                });
+                            }}
+                        >
+                            <FacetsSelector
+                                facetsProps={fasetter.buckets}
+                                setUnderFacet={(ufToggle) =>
+                                    dispatch({
+                                        type: ActionType.SetUnderfacet,
+                                        underfacetToggle: ufToggle,
+                                    })
+                                }
+                            />
+                        </RadioGroup>
                     )}
-                    <PreferredLanguageSelector
-                        setPreferredLanguage={(preferredLanguage) =>
+                    <Heading level="3" size="small">
+                        {'Foretrukket språk'}
+                    </Heading>
+                    <RadioGroup
+                        legend={'Foretrukket språk'}
+                        hideLegend={true}
+                        value={params.preferredLanguage}
+                        onChange={(preferredLanguage) =>
                             dispatch({
                                 type: ActionType.SetPreferredLanguage,
                                 preferredLanguage: preferredLanguage,
                             })
                         }
-                    />
+                    >
+                        <PreferredLanguageSelector />
+                    </RadioGroup>
                 </div>
             </Box>
         </div>

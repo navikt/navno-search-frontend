@@ -1,4 +1,5 @@
 import { searchParamsDefaultFilters } from '../types/search-params';
+import { SearchResultProps } from '../types/search-result';
 import { Action, ActionType } from './actions';
 import { SearchContext } from './ContextProvider';
 
@@ -7,10 +8,59 @@ export type UFToggleProps = {
     toggle: boolean;
 };
 
+// If search results yields 0 hits for a underfacet that was selected by user,
+// we need to remove it from the url query params. Otherwise, users will get 0 hits
+// for a search string where a hit was possible.
+const sanitizeUnderfacets = (
+    selectedUf: string[],
+    result: SearchResultProps
+): string[] => {
+    if (!selectedUf || selectedUf.length === 0) return [];
+
+    const availableUnderfacets = new Set<string>();
+
+    if (result?.aggregations?.fasetter?.buckets) {
+        result.aggregations.fasetter.buckets.forEach((facet) => {
+            if (facet.underaggregeringer?.buckets) {
+                facet.underaggregeringer.buckets.forEach((uf) => {
+                    availableUnderfacets.add(uf.key);
+                });
+            }
+        });
+    }
+
+    return selectedUf.filter((uf) => availableUnderfacets.has(uf));
+};
+
 export const reducer = (state: SearchContext, action: Action) => {
     switch (action.type) {
         case ActionType.SetResults:
-            return { ...state, result: action.result };
+            const sanitizedUf = sanitizeUnderfacets(
+                state.params.uf || [],
+                action.result
+            );
+
+            // Check if selected underfacets have been sanitized
+            // Must be done to avoid endless state update loop.
+            const ufChanged =
+                JSON.stringify(state.params.uf || []) !==
+                JSON.stringify(sanitizedUf);
+
+            if (ufChanged) {
+                return {
+                    ...state,
+                    result: action.result,
+                    params: {
+                        ...state.params,
+                        uf: sanitizedUf,
+                    },
+                };
+            }
+
+            return {
+                ...state,
+                result: action.result,
+            };
         case ActionType.SetParams:
             return { ...state, params: action.params };
         case ActionType.SetSearchTerm:

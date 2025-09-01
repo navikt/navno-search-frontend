@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from 'react';
+import { Checkbox, Radio } from '@navikt/ds-react';
 import { classNames } from 'utils/classnames';
 
 import style from './FilterOption.module.scss';
@@ -7,6 +8,7 @@ export type FilterOptionType = 'radio' | 'checkbox';
 
 export type FilterOptionProps = {
     label: string;
+    value: string;
     name: string;
     count?: number;
     checked?: boolean;
@@ -17,6 +19,7 @@ export type FilterOptionProps = {
 
 export const FilterOption = ({
     label,
+    value,
     name,
     count,
     checked,
@@ -25,7 +28,7 @@ export const FilterOption = ({
     id,
 }: FilterOptionProps) => {
     const inputProps = {
-        value: label,
+        value,
         name,
         checked,
         onChange,
@@ -33,13 +36,12 @@ export const FilterOption = ({
         id,
     };
 
+    const SelectElement = type === 'radio' ? Radio : Checkbox;
+
     return (
-        <span className={classNames(style.filterOption)}>
-            <input className={`navds-${type}__input`} {...inputProps} />
-            <label className={`navds-${type}__label`} htmlFor={inputProps.id}>
-                {label}
-                <span className={style.count}>{count}</span>
-            </label>
-        </span>
+        <div className={classNames(style.filterOption)}>
+            <SelectElement {...inputProps}>{label}</SelectElement>
+            <span className={style.count}>{count}</span>
+        </div>
     );
 };
