@@ -23,7 +23,7 @@
         "@navikt/ds-css": "7.33.2",
         "@navikt/ds-react": "7.33.2",
         "@navikt/ds-tokens": "7.33.2",
-        "@navikt/nav-dekoratoren-moduler": "3.5.0",
+        "@navikt/nav-dekoratoren-moduler": "3.6.0",
         "dayjs": "1.11.19",
         "html-react-parser": "5.2.8",
         "js-cookie": "3.0.5",
