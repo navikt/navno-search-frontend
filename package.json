@@ -13,19 +13,19 @@
         "test:watch": "jest --watch"
     },
     "dependenciesComments": {
-        "eslint": "Holdes på versjon 8.57.1. Nyeste versjon 9.39.1. From ESLint v9.0.0, the default configuration file is now eslint.config.js. ",
-        "next": "Holdes på versjon 14.2.28. Nyeste versjon 16.0.3",
-        "eslint-config-next": "Holdes på versjon 14.2.28. Nyeste versjon 16.0.3",
-        "@types/node": "Holdes på versjon 22.15.23. Nyeste versjon 24.10.1"
+        "eslint": "Holdes på versjon 8.57.1. Nyeste versjon 9.39.1. From ESLint v9.0.0, the default configuration file is now eslint.config.js. Brekker ellers",
+        "next": "Holdes på versjon 14.2.28. Nyeste versjon 16.0.7. Brekker ellers",
+        "eslint-config-next": "Holdes på versjon 14.2.28. Nyeste versjon 16.0.7. Brekker ellers",
+        "@types/node": "Holdes på versjon 22.15.23. Nyeste versjon 24.10.1. Holdes på versjon 22 pga Dockerfile"    
     },
     "dependencies": {
-        "@navikt/aksel-icons": "7.33.2",
-        "@navikt/ds-css": "7.33.2",
-        "@navikt/ds-react": "7.33.2",
-        "@navikt/ds-tokens": "7.33.2",
-        "@navikt/nav-dekoratoren-moduler": "3.5.0",
+        "@navikt/aksel-icons": "7.35.0",
+        "@navikt/ds-css": "7.35.0",
+        "@navikt/ds-react": "7.35.0",
+        "@navikt/ds-tokens": "7.35.0",
+        "@navikt/nav-dekoratoren-moduler": "3.6.1",
         "dayjs": "1.11.19",
-        "html-react-parser": "5.2.8",
+        "html-react-parser": "5.2.10",
         "js-cookie": "3.0.5",
         "next": "14.2.28"
     },
@@ -34,8 +34,8 @@
         "@testing-library/react": "16.3.0",
         "@testing-library/user-event": "14.6.1",
         "@types/node": "22.15.23",
-        "@typescript-eslint/eslint-plugin": "8.46.4",
-        "@typescript-eslint/parser": "8.46.4",
+        "@typescript-eslint/eslint-plugin": "8.48.1",
+        "@typescript-eslint/parser": "8.48.1",
         "@types/js-cookie": "3.0.6",
         "eslint": "8.57.1",
         "eslint-config-next": "14.2.28",
@@ -44,7 +44,7 @@
         "jest": "30.2.0",
         "jest-environment-jsdom": "30.2.0",
         "jsdom": "27.2.0",
-        "prettier": "3.6.2",
+        "prettier": "3.7.4",
         "typescript": "5.9.3"
     },
     "browserslist": {
