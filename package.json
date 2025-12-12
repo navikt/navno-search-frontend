@@ -19,7 +19,7 @@
         "@types/node": "Holdes på versjon 22.15.23. Nyeste versjon 24.10.1. Holdes på versjon 22 pga Dockerfile"    
     },
     "dependencies": {
-        "@navikt/aksel-icons": "7.35.0",
+        "@navikt/aksel-icons": "7.35.1",
         "@navikt/ds-css": "7.35.0",
         "@navikt/ds-react": "7.35.0",
         "@navikt/ds-tokens": "7.35.0",
