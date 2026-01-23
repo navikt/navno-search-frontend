@@ -16,7 +16,7 @@
         "eslint": "Holdes på versjon 8.57.1. Nyeste versjon 9.39.2. From ESLint v9.0.0, the default configuration file is now eslint.config.js. Brekker ellers",
         "next": "Holdes på versjon 14.2.28. Nyeste versjon 16.1.1. Brekker ellers",
         "eslint-config-next": "Holdes på versjon 14.2.28. Nyeste versjon 16.1.1. Brekker ellers",
-        "@types/node": "Holdes på versjon 22.15.23. Nyeste versjon 25.0.8. Holdes på versjon 22 pga Dockerfile"    
+        "@types/node": "Holdes på samme major som node-versjonen generelt."
     },
     "dependencies": {
         "@navikt/aksel-icons": "7.39.0",
@@ -33,10 +33,10 @@
         "@testing-library/jest-dom": "6.9.1",
         "@testing-library/react": "16.3.1",
         "@testing-library/user-event": "14.6.1",
-        "@types/node": "22.15.23",
+        "@types/js-cookie": "3.0.6",
+        "@types/node": "24.1.0",
         "@typescript-eslint/eslint-plugin": "8.53.0",
         "@typescript-eslint/parser": "8.53.0",
-        "@types/js-cookie": "3.0.6",
         "eslint": "8.57.1",
         "eslint-config-next": "14.2.28",
         "eslint-plugin-css-modules": "2.12.0",
@@ -45,6 +45,7 @@
         "jest-environment-jsdom": "30.2.0",
         "jsdom": "27.4.0",
         "prettier": "3.7.4",
+        "sass": "^1.97.3",
         "typescript": "5.9.3"
     },
     "browserslist": {
