@@ -50,7 +50,7 @@ jobs:
           ENV=${{ inputs.deployEnv }}
           EOF
       - name: Nextjs cache
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: ${{ github.workspace }}/.next/cache
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
