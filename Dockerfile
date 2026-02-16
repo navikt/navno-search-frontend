@@ -9,4 +9,5 @@ COPY public /app/public/
 COPY .next /app/.next/
 
 EXPOSE 3001
-CMD ["npm", "run", "start"]
+ENTRYPOINT ["node"]
+CMD ["node_modules/.bin/next", "start", "-p", "3001"]
