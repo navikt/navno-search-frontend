@@ -1,5 +1,8 @@
 FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/node:24-slim
 
+ARG APP_BASE_PATH
+ENV APP_BASE_PATH=${APP_BASE_PATH}
+
 WORKDIR /app
 
 COPY package*.json .env /app/
