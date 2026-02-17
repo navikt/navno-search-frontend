@@ -1,7 +1,7 @@
 FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/node:24-slim AS builder
 
-ENV NODE_ENV production
-ENV NPM_CONFIG_CACHE /tmp
+ENV NODE_ENV=production
+ENV NPM_CONFIG_CACHE=/tmp/npm
 
 WORKDIR /app
 
@@ -11,7 +11,6 @@ COPY . .
 RUN npm run build
 RUN npm prune --omit=dev
 
-# Runtime: her kjører du bare appen
 FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/node:24-slim AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
