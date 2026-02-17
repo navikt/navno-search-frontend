@@ -1,5 +1,9 @@
+const appBasePath =
+    process.env.APP_BASE_PATH ??
+    (process.env.NODE_ENV === 'production' ? '/sok' : '');
+
 const PATHS = {
-    searchApi: `${process.env.APP_BASE_PATH}/api/search`,
+    searchApi: `${appBasePath}/api/search`,
     searchTips: '/soketips',
     appBasePathProd: '/sok',
 };

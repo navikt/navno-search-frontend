@@ -19,10 +19,14 @@ const cssModulesNoDashesInClassnames = (config) => {
     });
 };
 
+const appBasePath =
+    process.env.APP_BASE_PATH ??
+    (process.env.NODE_ENV === 'production' ? '/sok' : '');
+
 module.exports = {
-    basePath: process.env.APP_BASE_PATH,
+    basePath: appBasePath,
     env: {
-        APP_BASE_PATH: process.env.APP_BASE_PATH,
+        APP_BASE_PATH: appBasePath,
         SEARCH_URL: process.env.SEARCH_URL,
     },
     webpack: (config) => {
