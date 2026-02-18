@@ -11,11 +11,5 @@ COPY public ./public
 COPY .next ./.next
 COPY .env next.config.js ./
 
-#COPY package*.json ./
-#COPY node_modules /app/node_modules/
-
-#COPY public /app/public/
-#COPY .next /app/.next/
-
 EXPOSE 3001
 CMD ["node_modules/.bin/next", "start", "-p", "3001"]
