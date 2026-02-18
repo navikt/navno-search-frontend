@@ -1,9 +1,5 @@
-const appBasePath =
-    process.env.APP_BASE_PATH ??
-    (process.env.NODE_ENV === 'production' ? '/sok' : '');
-
 const PATHS = {
-    searchApi: `${appBasePath}/api/search`,
+    searchApi: `${process.env.APP_BASE_PATH}/api/search`,
     searchTips: '/soketips',
     appBasePathProd: '/sok',
 };
@@ -19,7 +15,7 @@ const VARS = {
     },
     keys: {
         defaultFacet: 'privatperson',
-        defaultPreferredLanguage: "nb",
+        defaultPreferredLanguage: 'nb',
     },
 };
 
