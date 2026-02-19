@@ -15,7 +15,7 @@ const VARS = {
     },
     keys: {
         defaultFacet: 'privatperson',
-        defaultPreferredLanguage: "nb",
+        defaultPreferredLanguage: 'nb',
     },
 };
 
