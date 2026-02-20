@@ -11,4 +11,4 @@ COPY .next ./.next
 COPY .env next.config.js ./
 
 EXPOSE 3001
-CMD ["node_modules/.bin/next", "start", "-p", "3001"]
+CMD ["node", "node_modules/next/dist/bin/next", "start", "-p", "3001"]
