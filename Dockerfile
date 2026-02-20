@@ -4,11 +4,11 @@ ENV NODE_ENV=production
 
 WORKDIR /usr/src/app
 
-COPY package.json pnpm-lock.yaml /app/
-COPY node_modules /app/node_modules/
-COPY public /app/public/
-COPY .next /app/.next/
-COPY .env next.config.js /app/
+COPY package*.json ./
+COPY node_modules ./node_modules
+COPY public ./public
+COPY .next ./.next
+COPY .env next.config.js ./
 
 EXPOSE 3001
 CMD ["node_modules/.bin/next", "start", "-p", "3001"]
