@@ -1,0 +1,99 @@
+name: Build docker image
+
+inputs:
+  CLUSTER:
+    description: Target NAIS cluster
+    required: true
+  DEPLOYENV:
+    description: Deployment environment
+    required: true
+  IMAGENAME:
+    description: Docker image suffix
+    required: true
+  APP_ORIGIN:
+    description: App origin
+    required: true
+  SEARCH_URL:
+    description: Search API URL
+    required: true
+  READER_TOKEN:
+    description: GitHub package reader token
+    required: true
+  NAIS_WORKLOAD_IDENTITY_PROVIDER:
+    description: NAIS workload identity provider
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+
+    - name: Setup node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: 24
+        registry-url: https://npm.pkg.github.com
+        cache: pnpm
+
+    - name: Set app environment
+      shell: bash
+      env:
+        APP_ORIGIN: ${{ inputs.APP_ORIGIN }}
+        SEARCH_URL: ${{ inputs.SEARCH_URL }}
+        DEPLOYENV: ${{ inputs.DEPLOYENV }}
+      run: |
+        cat > .env <<EOF
+        NODE_ENV=production
+        APP_BASE_PATH=/sok
+        APP_ORIGIN=$APP_ORIGIN
+        SEARCH_URL=$SEARCH_URL
+        ENV=$DEPLOYENV
+        EOF
+
+    - name: Nextjs cache
+      uses: actions/cache@v5
+      with:
+        path: ${{ github.workspace }}/.next/cache
+        key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
+      env:
+        NODE_AUTH_TOKEN: ${{ inputs.READER_TOKEN }}
+
+    - name: Build application
+      shell: bash
+      run: pnpm run build
+
+    - name: Delete node_modules to avoid copying them into the docker image
+      shell: bash
+      run: rm -rf node_modules server/node_modules
+
+    - name: Install production dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile --prod
+      env:
+        NODE_AUTH_TOKEN: ${{ inputs.READER_TOKEN }}
+
+    - name: Build and push docker image
+      id: docker-push
+      uses: nais/docker-build-push@v0
+      with:
+        team: navno
+        identity_provider: ${{ inputs.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+        image_suffix: ${{ inputs.IMAGENAME }}
+
+    - name: Login to NAIS
+      uses: nais/login@v0
+      with:
+        team: navno
+
+    - name: Deploy to NAIS
+      uses: nais/deploy/actions/deploy@master
+      env:
+        CLUSTER: ${{ inputs.CLUSTER }}
+        RESOURCE: .nais/config.yml
+        VAR: image=${{ steps.docker-push.outputs.image }}
+        VARS: .nais/vars-${{ inputs.DEPLOYENV }}.yml

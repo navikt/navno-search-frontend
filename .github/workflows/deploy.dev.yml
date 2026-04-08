@@ -1,19 +1,24 @@
 name: Deploy to dev
-on:
-  workflow_dispatch
+on: workflow_dispatch
 
 jobs:
-  deploy-dev:
-    uses: ./.github/workflows/build-and-deploy.yml
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: dev
     permissions:
       contents: read
       id-token: write
-    with:
-      cluster: dev-gcp
-      deployEnv: dev
-      imagename: dev-deploy
-      APP_ORIGIN: https://www.ansatt.dev.nav.no
-      SEARCH_URL: https://navno-search-api.ekstern.dev.nav.no/content/search
-    secrets:
-      READER_TOKEN: ${{ secrets.READER_TOKEN }}
-      NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Build and deploy dev
+        uses: ./.github/actions/build-and-deploy
+        with:
+          CLUSTER: dev-gcp
+          DEPLOYENV: dev
+          IMAGENAME: dev-deploy
+          APP_ORIGIN: https://www.ansatt.dev.nav.no
+          SEARCH_URL: https://navno-search-api.ekstern.dev.nav.no/content/search
+          READER_TOKEN: ${{ secrets.READER_TOKEN }}
+          NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
