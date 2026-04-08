@@ -38,13 +38,17 @@ runs:
 
     - name: Set app environment
       shell: bash
+      env:
+        APP_ORIGIN: ${{ inputs.APP_ORIGIN }}
+        SEARCH_URL: ${{ inputs.SEARCH_URL }}
+        DEPLOYENV: ${{ inputs.DEPLOYENV }}
       run: |
         cat > .env <<EOF
         NODE_ENV=production
         APP_BASE_PATH=/sok
-        APP_ORIGIN=${{ inputs.APP_ORIGIN }}
-        SEARCH_URL=${{ inputs.SEARCH_URL }}
-        ENV=${{ inputs.DEPLOYENV }}
+        APP_ORIGIN=$APP_ORIGIN
+        SEARCH_URL=$SEARCH_URL
+        ENV=$DEPLOYENV
         EOF
 
     - name: Nextjs cache
