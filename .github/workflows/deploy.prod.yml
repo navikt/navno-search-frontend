@@ -5,24 +5,30 @@ on:
       - main
 
 jobs:
-  deploy-prod:
-    uses: ./.github/workflows/build-and-deploy.yml
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: prod
     permissions:
       contents: read
       id-token: write
-    with:
-      cluster: prod-gcp
-      deployEnv: prod
-      imagename: release-${{ github.ref_name }}
-      APP_ORIGIN: https://www.nav.no
-      SEARCH_URL: https://navno-search-api.nav.no/content/search
-    secrets:
-      READER_TOKEN: ${{ secrets.READER_TOKEN }}
-      NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Build and deploy prod
+        uses: ./.github/actions/build-and-deploy
+        with:
+          CLUSTER: prod-gcp
+          DEPLOYENV: prod
+          IMAGENAME: release-${{ github.ref_name }}
+          APP_ORIGIN: https://www.nav.no
+          SEARCH_URL: https://navno-search-api.nav.no/content/search
+          READER_TOKEN: ${{ secrets.READER_TOKEN }}
+          NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
   release:
     name: Create a new release
-    needs: deploy-prod
+    needs: build-and-deploy
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -30,6 +36,7 @@ jobs:
     steps:
       - name: Generate unique tag name
         run: echo "TAG_NAME=$(date +%s)" >> $GITHUB_ENV
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
