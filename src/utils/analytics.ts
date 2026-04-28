@@ -1,41 +1,29 @@
-import { logAnalyticsEvent as logAnalyticsEventDecorator } from '@navikt/nav-dekoratoren-moduler';
+import { getAnalyticsInstance, Events } from '@navikt/nav-dekoratoren-moduler';
 
-const logAnalyticsEvent = (
-    eventName: string,
-    data?: Record<string, unknown>
-): Promise<unknown> => {
-    return logAnalyticsEventDecorator({
-        eventName,
-        origin: 'navno-search-frontend',
-        eventData: data,
-    });
-};
+const logAnalyticsEvent = getAnalyticsInstance('navno-search-frontend');
 
-// eslint-disable-next-line
-export const logSearchQuery = (sokeord: string) =>
-    logAnalyticsEvent('søk', {
+export const logSearchQuery = (_sokeord: string) =>
+    logAnalyticsEvent(Events.SOK_NAVNO, {
         sokeord: '[redacted]',
-        komponent: 'søkeside',
+        komponentId: 'søkeside',
     });
 
 export const logResultClick = (
     destinasjon: string,
     treffnr: number,
-    // eslint-disable-next-line
-    sokeord?: string
+    _sokeord?: string
 ) =>
-    logAnalyticsEvent('resultat-klikk', {
+    logAnalyticsEvent(Events.RESULTAT_KLIKK, {
         destinasjon,
         sokeord: '[redacted]',
         treffnr,
     });
 
 export const logFilterSelection = (filternavn: string, subFilter?: string) =>
-    logAnalyticsEvent('filtervalg', {
+    logAnalyticsEvent(Events.FILTERVALG, {
         filternavn,
         subFilter,
     });
 
-export const logShowMore = (page: number) => {
-    logAnalyticsEvent('vis-flere-treff', { page });
-};
+export const logShowMore = (page: number) =>
+    logAnalyticsEvent(Events.VIS_FLERE_TREFF, { page });

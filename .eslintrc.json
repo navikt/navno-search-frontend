@@ -9,6 +9,10 @@
     "rules": {
         "css-modules/no-unused-class": [1, { "camelCase": true }],
         "css-modules/no-undef-class": [2, { "camelCase": true }],
-        "@typescript-eslint/no-unused-vars": "warn"
+        "@typescript-eslint/no-unused-vars": ["warn", {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_",
+            "caughtErrorsIgnorePattern": "^_"
+        }]
     }
 }
