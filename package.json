@@ -19,10 +19,6 @@
         "next": "Holdes på versjon 14.2.35. Nyeste versjon 16.2.4. Brekker ellers",
         "eslint-config-next": "Holdes på versjon 14.2.35. Nyeste versjon 16.2.4. Brekker ellers",
         "@types/node": "Holdes på samme major som node-versjonen generelt.",
-        "@html-react-parser": "Holdes på versjon 5.2.17. Ellers bygger det ikke",
-        "@react": "Holdes på versjon 18.3.1. Ny versjon 19.2.5. Ellers brekker det",
-        "@react-dom": "Holdes på versjon 18.3.1. Ny versjon 19.2.5. Ellers brekker det",
-        "jsdom": "Holdes på versjon 28.1.0. Ellers brekker det. Nyeste versjon 29.1.1",
         "typescript": "Holdes på versjon 5.9.3. Ellers brekker det. Nyeste versjon 6.0.3"
     },
     "dependencies": {
@@ -32,7 +28,7 @@
         "@navikt/ds-tokens": "7.40.0",
         "@navikt/nav-dekoratoren-moduler": "4.0.0",
         "dayjs": "1.11.20",
-        "html-react-parser": "5.2.17",
+        "html-react-parser": "6.0.1",
         "js-cookie": "3.0.5",
         "next": "14.2.35",
         "react": "19.2.5",
