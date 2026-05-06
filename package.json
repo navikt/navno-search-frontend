@@ -14,11 +14,11 @@
         "test:watch": "jest --watch"
     },
     "dependenciesComments": {
-        "@navikt/ds-*": "Holdes på versjon 7.40.0, ellers vil den ikke bygge",
+        "@navikt/ds-*": "Holdes på versjon 7.40.0, ellers vil den ikke bygge. Nyeste versjon 8.10.4",
         "eslint": "Holdes på versjon 8.57.1. Nyeste versjon 10.3.0. From ESLint v9.0.0, the default configuration file is now eslint.config.js. Brekker ellers",
         "next": "Holdes på versjon 14.2.35. Nyeste versjon 16.2.4. Brekker ellers",
         "eslint-config-next": "Holdes på versjon 14.2.35. Nyeste versjon 16.2.4. Brekker ellers",
-        "@types/node": "Holdes på samme major som node-versjonen generelt.",
+        "@types/node": "Holdes på samme major som node-versjonen generelt. Siste versjon 25.6.0",
         "typescript": "Holdes på versjon 5.9.3. Ellers brekker det. Nyeste versjon 6.0.3"
     },
     "dependencies": {
