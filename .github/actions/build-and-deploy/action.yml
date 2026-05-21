@@ -1,5 +1,5 @@
 name: Build docker image
-
+description: Shared action for building and pushing docker images to GitHub Container Registry, and deploying to NAIS.
 inputs:
   CLUSTER:
     description: Target NAIS cluster
