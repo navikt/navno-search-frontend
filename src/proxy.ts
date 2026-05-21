@@ -1,0 +1,28 @@
+import { NextRequest, NextResponse } from 'next/server';
+
+const LOGIN_COOKIE = 'dev-login';
+
+// 155.55.* is Navs public IP range. Also includes the private IP range used by our
+// internal network (10.*), and localhost. Takes the IPv6 prefix ::ffff: into account.
+const isNavIp = (ip: string | null) =>
+    ip ? /^(::ffff:)?(155\.55\.|10\.|127\.)/.test(ip) : true;
+
+// Applies certain restrictions for the app in dev environments. This is not intended
+// as a security measure, but rather to ensure (to some degree) that the public does
+// not accidentally end up in our (possibly confusing!) dev environments
+export default function proxy(req: NextRequest) {
+    if (process.env.ENV === 'dev1' || process.env.ENV === 'dev2') {
+        // Note: req.ip was removed in Next.js 16
+        const forwardedFor = req.headers.get('x-forwarded-for');
+        const ip =
+            req.headers.get('x-real-ip') ||
+            (forwardedFor ? forwardedFor.split(',')[0].trim() : null);
+
+        if (!(isNavIp(ip) || req.cookies.get(LOGIN_COOKIE))) {
+            console.log(`Non-authorized client ip: ${ip}`);
+            return new NextResponse('Ingen tilgang', { status: 401 });
+        }
+    }
+
+    return NextResponse.next();
+}
