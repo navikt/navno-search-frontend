@@ -54,15 +54,15 @@ describe('FilterRadioPanel', () => {
     });
 
     test('It displays the proper label for the filter', () => {
-        const { getByLabelText } = setupResult;
+        const { getByDisplayValue } = setupResult;
 
-        expect(getByLabelText('Filter option label')).toBeInTheDocument();
+        expect(getByDisplayValue('Filter option label')).toBeInTheDocument();
     });
 
     test('It calls the proper function when the radio changes after click', () => {
-        const { getByLabelText } = setupResult;
+        const { getByDisplayValue } = setupResult;
 
-        fireEvent.click(getByLabelText('Filter option label'));
+        fireEvent.click(getByDisplayValue('Filter option label'));
         expect(mockOnClick).toHaveBeenCalledTimes(1);
     });
 });

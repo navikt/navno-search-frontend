@@ -57,21 +57,21 @@ describe('FacetsSelector', () => {
     });
 
     test('renders the facet options correctly and is checked', async () => {
-        const { findByDisplayValue } = setupResult;
-        const input = await findByDisplayValue('Privatperson');
+        const { findByLabelText } = setupResult;
+        const input = await findByLabelText('Privatperson');
         expect(input).toHaveAttribute('type', 'radio');
         expect(input).toBeChecked();
     });
 
     test('does not check the other facets from the start', async () => {
-        const { findByDisplayValue } = setupResult;
-        const input = await findByDisplayValue('Arbeidsgiver');
+        const { findByLabelText } = setupResult;
+        const input = await findByLabelText('Arbeidsgiver');
         expect(input).not.toBeChecked();
     });
 
     test('calls setFacet when an option is clicked', async () => {
-        const { findByDisplayValue } = setupResult;
-        const input = await findByDisplayValue('Arbeidsgiver');
+        const { findByLabelText } = setupResult;
+        const input = await findByLabelText('Arbeidsgiver');
 
         fireEvent.click(input);
         expect(mockSetFacet).toHaveBeenCalledTimes(1);
@@ -98,9 +98,9 @@ describe('FacetsSelector', () => {
             mockSetUnderFacet,
         });
 
-        const { findByDisplayValue } = setupResult;
+        const { findByLabelText } = setupResult;
 
-        const input = await findByDisplayValue('Arbeidsgiver');
+        const input = await findByLabelText('Arbeidsgiver');
 
         expect(input).toBeChecked();
     });

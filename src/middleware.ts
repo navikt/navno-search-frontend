@@ -13,10 +13,11 @@ const isNavIp = (ip: string | null) =>
 export const middleware =
     process.env.ENV === 'dev1' || process.env.ENV === 'dev2'
         ? (req: NextRequest) => {
+              // Note: req.ip was removed in Next.js 16
+              const forwardedFor = req.headers.get('x-forwarded-for');
               const ip =
-                  req.ip ||
                   req.headers.get('x-real-ip') ||
-                  req.headers.get('x-forwarded-for');
+                  (forwardedFor ? forwardedFor.split(',')[0].trim() : null);
 
               if (!(isNavIp(ip) || req.cookies.get(LOGIN_COOKIE))) {
                   console.log(`Non-authorized client ip: ${ip}`);

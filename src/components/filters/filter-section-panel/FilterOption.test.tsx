@@ -7,6 +7,7 @@ const mockFunction = jest.fn();
 const setup = (configOverride: Partial<FilterOptionProps>) => {
     const config: FilterOptionProps = {
         label: 'Filter option label',
+        value: 'filter-option-value',
         name: 'foo-filter-option',
         count: 1,
         checked: true,
@@ -39,7 +40,7 @@ describe('FilterOption', () => {
             checked: false,
         });
 
-        const input = utils.getByDisplayValue('Filter option label');
+        const input = utils.getByLabelText('Filter option label');
 
         fireEvent.click(input);
 
@@ -53,7 +54,7 @@ describe('FilterOption', () => {
             checked: true,
         });
 
-        const input = utils.getByDisplayValue('Filter option label');
+        const input = utils.getByLabelText('Filter option label');
 
         expect(input).toBeChecked();
     });
