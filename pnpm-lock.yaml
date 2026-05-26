@@ -70,7 +70,7 @@ importers:
         specifier: 19.2.3
         version: 19.2.3(@types/react@19.2.14)
       eslint:
-        specifier: ^10.4.0
+        specifier: 10.4.0
         version: 10.4.0
       eslint-plugin-jsx-a11y:
         specifier: 6.10.2
@@ -100,7 +100,7 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
       typescript-eslint:
-        specifier: ^8.60.0
+        specifier: 8.60.0
         version: 8.60.0(eslint@10.4.0)(typescript@5.9.3)
 
 packages:
