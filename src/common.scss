@@ -1,5 +1,5 @@
-@forward '@navikt/ds-tokens/dist/tokens';
-@use '@navikt/ds-tokens/dist/tokens' as *;
+@forward '~@navikt/ds-tokens/dist/tokens.scss';
+@use '~@navikt/ds-tokens/dist/tokens.scss' as *;
 
 // Screen size breakpoints
 $mobileMaxWidth: 48rem; // 768px
