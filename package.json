@@ -15,8 +15,7 @@
     },
     "dependenciesComments": {
         "@navikt/ds-*": "Holdes på versjon 7.40.0, ellers vil den ikke bygge. Nyeste versjon 8.10.4",
-        "@types/node": "Holdes på samme major som node-versjonen generelt. Siste versjon 25.6.0",
-        "typescript": "Holdes på versjon 5.9.3. Ellers brekker det. Nyeste versjon 6.0.3"
+        "@types/node": "Holdes på samme major som node-versjonen generelt. Siste versjon 25.6.0"
     },
     "dependencies": {
         "@navikt/aksel-icons": "8.10.4",
@@ -50,7 +49,7 @@
         "jsdom": "29.1.1",
         "prettier": "3.8.3",
         "sass": "1.99.0",
-        "typescript": "5.9.3",
+        "typescript": "6.0.3",
         "typescript-eslint": "8.60.0"
     },
     "browser": {
