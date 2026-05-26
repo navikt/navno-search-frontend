@@ -1,4 +1,4 @@
-# Copilot Instructions
+d# Copilot Instructions
 
 Next.js 16 (Pages Router) search frontend for nav.no, deployed on NAIS.
 

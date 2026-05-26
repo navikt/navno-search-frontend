@@ -1,9 +1,10 @@
-import { RenderResult } from '@testing-library/react';
+import { render, RenderResult } from '@testing-library/react';
+import { RadioGroup } from '@navikt/ds-react';
 import userEvent from '@testing-library/user-event';
 import { PreferredLanguageSelector } from './PreferredLanguageSelector';
 import { mockResults } from 'testHelpers/mockResults';
 import { paramsFromResult } from 'types/search-params';
-import { componentSetup } from 'testHelpers/componentSetup';
+import { ContextProvider } from 'context/ContextProvider';
 
 describe('SearchFilters', () => {
     let setupResult: RenderResult;
@@ -13,16 +14,16 @@ describe('SearchFilters', () => {
         const initialResult = mockResults();
         const initialParams = paramsFromResult(initialResult);
 
-        setupResult = componentSetup({
-            Component: PreferredLanguageSelector,
-            contextProps: {
-                initialResult,
-                initialParams,
-            },
-            componentProps: {
-                setPreferredLanguage: mockSetPreferredLanguage,
-            },
-        });
+        setupResult = render(
+            <ContextProvider
+                initialResult={initialResult}
+                initialParams={initialParams}
+            >
+                <RadioGroup legend="test" hideLegend value={initialParams.preferredLanguage} onChange={mockSetPreferredLanguage}>
+                    <PreferredLanguageSelector />
+                </RadioGroup>
+            </ContextProvider>
+        );
     });
     test('Has all expected languages', async () => {
         const { findByLabelText } = setupResult;

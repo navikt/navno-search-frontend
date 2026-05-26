@@ -1,4 +1,5 @@
-import { fireEvent, RenderResult } from '@testing-library/react';
+import { fireEvent, render, RenderResult } from '@testing-library/react';
+import { RadioGroup } from '@navikt/ds-react';
 import { FacetsSelector } from './FacetsSelector';
 import { mockResults } from 'testHelpers/mockResults';
 import { mockFacets } from 'testHelpers/mockFacets';
@@ -8,38 +9,36 @@ import {
     SearchParams,
     SearchSort,
 } from 'types/search-params';
-import { componentSetup } from 'testHelpers/componentSetup';
+import { ContextProvider } from 'context/ContextProvider';
 
 type SetupConfig = {
     initialResult: SearchResultProps;
     initialParams?: SearchParams;
-    mockSetFacet: jest.Mock;
     mockSetUnderFacet: jest.Mock;
 };
 
 const setupTest = ({
     initialResult,
     initialParams,
-    mockSetFacet,
     mockSetUnderFacet,
 }: SetupConfig) => {
-    return componentSetup({
-        Component: FacetsSelector,
-        contextProps: {
-            initialResult,
-            initialParams,
-        },
-        componentProps: {
-            facetsProps: mockFacets(),
-            setFacet: mockSetFacet,
-            setUnderFacet: mockSetUnderFacet,
-        },
-    });
+    return render(
+        <ContextProvider
+            initialResult={initialResult}
+            initialParams={initialParams}
+        >
+            <RadioGroup legend="test" hideLegend value={initialParams?.f || ''}>
+                <FacetsSelector
+                    facetsProps={mockFacets()}
+                    setUnderFacet={mockSetUnderFacet}
+                />
+            </RadioGroup>
+        </ContextProvider>
+    );
 };
 
 describe('FacetsSelector', () => {
     let setupResult: RenderResult;
-    const mockSetFacet = jest.fn();
     const mockSetUnderFacet = jest.fn();
 
     beforeEach(() => {
@@ -51,7 +50,6 @@ describe('FacetsSelector', () => {
         setupResult = setupTest({
             initialResult,
             initialParams,
-            mockSetFacet,
             mockSetUnderFacet,
         });
     });
@@ -69,12 +67,33 @@ describe('FacetsSelector', () => {
         expect(input).not.toBeChecked();
     });
 
-    test('calls setFacet when an option is clicked', async () => {
-        const { findByLabelText } = setupResult;
-        const input = await findByLabelText('Arbeidsgiver');
+    test('calls onChange when an option is clicked', async () => {
+        setupResult.unmount();
+
+        const initialResult = mockResults();
+        const initialParams = paramsFromResult(initialResult);
+        initialParams.f = 'privatperson';
+
+        const mockOnChange = jest.fn();
+
+        const result = render(
+            <ContextProvider
+                initialResult={initialResult}
+                initialParams={initialParams}
+            >
+                <RadioGroup legend="test" hideLegend value={initialParams.f} onChange={mockOnChange}>
+                    <FacetsSelector
+                        facetsProps={mockFacets()}
+                        setUnderFacet={mockSetUnderFacet}
+                    />
+                </RadioGroup>
+            </ContextProvider>
+        );
+
+        const input = await result.findByLabelText('Arbeidsgiver');
 
         fireEvent.click(input);
-        expect(mockSetFacet).toHaveBeenCalledTimes(1);
+        expect(mockOnChange).toHaveBeenCalledTimes(1);
     });
 
     test('checks the correct facet when props are updated', async () => {
@@ -91,16 +110,13 @@ describe('FacetsSelector', () => {
 
         const initialResult = mockResults();
 
-        setupTest({
+        const result = setupTest({
             initialResult,
             initialParams,
-            mockSetFacet,
             mockSetUnderFacet,
         });
 
-        const { findByLabelText } = setupResult;
-
-        const input = await findByLabelText('Arbeidsgiver');
+        const input = await result.findByLabelText('Arbeidsgiver');
 
         expect(input).toBeChecked();
     });

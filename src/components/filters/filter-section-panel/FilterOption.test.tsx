@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { RadioGroup } from '@navikt/ds-react';
 import { FilterOption, FilterOptionProps } from './FilterOption';
 
 const mockFunction = jest.fn();
@@ -17,7 +18,15 @@ const setup = (configOverride: Partial<FilterOptionProps>) => {
         ...configOverride,
     };
 
-    const utils = render(<FilterOption {...config} />);
+    const wrapper = config.type === 'radio' ? (
+        <RadioGroup legend="test" hideLegend value={config.checked ? config.value : ''}>
+            <FilterOption {...config} />
+        </RadioGroup>
+    ) : (
+        <FilterOption {...config} />
+    );
+
+    const utils = render(wrapper);
 
     return {
         ...utils,
