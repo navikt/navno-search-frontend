@@ -15,8 +15,6 @@
     },
     "dependenciesComments": {
         "@navikt/ds-*": "Holdes på versjon 7.40.0, ellers vil den ikke bygge. Nyeste versjon 8.10.4",
-        "eslint": "Holdes på versjon 8.57.1. Nyeste versjon 10.3.0. From ESLint v9.0.0, the default configuration file is now eslint.config.js. Brekker ellers",
-        "eslint-config-next": "Holdes på 14.2.35 inntil ESLint oppgraderes til v9",
         "@types/node": "Holdes på samme major som node-versjonen generelt. Siste versjon 25.6.0",
         "typescript": "Holdes på versjon 5.9.3. Ellers brekker det. Nyeste versjon 6.0.3"
     },
@@ -34,6 +32,8 @@
         "react-dom": "19.2.5"
     },
     "devDependencies": {
+        "@eslint-react/eslint-plugin": "5.8.5",
+        "@next/eslint-plugin-next": "16.2.6",
         "@testing-library/jest-dom": "6.9.1",
         "@testing-library/react": "16.3.2",
         "@testing-library/user-event": "14.6.1",
@@ -41,18 +41,17 @@
         "@types/node": "24.1.0",
         "@types/react": "19.2.14",
         "@types/react-dom": "19.2.3",
-        "@typescript-eslint/eslint-plugin": "8.59.2",
-        "@typescript-eslint/parser": "8.59.2",
-        "eslint": "8.57.1",
-        "eslint-config-next": "14.2.35",
-        "eslint-plugin-css-modules": "2.12.0",
+        "eslint": "10.4.0",
+        "eslint-plugin-jsx-a11y": "6.10.2",
+        "eslint-plugin-react-hooks": "7.1.1",
         "husky": "9.1.7",
         "jest": "30.3.0",
         "jest-environment-jsdom": "30.3.0",
         "jsdom": "29.1.1",
         "prettier": "3.8.3",
         "sass": "1.99.0",
-        "typescript": "5.9.3"
+        "typescript": "5.9.3",
+        "typescript-eslint": "8.60.0"
     },
     "browser": {
         "jsdom": false
