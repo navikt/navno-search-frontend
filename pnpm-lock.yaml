@@ -21,8 +21,8 @@ importers:
         specifier: 7.40.0
         version: 7.40.0
       '@navikt/nav-dekoratoren-moduler':
-        specifier: 4.0.0
-        version: 4.0.0(html-react-parser@6.0.1(@types/react@19.2.14)(react@19.2.5))(react@19.2.5)
+        specifier: 4.2.2
+        version: 4.2.2(html-react-parser@6.0.1(@types/react@19.2.14)(react@19.2.5))(react@19.2.5)
       dayjs:
         specifier: 1.11.20
         version: 1.11.20
@@ -811,12 +811,15 @@ packages:
       '@types/react': ^17.0.30 || ^18 || ^19
       react: ^17 || ^18 || ^19
       react-dom: ^17 || ^18 || ^19
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
 
   '@navikt/ds-tokens@7.40.0':
     resolution: {integrity: sha512-zBaBKLS5R2OZyXI4UUPOmiB15L/u/aJPHiyoccJDtmqrv5wRkc1oM6UCjzKK0D4gLZHBoxp7YBT0sR9Mp4DXFQ==, tarball: https://npm.pkg.github.com/download/@navikt/ds-tokens/7.40.0/36f981e12d4d90f18155615b7666b737039a3ff0}
 
-  '@navikt/nav-dekoratoren-moduler@4.0.0':
-    resolution: {integrity: sha512-jsZmmEnXT63gwy0Or6skvdrxVG+acFmK55SURFah9LuPn8KAmrQa3EHhUhRZNsdt+tP5UgsnPA8HVoyurwLPXA==, tarball: https://npm.pkg.github.com/download/@navikt/nav-dekoratoren-moduler/4.0.0/65595610e69365df6008576d13e7f24511715683}
+  '@navikt/nav-dekoratoren-moduler@4.2.2':
+    resolution: {integrity: sha512-1V/fOlgTNzTWRzIgtJwymamj6NgppZdcRTiy9OXO57PwEA6lCoWX9qXh82Zgxl0pOYQQ7QOUH9DOfKov18h3wQ==, tarball: https://npm.pkg.github.com/download/@navikt/nav-dekoratoren-moduler/4.2.2/9982b2b38e397df0e9b0cd886beb3d16d0b97a61}
     engines: {node: 24.x}
     peerDependencies:
       html-react-parser: '>=5.x'
@@ -2342,10 +2345,6 @@ packages:
     peerDependenciesMeta:
       node-notifier:
         optional: true
-
-  js-cookie@3.0.5:
-    resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
-    engines: {node: '>=14'}
 
   js-cookie@3.0.7:
     resolution: {integrity: sha512-z/wZZgDrkNV1eA0ULjM/F9/50Ya8fbzgKneSpoPsXSGd0KnpdtHfOZWK+GcwLk+EZbS4F9RBhU+K2RgzuDaItw==}
@@ -4009,21 +4008,22 @@ snapshots:
       '@floating-ui/react-dom': 2.1.8(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@navikt/aksel-icons': 7.40.0
       '@navikt/ds-tokens': 7.40.0
-      '@types/react': 19.2.14
       clsx: 2.1.1
       date-fns: 4.1.0
       react: 19.2.5
       react-day-picker: 9.7.0(react@19.2.5)
       react-dom: 19.2.5(react@19.2.5)
+    optionalDependencies:
+      '@types/react': 19.2.14
 
   '@navikt/ds-tokens@7.40.0': {}
 
-  '@navikt/nav-dekoratoren-moduler@4.0.0(html-react-parser@6.0.1(@types/react@19.2.14)(react@19.2.5))(react@19.2.5)':
+  '@navikt/nav-dekoratoren-moduler@4.2.2(html-react-parser@6.0.1(@types/react@19.2.14)(react@19.2.5))(react@19.2.5)':
     dependencies:
       '@navikt/analytics-types': 0.0.9
       csp-header: 6.3.1
       html-react-parser: 6.0.1(@types/react@19.2.14)(react@19.2.5)
-      js-cookie: 3.0.5
+      js-cookie: 3.0.7
       react: 19.2.5
 
   '@next/env@16.2.6': {}
@@ -5839,8 +5839,6 @@ snapshots:
       - esbuild-register
       - supports-color
       - ts-node
-
-  js-cookie@3.0.5: {}
 
   js-cookie@3.0.7: {}
 
