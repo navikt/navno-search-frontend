@@ -19,7 +19,7 @@
     "typescript": "Holdes på versjon 5.9.3. Ellers brekker det. Nyeste versjon 6.0.3"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "8.11.1",
+    "@navikt/aksel-icons": "8.13.1",
     "@navikt/ds-css": "7.40.0",
     "@navikt/ds-react": "7.40.0",
     "@navikt/ds-tokens": "7.40.0",
@@ -28,30 +28,30 @@
     "html-react-parser": "6.1.3",
     "js-cookie": "3.0.8",
     "next": "16.2.6",
-    "react": "19.2.6",
-    "react-dom": "19.2.6"
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
   },
   "devDependencies": {
-    "@eslint-react/eslint-plugin": "5.8.9",
-    "@next/eslint-plugin-next": "16.2.6",
+    "@eslint-react/eslint-plugin": "5.9.2",
+    "@next/eslint-plugin-next": "16.2.9",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
     "@types/js-cookie": "3.0.6",
     "@types/node": "24.1.0",
-    "@types/react": "19.2.15",
+    "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
-    "eslint": "10.4.1",
+    "eslint": "10.5.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-react-hooks": "7.1.1",
     "husky": "9.1.7",
     "jest": "30.4.2",
     "jest-environment-jsdom": "30.4.1",
     "jsdom": "29.1.1",
-    "prettier": "3.8.3",
-    "sass": "1.100.0",
+    "prettier": "3.8.4",
+    "sass": "1.101.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.60.0"
+    "typescript-eslint": "8.62.0"
   },
   "browser": {
     "jsdom": false
