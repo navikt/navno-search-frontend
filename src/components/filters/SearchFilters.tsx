@@ -45,10 +45,10 @@ export const SearchFilters = ({ result, className = '' }: Props) => {
                     style.searchFilters,
                     showFiltersMobile ? style.visibleMobile : ''
                 )}
-                padding={'4'}
-                borderColor={'border-subtle'}
+                padding={'space-16'}
+                borderColor={'neutral-subtle'}
                 borderWidth={'1'}
-                borderRadius={'medium'}
+                borderRadius={'4'}
                 data-testid="search-filter-panel"
             >
                 <Heading level="3" size="small" className={style.titleDesktop}>

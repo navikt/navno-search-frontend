@@ -1,8 +1,8 @@
 .tag {
     white-space: nowrap;
-    margin-bottom: var(--a-spacing-2);
+    margin-bottom: var(--ax-space-8);
 
     &:not(:last-of-type) {
-        margin-right: var(--a-spacing-2);
+        margin-right: var(--ax-space-8);
     }
 }

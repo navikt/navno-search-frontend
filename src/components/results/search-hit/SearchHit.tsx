@@ -2,7 +2,7 @@ import React from 'react';
 import htmlReactParser from 'html-react-parser';
 import { SearchHitProps } from 'types/search-result';
 import { logResultClick } from 'utils/analytics';
-import { BodyLong, LinkPanel } from '@navikt/ds-react';
+import { BodyLong, LinkCard } from '@navikt/ds-react';
 import { SearchHitAudience } from './audience/SearchHitAudience';
 import { SearchHitTimestamps } from './timestamps/SearchHitTimestamps';
 
@@ -28,12 +28,15 @@ export const SearchHit = ({ hit, hitIndex }: Props) => {
     }
 
     return (
-        <LinkPanel
-            href={href}
-            className={style.searchHit}
-            onClick={() => logResultClick(displayName, hitIndex + 1)}
-        >
-            <LinkPanel.Title>{displayName}</LinkPanel.Title>
+        <LinkCard className={style.searchHit}>
+            <LinkCard.Title>
+                <LinkCard.Anchor
+                    href={href}
+                    onClick={() => logResultClick(displayName, hitIndex + 1)}
+                >
+                    {displayName}
+                </LinkCard.Anchor>
+            </LinkCard.Title>
             <div className={style.content}>
                 {highlight && (
                     <BodyLong className={style.highlight}>
@@ -45,6 +48,6 @@ export const SearchHit = ({ hit, hitIndex }: Props) => {
                     <SearchHitTimestamps hit={hit} />
                 </div>
             </div>
-        </LinkPanel>
+        </LinkCard>
     );
 };
