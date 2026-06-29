@@ -6,7 +6,6 @@
 
     :global(:where(.aksel-checkbox__label, .aksel-radio__label)) {
       align-items: center;
-      padding-block: var(--ax-space-8);
     }
 }
 
