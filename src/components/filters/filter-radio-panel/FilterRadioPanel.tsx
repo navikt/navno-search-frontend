@@ -26,7 +26,6 @@ export const FilterRadioPanel = ({
                 <Radio 
                     value={value}
                     onClick={onClick}
-                    className={style.radio}
                 >
                     {label}
                 </Radio>
