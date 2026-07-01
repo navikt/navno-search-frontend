@@ -23,7 +23,7 @@
 
 .searchTips {
     align-self: flex-start;
-    font-size: common.$ax-font-size-medium;
+    font-size: var(--ax-font-size-medium);
 }
 
 .hits {

@@ -16,7 +16,7 @@
     }
 
     :global(.aksel-link-card__title) a {
-        color: common.$ax-text-accent-subtle;
+        color: var(--ax-text-accent-subtle);
     }
 
     :global(.aksel-link-card__arrow) {
@@ -34,5 +34,5 @@
 
 .bottomRow {
     margin-top: 0.75rem;
-    color: common.$ax-text-neutral-subtle;
+    color: var(--ax-text-accent-subtle);
 }
