@@ -3,7 +3,6 @@
     "target": "esnext",
     "lib": [
       "dom",
-      "dom.iterable",
       "esnext"
     ],
     "types": [
@@ -19,9 +18,16 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "baseUrl": "src",
     "jsx": "react-jsx",
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "utils/*": ["./src/utils/*"],
+      "context/*": ["./src/context/*"],
+      "types/*": ["./src/types/*"],
+      "components/*": ["./src/components/*"],
+      "config": ["./src/config"],
+      "testHelpers/*": ["./src/testHelpers/*"]
+    }
   },
   "include": [
     "next-env.d.ts",
