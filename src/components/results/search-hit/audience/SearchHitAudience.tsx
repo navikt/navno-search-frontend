@@ -5,18 +5,23 @@ import { getTranslations } from '../translations';
 
 import style from './SearchHitAudience.module.scss';
 
-const variant: Record<Audience, TagProps['variant']> = {
-    person: 'info',
-    employer: 'alt1',
-    provider: 'alt2',
-    provider_doctor: 'alt2',
-    provider_municipality_employed: 'alt2',
-    provider_optician: 'alt2',
-    provider_administrator: 'alt2',
-    provider_measures_organizer: 'alt2',
-    provider_aid_supplier: 'alt2',
-    provider_other: 'alt2',
-    other: 'neutral',
+type TagConfig = {
+    variant: TagProps['variant'];
+    color?: TagProps['data-color'];
+};
+
+const tagConfig: Record<Audience, TagConfig> = {
+    person: { variant: 'info' },
+    employer: { variant: 'outline', color: 'meta-purple' },
+    provider: { variant: 'outline', color: 'meta-lime' },
+    provider_doctor: { variant: 'outline', color: 'meta-lime' },
+    provider_municipality_employed: { variant: 'outline', color: 'meta-lime' },
+    provider_optician: { variant: 'outline', color: 'meta-lime' },
+    provider_administrator: { variant: 'outline', color: 'meta-lime' },
+    provider_measures_organizer: { variant: 'outline', color: 'meta-lime' },
+    provider_aid_supplier: { variant: 'outline', color: 'meta-lime' },
+    provider_other: { variant: 'outline', color: 'meta-lime' },
+    other: { variant: 'neutral' },
 };
 
 type Props = {
@@ -30,14 +35,16 @@ export const SearchHitAudience = ({ audience, language }: Props) => {
     return (
         <>
             {audiences.map((aud) => {
-                if (!variant[aud]) {
+                const config = tagConfig[aud];
+                if (!config) {
                     console.error(`Invalid audience: ${aud}`);
                     return null;
                 }
 
                 return (
                     <Tag
-                        variant={variant[aud]}
+                        variant={config.variant}
+                        data-color={config.color}
                         className={style.tag}
                         size={'small'}
                         key={aud}

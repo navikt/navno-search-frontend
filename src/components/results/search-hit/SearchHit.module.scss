@@ -4,7 +4,7 @@
     display: block;
     border: none;
     padding-inline: 0;
-    margin-bottom: var(--a-spacing-2);
+    margin-bottom: var(--ax-space-8);
     word-break: break-word;
     transition-property: background-color, box-shadow;
     transition-duration: 0.1s;
@@ -15,11 +15,11 @@
         box-shadow: none;
     }
 
-    :global(.navds-link-panel__title) {
-        color: common.$a-text-action;
+    :global(.aksel-link-card__title) a {
+        color: var(--ax-text-accent-subtle);
     }
 
-    :global(.navds-link-panel__chevron) {
+    :global(.aksel-link-card__arrow) {
         display: none;
     }
 }
@@ -29,10 +29,10 @@
 }
 
 .highlight {
-    margin-top: var(--a-spacing-2);
+    margin-top: var(--ax-space-8);
 }
 
 .bottomRow {
     margin-top: 0.75rem;
-    color: common.$a-text-subtle;
+    color: var(--ax-text-neutral-subtle);
 }

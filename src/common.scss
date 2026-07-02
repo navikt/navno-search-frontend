@@ -1,6 +1,3 @@
-@forward '~@navikt/ds-tokens/dist/tokens.scss';
-@use '~@navikt/ds-tokens/dist/tokens.scss' as *;
-
 // Screen size breakpoints
 $mobileMaxWidth: 48rem; // 768px
 $tabletMinWidth: $mobileMaxWidth;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import { Alert } from '@navikt/ds-react';
+import { LocalAlert } from '@navikt/ds-react';
 import { ContextProvider } from 'context/ContextProvider';
 import { fetchSearchResults } from 'utils/fetch-search-result';
 import { paramsFromResult, SearchParams } from 'types/search-params';
@@ -37,9 +37,9 @@ const SearchBase = (props: Props) => {
                         <SearchPage />
                     </ContextProvider>
                 ) : (
-                    <Alert role="alert" variant="error">
+                    <LocalAlert role="alert" status="error">
                         {'Feil - søketjenesten er ikke tilgjengelig'}
-                    </Alert>
+                    </LocalAlert>
                 )}
             </main>
         </div>

@@ -5,12 +5,12 @@ $left-col-width: common.$desktopMinWidth - common.$filters-width -
 $breakpoint: $left-col-width + common.$padding-sides-desktop-small * 2;
 
 .heading {
-    margin-bottom: var(--a-spacing-2);
+    margin-bottom: var(--ax-space-8);
 }
 
 .search {
     display: grid;
-    row-gap: var(--a-spacing-3);
+    row-gap: var(--ax-space-12);
     max-width: 960px;
     margin-inline: auto;
     justify-content: center;
@@ -24,7 +24,7 @@ $breakpoint: $left-col-width + common.$padding-sides-desktop-small * 2;
 @media #{common.$mq-screen-desktop} {
     .search {
         grid-template-columns: [full-start main] minmax(0, 580fr) [side] minmax(0, 300fr) [full-end];
-        column-gap: var(--a-spacing-12);
+        column-gap: var(--ax-space-48);
     }
     .heading {
         grid-column: full;
