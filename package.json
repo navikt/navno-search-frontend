@@ -14,8 +14,7 @@
     "test:watch": "jest --watch"
   },
   "dependenciesComments": {
-    "@types/node": "Holdes på samme major som node-versjonen generelt. Siste versjon er 26.0.1",
-    "typescript": "Holdes på versjon 5.9.3. Ellers brekker det. Nyeste versjon 6.0.3"
+    "@types/node": "Holdes på samme major som node-versjonen generelt. Siste versjon er 26.0.1"    
   },
   "dependencies": {
     "@navikt/aksel-icons": "8.13.1",
@@ -49,7 +48,7 @@
     "jsdom": "29.1.1",
     "prettier": "3.8.4",
     "sass": "1.101.0",
-    "typescript": "5.9.3",
+    "typescript": "6.0.3",
     "typescript-eslint": "8.62.0"
   },
   "browser": {
