@@ -9,26 +9,33 @@ type ContextProps = {
     initialParams?: SearchParams;
 };
 
-type ComponentProps = { [key: string]: unknown };
+/**
+ * Makes `componentProps` optional only when every property of `P` is
+ * optional (i.e. the component takes no required props). Otherwise
+ * `componentProps` is required, so a test can't silently omit props the
+ * component actually needs.
+ */
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- `{}` here means "a type with no required properties", not "any value"
+type RequiredIfComponentHasProps<P> = {} extends P ? P | undefined : P;
 
-type TestConfigProps = {
-    Component: React.FC<unknown>;
+type TestConfigProps<P extends object> = {
+    Component: React.ComponentType<P>;
     contextProps: ContextProps;
-    componentProps?: ComponentProps;
+    componentProps: RequiredIfComponentHasProps<P>;
 };
 
-export const componentSetup = ({
+export const componentSetup = <P extends object>({
     Component,
     contextProps,
-    componentProps = {},
-}: TestConfigProps) => {
+    componentProps,
+}: TestConfigProps<P>) => {
     const { initialResult, initialParams } = contextProps;
     const utils = render(
         <ContextProvider
             initialResult={initialResult}
             initialParams={initialParams}
         >
-            <Component {...componentProps} />
+            <Component {...(componentProps as P)} />
         </ContextProvider>
     );
 

@@ -26,7 +26,8 @@
       "types/*": ["./src/types/*"],
       "components/*": ["./src/components/*"],
       "config": ["./src/config"],
-      "testHelpers/*": ["./src/testHelpers/*"]
+      "testHelpers/*": ["./src/testHelpers/*"],
+      "jest-utils": ["./src/jest-utils.ts"]
     }
   },
   "include": [

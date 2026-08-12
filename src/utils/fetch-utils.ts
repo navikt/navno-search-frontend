@@ -1,14 +1,17 @@
-export const fetchWithTimeout = (url: string, timeout: number) =>
+export const fetchWithTimeout = (
+    url: string,
+    timeout: number
+): Promise<Response> =>
     Promise.race([
         fetch(url),
-        new Promise((res) =>
+        new Promise<Response>((res) =>
             setTimeout(
                 () =>
                     res({
                         ok: false,
                         status: 408,
                         statusText: 'Request Timeout',
-                    }),
+                    } as Response),
                 timeout
             )
         ),

@@ -9,16 +9,20 @@ type SetupConfig = {
     initialResult: SearchResultProps;
     initialParams?: SearchParams;
     label: string;
+    count: number;
     isOpen: boolean;
     onClick: jest.Mock;
+    value: string;
 };
 
 const setupTest = ({
     initialResult,
     initialParams,
     label,
+    count,
     isOpen,
     onClick,
+    value,
 }: SetupConfig) => {
     return componentSetup({
         Component: FilterRadioPanel,
@@ -28,8 +32,11 @@ const setupTest = ({
         },
         componentProps: {
             label,
+            count,
             isOpen,
             onClick,
+            value,
+            children: null,
         },
     });
 };
@@ -49,7 +56,9 @@ describe('FilterRadioPanel', () => {
             initialParams,
             isOpen: false,
             label: 'Filter option label',
+            count: 3,
             onClick: mockOnClick,
+            value: 'privatperson',
         });
     });
 
