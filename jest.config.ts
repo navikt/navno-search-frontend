@@ -9,12 +9,6 @@ const customJestConfig = {
     modulePathIgnorePatterns: ['tests'],
     testEnvironment: 'jsdom',
     setupFilesAfterEnv: ['<rootDir>/src/jest-setup.ts'],
-    // @navikt/next-logger is ESM-only, which Jest can't load as CommonJS.
-    // Tests only need to verify our own logging calls, so a manual mock
-    // stands in for the real (pino-based) logger.
-    moduleNameMapper: {
-        '^@navikt/next-logger$': '<rootDir>/src/testHelpers/next-logger-mock.ts',
-    },
 };
 
 const config = async () => {
