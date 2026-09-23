@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { logger } from '@navikt/next-logger';
 
 const LOGIN_COOKIE = 'dev-login';
 
@@ -19,7 +20,7 @@ export default function proxy(req: NextRequest) {
             (forwardedFor ? forwardedFor.split(',')[0].trim() : null);
 
         if (!(isNavIp(ip) || req.cookies.get(LOGIN_COOKIE))) {
-            console.log(`Non-authorized client ip: ${ip}`);
+            logger.warn({ ip }, 'Non-authorized client ip');
             return new NextResponse('Ingen tilgang', { status: 401 });
         }
     }

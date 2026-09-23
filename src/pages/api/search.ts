@@ -1,3 +1,4 @@
+import { logger } from '@navikt/next-logger';
 import { fetchSearchResults } from '../../utils/fetch-search-result';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { SearchParams } from '../../types/search-params';
@@ -19,8 +20,8 @@ const searchHandler = async (
             res.status(200).json({ result: searchRes });
         })
         .catch((err) => {
-            console.error(err);
-            res.status(500).send({ error: err });
+            logger.error(err, 'Failed to fetch search results in /api/search');
+            res.status(500).send({ error: 'Failed to fetch search results' });
         });
 };
 

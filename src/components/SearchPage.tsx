@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Heading } from '@navikt/ds-react';
+import { logger } from '@navikt/next-logger';
 import { fetchSearchResultsClientside } from 'utils/fetch-search-result';
 import { logSearchQuery } from 'utils/analytics';
 import { objectToQueryString } from 'utils/fetch-utils';
@@ -40,7 +41,7 @@ const SearchPage = () => {
         }
 
         if (error) {
-            console.error(`Error while fetching results: `, error);
+            logger.error({ error }, 'Error while fetching results');
         }
 
         setIsAwaitingResults(false);

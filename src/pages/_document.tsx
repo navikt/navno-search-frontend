@@ -6,12 +6,25 @@ import Document, {
     DocumentContext,
     Head,
 } from 'next/document';
+import { logger } from '@navikt/next-logger';
 import { getDecorator } from '../utils/fetch-decorator';
 import { Config } from 'config';
 import { DecoratorComponentsReact } from '@navikt/nav-dekoratoren-moduler/ssr';
 
 type Props = {
     Decorator: DecoratorComponentsReact;
+};
+
+// Renders nothing. Used as a fallback for the decorator components if
+// fetching the decorator fails, so the page can still render without
+// a header/footer instead of crashing the entire SSR request.
+const NoOpComponent = () => null;
+
+const fallbackDecorator: DecoratorComponentsReact = {
+    Scripts: NoOpComponent,
+    Header: NoOpComponent,
+    Footer: NoOpComponent,
+    HeadAssets: NoOpComponent,
 };
 
 // Decorator will crash if invalid context ('privatperson', 'arbeidsgiver', 'samarbeidspartner') is passed.
@@ -36,7 +49,10 @@ class MyDocument extends Document<Props> {
         const context = ctx.query?.f ?? 'privatperson';
         const Decorator = await getDecorator(
             normalizeDecoratorContext(context)
-        );
+        ).catch((err) => {
+            logger.error(err, 'Failed to fetch decorator in _document');
+            return fallbackDecorator;
+        });
 
         return {
             ...initialProps,
