@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@navikt/ds-react';
+import { logger } from '@navikt/next-logger';
 import { SearchHit } from '../search-hit/SearchHit';
 import { SearchResultProps } from 'types/search-result';
 import { fetchSearchResultsClientside } from 'utils/fetch-search-result';
@@ -40,7 +41,7 @@ export const SearchResultsList = ({ result }: Props) => {
         }
 
         if (error) {
-            console.error(`Error while fetching more results: ${error}`);
+            logger.error({ error }, 'Error while fetching more results');
         }
     };
 

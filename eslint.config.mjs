@@ -25,6 +25,7 @@ export default [
                     caughtErrorsIgnorePattern: "^_",
                 },
             ],
+            "no-console": "error",
         },
     },
 ];

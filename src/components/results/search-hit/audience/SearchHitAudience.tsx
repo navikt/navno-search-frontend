@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tag, TagProps } from '@navikt/ds-react';
+import { logger } from '@navikt/next-logger';
 import { Audience, Language, SearchHitProps } from 'types/search-result';
 import { getTranslations } from '../translations';
 
@@ -37,7 +38,7 @@ export const SearchHitAudience = ({ audience, language }: Props) => {
             {audiences.map((aud) => {
                 const config = tagConfig[aud];
                 if (!config) {
-                    console.error(`Invalid audience: ${aud}`);
+                    logger.error({ audience: aud }, 'Invalid audience');
                     return null;
                 }
 

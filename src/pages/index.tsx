@@ -2,6 +2,7 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { LocalAlert } from '@navikt/ds-react';
+import { logger } from '@navikt/next-logger';
 import { ContextProvider } from 'context/ContextProvider';
 import { fetchSearchResults } from 'utils/fetch-search-result';
 import { paramsFromResult, SearchParams } from 'types/search-params';
@@ -54,7 +55,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
         getDecoratorAudienceIfValid(context.req.cookies),
         getDecoratorLanguageIfValid(context.req.cookies)
     ).catch((err) => {
-        console.error(err);
+        logger.error(
+            err,
+            'Failed to fetch initial search results in getServerSideProps'
+        );
         return null;
     });
 
@@ -65,7 +69,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     }
 
     const resultWithoutQuery = await fetchSearchResults().catch((err) => {
-        console.error(err);
+        logger.error(
+            err,
+            'Failed to fetch fallback search results in getServerSideProps'
+        );
         return null;
     });
 
