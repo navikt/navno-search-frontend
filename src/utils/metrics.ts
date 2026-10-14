@@ -1,5 +1,5 @@
-import { Counter, Histogram, register } from '@prometheus-io/client';
-export { register as metricsRegistry };
+import { Counter, Histogram } from '@prometheus-io/client';
+export { register as metricsRegistry } from '@prometheus-io/client';
 
 // Kept on globalThis so that Next's module duplication (per-route bundles, dev
 // reloads) doesn't try to register the same metric twice.
