@@ -1,6 +1,6 @@
 allowBuilds:
-  '@parcel/watcher': false
-  sharp: true
-  unrs-resolver: true
+    '@parcel/watcher': false
+    sharp: true
+    unrs-resolver: true
 minimumReleaseAge: 5760
-minimumReleaseAgeExclude: '@navikt/*'
+minimumReleaseAgeExclude: ['@navikt/*']
