@@ -6,6 +6,7 @@ module.exports = {
     },
     serverExternalPackages: [
         'pino',
+        '@prometheus-io/client',
         '@navikt/next-logger',
         '@navikt/pino-logger',
     ],
