@@ -1,24 +1,30 @@
 name: Deploy to dev
 on: workflow_dispatch
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    environment: dev
-    permissions:
-      contents: read
-      id-token: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
+permissions:
+  contents: read
+  id-token: write
 
-      - name: Build and deploy dev
-        uses: ./.github/actions/build-and-deploy
-        with:
-          CLUSTER: dev-gcp
-          DEPLOYENV: dev
-          IMAGENAME: dev-deploy
-          APP_ORIGIN: https://www.ansatt.dev.nav.no
-          SEARCH_URL: https://navno-search-api.ekstern.dev.nav.no/content/search
-          READER_TOKEN: ${{ secrets.READER_TOKEN }}
-          NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+jobs:
+  build:
+    uses: navikt/navno-ci/.github/workflows/node-build.yml@v1
+    with:
+      github-environment: dev
+      image-suffix: dev-deploy
+      build-cache-paths: .next/cache
+      env-file: |
+        NODE_ENV=production
+        APP_BASE_PATH=/sok
+        APP_ORIGIN=https://www.ansatt.dev.nav.no
+        SEARCH_URL=https://navno-search-api.ekstern.dev.nav.no/content/search
+        ENV=dev
+    secrets: inherit
+
+  deploy:
+    needs: build
+    uses: navikt/navno-ci/.github/workflows/nais-deploy.yml@v1
+    with:
+      cluster: dev-gcp
+      resource: .nais/config.yml
+      vars: .nais/vars-dev.yml
+      var: image=${{ needs.build.outputs.image }}
