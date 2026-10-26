@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { LocalAlert } from '@navikt/ds-react';
 import { logger } from '@navikt/next-logger';
 import { ContextProvider } from 'context/ContextProvider';
-import { fetchSearchResults } from 'utils/fetch-search-result';
+import { fetchSearchResults, isValidFacet } from 'utils/fetch-search-result';
 import { paramsFromResult, SearchParams } from 'types/search-params';
 import { SearchResultProps } from 'types/search-result';
 import SearchPage from 'components/SearchPage';
@@ -63,8 +63,12 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     });
 
     if (result) {
+        // Corrected facet URLs should show hits, not the empty-search landing page.
+        const isInitialResult =
+            context.query.f === undefined || isValidFacet(context.query.f);
+
         return {
-            props: { initialResult: { ...result, isInitialResult: true } },
+            props: { initialResult: { ...result, isInitialResult } },
         };
     }
 

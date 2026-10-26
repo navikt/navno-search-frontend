@@ -15,7 +15,7 @@ const validFacets: ReadonlySet<string> = new Set([
     'innhold-fra-fylker',
 ]);
 
-const isValidFacet = (facet: unknown): facet is string =>
+export const isValidFacet = (facet: unknown): facet is string =>
     typeof facet === 'string' && validFacets.has(facet);
 
 export const fetchSearchResults = (
