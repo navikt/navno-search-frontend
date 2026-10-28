@@ -47,7 +47,6 @@ spec:
           namespace: navno
       external:
         - host: {{appHost}}
-        - host: {{searchHost}}
   resources:
   {{#with resources}}
     limits:

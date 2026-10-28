@@ -20,7 +20,7 @@ jobs:
         NODE_ENV=production
         APP_BASE_PATH=/sok
         APP_ORIGIN=https://www.nav.no
-        SEARCH_URL=https://navno-search-api.nav.no/content/search
+        SEARCH_URL=http://navno-search-api.navno/content/search
         ENV=prod
     secrets: inherit
 
