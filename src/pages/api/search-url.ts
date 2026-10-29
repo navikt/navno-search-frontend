@@ -29,6 +29,10 @@ const searchUrlHandler = async (
         const url = new URL('search-url', Config.URLS.searchService);
         url.search = new URLSearchParams({ term }).toString();
 
+        logger.info(
+            `Fetching search URL for term: ${term} from ${url.toString()}`
+        );
+
         const response = await fetchWithTimeout(url.toString(), 5000);
         if (!response.ok) {
             logger.error(
