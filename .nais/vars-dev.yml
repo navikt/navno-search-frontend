@@ -1,7 +1,6 @@
 appName: navno-search-frontend-dev1
 appHost: www.ansatt.dev.nav.no
 dekoratorenAppName: nav-dekoratoren
-searchHost: navno-search-api.ekstern.dev.nav.no
 ingresses:
   - https://www.ansatt.dev.nav.no/sok($|\/.+)
 replicas:
