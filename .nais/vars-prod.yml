@@ -8,6 +8,7 @@ replicas:
   max: 20
 resources:
   limits:
+    cpu: 600m
     memory: 768Mi
   requests:
     cpu: 150m
