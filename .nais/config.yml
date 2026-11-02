@@ -9,6 +9,11 @@ metadata:
 spec:
   image: {{image}}
   port: 3001
+  startup:
+    path: /sok/api/internal/isAlive
+    periodSeconds: 5
+    timeout: 3
+    failureThreshold: 36
   liveness:
     path: /sok/api/internal/isAlive
     initialDelay: 5
