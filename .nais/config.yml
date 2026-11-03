@@ -38,6 +38,11 @@ spec:
   env:
     - name: NPM_CONFIG_CACHE
       value: /tmp/npm-cache
+    # Through service discovery, so the same in both clusters
+    - name: SEARCH_URL
+      value: http://navno-search-api.navno/content/search
+    - name: APP_ORIGIN
+      value: https://{{appHost}}
   replicas:
   {{#with replicas}}
     min: {{min}}

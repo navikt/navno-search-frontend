@@ -10,7 +10,7 @@ En Hono-server rendrer React-appen ([client/App.tsx](client/App.tsx)) med Aksel,
 pnpm dev
 ```
 
-Kjører på [http://localhost:3001/sok](http://localhost:3001/sok) med verdiene i `.env.development`. En endring i `client/` byttes inn uten å laste siden, og en endring i `server/` laster siden på nytt.
+Kjører på [http://localhost:3001/sok](http://localhost:3001/sok) med verdiene i `.env.development`. I podden kommer de fra `.nais/config.yml`. En endring i `client/` byttes inn uten å laste siden, og en endring i `server/` laster siden på nytt.
 
 Bygget, slik det kjører i podden:
 

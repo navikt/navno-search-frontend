@@ -15,12 +15,6 @@ jobs:
     with:
       github-environment: prod
       image-suffix: release-${{ github.ref_name }}
-      env-file: |
-        NODE_ENV=production
-        APP_BASE_PATH=/sok
-        APP_ORIGIN=https://www.nav.no
-        SEARCH_URL=http://navno-search-api.navno/content/search
-        ENV=prod
     secrets: inherit
 
   deploy:

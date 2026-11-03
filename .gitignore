@@ -8,8 +8,7 @@
 # testing
 /coverage
 
-# written by CI from the workflow's env-file; local values are in .env.development
-/.env
+# local env files
 .env.local
 .env.development.local
 .env.test.local

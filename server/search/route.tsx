@@ -12,7 +12,6 @@ export const search = new Hono<DevEnv>().get('/', parseParams, async (c) => {
 	const props: AppProps = { result: found?.result ?? null, params: found?.params ?? params, landing };
 
 	c.header('Cache-Control', NO_STORE);
-	// The browser hydrates this with the same props
 	const content = renderToString(<App {...props} />);
 	return c.html(await toHtml(c, searchPage(decorator, content, props)));
 });

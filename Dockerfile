@@ -5,10 +5,10 @@ ENV NODE_ENV=production
 WORKDIR /usr/src/app
 
 # package.json for the #dist/* import the server reads its client files through
-COPY package.json .env ./
+COPY package.json ./
 COPY node_modules ./node_modules
 COPY dist ./dist
 
 EXPOSE 3001
 ENTRYPOINT ["node"]
-CMD ["--env-file=.env", "dist/server/main.js"]
+CMD ["dist/server/main.js"]

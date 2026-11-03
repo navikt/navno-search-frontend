@@ -11,12 +11,6 @@ jobs:
     with:
       github-environment: dev
       image-suffix: dev-deploy
-      env-file: |
-        NODE_ENV=production
-        APP_BASE_PATH=/sok
-        APP_ORIGIN=https://www.ansatt.dev.nav.no
-        SEARCH_URL=http://navno-search-api.navno/content/search
-        ENV=dev
     secrets: inherit
 
   deploy:

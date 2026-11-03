@@ -14,10 +14,4 @@ jobs:
       push-image: false
       # Rebuilds with a pinned test env, so it can't be a part of `pnpm test`
       post-build-commands: pnpm run test:http
-      env-file: |
-        NODE_ENV=production
-        APP_BASE_PATH=/sok
-        APP_ORIGIN=https://www.ansatt.dev.nav.no
-        SEARCH_URL=http://navno-search-api.navno/content/search
-        ENV=dev
     secrets: inherit

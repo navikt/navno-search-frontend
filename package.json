@@ -13,7 +13,7 @@
 	"scripts": {
 		"dev": "vite 2>&1 | pino-pretty --messageKey=message",
 		"build": "vite build && vite build --ssr server/main.ts",
-		"start": "node --env-file=.env.development dist/server/main.js",
+		"start": "NODE_ENV=production node --env-file=.env.development dist/server/main.js",
 		"lint": "oxfmt --check && oxlint && tsc --noEmit",
 		"format": "oxfmt",
 		"prepare": "husky || true",
