@@ -15,7 +15,6 @@ jobs:
     with:
       github-environment: prod
       image-suffix: release-${{ github.ref_name }}
-      build-cache-paths: .next/cache
       env-file: |
         NODE_ENV=production
         APP_BASE_PATH=/sok

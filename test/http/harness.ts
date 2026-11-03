@@ -9,12 +9,10 @@ export const ROOT = fileURLToPath(new URL('../..', import.meta.url));
 
 // How the built server is started. This is the only line that should change
 // when the server is ported; the tests must stay the same.
-export const ENTRY = ['node_modules/next/dist/bin/next', 'start'];
+export const ENTRY = ['dist/server/main.js'];
 
 export const BASE = '/sok';
 
-// Next inlines SEARCH_URL into the build, so `pretest:http` in package.json
-// must build with the same values
 export const APP_ORIGIN = 'https://www.nav.test';
 
 const defaultEnv = (): Record<string, string> => ({

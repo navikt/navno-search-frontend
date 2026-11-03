@@ -1,33 +1,35 @@
-d# Copilot Instructions
+# Copilot Instructions
 
-Next.js 16 (Pages Router) search frontend for nav.no, deployed on NAIS.
+The search page on nav.no (`/sok`): a Hono server that renders a React app, which the browser hydrates, deployed on NAIS.
 
 ## Stack
 
-- React 19, TypeScript 5.9, pnpm
-- NAV Design System (`@navikt/ds-react` v7.40, `@navikt/ds-css`)
-- SCSS modules for styling
-- Vitest + Testing Library for tests
+- Hono 4 on Node 24, React 19 rendered on the server and hydrated in the browser, pnpm
+- NAV Design System (`@navikt/ds-react`, `@navikt/ds-css`)
+- Vite for the dev server and both builds, Vitest for tests, oxfmt and oxlint
 
 ## Commands
 
 - `pnpm dev` — dev server on port 3001
-- `pnpm build` — production build
-- `pnpm test` — unit tests (Vitest)
-- `pnpm run test:http` — rebuild with a pinned test env and run the black-box HTTP tests in `test/http` against it
-- `pnpm lint` — ESLint
+- `pnpm build` — client and server builds in `dist`
+- `pnpm test` — unit tests
+- `pnpm lint` — oxfmt, oxlint and TypeScript
+- `pnpm run test:http` — rebuild, then the temporary black-box tests in `test/http` against the build
 
 ## Architecture
 
-- `src/pages/index.tsx` — SSR entry, fetches from search API via `getServerSideProps`
-- `src/pages/api/search.ts` — BFF proxy to external search service
-- `src/components/` — UI components (SearchPage, filters, input, results, sorting)
-- `src/context/` — React context with reducer for client-side state
-- `src/utils/` — fetch helpers, analytics, decorator utilities
-- `src/types/` — TypeScript types for search params and results
+- `server/app.ts` — the Hono app: the page, `/sok/api/search` (the app's own searches), `/sok/api/search-url`, probes and metrics, the built assets, the 404 page
+- `server/document.ts` — the whole document: decorator, meta tags, asset tags
+- `server/search/` — the page and `/sok/api/search`: params from the URL and the decorator's cookies, and the upstream search
+- `client/App.tsx` — the app both sides render; `client/main-client.tsx` hydrates it with the props the server put in `#app-props`
+- `client/useSearch.ts` — the page's state: searches `/sok/api/search` in place and replaces the URL
+- `client/search/` — the components
+- `shared/` — what server and browser both use: the search params and the API's types
+- `client/styles.css` — `@navikt/ds-css` and the page's own classes, prefixed `sok-`
 
 ## Conventions
 
 - Norwegian UI text (bokmål)
 - Use NAV design system components over custom HTML
-- Client-side searches go through the local API proxy (`/sok/api/search`), not directly to the backend
+- The page also works as one GET form with named controls, before hydration and without JavaScript
+- Imports across directories go through package.json `imports` (`#server/…`, `#client/…`, `#shared/…`, `#test/…`), with the file extension

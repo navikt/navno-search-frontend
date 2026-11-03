@@ -1,0 +1,314 @@
+@import '@navikt/ds-css';
+
+/*
+ * The SCSS modules from the Next app as plain CSS, in their order: a sok- prefix
+ * instead of the module hash. Breakpoints: phone up to 48rem, tablet 48–64rem,
+ * desktop from 64rem, large desktop from 90rem.
+ */
+
+/* The page around the form (on Next, div.app and main.content-wrapper) */
+.sok-main {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 90rem;
+	min-height: 22.5rem;
+	margin: 0 auto 3rem auto;
+	font-size: var(--ax-font-size-large);
+	line-height: var(--ax-font-line-height-xlarge);
+}
+
+/* The decorator's breadcrumbs */
+.brodsmulesti li:nth-child(2):not(:last-child) {
+	display: none;
+}
+
+@media only screen and (max-width: 48rem) {
+	.sok-main {
+		padding: 0 1rem;
+	}
+}
+
+@media only screen and (min-width: 48rem) and (max-width: 64rem) {
+	.sok-main {
+		padding: 0 1rem;
+	}
+}
+
+@media only screen and (min-width: 64rem) {
+	.sok-main {
+		padding: 1rem 1rem;
+	}
+}
+
+@media only screen and (min-width: 90rem) {
+	.sok-main {
+		padding: 1rem 3rem;
+	}
+}
+
+/* The decorator's placeholder, if the server couldn't fetch it */
+#decorator-header {
+	min-height: 72px;
+}
+
+@media only screen and (min-width: 48rem) {
+	#decorator-header {
+		min-height: 80px;
+	}
+}
+
+@media print {
+	.decorator-wrapper {
+		display: none;
+	}
+}
+
+/* The form, which is the page's grid */
+.sok-heading {
+	margin-bottom: var(--ax-space-8);
+}
+
+.sok-page {
+	display: grid;
+	row-gap: var(--ax-space-12);
+	max-width: 960px;
+	margin-inline: auto;
+	justify-content: center;
+}
+
+@media only screen and (max-width: 64rem) {
+	.sok-page {
+		display: block;
+		margin-inline: auto;
+	}
+}
+
+@media only screen and (min-width: 64rem) {
+	.sok-page {
+		grid-template-columns: [full-start main] minmax(0, 580fr) [side] minmax(0, 300fr) [full-end];
+		column-gap: var(--ax-space-48);
+	}
+
+	.sok-heading {
+		grid-column: full;
+	}
+
+	/* Comes later, so it puts the heading in the main column too, as on Next */
+	.sok-page > * {
+		grid-column: main;
+	}
+
+	.sok-page .sok-filter-wrapper {
+		grid-column: side;
+		grid-row: 2 / span 8;
+	}
+}
+
+.sok-search-field {
+	margin-bottom: 1rem;
+}
+
+/* Sorting */
+.sok-sorting {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.sok-sorting-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.sok-sorting-options {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: -0.75rem;
+}
+
+.sok-sorting-options > * {
+	margin-bottom: var(--ax-space-8);
+	margin-right: 1rem;
+}
+
+.sok-search-tips {
+	align-self: flex-start;
+	font-size: var(--ax-font-size-medium);
+}
+
+.sok-summary {
+	word-break: break-word;
+}
+
+/* Filters */
+.sok-filter-wrapper {
+	height: fit-content;
+}
+
+@media only screen and (max-width: 64rem) {
+	.sok-filter-wrapper {
+		margin-top: 0.5rem;
+	}
+
+	.sok-filter-panel {
+		border-top: 1px solid var(--ax-border-subtle);
+		display: none;
+	}
+}
+
+.sok-filters {
+	display: grid;
+	gap: var(--ax-space-16);
+}
+
+.sok-filter-toggle {
+	display: none;
+	padding: var(--ax-space-12);
+	justify-content: space-between;
+	width: 100%;
+	border: 1px solid var(--ax-border-subtle);
+	border-radius: var(--ax-radius-4);
+}
+
+.sok-filter-toggle span {
+	display: flex;
+	gap: var(--ax-space-4);
+}
+
+.sok-filter-toggle svg {
+	transition: transform 0.35s linear;
+	font-size: 1.5rem;
+	transform: translateY(-1px);
+}
+
+@media only screen and (max-width: 64rem) {
+	.sok-filter-toggle {
+		display: flex;
+	}
+
+	.sok-filter-title {
+		display: none;
+	}
+
+	.sok-filters {
+		position: relative;
+	}
+
+	.sok-filter-panel--open {
+		margin-top: -1px;
+		z-index: 9999;
+		min-width: 18.75rem;
+		display: block;
+	}
+
+	.sok-filter-panel--open .sok-filters {
+		max-height: 100rem;
+	}
+}
+
+.sok-facet {
+	padding-top: var(--ax-space-4);
+}
+
+.sok-facet-option {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.sok-count {
+	margin-left: auto;
+}
+
+.sok-underfacets {
+	padding: var(--ax-space-4) 0 var(--ax-space-16) var(--ax-space-32);
+}
+
+.sok-underfacet {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: var(--ax-space-16);
+}
+
+.sok-underfacet :where(.aksel-checkbox__label, .aksel-radio__label) {
+	align-items: center;
+}
+
+/* Hits */
+.sok-results {
+	display: flex;
+	flex-direction: column;
+	margin-top: var(--ax-space-8);
+}
+
+.sok-hit {
+	display: block;
+	border: none;
+	padding-inline: 0;
+	margin-bottom: var(--ax-space-8);
+	word-break: break-word;
+	transition-property: background-color, box-shadow;
+	transition-duration: 0.1s;
+	transition-timing-function: ease-out;
+}
+
+.sok-hit:hover {
+	border: none;
+	box-shadow: none;
+}
+
+.sok-hit .aksel-link-card__title a {
+	color: var(--ax-text-accent-subtle);
+}
+
+.sok-hit .aksel-link-card__arrow {
+	display: none;
+}
+
+.sok-hit-content {
+	width: 100%;
+}
+
+.sok-hit-highlight {
+	margin-top: var(--ax-space-8);
+}
+
+.sok-hit-footer {
+	margin-top: 0.75rem;
+	color: var(--ax-text-neutral-subtle);
+}
+
+.sok-tag {
+	white-space: nowrap;
+	margin-bottom: var(--ax-space-8);
+}
+
+.sok-tag:not(:last-of-type) {
+	margin-right: var(--ax-space-8);
+}
+
+.sok-show-more {
+	align-self: center;
+	text-transform: none;
+	margin-top: 1rem;
+}
+
+/* In place of the hits while a search runs */
+.sok-spinner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 1rem;
+}
+
+.sok-spinner-loader {
+	margin-top: 1rem;
+}
+
+/* The 404 page */
+.sok-not-found {
+	max-width: 960px;
+	margin-inline: auto;
+}

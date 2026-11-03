@@ -11,7 +11,6 @@ jobs:
     with:
       github-environment: dev
       image-suffix: dev-deploy
-      build-cache-paths: .next/cache
       env-file: |
         NODE_ENV=production
         APP_BASE_PATH=/sok
