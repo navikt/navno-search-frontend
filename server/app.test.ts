@@ -17,11 +17,12 @@ const searchUrlApi = (reply: MockReply | MockReply[]) => http.get(SEARCH_URL_API
 const searches = () => http.callsTo(SEARCH_API).map((call) => call.query);
 
 beforeEach(() => {
-	// Outside a cluster, the decorator module calls www.nav.no
+	// Outside a cluster, the decorator module calls www.nav.no. The header echoes what the page asked
+	// for: the module caches its answers, so its calls can't be counted
 	http.get('https://www.nav.no/dekoratoren/ssr', ({ query }) => ({
 		json: {
 			headAssets: '<link rel="stylesheet" href="https://www.nav.no/decorator.css" data-stub="head-assets">',
-			header: `<div data-stub="decorator-header" data-context="${query.get('context')}"></div>`,
+			header: `<div data-stub="decorator-header" data-context="${query.get('context')}" data-chatbot="${query.get('chatbot')}" data-breadcrumbs='${query.get('breadcrumbs')}'></div>`,
 			footer: '<div data-stub="decorator-footer"></div>',
 			scripts: '<script src="https://www.nav.no/decorator.js" data-stub="decorator-scripts"></script>',
 			versionId: '1',
@@ -73,13 +74,30 @@ describe('the search page', () => {
 
 	test('has the metadata for sharing, and is not indexed', async () => {
 		const { doc } = await get('/sok?ord=dagpenger');
-		const meta = (selector: string) => doc.head.querySelector(selector)?.getAttribute('content');
+		const meta = Object.fromEntries(
+			[...doc.head.querySelectorAll('meta[name], meta[property]')].map((tag) => [
+				tag.getAttribute('name') ?? tag.getAttribute('property'),
+				tag.getAttribute('content'),
+			])
+		);
+		const description = 'Søk på hele nav.no. Du kan filtrere på innhold og dato.';
+		const image = 'https://www.nav.test/gfx/social-share-fallback.png';
 
 		expect(doc.head.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe('https://www.nav.test/sok');
-		expect(meta('meta[name="description"]')).toBe('Søk på hele nav.no. Du kan filtrere på innhold og dato.');
-		expect(meta('meta[name="robots"]')).toBe('noindex, nofollow');
-		expect(meta('meta[property="og:url"]')).toBe('https://www.nav.test/sok');
-		expect(meta('meta[property="og:image"]')).toBe('https://www.nav.test/gfx/social-share-fallback.png');
+		expect(meta).toMatchObject({
+			description,
+			robots: 'noindex, nofollow',
+			'og:title': 'Søk - nav.no',
+			'og:site_name': 'nav.no',
+			'og:url': 'https://www.nav.test/sok',
+			'og:description': description,
+			'og:image': image,
+			'twitter:card': 'summary_large_image',
+			'twitter:domain': 'nav.no',
+			'twitter:title': 'Søk - nav.no',
+			'twitter:description': description,
+			'twitter:image:src': image,
+		});
 	});
 
 	test("puts the app's styles after the decorator's, and loads its script after the decorator's", async () => {
@@ -112,10 +130,37 @@ describe('the search page', () => {
 		expect(doc.querySelector('form.sok-page')).not.toBeNull();
 	});
 
+	test.each(['uf=informasjon&uf=kontor', 'uf=informasjon,kontor'])(
+		'passes the search on to the API, with %s',
+		async (uf) => {
+			await get(`/sok?ord=dagpenger%20s%C3%B8knad&f=arbeidsgiver&${uf}&s=1&preferredLanguage=en`);
+
+			expect(searches().map((query) => Array.from(query))).toEqual([
+				[
+					['ord', 'dagpenger søknad'],
+					['f', 'arbeidsgiver'],
+					['uf', 'informasjon,kontor'],
+					['s', '1'],
+					['preferredLanguage', 'en'],
+					['page', '0'],
+				],
+			]);
+		}
+	);
+
+	test('asks the decorator for the chatbot and the Søk breadcrumb', async () => {
+		const header = (await get('/sok?ord=dagpenger')).doc.querySelector('[data-stub="decorator-header"]');
+
+		expect(header?.getAttribute('data-chatbot')).toBe('true');
+		expect(JSON.parse(header?.getAttribute('data-breadcrumbs') ?? 'null')).toEqual([{ title: 'Søk', url: '/sok' }]);
+	});
+
 	test.each([
+		['f=privatperson', 'privatperson'],
 		['f=arbeidsgiver', 'arbeidsgiver'],
 		['f=samarbeidspartner', 'samarbeidspartner'],
 		['f=presse', 'privatperson'],
+		['f=finnes-ikke', 'privatperson'],
 		['f=arbeidsgiver&f=samarbeidspartner', 'privatperson'],
 		['ord=x', 'privatperson'],
 	])('?%s gets the %s decorator', async (query, context) => {
@@ -180,6 +225,7 @@ describe('internal endpoints', () => {
 		const res = await app.request(`/sok/api/internal/${probe}`);
 
 		expect(res.status).toBe(200);
+		expect(res.headers.get('content-type')).toMatch(/^application\/json\b/);
 		expect(await res.json()).toEqual({ message });
 	});
 
@@ -189,6 +235,8 @@ describe('internal endpoints', () => {
 
 		expect(res.status).toBe(200);
 		expect(res.headers.get('content-type')).toBe('text/plain; version=0.0.4; charset=utf-8');
+		expect(body).toMatch(/^# TYPE navno_search_requests_total counter$/m);
+		expect(body).toMatch(/^# TYPE navno_search_upstream_duration_seconds histogram$/m);
 		for (const series of [
 			'navno_search_requests_total{status="success"}',
 			'navno_search_requests_total{status="error"}',
@@ -285,21 +333,26 @@ describe('/sok/api/search-url', () => {
 		const res = await app.request(`/sok/api/search-url?term=${term}`);
 
 		expect(res.status).toBe(200);
+		expect(res.headers.get('content-type')).toMatch(/^application\/json\b/);
 		expect(await res.json()).toEqual(answer);
 	});
 
 	test('passes the term on encoded', async () => {
-		await app.request(`/sok/api/search-url?term=${encodeURIComponent('a&b c#d+e')}`);
+		await app.request(`/sok/api/search-url?term=${encodeURIComponent('a&b c#d+e=f')}`);
 
-		expect(http.callsTo(SEARCH_URL_API).map((call) => call.query.get('term'))).toEqual(['a&b c#d+e']);
+		expect(http.callsTo(SEARCH_URL_API).map((call) => call.query.get('term'))).toEqual(['a&b c#d+e=f']);
 	});
 
-	test.each(['', '?term=%20%20', '?term=a&term=b'])('400 for the term in "%s"', async (query) => {
-		const res = await app.request(`/sok/api/search-url${query}`);
+	test.each(['', '?term=%20%20', '?term=a&term=b'])(
+		'400 for the term in "%s", without asking the API',
+		async (query) => {
+			const res = await app.request(`/sok/api/search-url${query}`);
 
-		expect(res.status).toBe(400);
-		expect(await res.json()).toEqual({ error: 'A single non-empty term is required' });
-	});
+			expect(res.status).toBe(400);
+			expect(await res.json()).toEqual({ error: 'A single non-empty term is required' });
+			expect(http.callsTo(SEARCH_URL_API)).toEqual([]);
+		}
+	);
 
 	test("passes on the API's error status", async () => {
 		searchUrlApi({ status: 503 });
@@ -333,5 +386,7 @@ describe('/sok/api/search-url', () => {
 
 		expect(res.status).toBe(405);
 		expect(res.headers.get('allow')).toBe('GET');
+		expect(await res.json()).toEqual({ error: 'Method not allowed' });
+		expect(http.callsTo(SEARCH_URL_API)).toEqual([]);
 	});
 });

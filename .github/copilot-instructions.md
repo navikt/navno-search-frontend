@@ -14,7 +14,6 @@ The search page on nav.no (`/sok`): a Hono server that renders a React app, whic
 - `pnpm build` — client and server builds in `dist`
 - `pnpm test` — unit tests
 - `pnpm lint` — oxfmt, oxlint and TypeScript
-- `pnpm run test:http` — rebuild, then the temporary black-box tests in `test/http` against the build
 
 ## Architecture
 

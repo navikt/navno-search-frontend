@@ -10,10 +10,5 @@ export default defineConfig({
 	endOfLine: 'lf',
 	// Leaves the markup in @itsy/html templates alone
 	embeddedLanguageFormatting: 'off',
-	ignorePatterns: [
-		'.nais/config.yml',
-		'wcag-rapport.json',
-		// The temporary suite stays as it was written against Next, until it's deleted
-		'test/http/**',
-	],
+	ignorePatterns: ['.nais/config.yml', 'wcag-rapport.json'],
 });

@@ -61,6 +61,17 @@ describe('SearchPage', () => {
 		expect(checked(doc, 'preferredLanguage')).toEqual(['en']);
 	});
 
+	test('labels the search field, sorting and language, and links to the search tips', () => {
+		const doc = page();
+		const labels = (name: string) => inputs(doc, `input[name="${name}"]`).map((input) => text(input.labels?.[0]));
+		const tips = [...doc.querySelectorAll('a')].filter((a) => text(a) === 'Søketips');
+
+		expect(labels('ord')).toEqual(['Søk på siden']);
+		expect(labels('s')).toEqual(['Beste treff', 'Dato']);
+		expect(labels('preferredLanguage')).toEqual(['Bokmål', 'Nynorsk', 'English']);
+		expect(tips.map((a) => a.getAttribute('href'))).toEqual(['/soketips']);
+	});
+
 	test('cuts a long search term to the field length', () => {
 		const doc = page({ params: { ord: 'x'.repeat(150) } });
 
@@ -152,6 +163,12 @@ describe('SearchPage', () => {
 });
 
 describe('Hit', () => {
+	test('links its title to the page', () => {
+		const link = render(<Hit hit={hit()} number={1} />).querySelector('a#sok-treff-1');
+
+		expect([link?.getAttribute('href'), text(link)]).toEqual(['https://www.nav.no/dagpenger', 'Dagpenger']);
+	});
+
 	test("closes a <b> the API's cut left open, so the rest of the page isn't bold", () => {
 		const doc = render(<Hit hit={hit({ highlight: 'Du kan søke om <b>dagpeng' })} number={1} />);
 

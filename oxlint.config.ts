@@ -4,8 +4,6 @@ export default defineConfig({
 	plugins: ['typescript', 'unicorn', 'oxc', 'react', 'jsx-a11y', 'vitest', 'promise'],
 	categories: { correctness: 'error', suspicious: 'error', perf: 'error' },
 	options: { reportUnusedDisableDirectives: 'warn', typeAware: true },
-	// The temporary suite stays as it was written against Next, until it's deleted
-	ignorePatterns: ['test/http/**'],
 	rules: {
 		'no-console': 'error',
 		'typescript/no-explicit-any': 'error',

@@ -9,7 +9,6 @@ export default defineConfig({
 			// The logger writes to stdout, past Vitest
 			LOG_LEVEL: 'silent',
 		},
-		// Not test/http, which has its own config: `pnpm run test:http`
 		projects: [
 			{ extends: true, test: { name: 'server', include: ['server/**/*.test.{ts,tsx}'], environment: 'node' } },
 			{

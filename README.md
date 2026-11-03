@@ -22,7 +22,6 @@ pnpm build && pnpm start
 
 - `pnpm test`: enhetstestene
 - `pnpm lint`: oxfmt, oxlint og TypeScript
-- `pnpm run test:http`: bygger på nytt og tester bygget over HTTP. Testene i `test/http` ble skrevet mot Next-versjonen for å sikre byttet, og fjernes når enhetstestene dekker det samme.
 
 ## Deploy til dev-miljø
 
