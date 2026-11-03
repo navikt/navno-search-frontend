@@ -5,6 +5,8 @@ const createJestConfig = nextJest({
 });
 
 const customJestConfig = {
+    // test/http is the black-box suite, run by Vitest with `pnpm run test:http`
+    roots: ['<rootDir>/src'],
     moduleDirectories: ['node_modules', '<rootDir>/src'],
     modulePathIgnorePatterns: ['tests'],
     testEnvironment: 'jsdom',

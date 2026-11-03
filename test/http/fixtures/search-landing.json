@@ -1,0 +1,322 @@
+{
+    "page": 0,
+    "s": 0,
+    "preferredLanguage": "nb",
+    "isMore": true,
+    "word": "",
+    "total": 850,
+    "fasettKey": "privatperson",
+    "aggregations": {
+        "fasetter": {
+            "buckets": [
+                {
+                    "key": "privatperson",
+                    "docCount": 850,
+                    "checked": true,
+                    "name": "Privatperson",
+                    "underaggregeringer": {
+                        "buckets": [
+                            {
+                                "key": "informasjon",
+                                "docCount": 371,
+                                "checked": false,
+                                "name": "Informasjon",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "kontor",
+                                "docCount": 261,
+                                "checked": false,
+                                "name": "Kontor",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "soknad-og-skjema",
+                                "docCount": 208,
+                                "checked": false,
+                                "name": "Søknad og skjema",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "aktuelt",
+                                "docCount": 10,
+                                "checked": false,
+                                "name": "Aktuelt",
+                                "underaggregeringer": null
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "arbeidsgiver",
+                    "docCount": 450,
+                    "checked": false,
+                    "name": "Arbeidsgiver",
+                    "underaggregeringer": {
+                        "buckets": [
+                            {
+                                "key": "informasjon",
+                                "docCount": 114,
+                                "checked": false,
+                                "name": "Informasjon",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "kontor",
+                                "docCount": 273,
+                                "checked": false,
+                                "name": "Kontor",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "soknad-og-skjema",
+                                "docCount": 61,
+                                "checked": false,
+                                "name": "Søknad og skjema",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "aktuelt",
+                                "docCount": 2,
+                                "checked": false,
+                                "name": "Aktuelt",
+                                "underaggregeringer": null
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "samarbeidspartner",
+                    "docCount": 493,
+                    "checked": false,
+                    "name": "Samarbeidspartner",
+                    "underaggregeringer": {
+                        "buckets": [
+                            {
+                                "key": "informasjon",
+                                "docCount": 139,
+                                "checked": false,
+                                "name": "Informasjon",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "kontor",
+                                "docCount": 261,
+                                "checked": false,
+                                "name": "Kontor",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "soknad-og-skjema",
+                                "docCount": 87,
+                                "checked": false,
+                                "name": "Søknad og skjema",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "aktuelt",
+                                "docCount": 6,
+                                "checked": false,
+                                "name": "Aktuelt",
+                                "underaggregeringer": null
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "presse",
+                    "docCount": 40,
+                    "checked": false,
+                    "name": "Presse",
+                    "underaggregeringer": {
+                        "buckets": []
+                    }
+                },
+                {
+                    "key": "statistikk",
+                    "docCount": 11916,
+                    "checked": false,
+                    "name": "Statistikk",
+                    "underaggregeringer": {
+                        "buckets": [
+                            {
+                                "key": "artikler",
+                                "docCount": 2173,
+                                "checked": false,
+                                "name": "Artikler",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "nyheter",
+                                "docCount": 34,
+                                "checked": false,
+                                "name": "Nyheter",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "tabeller",
+                                "docCount": 9709,
+                                "checked": false,
+                                "name": "Tabeller",
+                                "underaggregeringer": null
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "analyser-og-forskning",
+                    "docCount": 897,
+                    "checked": false,
+                    "name": "Analyser og forskning",
+                    "underaggregeringer": {
+                        "buckets": [
+                            {
+                                "key": "artikler",
+                                "docCount": 891,
+                                "checked": false,
+                                "name": "Artikler",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "nyheter",
+                                "docCount": 6,
+                                "checked": false,
+                                "name": "Nyheter",
+                                "underaggregeringer": null
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "innhold-fra-fylker",
+                    "docCount": 701,
+                    "checked": false,
+                    "name": "Innhold fra fylker",
+                    "underaggregeringer": {
+                        "buckets": [
+                            {
+                                "key": "agder",
+                                "docCount": 42,
+                                "checked": false,
+                                "name": "Agder",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "innlandet",
+                                "docCount": 40,
+                                "checked": false,
+                                "name": "Innlandet",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "more-og-romsdal",
+                                "docCount": 40,
+                                "checked": false,
+                                "name": "Møre og Romsdal",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "nordland",
+                                "docCount": 51,
+                                "checked": false,
+                                "name": "Nordland",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "oslo",
+                                "docCount": 108,
+                                "checked": false,
+                                "name": "Oslo",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "rogaland",
+                                "docCount": 46,
+                                "checked": false,
+                                "name": "Rogaland",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "troms-og-finnmark",
+                                "docCount": 32,
+                                "checked": false,
+                                "name": "Troms og Finnmark",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "trondelag",
+                                "docCount": 77,
+                                "checked": false,
+                                "name": "Trøndelag",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "vestfold-og-telemark",
+                                "docCount": 70,
+                                "checked": false,
+                                "name": "Vestfold og Telemark",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "vestland",
+                                "docCount": 65,
+                                "checked": false,
+                                "name": "Vestland",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "vest-viken",
+                                "docCount": 73,
+                                "checked": false,
+                                "name": "Vest-Viken",
+                                "underaggregeringer": null
+                            },
+                            {
+                                "key": "ost-viken",
+                                "docCount": 57,
+                                "checked": false,
+                                "name": "Øst-Viken",
+                                "underaggregeringer": null
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "hits": [
+        {
+            "displayName": "Ortopediske hjelpemidler",
+            "href": "https://www.nav.no/ortopediske-hjelpemidler",
+            "highlight": "Hjelpemidler som ortose, protese, ortopediske sko, parykk, øyeprotese eller ansiktsprotese.",
+            "modifiedTime": null,
+            "publishedTime": null,
+            "audience": ["person"],
+            "language": "nb",
+            "type": "produktside",
+            "score": 2.0
+        },
+        {
+            "displayName": "Søk om godkjennelse av farskap eller medmorskap fastsatt i utlandet",
+            "href": "https://www.nav.no/farskap-medmorskap-utland",
+            "highlight": "Farskap eller medmorskap fastsatt i utlandet kan bli godkjent i Norge.",
+            "modifiedTime": null,
+            "publishedTime": null,
+            "audience": ["person"],
+            "language": "nb",
+            "type": "guide",
+            "score": 2.0
+        },
+        {
+            "displayName": "Videomøte med Nav",
+            "href": "https://www.nav.no/videomote-med-nav",
+            "highlight": "Har du blitt kalt inn til et videomøte med Nav? Se hvordan du forbereder deg til møtet på mobil eller PC.",
+            "modifiedTime": null,
+            "publishedTime": null,
+            "audience": ["person"],
+            "language": "nb",
+            "type": "guide",
+            "score": 2.0
+        }
+    ]
+}
