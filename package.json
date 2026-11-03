@@ -14,7 +14,9 @@
         "lint": "eslint src/",
         "prepare": "husky || true",
         "test": "jest --collectCoverage",
-        "test:watch": "jest --watch"
+        "test:watch": "jest --watch",
+        "pretest:http": "NODE_ENV=production ENV=localhost DECORATOR_LOCAL_URL=http://127.0.0.1:9 NEXT_TELEMETRY_DISABLED=1 APP_BASE_PATH=/sok APP_ORIGIN=https://www.nav.test SEARCH_URL=http://navno-search-api.test/content/search pnpm run build",
+        "test:http": "vitest run --config test/http/vitest.config.mts"
     },
     "dependenciesComments": {
         "@types/node": "Holdes på samme major som LTS node-versjon. Siste LTS node-versjon er 24, derfor @types/node@24"
@@ -57,15 +59,13 @@
         "prettier": "3.9.9",
         "sass": "1.105.1",
         "typescript": "6.0.3",
-        "typescript-eslint": "8.72.0"
+        "typescript-eslint": "8.72.0",
+        "undici": "8.12.3",
+        "vite": "8.3.5",
+        "vitest": "5.0.5"
     },
     "browser": {
         "jsdom": false
-    },
-    "pnpm": {
-        "onlyBuiltDependencies": [
-            "@parcel/watcher"
-        ]
     },
     "devEngines": {
         "runtime": {
