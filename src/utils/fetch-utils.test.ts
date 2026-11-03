@@ -1,15 +1,17 @@
-import { endFetchMock, startFetchMock } from 'jest-utils';
+import { afterAll, beforeAll, describe, expect, test, vi } from 'vitest';
 import { fetchWithTimeout, objectToQueryString } from './fetch-utils';
 
-// Save the original fetch function
-
 describe('fetchWithTimeout', () => {
+    const fetchMock = vi.fn<typeof fetch>(async () =>
+        Response.json({ data: 'Foo bar' })
+    );
+
     beforeAll(() => {
-        startFetchMock();
+        vi.stubGlobal('fetch', fetchMock);
     });
 
     afterAll(() => {
-        endFetchMock();
+        vi.unstubAllGlobals();
     });
 
     test('should resolve with the response when the fetch request succeeds', async () => {
@@ -19,6 +21,7 @@ describe('fetchWithTimeout', () => {
         const result = await fetchWithTimeout(url, timeout);
         const json = await result.json();
 
+        expect(fetchMock).toHaveBeenCalledWith(url);
         expect(json).toEqual({ data: 'Foo bar' });
     });
 });

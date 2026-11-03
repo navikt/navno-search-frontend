@@ -1,3 +1,4 @@
+import { beforeEach, describe, expect, test, vi, type Mock } from 'vitest';
 import { fireEvent, render, RenderResult } from '@testing-library/react';
 import { RadioGroup } from '@navikt/ds-react';
 import { FacetsSelector } from './FacetsSelector';
@@ -14,7 +15,7 @@ import { ContextProvider } from 'context/ContextProvider';
 type SetupConfig = {
     initialResult: SearchResultProps;
     initialParams?: SearchParams;
-    mockSetUnderFacet: jest.Mock;
+    mockSetUnderFacet: Mock;
 };
 
 const setupTest = ({
@@ -39,7 +40,7 @@ const setupTest = ({
 
 describe('FacetsSelector', () => {
     let setupResult: RenderResult;
-    const mockSetUnderFacet = jest.fn();
+    const mockSetUnderFacet = vi.fn();
 
     beforeEach(() => {
         const initialResult = mockResults();
@@ -74,7 +75,7 @@ describe('FacetsSelector', () => {
         const initialParams = paramsFromResult(initialResult);
         initialParams.f = 'privatperson';
 
-        const mockOnChange = jest.fn();
+        const mockOnChange = vi.fn();
 
         const result = render(
             <ContextProvider

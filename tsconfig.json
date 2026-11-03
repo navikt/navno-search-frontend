@@ -5,9 +5,6 @@
       "dom",
       "esnext"
     ],
-    "types": [
-      "@testing-library/jest-dom"
-    ],
     "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
@@ -26,8 +23,7 @@
       "types/*": ["./src/types/*"],
       "components/*": ["./src/components/*"],
       "config": ["./src/config"],
-      "testHelpers/*": ["./src/testHelpers/*"],
-      "jest-utils": ["./src/jest-utils.ts"]
+      "testHelpers/*": ["./src/testHelpers/*"]
     }
   },
   "include": [

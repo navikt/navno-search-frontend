@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import { isInitialDefaultQuery } from 'utils/isInitialDefaultQuery';
 import { SearchResultProps } from 'types/search-result';
 import { paramsFromResult, SearchParams } from 'types/search-params';

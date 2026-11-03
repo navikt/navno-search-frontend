@@ -1,3 +1,4 @@
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { fireEvent, RenderResult } from '@testing-library/react';
 import { SearchInput } from './SearchInput';
 import { mockResults } from 'testHelpers/mockResults';
@@ -6,7 +7,7 @@ import { componentSetup } from '../../testHelpers/componentSetup';
 
 describe('SearchInput', () => {
     let setupResult: RenderResult;
-    const mockFetchNewResults = jest.fn();
+    const mockFetchNewResults = vi.fn();
 
     beforeEach(() => {
         const initialResult = mockResults();
