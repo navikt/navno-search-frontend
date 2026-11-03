@@ -1,3 +1,4 @@
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { render, RenderResult } from '@testing-library/react';
 import { RadioGroup } from '@navikt/ds-react';
 import userEvent from '@testing-library/user-event';
@@ -8,7 +9,7 @@ import { ContextProvider } from 'context/ContextProvider';
 
 describe('SearchFilters', () => {
     let setupResult: RenderResult;
-    const mockSetPreferredLanguage = jest.fn();
+    const mockSetPreferredLanguage = vi.fn();
 
     beforeEach(() => {
         const initialResult = mockResults();

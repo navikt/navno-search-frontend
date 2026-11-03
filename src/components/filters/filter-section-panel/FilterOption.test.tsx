@@ -1,9 +1,10 @@
+import { describe, expect, test, vi } from 'vitest';
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { RadioGroup } from '@navikt/ds-react';
 import { FilterOption, FilterOptionProps } from './FilterOption';
 
-const mockFunction = jest.fn();
+const mockFunction = vi.fn();
 
 const setup = (configOverride: Partial<FilterOptionProps>) => {
     const config: FilterOptionProps = {

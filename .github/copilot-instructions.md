@@ -7,13 +7,14 @@ Next.js 16 (Pages Router) search frontend for nav.no, deployed on NAIS.
 - React 19, TypeScript 5.9, pnpm
 - NAV Design System (`@navikt/ds-react` v7.40, `@navikt/ds-css`)
 - SCSS modules for styling
-- Jest + Testing Library for tests
+- Vitest + Testing Library for tests
 
 ## Commands
 
 - `pnpm dev` — dev server on port 3001
 - `pnpm build` — production build
-- `pnpm test` — run tests with coverage
+- `pnpm test` — unit tests (Vitest)
+- `pnpm run test:http` — rebuild with a pinned test env and run the black-box HTTP tests in `test/http` against it
 - `pnpm lint` — ESLint
 
 ## Architecture

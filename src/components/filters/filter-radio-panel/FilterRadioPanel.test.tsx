@@ -1,3 +1,4 @@
+import { beforeEach, describe, expect, test, vi, type Mock } from 'vitest';
 import { fireEvent, RenderResult } from '@testing-library/react';
 import { FilterRadioPanel } from './FilterRadioPanel';
 import { mockResults } from 'testHelpers/mockResults';
@@ -11,7 +12,7 @@ type SetupConfig = {
     label: string;
     count: number;
     isOpen: boolean;
-    onClick: jest.Mock;
+    onClick: Mock;
     value: string;
 };
 
@@ -43,7 +44,7 @@ const setupTest = ({
 
 describe('FilterRadioPanel', () => {
     let setupResult: RenderResult;
-    const mockOnClick = jest.fn();
+    const mockOnClick = vi.fn();
 
     beforeEach(() => {
         const initialResult = mockResults();
