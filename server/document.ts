@@ -88,7 +88,7 @@ const page = ({ title, description, head = [], decorator, content, props }: Page
 export type DevEnv = { Bindings: { vite?: ViteDevServer } };
 
 // Vite dev things
-export const toHtml = async (c: Context<DevEnv>, markup: string) => {
+export const toHtml = (c: Context<DevEnv>, markup: string): string | Promise<string> => {
 	const vite = c.env?.vite;
 	if (!import.meta.env.DEV || !vite) {
 		return markup;

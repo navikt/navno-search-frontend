@@ -29,6 +29,29 @@ export const SearchPage = ({ initial }: { initial: Initial }) => {
 		}
 	}, [firstNew]);
 
+	const results = () => {
+		if (failed) {
+			return <Unavailable />;
+		}
+		if (loading) {
+			return <Spinner />;
+		}
+		if (landing) {
+			return null;
+		}
+		return (
+			<Hits
+				result={result}
+				params={params}
+				loadingMore={loadingMore}
+				onShowMore={() => {
+					trackShowMore(params.page + 1);
+					search.showMore();
+				}}
+			/>
+		);
+	};
+
 	return (
 		<form
 			className="sok-page"
@@ -68,25 +91,7 @@ export const SearchPage = ({ initial }: { initial: Initial }) => {
 					}}
 				/>
 			)}
-			<div className="sok-results">
-				{failed ? (
-					<Unavailable />
-				) : loading ? (
-					<Spinner />
-				) : (
-					!landing && (
-						<Hits
-							result={result}
-							params={params}
-							loadingMore={loadingMore}
-							onShowMore={() => {
-								trackShowMore(params.page + 1);
-								search.showMore();
-							}}
-						/>
-					)
-				)}
-			</div>
+			<div className="sok-results">{results()}</div>
 		</form>
 	);
 };

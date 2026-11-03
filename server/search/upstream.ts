@@ -45,7 +45,7 @@ const search = async (params: SearchParams, from: number): Promise<SearchResult>
 			Array.from({ length: params.page - from + 1 }, (_, i) => fetchPage(params, from + i))
 		);
 		searches.inc({ status: 'success' });
-		return { ...pages[pages.length - 1], hits: pages.flatMap((page) => page.hits) };
+		return { ...pages.at(-1)!, hits: pages.flatMap((page) => page.hits) };
 	} catch (e) {
 		searches.inc({ status: 'error' });
 		throw e;
