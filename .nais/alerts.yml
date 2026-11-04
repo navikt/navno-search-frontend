@@ -22,7 +22,7 @@ spec:
           annotations:
             summary: Over 5 % of searches in navno-search-frontend fail
             consequence: Users get the unfiltered listing instead of their hits, or an error page if that fails too.
-            action: The logs say why ("Search failed", with a status or a timeout). Check that navno-search-api is up, and its own metrics.
+            action: Check logs - should have "Search failed", with a status or a timeout. Check that navno-search-api is up, and its own metrics.
           labels:
             namespace: navno
             severity: critical
@@ -37,8 +37,8 @@ spec:
           for: 30m
           annotations:
             summary: No successful searches in navno-search-frontend for over 1.5 hours during the day
-            consequence: The service may be down, unreachable or broken for users, or no longer scraped. The error alert can't fire without traffic.
-            action: Check that the pods are running and being scraped, then try https://www.nav.no/sok?ord=dagpenger yourself.
+            consequence: The service may be down, unreachable or broken for users, or just no longer scraped.
+            action: Check that the pods are running and being scraped, then check the service - e.g. https://www.nav.no/sok?ord=dagpenger.
           labels:
             namespace: navno
             severity: warning
