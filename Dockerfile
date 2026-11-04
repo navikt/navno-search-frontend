@@ -4,11 +4,11 @@ ENV NODE_ENV=production
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+# package.json for the #dist/* import the server reads its client files through
+COPY package.json ./
 COPY node_modules ./node_modules
-COPY public ./public
-COPY .next ./.next
-COPY .env next.config.js ./
+COPY dist ./dist
 
 EXPOSE 3001
-CMD ["node_modules/next/dist/bin/next", "start", "-p", "3001"]
+ENTRYPOINT ["node"]
+CMD ["dist/server/main.js"]

@@ -15,13 +15,6 @@ jobs:
     with:
       github-environment: prod
       image-suffix: release-${{ github.ref_name }}
-      build-cache-paths: .next/cache
-      env-file: |
-        NODE_ENV=production
-        APP_BASE_PATH=/sok
-        APP_ORIGIN=https://www.nav.no
-        SEARCH_URL=http://navno-search-api.navno/content/search
-        ENV=prod
     secrets: inherit
 
   deploy:
@@ -33,3 +26,11 @@ jobs:
       resource: .nais/config.yml
       vars: .nais/vars-prod.yml
       var: image=${{ needs.build.outputs.image }}
+
+  # This is separate from the app deploy so rollback.prod.yml (which only applies config.yml) shares its concurrency group
+  alerts:
+    uses: navikt/navno-ci/.github/workflows/nais-deploy.yml@v1
+    permissions: { contents: read, id-token: write }
+    with:
+      cluster: prod-gcp
+      resource: .nais/alerts.yml

@@ -9,11 +9,6 @@ metadata:
 spec:
   image: {{image}}
   port: 3001
-  startup:
-    path: /sok/api/internal/isAlive
-    periodSeconds: 5
-    timeout: 3
-    failureThreshold: 36
   liveness:
     path: /sok/api/internal/isAlive
     initialDelay: 5
@@ -36,28 +31,30 @@ spec:
     - {{url}}
   {{/each}}
   env:
-    - name: NPM_CONFIG_CACHE
-      value: /tmp/npm-cache
+    # Through service discovery, so the same in both clusters
+    - name: SEARCH_URL
+      value: http://navno-search-api.navno/content/search
+    # Only for the page's canonical and og: URLs, the app never calls it
+    - name: APP_ORIGIN
+      value: https://{{appHost}}
   replicas:
   {{#with replicas}}
     min: {{min}}
     max: {{max}}
   {{/with}}
+  # Dekoratøren and nav-search-api are both reached through service discovery, so nothing external
   accessPolicy:
     outbound:
       rules:
-        - application: {{dekoratorenAppName}}
+        - application: nav-dekoratoren
           namespace: personbruker
         - application: navno-search-api
           namespace: navno
-      external:
-        - host: {{appHost}}
   resources:
   {{#with resources}}
-    limits:
-      cpu: {{limits.cpu}}
-      memory: {{limits.memory}}
     requests:
       cpu: {{requests.cpu}}
       memory: {{requests.memory}}
+    limits:
+      memory: {{limits.memory}}
   {{/with}}
