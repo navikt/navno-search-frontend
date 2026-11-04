@@ -1,15 +1,13 @@
 appName: navno-search-frontend
 appHost: www.nav.no
-dekoratorenAppName: nav-dekoratoren
 ingresses:
   - https://www.nav.no/sok($|\/.+)
 replicas:
   min: 2
-  max: 20
+  max: 6
 resources:
-  limits:
-    cpu: 600m
-    memory: 768Mi
   requests:
-    cpu: 150m
-    memory: 256Mi
+    cpu: 100m
+    memory: 192Mi
+  limits:
+    memory: 512Mi
