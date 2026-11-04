@@ -1,3 +1,6 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { brotliCompressSync, constants, gzipSync } from 'node:zlib';
 import devServer, { defaultOptions } from '@hono/vite-dev-server';
 import react from '@vitejs/plugin-react';
 import { defineConfig, loadEnv } from 'vite';
@@ -32,6 +35,23 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
 					const inClient = server.environments.client.moduleGraph.getModulesByFile(file)?.size;
 					if (this.environment.name === 'ssr' && modules.length > 0 && !inClient) {
 						server.environments.client.hot.send({ type: 'full-reload' });
+					}
+				},
+			},
+			{
+				// Compresses the client's files once, at maximum, instead of on every request. serveStatic in
+				// server/app.ts sends these; hono/compress takes over if one is missing
+				name: 'precompress',
+				apply: () => command === 'build' && !isSsrBuild,
+				writeBundle({ dir = '' }, bundle) {
+					for (const file of Object.keys(bundle).filter((name) => /\.(js|css)$/.test(name))) {
+						const path = join(dir, file);
+						const source = readFileSync(path);
+						writeFileSync(
+							`${path}.br`,
+							brotliCompressSync(source, { params: { [constants.BROTLI_PARAM_QUALITY]: constants.BROTLI_MAX_QUALITY } })
+						);
+						writeFileSync(`${path}.gz`, gzipSync(source, { level: constants.Z_BEST_COMPRESSION }));
 					}
 				},
 			},

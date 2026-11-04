@@ -25,6 +25,9 @@ if (import.meta.env.PROD) {
 		'/assets/*',
 		serveStatic({
 			root: fileURLToPath(import.meta.resolve('#dist/client')),
+			// Vite will write compressed files, this directly uses them instead of compressing
+			// Saves a boatload of server time
+			precompressed: true,
 			// serveStatic looks the file up by the whole path, the base path included
 			rewriteRequestPath: (path) => path.slice(BASE_PATH.length),
 			// The file names hold a hash of the content, so a file never changes
