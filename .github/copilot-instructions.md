@@ -4,7 +4,7 @@ The search page on nav.no (`/sok`): a Hono server that renders a React app, whic
 
 ## Stack
 
-- Hono 4 on Node 24, React 19 rendered on the server and hydrated in the browser, pnpm
+- Hono 4 on Node 26, React 19 rendered on the server and hydrated in the browser, pnpm
 - NAV Design System (`@navikt/ds-react`, `@navikt/ds-css`)
 - Vite for the dev server and both builds, Vitest for tests, oxfmt and oxlint
 
