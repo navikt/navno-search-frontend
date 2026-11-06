@@ -43,7 +43,7 @@
 		"@testing-library/react": "16.3.3",
 		"@testing-library/user-event": "14.6.8",
 		"@types/jsdom": "30.0.0",
-		"@types/node": "24.1.0",
+		"@types/node": "26.6.5",
 		"@types/react": "19.3.0",
 		"@types/react-dom": "19.3.0",
 		"@vitejs/plugin-react": "6.1.2",
@@ -60,15 +60,12 @@
 	"devEngines": {
 		"runtime": {
 			"name": "node",
-			"version": "^24.19.0",
+			"version": "26.13.0",
 			"onFail": "download"
 		}
 	},
 	"engines": {
-		"node": "24"
+		"node": "26"
 	},
-	"packageManager": "pnpm@11.28.9+sha512.35421cea2720eca3f5ad722b67e8ef18f4d3cd4745ed2fcfeb0dc288d4e9437fad3870d91ee6e83f268f0f6f7e0f62723317b19617bb45ee4333172ef51159f8",
-	"dependenciesComments": {
-		"@types/node": "Holdes på samme major som LTS node-versjon. Siste LTS node-versjon er 24, derfor @types/node@24"
-	}
+	"packageManager": "pnpm@11.28.9+sha512.35421cea2720eca3f5ad722b67e8ef18f4d3cd4745ed2fcfeb0dc288d4e9437fad3870d91ee6e83f268f0f6f7e0f62723317b19617bb45ee4333172ef51159f8"
 }
