@@ -10,5 +10,5 @@ COPY package.json ./
 COPY dist ./dist
 
 EXPOSE 3001
-ENTRYPOINT ["node", "--enable-source-maps"]
+ENTRYPOINT ["node"]
 CMD ["dist/server/main.js"]

@@ -73,7 +73,7 @@ before(async () => {
 
 	const port = await freePort();
 	origin = `http://127.0.0.1:${port}`;
-	app = spawn(process.execPath, ['--enable-source-maps', 'dist/server/main.js'], {
+	app = spawn(process.execPath, ['dist/server/main.js'], {
 		cwd: dir,
 		env: {
 			PATH: process.env.PATH,
