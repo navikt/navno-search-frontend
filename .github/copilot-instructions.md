@@ -13,6 +13,7 @@ The search page on nav.no (`/sok`): a Hono server that renders a React app, whic
 - `pnpm dev` — dev server on port 3001
 - `pnpm build` — client and server builds in `dist`
 - `pnpm test` — unit tests
+- `pnpm test:dist` — runs the build without node_modules, as the image does (after `pnpm build`)
 - `pnpm lint` — oxfmt, oxlint and TypeScript
 
 ## Architecture
@@ -32,3 +33,4 @@ The search page on nav.no (`/sok`): a Hono server that renders a React app, whic
 - Use NAV design system components over custom HTML
 - The page also works as one GET form with named controls, before hydration and without JavaScript
 - Imports across directories go through package.json `imports` (`#server/…`, `#client/…`, `#shared/…`, `#test/…`), with the file extension
+- The server build bundles every dependency and the image has no node_modules, so the SBOM comes from `pnpm-lock.yaml`: anything that ends up in `dist` belongs in `dependencies`, not `devDependencies`

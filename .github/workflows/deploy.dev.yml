@@ -11,6 +11,11 @@ jobs:
     with:
       github-environment: dev
       image-suffix: dev-deploy
+      # The image ships the bundled build without node_modules (Dockerfile), so there's nothing to prune,
+      # the SBOM comes from the lockfile, and test:dist runs the build without node_modules first
+      post-build-commands: pnpm run test:dist
+      prune-remove: ''
+      sbom-from-lockfile: true
     secrets: inherit
 
   deploy:
