@@ -104,13 +104,12 @@ after(async () => {
 	}
 });
 
-test('the probes answer', async () => {
-	for (const probe of ['isAlive', 'isReady', 'metrics']) {
-		// oxlint-disable-next-line no-await-in-loop
+for (const probe of ['isAlive', 'isReady', 'metrics']) {
+	test(`the ${probe} probe answers`, async () => {
 		const res = await get(`/sok/api/internal/${probe}`);
 		assert.equal(res.status, 200, withOutput(`${probe}: ${res.status}`));
-	}
-});
+	});
+}
 
 test('the search page renders the hits', async () => {
 	const res = await get('/sok?ord=dagpenger');
