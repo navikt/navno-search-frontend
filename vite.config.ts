@@ -44,10 +44,15 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
 				},
 			},
 		],
-		// Loading all of Aksel and zod from node-modules costs about 1.1s at boot and 35-50 MB per pod, inline them instead
-		ssr: command === 'build' ? { noExternal: ['@navikt/ds-react', '@navikt/aksel-icons', 'zod'] } : undefined,
+		// The server build bundles every dependency, so the image needs no node_modules: they cost about 1.1s at boot
+		// and 35-50 MB per pod for Aksel and zod alone. The image scan can't see bundled packages, so the SBOM
+		// comes from pnpm-lock.yaml instead (sbom-from-lockfile in the workflows)
+		ssr: command === 'build' ? { noExternal: true } : undefined,
+		// Otherwise React's development and production builds are both bundled, and picked between at runtime
+		define: isSsrBuild ? { 'process.env.NODE_ENV': JSON.stringify('production') } : undefined,
 		build: isSsrBuild
-			? { outDir: 'dist/server' }
+			? // node --enable-source-maps in the Dockerfile maps stack traces back to the source
+				{ outDir: 'dist/server', sourcemap: true }
 			: {
 					outDir: 'dist/client',
 					manifest: true,

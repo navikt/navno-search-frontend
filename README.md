@@ -18,9 +18,12 @@ Bygget, slik det kjører i podden:
 pnpm build && pnpm start
 ```
 
+Serverbygget pakker inn alle avhengighetene, så imaget har bare `dist` og `package.json`, uten `node_modules`. Derfor lager CI SBOM-en fra `pnpm-lock.yaml` (`sbom-from-lockfile` i navno-ci) i stedet for fra imaget. Det som havner i bygget, hører hjemme i `dependencies`.
+
 ## Tester
 
 - `pnpm test`: enhetstestene
+- `pnpm test:dist`: kjører bygget uten `node_modules`, slik imaget gjør, og sjekker siden, klientfilene og probene. Krever `pnpm build` først; CI kjører den etter bygget
 - `pnpm lint`: oxfmt, oxlint og TypeScript
 
 ## Deploy til dev-miljø

@@ -12,4 +12,7 @@ jobs:
     uses: navikt/navno-ci/.github/workflows/node-build.yml@v1
     with:
       push-image: false
+      # The same checks as the deploys, so a failure shows up before the merge
+      post-build-commands: pnpm run test:dist
+      sbom-from-lockfile: true
     secrets: inherit
