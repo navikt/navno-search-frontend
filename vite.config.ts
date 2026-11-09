@@ -51,8 +51,9 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
 		// Otherwise React's development and production builds are both bundled, and picked between at runtime
 		define: isSsrBuild ? { 'process.env.NODE_ENV': JSON.stringify('production') } : undefined,
 		build: isSsrBuild
-			? // node --enable-source-maps in the Dockerfile maps stack traces back to the source
-				{ outDir: 'dist/server', sourcemap: true }
+			? // No source map: node --enable-source-maps parses it at startup and holds on to it, about 35 MB per pod.
+				// The bundle isn't minified, so stack traces into it still read fine
+				{ outDir: 'dist/server' }
 			: {
 					outDir: 'dist/client',
 					manifest: true,
