@@ -27,18 +27,6 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
 				injectClientScript: false,
 			}),
 			{
-				// A server-only module rendered the page the browser shows, so an edit needs a reload.
-				// The app's components hot-reload in the browser instead (devServer's own reload,
-				// handleHotUpdate, doesn't fire for server modules in Vite 8)
-				name: 'reload-on-server-edit',
-				hotUpdate({ file, modules, server }) {
-					const inClient = server.environments.client.moduleGraph.getModulesByFile(file)?.size;
-					if (this.environment.name === 'ssr' && modules.length > 0 && !inClient) {
-						server.environments.client.hot.send({ type: 'full-reload' });
-					}
-				},
-			},
-			{
 				// Compresses the client's files once, at maximum, instead of on every request. serveStatic in
 				// server/app.ts sends these; hono/compress takes over if one is missing
 				name: 'precompress',
@@ -56,9 +44,10 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
 				},
 			},
 		],
+		// Loading all of Aksel and zod from node-modules costs about 1.1s at boot and 35-50 MB per pod, inline them instead
+		ssr: command === 'build' ? { noExternal: ['@navikt/ds-react', '@navikt/aksel-icons', 'zod'] } : undefined,
 		build: isSsrBuild
-			? // Dependencies stay external: the image has node_modules
-				{ outDir: 'dist/server' }
+			? { outDir: 'dist/server' }
 			: {
 					outDir: 'dist/client',
 					manifest: true,

@@ -1,5 +1,5 @@
 import { json } from '@itsy/html/util';
-import { screen, waitFor } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderToString } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
@@ -28,7 +28,10 @@ afterEach(() => {
 // The page as the server sends it, then the script as the browser runs it
 const load = async (props: AppProps) => {
 	document.body.innerHTML = `<main id="maincontent">${renderToString(<App {...props} />)}</main>${json(props, { id: 'app-props' }).markup}`;
-	await import('./main-client.tsx');
+	// hydrateRoot schedules its work; flush it so it can't run after the test (and jsdom) is gone
+	await act(async () => {
+		await import('./main-client.tsx');
+	});
 };
 
 describe('main-client', () => {
