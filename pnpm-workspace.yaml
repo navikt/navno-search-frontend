@@ -1,2 +1,2 @@
-minimumReleaseAge: 5760
+minimumReleaseAge: 4320
 minimumReleaseAgeExclude: ['@navikt/*', '@itsy/*']
