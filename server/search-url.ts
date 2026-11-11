@@ -1,6 +1,6 @@
 import { corgi, isHttpError, isTimeoutError } from '@itsy/corgi';
 import { withTimeout } from '@itsy/corgi/timeout';
-import { logger } from '@navikt/pino-logger';
+import { logger } from '@navikt/navno-logger';
 import { Hono } from 'hono';
 import type { ContentfulStatusCode } from 'hono/utils/http-status';
 import { env } from './env.ts';
@@ -25,10 +25,10 @@ export const searchUrl = new Hono()
 		} catch (err) {
 			// Only the status: an HttpError's message and url have the term
 			if (isHttpError(err)) {
-				logger.error({ status: err.status }, 'Failed to fetch search URL');
+				logger.error('Failed to fetch search URL', { status: err.status });
 				return c.json(FAILED, err.status as ContentfulStatusCode);
 			}
-			logger.error(err, 'Failed to fetch search URL');
+			logger.error('Failed to fetch search URL', err);
 			return c.json(FAILED, isTimeoutError(err) ? 408 : 500);
 		}
 	})

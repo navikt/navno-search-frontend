@@ -1,5 +1,5 @@
 import { networkError, type MockReply } from '@itsy/corgi/testing';
-import { logger } from '@navikt/pino-logger';
+import { logger } from '@navikt/navno-logger';
 import { JSDOM } from 'jsdom';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { installMockFetch } from '#test/fetch.ts';
@@ -321,7 +321,7 @@ describe('/sok/api/search', () => {
 
 		await app.request('/sok/api/search?ord=hemmelig');
 
-		expect(error.mock.calls).toEqual([[{ status: 500, facet: 'privatperson', page: 0 }, 'Search failed']]);
+		expect(error.mock.calls).toEqual([['Search failed', { status: 500, facet: 'privatperson', page: 0 }]]);
 	});
 });
 
@@ -369,7 +369,7 @@ describe('/sok/api/search-url', () => {
 
 		await app.request('/sok/api/search-url?term=hemmelig');
 
-		expect(error.mock.calls).toEqual([[{ status: 503 }, 'Failed to fetch search URL']]);
+		expect(error.mock.calls).toEqual([['Failed to fetch search URL', { status: 503 }]]);
 	});
 
 	test('500 when the API is unreachable', async () => {

@@ -11,7 +11,7 @@
 		"#test/*": "./test/*"
 	},
 	"scripts": {
-		"dev": "vite 2>&1 | pino-pretty --messageKey=message",
+		"dev": "vite",
 		"build": "vite build && vite build --ssr server/main.ts",
 		"start": "NODE_ENV=production node --env-file=.env.development dist/server/main.js",
 		"lint": "oxfmt --check && oxlint && tsc --noEmit",
@@ -29,11 +29,10 @@
 		"@navikt/ds-css": "8.22.1",
 		"@navikt/ds-react": "8.22.1",
 		"@navikt/nav-dekoratoren-moduler": "4.6.0",
-		"@navikt/pino-logger": "5.0.2",
+		"@navikt/navno-logger": "1.1.0",
 		"@prometheus-io/client": "0.16.1",
 		"hono": "4.13.16",
 		"html-react-parser": "6.1.9",
-		"pino": "10.4.0",
 		"react": "19.3.1",
 		"react-dom": "19.3.1",
 		"zod": "4.6.7"
