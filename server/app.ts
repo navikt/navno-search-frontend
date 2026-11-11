@@ -1,8 +1,9 @@
 import { fileURLToPath } from 'node:url';
 import { serveStatic } from '@hono/node-server/serve-static';
-import { logger } from '@navikt/pino-logger';
+import { logger, traceRoute } from '@navikt/navno-logger';
 import { Hono } from 'hono';
 import { compress } from 'hono/compress';
+import { routePath } from 'hono/route';
 import { internal } from './internal.ts';
 import { notFound } from './not-found.tsx';
 import { searchApi } from './search/api.ts';
@@ -12,6 +13,12 @@ import { BASE_PATH } from '#shared/search.ts';
 
 // strict: false matches /sok/ as well as /sok
 const app = new Hono({ strict: false });
+
+// Make OTel in Nais work
+app.use(async (c, next) => {
+	await next();
+	traceRoute(routePath(c));
+});
 app.use(compress());
 
 const sok = app.basePath(BASE_PATH);
@@ -43,7 +50,7 @@ sok.route('/', search);
 app.notFound(notFound);
 
 app.onError((err, c) => {
-	logger.error(err, `Unhandled error on ${c.req.path}`);
+	logger.error('Request failed', { method: c.req.method, path: c.req.path }, err);
 	return c.text('Internal Server Error', 500);
 });
 

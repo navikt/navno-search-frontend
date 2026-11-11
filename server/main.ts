@@ -1,5 +1,5 @@
 import { serve } from '@hono/node-server';
-import { logger } from '@navikt/pino-logger';
+import { logger } from '@navikt/navno-logger';
 import app from './app.ts';
 import { env } from './env.ts';
 

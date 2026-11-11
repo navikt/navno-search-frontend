@@ -1,6 +1,6 @@
 import { corgi, isHttpError } from '@itsy/corgi';
 import { withTimeout } from '@itsy/corgi/timeout';
-import { logger } from '@navikt/pino-logger';
+import { logger } from '@navikt/navno-logger';
 import { env } from '#server/env.ts';
 import { searches, upstreamDuration } from '#server/metrics.ts';
 import { DEFAULTS, type SearchParams } from '#shared/search.ts';
@@ -32,7 +32,7 @@ const fetchPage = async (params: SearchParams, page: number): Promise<SearchResu
 		// HttpError → { status: 500 }, its message includes search terms
 		// Others → { error: 'TimeoutError: Request timed out after 5000ms' }
 		const reason = isHttpError(e) ? { status: e.status } : { error: String(e) };
-		logger.error({ ...reason, facet: params.f, page }, 'Search failed');
+		logger.error('Search failed', { ...reason, facet: params.f, page });
 		throw e;
 	}
 };
