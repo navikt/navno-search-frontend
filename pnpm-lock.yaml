@@ -212,6 +212,9 @@ importers:
       '@hono/vite-dev-server':
         specifier: 0.26.1
         version: 0.26.1(hono@4.13.16)
+      '@navikt/browserslist-config-public':
+        specifier: ^1.0.1
+        version: 1.0.1
       '@testing-library/dom':
         specifier: 10.4.2
         version: 10.4.2
@@ -411,6 +414,10 @@ packages:
   '@navikt/analytics-types@0.0.9':
     resolution: {integrity: sha512-bopCvqEogyFcmrJiBxK/Mr25d6yPKF7GR36MGrJqiHCPJYf1rDu6lK4cpooTG4Q//D/1xTkHRom8ZH5BI6dTew==, tarball: https://npm.pkg.github.com/download/@navikt/analytics-types/0.0.9/5919241a6dbb782eb101fff3234ce5c36d16e942}
     engines: {node: '>=20.0.0', npm: '>=9.0.0'}
+
+  '@navikt/browserslist-config-public@1.0.1':
+    resolution: {integrity: sha512-+2/FDapYJnsIiaMpkIcmDp2FCEBRkyYCDwXer20OcxdePzEX/sUWT5u9pgnNaZX2caPG6dyMO3vGy0xKoaMtMA==, tarball: https://npm.pkg.github.com/download/@navikt/browserslist-config-public/1.0.1/816ff0885a9db807068afaec197a7d8ec194d258}
+    engines: {node: '>=24'}
 
   '@navikt/ds-css@8.22.1':
     resolution: {integrity: sha512-whWza4g9GAssC9qWOEtrnPYcffaGGT6ko347A6KggccrC7/G7drxJj2aQVk+2bHFWT7GClg20dDxlmZKm9CcTA==, tarball: https://npm.pkg.github.com/download/@navikt/ds-css/8.22.1/623473ad66bd13b979cd026acb51b996b25a62a4}
@@ -1779,6 +1786,8 @@ snapshots:
   '@navikt/aksel-icons@8.22.1': {}
 
   '@navikt/analytics-types@0.0.9': {}
+
+  '@navikt/browserslist-config-public@1.0.1': {}
 
   '@navikt/ds-css@8.22.1': {}
 

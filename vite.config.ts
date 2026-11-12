@@ -2,6 +2,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { brotliCompressSync, constants, gzipSync } from 'node:zlib';
 import devServer, { defaultOptions } from '@hono/vite-dev-server';
+import navBrowserTargets from '@navikt/browserslist-config-public/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig, loadEnv } from 'vite';
 
@@ -18,6 +19,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
 		// There's no index.html to find the client's dependencies in
 		optimizeDeps: { entries: ['client/main-client.tsx'] },
 		plugins: [
+			navBrowserTargets(),
 			react(),
 			// In dev, Hono answers every request except Vite's own and the client files Vite serves
 			devServer({
