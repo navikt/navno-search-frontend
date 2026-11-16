@@ -53,8 +53,11 @@ describe('main-client', () => {
 	test('starts APM', async () => {
 		await load({ result: searchResult(), params: DEFAULTS, landing: true });
 
+		// Not the whole call: version comes from GITHUB_SHA, which CI sets and Vitest passes on
 		await waitFor(() =>
-			expect(apm.init).toHaveBeenCalledExactlyOnceWith({ app: 'navno-search-frontend', namespace: 'navno' })
+			expect(apm.init).toHaveBeenCalledExactlyOnceWith(
+				expect.objectContaining({ app: 'navno-search-frontend', namespace: 'navno' })
+			)
 		);
 	});
 
