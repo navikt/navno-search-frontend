@@ -9,9 +9,13 @@ import { searchResult } from '#test/fixtures.ts';
 import type { AppProps } from './App.tsx';
 import { App } from './App.tsx';
 
-const { log } = vi.hoisted(() => ({ log: vi.fn(() => Promise.resolve()) }));
+const { log, apm } = vi.hoisted(() => ({
+	log: vi.fn(() => Promise.resolve()),
+	apm: { init: vi.fn(), captureException: vi.fn() },
+}));
 
 vi.mock('@navikt/nav-dekoratoren-moduler', () => ({ getAnalyticsInstance: () => log }));
+vi.mock('@nais/apm', () => apm);
 
 const http = installMockFetch();
 
@@ -22,6 +26,7 @@ beforeEach(() => {
 
 afterEach(() => {
 	log.mockClear();
+	apm.init.mockClear();
 	document.body.innerHTML = '';
 });
 
@@ -43,6 +48,17 @@ describe('main-client', () => {
 		await userEvent.setup().click(await screen.findByRole('radio', { name: 'Presse' }));
 
 		await waitFor(() => expect(http.calls).toHaveLength(1));
+	});
+
+	test('starts APM', async () => {
+		await load({ result: searchResult(), params: DEFAULTS, landing: true });
+
+		// Not the whole call: version comes from GITHUB_SHA, which CI sets and Vitest passes on
+		await waitFor(() =>
+			expect(apm.init).toHaveBeenCalledExactlyOnceWith(
+				expect.objectContaining({ app: 'navno-search-frontend', namespace: 'navno' })
+			)
+		);
 	});
 
 	test.each<[string, AppProps]>([

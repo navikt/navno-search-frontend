@@ -50,8 +50,13 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
 		// and 35-50 MB per pod for Aksel and zod alone. The image scan can't see bundled packages, so the SBOM
 		// comes from pnpm-lock.yaml instead (sbom-from-lockfile in the workflows)
 		ssr: command === 'build' ? { noExternal: true } : undefined,
-		// Otherwise React's development and production builds are both bundled, and picked between at runtime
-		define: isSsrBuild ? { 'process.env.NODE_ENV': JSON.stringify('production') } : undefined,
+		// Server: otherwise React's development and production builds are both bundled, and picked between at runtime.
+		// Client: @nais/apm's version (client/apm.ts) is the commit, which GitHub Actions sets for the build. Left out locally
+		define: isSsrBuild
+			? { 'process.env.NODE_ENV': JSON.stringify('production') }
+			: process.env.GITHUB_SHA
+				? { 'import.meta.env.GITHUB_SHA': JSON.stringify(process.env.GITHUB_SHA) }
+				: undefined,
 		build: isSsrBuild
 			? // No source map: node --enable-source-maps parses it at startup and holds on to it, about 35 MB per pod.
 				// The bundle isn't minified, so stack traces into it still read fine
